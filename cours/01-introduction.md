@@ -47,9 +47,10 @@ Le cours de **Modélisation de données** vous a appris à :
 
 <v-clicks>
 
-- Concevoir un **MCD** (Modèle Conceptuel de Données)
-- Le transformer en **MLD** (Modèle Logique)
-- L'implémenter en **MPD** (Modèle Physique)
+- Analyser un problème client pour **identifier les données nécessaires**
+- Conceptualiser une solution sous forme d'un **modèle conceptuel** (MCD)
+- Traduire le modèle conceptuel en **modèle logique** relationnel (MLD)
+- L'implémenter en **modèle physique** (MPD)
 - Écrire des requêtes **SQL**
 
 </v-clicks>
@@ -68,39 +69,39 @@ layout: default
 
 <div class="grid grid-cols-2 gap-8 mt-4">
 
-
 <div>
+
 <v-clicks>
 
-- **Modélisation** — _Quoi_ stocker
-
-- **Infrastructure** — _Comment_ le stocker, le protéger, le faire évoluer
-
-- **Production** — Systèmes réels avec vrais utilisateurs
+- Comprendre les enjeux d'**infrastructure** : concurrence, performance, sécurité, durabilité
+- **Importer, nettoyer et transformer** des données brutes en base exploitable
+- **Comparer les structures** de données et choisir la plus adaptée
+- Concevoir des **pipelines de transformation** (ETL/ELT)
+- **Sécuriser, optimiser** et automatiser une infrastructure
+- Porter un **regard critique** sur les dimensions éthiques et environnementales
 
 </v-clicks>
 
 </div>
 
+<div class="flex items-center justify-center">
 
-<div class="text-2xl mt-8">
-
-```mermaid {scale: 0.8}
-%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#f5f5f5', 'primaryTextColor': '#000', 'primaryBorderColor': '#e0e0e0', 'lineColor': '#9e9e9e', 'fontFamily': 'Roboto', 'fontSize': '14px', 'nodeBorder': '1px', 'nodeRadius': '8px'}}}%%
-graph LR
-    A(Modélisation) --> B(Infrastructure)
-    B --> C(Production)
+```mermaid {scale: 0.75}
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#f5f5f5', 'primaryTextColor': '#000', 'primaryBorderColor': '#e0e0e0', 'lineColor': '#9e9e9e', 'fontFamily': 'Roboto Mono', 'fontSize': '12px'}, 'flowchart': {'htmlLabels': true, 'useMaxWidth': false}}}%%
+graph TB
+    A["<div style='min-width:220px;text-align:center;padding:8px'><strong>Modélisation</strong><br/>Quoi stocker</div>"] --> B["<div style='min-width:220px;text-align:center;padding:8px'><strong>Infrastructure</strong><br/>Comment le stocker,<br/>le protéger, le faire évoluer</div>"]
+    B --> C["<div style='min-width:220px;text-align:center;padding:8px'><strong>Production</strong><br/>Systèmes réels<br/>avec vrais utilisateurs</div>"]
 
     style A fill:#f5f5f5,stroke:#e0e0e0,color:#000
     style B fill:#DA291C,stroke:#DA291C,color:#fff
     style C fill:#f5f5f5,stroke:#e0e0e0,color:#000
 
-    linkStyle default stroke:#9e9e9e,stroke-width:1.5px
+    linkStyle default stroke:#9e9e9e,stroke-width:2px
 ```
-</div>
+
 </div>
 
-
+</div>
 
 ---
 layout: default
@@ -221,57 +222,30 @@ layout: default
 layout: default
 ---
 
-# Organisation du semestre
+# Évaluation
 
-<div class="grid grid-cols-2 gap-8">
+<img src="/images/evaluation.svg" class="w-full mx-auto mt-4" />
 
-<div>
+<div class="grid grid-cols-2 gap-8 mt-6">
 
-### 12 semaines
+<div v-click>
 
-<div class="table-compact">
+### Projet (50%)
 
-| Sem. | Module |
-|---|---|
-| 1 | Introduction |
-| 2 | Fondamentaux |
-| 3 | Import et nettoyage |
-| 4 | Transactions |
-| 5 | Optimisation |
-| 6 | Sécurité et sauvegarde |
-| 7 | Structures de données |
-| 8 | Flux de données |
-| 9 | Architectures modernes |
-| 10 | Éthique et durabilité |
-| 11-12 | Projet (finalisation + poster) |
-
-</div>
+- Par groupes de 2-3
+- **Poster A3** synthétisant les étapes du projet (affiché en classe)
+- Présentation du poster + questions — **28-29 mai**
+- Rendu final : scripts, jalons, adaptations — **31 mai**
 
 </div>
 
 <div v-click>
 
-### Évaluation
+### Examen final (50%)
 
-<img src="/images/evaluation.svg" class="w-full mt-4" />
-
-<div class="grid grid-cols-2 gap-4 mt-4 text-sm">
-
-<div>
-
-**Projet (50%)**
-Par groupes de 2 — plus de détails au slide suivant
-
-</div>
-
-<div>
-
-**Examen (50%)**
-Sur ordinateur · 3h · Session d'examen
-
-</div>
-
-</div>
+- Individuel, en semaine d'examen
+- Sur ordinateur · 3h
+- Mise en situation : un schéma, un cas, un problème — proposer et justifier une solution
 
 </div>
 
@@ -291,9 +265,9 @@ layout: default
 
 <v-clicks>
 
-- **PostgreSQL** + **PostGIS** — Notre SGBD principal
-- **Git / GitHub** — Versioning du projet
-- **Docker** — Conteneurisation
+- <carbon-data-base /> **PostgreSQL** + **PostGIS** — Notre SGBD principal
+- <carbon-logo-github /> **Git / GitHub** — Versioning du projet
+- <carbon-container-software /> **Docker** — Conteneurisation
 
 </v-clicks>
 
@@ -303,9 +277,11 @@ layout: default
 
 ### Ce que nous ajouterons
 
-- **EXPLAIN ANALYZE** — Analyse de requêtes
-- **pg_dump / pg_restore** — Sauvegarde
-- **dbt** — Transformation de données
+- <carbon-chart-treemap /> **Index** (B-tree, GIN, GiST) — Optimisation
+- <carbon-search /> **EXPLAIN ANALYZE** — Analyse de requêtes
+- <carbon-locked /> **Rôles et permissions** — Sécurité
+- <carbon-save /> **pg_dump / pg_restore** — Sauvegarde
+- <carbon-flow /> **dbt** — Pipelines de transformation
 
 </div>
 
@@ -395,7 +371,7 @@ Contacts, spécialités
 
 <div v-click class="accent-box mt-4">
 
-Les données sont volontairement **imparfaites** : casse variable, formats de date qui évoluent, références par texte libre, champs parfois vides. Comme de vrais Excel faits à la main.
+Les données sont volontairement **imparfaites** : comme de vrais Excel faits à la main.
 
 </div>
 
@@ -447,40 +423,6 @@ Fiche par lampadaire, score de priorité (pannes × âge × coût), sélection d
 layout: default
 ---
 
-# Évaluation
-
-| Composante | Poids |
-|---|---|
-| **Projet** — présentation + poster A3 | 50% |
-| **Examen final** — semaine d'examen | 50% |
-
-<div class="grid grid-cols-2 gap-8 mt-4">
-
-<div v-click>
-
-### Projet (50%)
-
-- **Poster A3** synthétisant les étapes du projet (affiché en classe)
-- Présentation du poster + questions (28-29 mai)
-- Rendu final : scripts, jalons, adaptations (31 mai)
-
-</div>
-
-<div v-click>
-
-### Examen final (50%)
-
-- Individuel, en semaine d'examen
-- Mise en situation : un schéma, un cas, un problème — proposer et justifier une solution
-
-</div>
-
-</div>
-
----
-layout: default
----
-
 # Jalons du projet (formatifs, non notés)
 
 Chaque jalon vous fait progresser — le feedback en classe ne compte pas dans la note.
@@ -494,12 +436,6 @@ Chaque jalon vous fait progresser — le feedback en classe ne compte pas dans l
 | **J4** dbt + poster | 9-10 | Staging → marts, poster A3 |
 | **J5** Présentation + poster | 28-29 mai | Poster A3 affiché + présentation |
 | **Rendu final** | 31 mai | Scripts, jalons, adaptations |
-
-<div v-click class="accent-box mt-4">
-
-**Groupes de 2-3 personnes** — Formation des groupes et tirage du brief aujourd'hui
-
-</div>
 
 ---
 layout: section
@@ -594,34 +530,31 @@ layout: default
 
 # Ressources du cours
 
-<div class="grid grid-cols-2 gap-6">
-
-<div>
-
 ### Livres
 
-- **Data Feminism** — D'Ignazio & Klein (2020)
-  <br><small>[data-feminism.mitpress.mit.edu](https://data-feminism.mitpress.mit.edu/)</small>
-
-- **Designing Data-Intensive Applications** — Kleppmann (2017)
-  <br><small>O'Reilly Media</small>
-
-- **Atlas of AI** — Crawford (2021)
-  <br><small>Yale University Press</small>
-
+<div class="mosaic mosaic-3 mosaic-books mt-4" style="height: 200px;">
+  <figure>
+    <img src="/images/01-introduction/designing_data_intensive_applications.avif" />
+    <figcaption>Kleppmann · Designing Data-Intensive Applications (2017)</figcaption>
+  </figure>
+  <figure>
+    <img src="/images/01-introduction/data_mesh.jpeg" />
+    <figcaption>Dehghani · Data Mesh (2022)</figcaption>
+  </figure>
+  <figure>
+    <img src="/images/01-introduction/Data_Feminism.jpg" />
+    <figcaption>D'Ignazio & Klein · Data Feminism (2020)</figcaption>
+  </figure>
 </div>
 
-<div>
-
 ### En ligne
+
+<div class="grid grid-cols-2 gap-4 mt-2" style="font-size: 0.8rem;">
 
 - [PostgreSQL Documentation](https://www.postgresql.org/docs/)
 - [Use The Index, Luke!](https://use-the-index-luke.com/)
 - [dbt Documentation](https://docs.getdbt.com/)
 - [FAIR Principles](https://www.go-fair.org/fair-principles/)
-- [IA éthique et durable — Cairn](https://stm.cairn.info/revue-enjeux-numeriques-2025-1-page-8?lang=fr)
-
-</div>
 
 </div>
 

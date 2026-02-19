@@ -66,7 +66,7 @@ layout: default
 # L'évolution des architectures de données
 
 ```mermaid {scale: 0.7}
-%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#f5f5f5', 'primaryTextColor': '#000', 'primaryBorderColor': '#e0e0e0', 'lineColor': '#9e9e9e', 'fontFamily': 'Roboto', 'fontSize': '13px'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#f5f5f5', 'primaryTextColor': '#000', 'primaryBorderColor': '#e0e0e0', 'lineColor': '#9e9e9e', 'fontFamily': 'Roboto Mono', 'fontSize': '13px'}}}%%
 graph LR
     A("Data Warehouse<br/><small>1990s — centralisé, structuré</small>") --> B("Data Lake<br/><small>2010s — brut, massif</small>")
     B --> C("Lakehouse<br/><small>2020s — hybride</small>")
@@ -150,7 +150,7 @@ Chaque domaine métier est **responsable de ses propres données**.
 <div v-click>
 
 ```mermaid {scale: 0.55}
-%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#f5f5f5', 'primaryTextColor': '#000', 'primaryBorderColor': '#e0e0e0', 'lineColor': '#9e9e9e', 'fontFamily': 'Roboto', 'fontSize': '13px', 'clusterBkg': '#fafafa', 'clusterBorder': '#e0e0e0'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#f5f5f5', 'primaryTextColor': '#000', 'primaryBorderColor': '#e0e0e0', 'lineColor': '#9e9e9e', 'fontFamily': 'Roboto Mono', 'fontSize': '13px', 'clusterBkg': '#fafafa', 'clusterBorder': '#e0e0e0'}}}%%
 graph TB
     subgraph "Domaine Podcast"
         A(Opérations) --> B(Données analytiques)
@@ -359,7 +359,7 @@ layout: default
 Une organisation en couches de qualité croissante.
 
 ```mermaid {scale: 0.65}
-%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#f5f5f5', 'primaryTextColor': '#000', 'primaryBorderColor': '#e0e0e0', 'lineColor': '#9e9e9e', 'fontFamily': 'Roboto', 'fontSize': '13px'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#f5f5f5', 'primaryTextColor': '#000', 'primaryBorderColor': '#e0e0e0', 'lineColor': '#9e9e9e', 'fontFamily': 'Roboto Mono', 'fontSize': '13px'}}}%%
 graph LR
     A("Sources<br/><small>APIs, fichiers, bases</small>") --> B("Bronze<br/><small>Données brutes</small>")
     B --> C("Silver<br/><small>Données nettoyées</small>")
@@ -475,7 +475,7 @@ layout: default
 Le RAG connecte un modèle de langage (LLM) aux **données internes** de l'organisation.
 
 ```mermaid {scale: 0.6}
-%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#f5f5f5', 'primaryTextColor': '#000', 'primaryBorderColor': '#e0e0e0', 'lineColor': '#9e9e9e', 'fontFamily': 'Roboto', 'fontSize': '13px'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#f5f5f5', 'primaryTextColor': '#000', 'primaryBorderColor': '#e0e0e0', 'lineColor': '#9e9e9e', 'fontFamily': 'Roboto Mono', 'fontSize': '13px'}}}%%
 graph LR
     A("Question<br/>utilisateur") --> B("Recherche<br/><small>Vector DB / Index</small>")
     B --> C("Documents<br/>pertinents")
@@ -614,7 +614,7 @@ layout: default
 # Comment tout s'articule
 
 ```mermaid {scale: 0.5}
-%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#f5f5f5', 'primaryTextColor': '#000', 'primaryBorderColor': '#e0e0e0', 'lineColor': '#9e9e9e', 'fontFamily': 'Roboto', 'fontSize': '13px', 'clusterBkg': '#fafafa', 'clusterBorder': '#e0e0e0'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#f5f5f5', 'primaryTextColor': '#000', 'primaryBorderColor': '#e0e0e0', 'lineColor': '#9e9e9e', 'fontFamily': 'Roboto Mono', 'fontSize': '13px', 'clusterBkg': '#fafafa', 'clusterBorder': '#e0e0e0'}}}%%
 graph TB
     subgraph "Sources"
         S1(APIs)

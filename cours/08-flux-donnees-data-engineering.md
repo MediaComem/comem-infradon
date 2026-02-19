@@ -30,6 +30,13 @@ layout: none
 layout: center
 ---
 
-# 🚧 En construction
+<img src="/images/01-introduction/dilbert_data_engineering.gif" class="mx-auto" style="height: 200px;" />
+<figcaption class="text-center"><a href="https://medium.com/@kaizhi.zhang92/why-i-switched-from-data-science-to-data-engineering-84f9bc58d48b">Why I switched from Data Science to Data Engineering</a> — Dilbert</figcaption>
+
+---
+layout: center
+---
+
+# En construction
 
 Ce cours est en cours de préparation.

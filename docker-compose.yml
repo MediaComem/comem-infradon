@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: postgis/postgis:16-3.4
+    container_name: infradon-postgres
+    environment:
+      POSTGRES_USER: infradon
+      POSTGRES_PASSWORD: infradon
+      POSTGRES_DB: infradon
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:

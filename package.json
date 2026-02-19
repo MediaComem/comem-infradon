@@ -3,16 +3,19 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "build": "slidev build",
     "dev": "slidev cours/01-introduction.md --open",
     "dev:01": "slidev cours/01-introduction.md --open",
-    "dev:02": "slidev cours/02-transaction-concurrence.md --open",
-    "dev:03": "slidev cours/03-optimisation-indexation.md --open",
-    "dev:04": "slidev cours/04-sauvegarde-recuperation.md --open",
-    "dev:05": "slidev cours/05-automatisation.md --open",
-    "dev:06": "slidev cours/06-ethique-des-donnees.md --open",
-    "dev:07": "slidev cours/07-infrastructure-ia.md --open",
-    "dev:08": "slidev cours/08-systemes-cloud.md --open",
+    "dev:02": "slidev cours/02-fondamentaux.md --open",
+    "dev:03": "slidev cours/03-import-nettoyage.md --open",
+    "dev:04": "slidev cours/04-transactions-concurrence.md --open",
+    "dev:05": "slidev cours/05-optimisation-indexation.md --open",
+    "dev:06": "slidev cours/06-securite-roles-sauvegarde.md --open",
+    "dev:07": "slidev cours/07-structures-donnees.md --open",
+    "dev:08": "slidev cours/08-flux-donnees-data-engineering.md --open",
+    "dev:09": "slidev cours/09-architectures-modernes.md --open",
+    "dev:10": "slidev cours/10-ethique-durabilite.md --open",
+    "build": "slidev build",
+    "build:all": "node scripts/build-all.mjs",
     "export": "slidev export"
   },
   "dependencies": {
@@ -21,5 +24,8 @@
     "@slidev/theme-default": "latest",
     "@slidev/theme-seriph": "latest",
     "vue": "^3.5.27"
+  },
+  "devDependencies": {
+    "playwright-chromium": "^1.40.0"
   }
 }

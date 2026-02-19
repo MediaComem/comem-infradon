@@ -1,12 +1,6 @@
 """
-Génère les 4 fichiers Excel du projet VéloCité — Service technique communal d'Yverdon-les-Bains.
+Génère les 4 fichiers Excel du projet Service technique communal d'Yverdon-les-Bains.
 Les données contiennent des tendances exploitables par chaque brief.
-
-Tendances intégrées :
-- Brief A (Budget) : fontaines = coût élevé, pic saisonnier mars-avril, 5 objets très coûteux
-- Brief B (Gare)  : quartier Gare = délais plus longs, signalements ouverts concentrés
-- Brief C (Lampadaires) : vieux lampadaires Gare = pannes fréquentes, corrélation âge/pannes
-- Brief D (Bancs) : bancs bois vieillissent vite, bancs métal OK, fournisseur fermé
 """
 
 import random

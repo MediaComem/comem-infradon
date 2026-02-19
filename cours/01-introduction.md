@@ -183,6 +183,36 @@ layout: section
 layout: default
 ---
 
+# Supports
+
+<div class="grid grid-cols-2 gap-8 mt-4">
+
+<div>
+
+### Cours (slides)
+
+[comem-infradon.onrender.com](https://comem-infradon.onrender.com/)
+
+</div>
+
+<div>
+
+### <carbon-logo-github /> GitHub
+
+[github.com/MediaComem/comem-infradon](https://github.com/MediaComem/comem-infradon)
+
+- Description du cours et objectifs
+- Données et briefs du projet
+- Jalons et évaluation
+
+</div>
+
+</div>
+
+---
+layout: default
+---
+
 # Organisation du semestre
 
 <div class="grid grid-cols-2 gap-8">
@@ -544,7 +574,7 @@ layout: default
 
 <div v-click class="accent-box mt-8">
 
-**Prochain cours** : Module 02 — Fondamentaux des bases de données
+**Prochain cours** : Module 02 — [Fondamentaux des bases de données](https://comem-infradon.onrender.com/02-fondamentaux/)
 
 _CRUD, ACID, OLTP vs OLAP, vues et vues matérialisées_
 

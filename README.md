@@ -36,16 +36,16 @@ Un fichier `docker-compose.yml` est fourni pour démarrer PostgreSQL + PostGIS.
 
 | # | Module | Contenu |
 |---|--------|---------|
-| 01 | [Introduction](cours/01-introduction.md) | Présentation du cours, outils, projet fil rouge |
-| 02 | [Fondamentaux des bases de données](cours/02-fondamentaux.md) | CRUD, ACID, OLAP vs OLTP, vues, vues matérialisées |
-| 03 | [Import et nettoyage des données](cours/03-import-nettoyage.md) | Import Excel vers PostgreSQL, staging, CAST, TRIM, COALESCE, regexp_replace, dédoublonnage |
-| 04 | [Transactions et concurrence](cours/04-transactions-concurrence.md) | Niveaux d'isolation, verrous, deadlocks |
-| 05 | [Optimisation et indexation](cours/05-optimisation-indexation.md) | EXPLAIN ANALYZE, types d'index (B-tree, GIN, GiST), vues matérialisées |
-| 06 | [Sécurité, rôles et sauvegarde](cours/06-securite-roles-sauvegarde.md) | GRANT/REVOKE, Row-Level Security, pg_dump/pg_restore, stratégies de backup |
-| 07 | [Structures de données](cours/07-structures-donnees.md) | Relationnel vs NoSQL (document, key-value, colonnes, graph), stockage médias, cas concrets (Instagram, TikTok, Spotify) |
-| 08 | [Flux de données et data engineering](cours/08-flux-donnees-data-engineering.md) | ETL vs ELT, triggers, CDC, dbt (models, sources, tests, seeds), workflows de transformation |
-| 09 | [Architectures modernes](cours/09-architectures-modernes.md) | Data mesh, architecture medallion, lakehouse, RAG, systèmes cloud |
-| 10 | [Éthique et durabilité des données](cours/10-ethique-durabilite.md) | Impact environnemental, biais, gouvernance, RGPD/nLPD, data feminism |
+| 01 | [Introduction](https://comem-infradon.onrender.com/01-introduction/) | Présentation du cours, outils, projet fil rouge |
+| 02 | [Fondamentaux des bases de données](https://comem-infradon.onrender.com/02-fondamentaux/) | CRUD, ACID, OLAP vs OLTP, vues, vues matérialisées |
+| 03 | [Import et nettoyage des données](https://comem-infradon.onrender.com/03-import-nettoyage/) | Import Excel vers PostgreSQL, staging, CAST, TRIM, COALESCE, regexp_replace, dédoublonnage |
+| 04 | [Transactions et concurrence](https://comem-infradon.onrender.com/04-transactions-concurrence/) | Niveaux d'isolation, verrous, deadlocks |
+| 05 | [Optimisation et indexation](https://comem-infradon.onrender.com/05-optimisation-indexation/) | EXPLAIN ANALYZE, types d'index (B-tree, GIN, GiST), vues matérialisées |
+| 06 | [Sécurité, rôles et sauvegarde](https://comem-infradon.onrender.com/06-securite-roles-sauvegarde/) | GRANT/REVOKE, Row-Level Security, pg_dump/pg_restore, stratégies de backup |
+| 07 | [Structures de données](https://comem-infradon.onrender.com/07-structures-donnees/) | Relationnel vs NoSQL (document, key-value, colonnes, graph), stockage médias, cas concrets (Instagram, TikTok, Spotify) |
+| 08 | [Flux de données et data engineering](https://comem-infradon.onrender.com/08-flux-donnees/) | ETL vs ELT, triggers, CDC, dbt (models, sources, tests, seeds), workflows de transformation |
+| 09 | [Architectures modernes](https://comem-infradon.onrender.com/09-architectures-modernes/) | Data mesh, architecture medallion, lakehouse, RAG, systèmes cloud |
+| 10 | [Éthique et durabilité des données](https://comem-infradon.onrender.com/10-ethique-durabilite/) | Impact environnemental, biais, gouvernance, RGPD/nLPD, data feminism |
 
 ---
 

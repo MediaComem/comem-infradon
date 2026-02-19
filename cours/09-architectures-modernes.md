@@ -66,15 +66,18 @@ layout: default
 # L'évolution des architectures de données
 
 ```mermaid {scale: 0.7}
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#f5f5f5', 'primaryTextColor': '#000', 'primaryBorderColor': '#e0e0e0', 'lineColor': '#9e9e9e', 'fontFamily': 'Roboto', 'fontSize': '13px'}}}%%
 graph LR
-    A["Data Warehouse<br/><small>1990s — centralisé, structuré</small>"] --> B["Data Lake<br/><small>2010s — brut, massif</small>"]
-    B --> C["Lakehouse<br/><small>2020s — hybride</small>"]
-    C --> D["Data Mesh<br/><small>2020s — décentralisé, orienté domaine</small>"]
+    A("Data Warehouse<br/><small>1990s — centralisé, structuré</small>") --> B("Data Lake<br/><small>2010s — brut, massif</small>")
+    B --> C("Lakehouse<br/><small>2020s — hybride</small>")
+    C --> D("Data Mesh<br/><small>2020s — décentralisé, orienté domaine</small>")
 
-    style A fill:#e0e0e0
-    style B fill:#e0e0e0
-    style C fill:#b3e5fc
-    style D fill:#4EC5D4
+    style A fill:#f5f5f5,stroke:#e0e0e0,color:#000
+    style B fill:#f5f5f5,stroke:#e0e0e0,color:#000
+    style C fill:#f5f5f5,stroke:#9e9e9e,color:#000
+    style D fill:#DA291C,stroke:#DA291C,color:#fff
+
+    linkStyle default stroke:#9e9e9e,stroke-width:1.5px
 ```
 
 <div class="grid grid-cols-2 gap-4 mt-6">
@@ -147,19 +150,24 @@ Chaque domaine métier est **responsable de ses propres données**.
 <div v-click>
 
 ```mermaid {scale: 0.55}
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#f5f5f5', 'primaryTextColor': '#000', 'primaryBorderColor': '#e0e0e0', 'lineColor': '#9e9e9e', 'fontFamily': 'Roboto', 'fontSize': '13px', 'clusterBkg': '#fafafa', 'clusterBorder': '#e0e0e0'}}}%%
 graph TB
     subgraph "Domaine Podcast"
-        A[Opérations] --> B[Données analytiques]
+        A(Opérations) --> B(Données analytiques)
     end
     subgraph "Domaine Utilisateurs"
-        C[Opérations] --> D[Données analytiques]
+        C(Opérations) --> D(Données analytiques)
     end
     subgraph "Domaine Finance"
-        E[Opérations] --> F[Données analytiques]
+        E(Opérations) --> F(Données analytiques)
     end
     B --> G((Mesh))
     D --> G
     F --> G
+
+    style G fill:#DA291C,stroke:#DA291C,color:#fff
+
+    linkStyle default stroke:#9e9e9e,stroke-width:1.5px
 ```
 
 </div>
@@ -351,15 +359,20 @@ layout: default
 Une organisation en couches de qualité croissante.
 
 ```mermaid {scale: 0.65}
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#f5f5f5', 'primaryTextColor': '#000', 'primaryBorderColor': '#e0e0e0', 'lineColor': '#9e9e9e', 'fontFamily': 'Roboto', 'fontSize': '13px'}}}%%
 graph LR
-    A["Sources<br/><small>APIs, fichiers, bases</small>"] --> B["Bronze<br/><small>Données brutes</small>"]
-    B --> C["Silver<br/><small>Données nettoyées</small>"]
-    C --> D["Gold<br/><small>Données métier</small>"]
-    D --> E["Consommation<br/><small>Dashboards, IA, rapports</small>"]
+    A("Sources<br/><small>APIs, fichiers, bases</small>") --> B("Bronze<br/><small>Données brutes</small>")
+    B --> C("Silver<br/><small>Données nettoyées</small>")
+    C --> D("Gold<br/><small>Données métier</small>")
+    D --> E("Consommation<br/><small>Dashboards, IA, rapports</small>")
 
-    style B fill:#cd7f32
-    style C fill:#c0c0c0
-    style D fill:#ffd700
+    style A fill:#f5f5f5,stroke:#e0e0e0,color:#000
+    style B fill:#f5f5f5,stroke:#9e9e9e,color:#000
+    style C fill:#f5f5f5,stroke:#000,color:#000
+    style D fill:#DA291C,stroke:#DA291C,color:#fff
+    style E fill:#f5f5f5,stroke:#e0e0e0,color:#000
+
+    linkStyle default stroke:#9e9e9e,stroke-width:1.5px
 ```
 
 <div class="grid grid-cols-3 gap-4 mt-4 text-sm">
@@ -462,15 +475,21 @@ layout: default
 Le RAG connecte un modèle de langage (LLM) aux **données internes** de l'organisation.
 
 ```mermaid {scale: 0.6}
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#f5f5f5', 'primaryTextColor': '#000', 'primaryBorderColor': '#e0e0e0', 'lineColor': '#9e9e9e', 'fontFamily': 'Roboto', 'fontSize': '13px'}}}%%
 graph LR
-    A["Question<br/>utilisateur"] --> B["Recherche<br/><small>Vector DB / Index</small>"]
-    B --> C["Documents<br/>pertinents"]
-    C --> D["LLM<br/><small>Génération de réponse</small>"]
+    A("Question<br/>utilisateur") --> B("Recherche<br/><small>Vector DB / Index</small>")
+    B --> C("Documents<br/>pertinents")
+    C --> D("LLM<br/><small>Génération de réponse</small>")
     A --> D
-    D --> E["Réponse<br/>contextualisée"]
+    D --> E("Réponse<br/>contextualisée")
 
-    style B fill:#b3e5fc
-    style D fill:#4EC5D4
+    style A fill:#f5f5f5,stroke:#e0e0e0,color:#000
+    style B fill:#f5f5f5,stroke:#9e9e9e,color:#000
+    style C fill:#f5f5f5,stroke:#e0e0e0,color:#000
+    style D fill:#DA291C,stroke:#DA291C,color:#fff
+    style E fill:#f5f5f5,stroke:#e0e0e0,color:#000
+
+    linkStyle default stroke:#9e9e9e,stroke-width:1.5px
 ```
 
 <v-clicks>
@@ -595,28 +614,29 @@ layout: default
 # Comment tout s'articule
 
 ```mermaid {scale: 0.5}
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#f5f5f5', 'primaryTextColor': '#000', 'primaryBorderColor': '#e0e0e0', 'lineColor': '#9e9e9e', 'fontFamily': 'Roboto', 'fontSize': '13px', 'clusterBkg': '#fafafa', 'clusterBorder': '#e0e0e0'}}}%%
 graph TB
     subgraph "Sources"
-        S1[APIs]
-        S2[Bases opérationnelles]
-        S3[Fichiers / IoT]
+        S1(APIs)
+        S2(Bases opérationnelles)
+        S3(Fichiers / IoT)
     end
 
     subgraph "Ingestion"
-        I1[ETL / ELT]
-        I2[CDC / Streaming]
+        I1(ETL / ELT)
+        I2(CDC / Streaming)
     end
 
     subgraph "Stockage — Architecture Medallion"
-        B[Bronze — brut]
-        Si[Silver — nettoyé]
-        G[Gold — métier]
+        B(Bronze — brut)
+        Si(Silver — nettoyé)
+        G(Gold — métier)
     end
 
     subgraph "Consommation"
-        C1[Dashboards / BI]
-        C2[RAG / LLM]
-        C3[Data Products — Mesh]
+        C1(Dashboards / BI)
+        C2(RAG / LLM)
+        C3(Data Products — Mesh)
     end
 
     S1 --> I1
@@ -629,6 +649,10 @@ graph TB
     G --> C1
     G --> C2
     G --> C3
+
+    style G fill:#DA291C,stroke:#DA291C,color:#fff
+
+    linkStyle default stroke:#9e9e9e,stroke-width:1.5px
 ```
 
 <div class="footer">Source · Dehghani, <em>Data Mesh</em> (2022) · <a href="https://www.databricks.com/glossary/medallion-architecture">Databricks — Medallion Architecture</a></div>

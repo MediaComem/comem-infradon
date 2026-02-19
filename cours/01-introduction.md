@@ -86,13 +86,16 @@ layout: default
 <div class="text-2xl mt-8">
 
 ```mermaid {scale: 0.8}
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#f5f5f5', 'primaryTextColor': '#000', 'primaryBorderColor': '#e0e0e0', 'lineColor': '#9e9e9e', 'fontFamily': 'Roboto', 'fontSize': '14px', 'nodeBorder': '1px', 'nodeRadius': '8px'}}}%%
 graph LR
-    A[Modélisation] --> B[Infrastructure]
-    B --> C[Production]
+    A(Modélisation) --> B(Infrastructure)
+    B --> C(Production)
 
-    style A fill:#e0e0e0
-    style B fill:#DA291C
-    style C fill:#e0e0e0
+    style A fill:#f5f5f5,stroke:#e0e0e0,color:#000
+    style B fill:#DA291C,stroke:#DA291C,color:#fff
+    style C fill:#f5f5f5,stroke:#e0e0e0,color:#000
+
+    linkStyle default stroke:#9e9e9e,stroke-width:1.5px
 ```
 </div>
 </div>

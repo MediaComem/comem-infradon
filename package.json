@@ -1,0 +1,25 @@
+{
+  "name": "comem-infradon",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "slidev build",
+    "dev": "slidev cours/01-introduction.md --open",
+    "dev:01": "slidev cours/01-introduction.md --open",
+    "dev:02": "slidev cours/02-transaction-concurrence.md --open",
+    "dev:03": "slidev cours/03-optimisation-indexation.md --open",
+    "dev:04": "slidev cours/04-sauvegarde-recuperation.md --open",
+    "dev:05": "slidev cours/05-automatisation.md --open",
+    "dev:06": "slidev cours/06-ethique-des-donnees.md --open",
+    "dev:07": "slidev cours/07-infrastructure-ia.md --open",
+    "dev:08": "slidev cours/08-systemes-cloud.md --open",
+    "export": "slidev export"
+  },
+  "dependencies": {
+    "@slidev/cli": "^52.11.5",
+    "@slidev/theme-apple-basic": "^0.25.1",
+    "@slidev/theme-default": "latest",
+    "@slidev/theme-seriph": "latest",
+    "vue": "^3.5.27"
+  }
+}

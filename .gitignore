@@ -1,2 +1,11 @@
 InfraDon1*
-cours/05-challenges
+cours-archive/05-challenges
+node_modules
+.DS_Store
+dist
+*.local
+.vite-inspect
+.remote-assets
+components.d.ts
+.claude
+.venv

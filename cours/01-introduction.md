@@ -127,7 +127,7 @@ layout: default
 <div>
 
 <img src="/images/01-introduction/web-app-architecture.png" class="h-64" />
-<figcaption><a href="https://www.softkraft.co/web-application-architecture/">Softkraft — Web Application Architecture</a></figcaption>
+<figcaption><a href="https://www.zealousys.com/blog/web-application-architecture/">Zealous Systems - What is Web Application Architecture: The Complete Guide</a></figcaption>
 
 </div>
 

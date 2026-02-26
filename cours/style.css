@@ -21,6 +21,7 @@ code, code *, pre, pre * {
   color: #000;
   font-family: 'Roboto', sans-serif !important;
   padding: 2.5rem 3rem;
+  cursor: default;
 }
 
 /* Headings */
@@ -296,27 +297,34 @@ strong {
   object-fit: contain !important;
 }
 
-/* ===== FOOTER (sources) ===== */
+/* ===== FOOTER (sources) — vertical, right side ===== */
 .footer, .footer * {
   font-family: 'Roboto Mono', monospace !important;
-  font-size: 0.6rem !important;
+  font-size: 0.55rem !important;
   color: #9e9e9e !important;
-  line-height: 1.5 !important;
+  line-height: 1 !important;
 }
 
 .footer {
   position: absolute !important;
-  bottom: 1rem !important;
-  left: 2rem !important;
-  right: auto !important;
-  letter-spacing: 0.01em;
-  z-index: 10;
+  right: 0.4rem !important;
+  top: 2.5rem !important;
+  bottom: 2.5rem !important;
+  left: auto !important;
+  writing-mode: vertical-rl !important;
+  transform: rotate(180deg) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  letter-spacing: 0.03em;
+  z-index: 1000;
+  pointer-events: none;
 }
 
 .footer a {
   color: #9e9e9e !important;
   text-decoration: none !important;
-  border-bottom: 1px solid rgba(158, 158, 158, 0.3) !important;
+  pointer-events: all;
   transition: opacity 0.2s;
 }
 
@@ -324,24 +332,33 @@ strong {
   opacity: 0.7 !important;
 }
 
-/* Inverted footer for dark slides */
-.slidev-layout.cover .footer,
-.slidev-layout.cover .footer *,
-.slidev-layout.intro .footer,
-.slidev-layout.intro .footer *,
-.slidev-layout.section .footer,
-.slidev-layout.section .footer *,
-.slidev-layout.end .footer,
-.slidev-layout.end .footer * {
-  color: rgba(255, 255, 255, 0.35) !important;
+/* ===== COVER FOOTER (GitHub + license, horizontal, white cover) ===== */
+.cover-footer, .cover-footer * {
+  font-family: 'Roboto Mono', monospace !important;
+  font-size: 0.6rem !important;
+  color: #9e9e9e !important;
+  line-height: 1.5 !important;
 }
 
-.slidev-layout.cover .footer a,
-.slidev-layout.intro .footer a,
-.slidev-layout.section .footer a,
-.slidev-layout.end .footer a {
-  color: rgba(255, 255, 255, 0.35) !important;
-  border-bottom-color: rgba(255, 255, 255, 0.15) !important;
+.cover-footer {
+  position: absolute !important;
+  bottom: 1rem !important;
+  left: 2rem !important;
+  right: auto !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 1rem !important;
+  z-index: 1000;
+}
+
+.cover-footer a {
+  color: #9e9e9e !important;
+  text-decoration: none !important;
+  transition: opacity 0.2s;
+}
+
+.cover-footer a:hover {
+  opacity: 0.7 !important;
 }
 
 /* ===== PAGE NUMBERS ===== */
@@ -471,16 +488,59 @@ figcaption {
 
 .accent-box, .accent-box * {
   font-family: 'Roboto Mono', monospace !important;
-  font-size: 0.8rem !important;
+  font-size: 0.7rem !important;
   color: var(--heig-red) !important;
+  line-height: 0.8rem !important;
 }
 
 .accent-box {
   border-left: 3px solid var(--heig-red);
-  padding: 0.75rem 1rem;
+  padding: 0.3rem 0.3rem;
   background: var(--heig-red-light);
   border-radius: 0 4px 4px 0;
-  line-height: 1.5;
+}
+
+/* Colored note boxes (problème / solution) and card boxes */
+.slidev-layout div[class~="border-l-4"],
+.slidev-layout div[class~="border"][class~="rounded"] {
+  font-size: 0.78rem;
+  line-height: 1.4;
+}
+
+/* Ensure ul/li inside compact boxes inherit the parent font size */
+.slidev-layout div[class~="border-l-2"] ul,
+.slidev-layout div[class~="border-l-2"] li,
+.slidev-layout div[class~="border-l-4"] ul,
+.slidev-layout div[class~="border-l-4"] li {
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.slidev-layout div[class~="border-l-4"] strong,
+.slidev-layout div[class~="border-l-2"] strong,
+.slidev-layout div[class~="border"][class~="rounded"] strong,
+.slidev-layout p strong,
+.slidev-layout li strong,
+.slidev-layout h3 {
+  color: var(--heig-red);
+}
+
+/* Section slide subtitle */
+.module-link {
+  font-family: 'Roboto Mono', monospace !important;
+  text-decoration: underline;
+  text-decoration-style: dashed;
+  text-underline-offset: 3px;
+  color: inherit;
+}
+
+.section-subtitle {
+  font-family: 'Roboto Mono', monospace !important;
+  font-size: 0.9rem !important;
+  color: #f6f3f3 !important;
+  margin-top: 0.5rem;
+  font-weight: 400;
+  line-height: 1.4;
 }
 
 /* Image caption (bottom-right overlay on full-screen image slides) */

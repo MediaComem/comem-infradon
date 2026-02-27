@@ -50,10 +50,10 @@ layout: default
 
 <v-clicks>
 
-- L'ensemble des **outils, processus et technologies** qui permettent de collecter, stocker, traiter et rendre les données accessibles
-- Comme la plomberie d'un bâtiment : **invisible quand ça marche**, critique quand ça casse
-- Elle est la **fondation** de toute organisation pilotée par la donnée
-- Sans infrastructure fiable, les données les mieux modélisées ne valent rien
+- **Outils, processus et technologies** pour collecter, stocker, traiter et exposer les données
+- **Invisible quand ça marche**, critique quand ça casse
+- **Fondation** de toute organisation pilotée par la donnée
+- Sans infrastructure fiable → données inutilisables
 
 </v-clicks>
 
@@ -101,7 +101,7 @@ APIs, interfaces SQL, outils BI, tableaux de bord
 
 <carbon-locked /> **Sécurité**
 
-Chiffrement, contrôle d'accès, audit, conformité (RGPD)
+Chiffrement, contrôle d'accès, audit, conformité (LPD, RGPD)
 
 </div>
 
@@ -221,12 +221,12 @@ layout: default
 
 <v-clicks>
 
-Tout système de données doit permettre au minimum :
+Toute interface de données expose au minimum :
 
-- **C**REATE - ajouter une nouvelle donnée
-- **R**EAD - lire, interroger
-- **U**PDATE - modifier une donnée existante
-- **D**ELETE - supprimer
+- **C**REATE : ajouter
+- **R**EAD : lire, interroger
+- **U**PDATE : modifier
+- **D**ELETE : supprimer
 
 </v-clicks>
 
@@ -264,12 +264,12 @@ layout: default
 
 <v-clicks>
 
-Une opération est **idempotente** si l'exécuter plusieurs fois produit le même résultat que l'exécuter une seule fois.
+**Idempotente** : N exécutions = même résultat qu'une seule
 
 - **READ** : toujours idempotent
-- **DELETE** : idempotent - supprimer ce qui n'existe plus = no-op
-- **PUT / UPSERT** : idempotent - remplacer donne toujours le même état final
-- **POST / INSERT** : **pas idempotent** par défaut - deux appels créent deux enregistrements
+- **DELETE** : idempotent : supprimer ce qui n'existe plus = no-op
+- **PUT / UPSERT** : idempotent : résultat final toujours identique
+- **POST / INSERT** : **non idempotent** par défaut : deux appels = deux enregistrements
 
 </v-clicks>
 
@@ -279,7 +279,7 @@ Une opération est **idempotente** si l'exécuter plusieurs fois produit le mêm
 
 ### Pourquoi ça compte en infrastructure
 
-Les systèmes distribués échouent et **réessaient** automatiquement.
+Systèmes distribués : pannes + **réessais** automatiques
 
 ```
 Réseau coupe après l'écriture,
@@ -292,7 +292,7 @@ avant l'acquittement
 
 <div class="accent-box mt-4">
 
-Concevoir ses opérations pour être idempotentes est une règle fondamentale d'infrastructure distribuée.
+Idempotence = règle fondamentale d'infrastructure distribuée
 
 </div>
 
@@ -323,11 +323,11 @@ layout: default
 
 </div>
 
-<div class="mt-2 text-sm text-gray-500 italic" v-click>Deux techniciens sont envoyés sur place. L'un ne sait pas que l'autre y va déjà.</div>
+
 
 <div v-click class="grid grid-cols-2 gap-2 mt-2" style="font-size: 0.72rem; line-height: 1.3;">
 
-<div class="px-2 py-1 border-l-2 border-gray-400"><strong>Problème</strong><br/>L'opération <code>INSERT signalement</code> n'est pas idempotente. Chaque retry crée un nouveau doublon.</div>
+<div class="px-2 py-1 border-l-2 border-gray-400"><strong>Problème</strong><br/>L'opération <code>INSERT signalement</code> n'est pas idempotente. Chaque réessai crée un nouveau doublon.</div>
 
 <div class="px-2 py-1 border-l-2 border-gray-400"><strong>Solution</strong><br/>Générer un identifiant unique côté client (ex : hash objet + date + auteur). Utiliser un <code>INSERT ... ON CONFLICT DO NOTHING</code> côté base.</div>
 
@@ -345,11 +345,9 @@ layout: default
 
 <v-clicks>
 
-- **Hard delete** - la donnée est effacée définitivement de la base
-
-- **Soft delete** - la donnée est marquée comme supprimée (`deleted_at`, `is_active = false`), mais reste présente
-
-Ce n'est pas un détail technique : c'est une **décision d'infrastructure** qui engage l'auditabilité, la conformité légale et les performances.
+- **Hard delete** : effacement définitif
+- **Soft delete** : marquée supprimée (`deleted_at`, `is_active`), mais conservée
+- **Décision d'infrastructure** : engage auditabilité, conformité légale, performances
 
 </v-clicks>
 
@@ -361,7 +359,7 @@ Ce n'est pas un détail technique : c'est une **décision d'infrastructure** qui
 |---|---|---|
 | Auditabilité | ✗ | ✓ |
 | Réversibilité | ✗ | ✓ |
-| RGPD (droit à l'effacement) | ✓ direct | Complexe |
+| RGPD, LPD (droit à l'effacement) | ✓ direct | Complexe |
 | Intégrité référentielle | Risque cascade | Préservée |
 | Accumulation de données | Non | Oui |
 | Requêtes | Simples | Filtrer `deleted_at IS NULL` |
@@ -372,9 +370,9 @@ Ce n'est pas un détail technique : c'est une **décision d'infrastructure** qui
 
 
 </div>
-<div class="accent-box">
+<div v-click class="accent-box">
 
-Le RGPD crée un paradoxe : le droit à l'oubli oblige parfois à supprimer ce qu'on aurait voulu conserver pour l'audit.
+Le RGPD/LPD crée un paradoxe : le droit à l'oubli oblige parfois à supprimer ce qu'on aurait voulu conserver pour l'audit.
 
 → Rôles, permissions et conformité : <a class="module-link" href="https://comem-infradon.onrender.com/06-securite-roles-sauvegarde/">module 06</a>
 
@@ -400,9 +398,9 @@ layout: default
 
 <v-clicks>
 
-- Selon IBM, **20 % des données** en entreprise sont compromises par une mauvaise qualité
-- Une mauvaise donnée qui entre dans le système se **propage** à chaque rapport, chaque pipeline, chaque décision
-- Le coût de correction augmente exponentiellement avec le temps : corriger à l'entrée coûte 1, corriger en production coûte 100
+- **Coûts cachés** qui se propagent à travers toute l'organisation
+- Se **propage** à chaque rapport, pipeline, décision
+- Corriger à l'entrée coûte 1 → corriger en production coûte 100
 
 </v-clicks>
 
@@ -431,7 +429,7 @@ Les fichiers Excel du service technique contiennent :
 
 </div>
 
-<div class="footer"><a href="https://firsteigen.com/blog/how-to-build-a-robust-data-infrastructure/">FirstEigen · Seth Rao · How to Build a Robust Data Infrastructure (2022)</a></div>
+<div class="footer"><a href="https://www.ibm.com/think/insights/cost-of-poor-data-quality">Krantz & Jonker · The True Cost of Poor Data Quality (IBM Think, 2026)</a></div>
 
 ---
 layout: default
@@ -531,8 +529,8 @@ layout: default
 <div class="px-2 py-1 border-l-2 border-gray-400"><strong>Cohérence</strong> : 3 formats de date différents (<code>01/03/2023</code>, <code>2023-02-28</code>, <code>03/2023</code>)</div>
 <div class="px-2 py-1 border-l-2 border-gray-400"><strong>Validité</strong> : <code>urgence = 4</code> hors domaine (1-3), <code>urgence = "haute"</code> mauvais type</div>
 <div class="px-2 py-1 border-l-2 border-gray-400"><strong>Unicité</strong> : lignes 1 et 3 semblent identiques (même objet, même date, même description)</div>
-<div class="px-2 py-1 border-l-2 border-gray-400"><strong>Précision</strong> : "Marie Dupond", "marie dupond", "Marie Dupont" — 3 orthographes pour 1 personne</div>
-<div class="px-2 py-1 border-l-2 border-gray-400"><strong>Temporalité</strong> : aucun champ de mise à jour — impossible de savoir si les statuts sont à jour</div>
+<div class="px-2 py-1 border-l-2 border-gray-400"><strong>Précision</strong> : "Marie Dupond", "marie dupond", "Marie Dupont" : 3 orthographes pour 1 personne</div>
+<div class="px-2 py-1 border-l-2 border-gray-400"><strong>Temporalité</strong> : aucun champ de mise à jour : impossible de savoir si les statuts sont à jour</div>
 </div>
 
 </v-clicks>
@@ -553,15 +551,15 @@ layout: default
 
 <div v-click>
 
-Les trois niveaux sont **complémentaires**. Ne pas tout déléguer à un seul !
+Trois niveaux **complémentaires** : ne pas tout déléguer à un seul
 
 <div class="flex flex-col gap-14 mt-6" style="font-size: 0.78rem; line-height: 1.4;">
 
-<div class="px-3 py-2 border-l-2 border-gray-400 flex items-center gap-3"><div><strong>Côté client</strong><br/>Validation des formulaires et contrôles UI : améliore l'expérience, mais contournable.</div></div>
+<div class="px-3 py-2 border-l-2 border-gray-400 flex items-center gap-3"><div><strong>Côté client</strong><br/>Validation UI : améliore l'expérience, mais contournable</div></div>
 
-<div class="px-3 py-2 border-l-2 border-gray-400 flex items-center gap-3"><div><strong>Application (pipelines ou backend)</strong><br/>Règles métier complexes, transformations, vérifications croisées : le cœur de la logique.</div></div>
+<div class="px-3 py-2 border-l-2 border-gray-400 flex items-center gap-3"><div><strong>Application (pipelines ou backend)</strong><br/>Règles métier, transformations, vérifications croisées</div></div>
 
-<div class="px-3 py-2 border-l-2 border-gray-400 flex items-center gap-3"><div><strong>Base de données</strong><br/>Contraintes, types, clés étrangères : dernier filet si quelqu'un passe en dehors de l'application.</div></div>
+<div class="px-3 py-2 border-l-2 border-gray-400 flex items-center gap-3"><div><strong>Base de données</strong><br/>Contraintes, types, clés étrangères : dernier filet</div></div>
 
 </div>
 
@@ -575,7 +573,7 @@ layout: section
 
 # ACID - les garanties transactionnelles
 
-<p class="section-subtitle">Ce qu'un système fiable promet — et ce qu'il ne peut pas toujours tenir</p>
+<p class="section-subtitle">Ce qu'un système fiable promet : et ce qu'il ne peut pas toujours tenir</p>
 
 ---
 layout: default
@@ -589,12 +587,12 @@ layout: default
 
 <v-clicks>
 
-Une **transaction** est un groupe d'opérations traité comme une unité indivisible.
+Groupe d'opérations traité comme une **unité indivisible**
 
-Exemple : enregistrer un signalement **et** créer l'intervention associée.
+*Ex : enregistrer un signalement **et** créer l'intervention*
 
-- Si les deux réussissent → la transaction est **validée** (<code>COMMIT</code>)
-- Si l'une échoue → tout est **annulé** (<code>ROLLBACK</code>)
+- Succès → **COMMIT**
+- Échec → **ROLLBACK** (tout annulé)
 
 </v-clicks>
 
@@ -629,81 +627,52 @@ layout: default
 <div v-click class="p-3 border rounded">
 
 ### Atomicité
-**Tout ou rien.**
+**Tout ou rien**
 
-Soit toutes les opérations réussissent, soit aucune n'est appliquée.
+Toutes réussissent ou aucune n'est appliquée
 
-*Ex : clôture d'une intervention + mise à jour du stock — si l'un échoue, tout est annulé.*
+*Ex : clôture intervention + mise à jour stock : un échec annule tout*
 
-Un crash au milieu → rollback automatique.
+Crash → rollback automatique
 
 </div>
 
 <div v-click class="p-3 border rounded">
 
 ### Cohérence
-La base passe d'un **état valide à un autre état valide**.
+**État valide → état valide**
 
-Les contraintes sont respectées avant et après chaque transaction.
+Contraintes respectées avant et après
 
-*Ex : on ne peut pas créer une intervention pour un objet qui n'existe pas.*
+*Ex : intervention impossible pour un objet inexistant*
 
 </div>
 
 <div v-click class="p-3 border rounded">
 
 ### Isolation
-Les transactions concurrentes **ne voient pas les états intermédiaires** des autres.
+Pas de visibilité sur les **états intermédiaires**
 
-Transaction B voit soit l'ancienne valeur, soit la nouvelle — jamais un état partiel.
+Ancienne valeur ou nouvelle : jamais un état partiel
 
-→ Niveaux d'isolation : <a class="module-link" href="https://comem-infradon.onrender.com/04-transactions-concurrence/">module 04</a>.
+→ Niveaux d'isolation : <a class="module-link" href="https://comem-infradon.onrender.com/04-transactions-concurrence/">module 04</a>
 
 </div>
 
 <div v-click class="p-3 border rounded">
 
 ### Durabilité
-Une fois validée, une transaction **survit aux pannes**.
+**Survit aux pannes** une fois validée
 
-Mécanisme : **Write-Ahead Log (WAL)** — toute modification est d'abord écrite dans un journal.
+**Write-Ahead Log (WAL)** : modification écrite dans un journal avant application
 
-En cas de crash : le WAL rejoue ou annule les transactions en suspens.
+Crash → WAL rejoue ou annule les transactions en suspens
 
 </div>
 
 </div>
 
 <div class="footer"><a href="https://www.postgresql.org/docs/current/wal-intro.html">PostgreSQL · Introduction to WAL</a> · <a href="https://www.postgresql.org/docs/current/transaction-iso.html">PostgreSQL · Transaction Isolation</a></div>
-
----
-layout: default
----
-
-# ACID n'est pas binaire
-
-<div class="mt-2">
-
-Tous les systèmes ne garantissent pas ACID au même niveau :
-
-| Système | Atomicité | Cohérence | Isolation | Durabilité |
-|---------|:---------:|:---------:|:---------:|:----------:|
-| PostgreSQL | ✓ | ✓ | ✓ niveaux configurables | ✓ |
-| MySQL InnoDB | ✓ | ✓ | ✓ | ✓ |
-| MongoDB (≥ v4) | ✓ | ✓ | ✓ multi-document | ✓ |
-| Redis | Partiel | Partiel | Partiel | Configurable |
-| SQLite | ✓ | ✓ | ✓ | ✓ |
-| Cassandra | ✗ | Éventuelle | Faible | ✓ |
-
-</div>
-
-<div v-click class="accent-box mt-2">
-
-Avant de choisir un système de stockage, vérifiez quelles garanties ACID il offre - et lesquelles votre cas d'usage nécessite réellement.
-
-→ NoSQL, bases graphes et stockage médias : <a class="module-link" href="https://comem-infradon.onrender.com/07-structures-donnees/">module 07</a>
-
-</div>
 
 ---
 layout: section
@@ -725,17 +694,17 @@ layout: default
 
 <v-clicks>
 
-Plusieurs machines (**nœuds**) qui coopèrent via un réseau :
+Plusieurs **nœuds** coopèrent via un réseau :
 
-- Réplication des données entre nœuds
-- Scalabilité horizontale — ajouter des machines plutôt que les grossir
-- Pannes réseau entre nœuds inévitables en production
+- Réplication entre nœuds
+- Scalabilité horizontale : machines supplémentaires, pas plus grosses
+- Pannes réseau inévitables en production
 
 </v-clicks>
 
 <div v-click class="accent-box mt-4">
 
-Un PostgreSQL sur une seule machine **n'est pas** un système distribué — CAP et BASE ne s'appliquent qu'aux architectures **multi-nœuds**
+Un PostgreSQL sur une seule machine **n'est pas** un système distribué : CAP et BASE ne s'appliquent qu'aux architectures **multi-nœuds**
 
 </div>
 
@@ -767,35 +736,29 @@ layout: default
 
 <v-clicks>
 
-Dans un tel système, on ne peut garantir simultanément que **deux des trois** propriétés :
+Au maximum **deux des trois** propriétés garantissables simultanément :
 
-- <span style="color:var(--heig-red);font-weight:700">C</span><span style="font-weight:700">onsistency</span> — tous les nœuds voient les mêmes données
-- <span style="color:var(--heig-red);font-weight:700">A</span><span style="font-weight:700">vailability</span> — toute requête reçoit une réponse (données potentiellement obsolètes)
-- <span style="color:var(--heig-red);font-weight:700">P</span><span style="font-weight:700">artition tolerance</span> — le système fonctionne malgré les coupures réseau
+- <span style="color:var(--heig-red);font-weight:700">C</span><span style="font-weight:700">onsistency</span> : tous les nœuds voient les mêmes données
+- <span style="color:var(--heig-red);font-weight:700">A</span><span style="font-weight:700">vailability</span> : toute requête reçoit une réponse (données potentiellement obsolètes)
+- <span style="color:var(--heig-red);font-weight:700">P</span><span style="font-weight:700">artition tolerance</span> : fonctionne malgré les coupures réseau
 
 </v-clicks>
 
 <div v-click class="accent-box mt-4">
 
-Les partitions réseau arrivent **toujours** en production. En pratique, le choix se fait entre **CP** (cohérence forte) et **AP** (disponibilité prioritaire).
+Partitions réseau inévitables en production → choix réel entre **CP** et **AP**
 
 </div>
 
 </div>
 
-<div v-click>
+<div>
 
-| Choix | Propriétés | Exemples |
-|-------|-----------|---------|
-| **CP** | Cohérence + Partition | PostgreSQL, HBase, Zookeeper |
-| **AP** | Disponibilité + Partition | Cassandra, CouchDB, DynamoDB |
-| **CA** | Cohérence + Disponibilité | Impossible en réseau distribué |
+<img src="/images/02-fondamentaux/cap-theorem.webp" class="rounded" style="max-height: 70%; object-fit: contain;" />
 
-<div class="mt-4 text-sm text-gray-500">
+<div class="mt-2 text-sm text-gray-500">
 
-→ Une base PostgreSQL sur un seul nœud n'est pas concernée par CAP. Le théorème s'applique aux systèmes **multi-nœuds**.
-
-→ Architectures distribuées, data mesh : <a class="module-link" href="https://comem-infradon.onrender.com/09-architectures-modernes/">module 09</a>
+→ PostgreSQL mono-nœud : hors scope CAP · Architectures distribuées : <a class="module-link" href="https://comem-infradon.onrender.com/09-architectures-modernes/">module 09</a>
 
 </div>
 
@@ -803,7 +766,7 @@ Les partitions réseau arrivent **toujours** en production. En pratique, le choi
 
 </div>
 
-<div class="footer"><a href="https://martin.kleppmann.com/2015/05/11/please-stop-calling-databases-cp-or-ap.html">Kleppmann · Please stop calling databases CP or AP (2015)</a></div>
+<div class="footer"><a href="https://hazelcast.com/foundations/distributed-computing/cap-theorem/">Hazelcast · CAP Theorem</a> · <a href="https://martin.kleppmann.com/2015/05/11/please-stop-calling-databases-cp-or-ap.html">Kleppmann · Please stop calling databases CP or AP (2015)</a></div>
 
 ---
 layout: default
@@ -817,11 +780,11 @@ layout: default
 
 <v-clicks>
 
-**BASE** est le modèle alternatif à ACID pour les systèmes distribués à haute disponibilité :
+Modèle alternatif à ACID pour systèmes distribués à haute disponibilité :
 
-- <span style="color:var(--heig-red);font-weight:700">B</span><span style="font-weight:700">asically</span> <span style="color:var(--heig-red);font-weight:700">A</span><span style="font-weight:700">vailable</span> — le système répond toujours (données potentiellement obsolètes)
-- <span style="color:var(--heig-red);font-weight:700">S</span><span style="font-weight:700">oft state</span> — l'état peut évoluer sans nouvelle écriture, par propagation entre nœuds
-- <span style="color:var(--heig-red);font-weight:700">E</span><span style="font-weight:700">ventually consistent</span> — sans nouvelles écritures, tous les nœuds convergent vers le même état
+- <span style="color:var(--heig-red);font-weight:700">B</span><span style="font-weight:700">asically</span> <span style="color:var(--heig-red);font-weight:700">A</span><span style="font-weight:700">vailable</span> : répond toujours (données potentiellement obsolètes)
+- <span style="color:var(--heig-red);font-weight:700">S</span><span style="font-weight:700">oft state</span> : état évolue par propagation entre nœuds
+- <span style="color:var(--heig-red);font-weight:700">E</span><span style="font-weight:700">ventually consistent</span> : convergence vers le même état sans nouvelles écritures
 
 </v-clicks>
 
@@ -840,7 +803,7 @@ layout: default
 
 <div class="accent-box mt-4">
 
-Ce n'est pas « ACID vs BASE » - c'est **quel niveau de garantie pour quel usage**. Un même système peut utiliser les deux selon les opérations.
+Pas « ACID vs BASE » : **quel niveau de garantie pour quel usage**. Un même système peut combiner les deux.
 
 </div>
 
@@ -854,7 +817,7 @@ layout: section
 
 # OLTP vs OLAP - deux paradigmes
 
-<p class="section-subtitle">Opérationnel ou analytique — deux usages aux contraintes incompatibles</p>
+<p class="section-subtitle">Opérationnel ou analytique : deux usages aux contraintes incompatibles</p>
 
 ---
 layout: default
@@ -906,9 +869,7 @@ layout: default
 
 # Quel est le problème ?
 
-<div class="text-sm text-gray-500 italic mb-2"><strong>Scénario</strong> : À 8h45, un technicien essaie d'enregistrer un signalement urgent depuis son téléphone. Au même moment, le responsable a lancé depuis son bureau : `SELECT type_mobilier, SUM(cout), COUNT(*) FROM interventions GROUP BY type_mobilier` - un rapport sur 5 ans de données.
-
-La saisie du technicien prend **45 secondes** au lieu de 2.
+<div class="text-sm text-gray-500 italic mb-2"><strong>Scénario</strong> : À 8h45, un technicien essaie d'enregistrer un signalement urgent depuis son téléphone. Au même moment, le responsable a lancé depuis son bureau : `SELECT type_mobilier, SUM(cout), COUNT(*) FROM interventions GROUP BY type_mobilier` - un rapport sur 5 ans de données. La saisie du technicien prend <b>45 secondes</b> au lieu de 2.
 </div>
 
 
@@ -944,13 +905,13 @@ layout: default
 
 <v-clicks>
 
-- **Normalisation** — structurer les données pour éviter la redondance
+- **Normalisation** : éviter la redondance
 
-  - Données réparties dans plusieurs tables reliées par des clés
-  - Cohérence et intégrité garanties à l'écriture
+  - Tables reliées par des clés
+  - Cohérence et intégrité à l'écriture
   - Jointures nécessaires à la lecture
 
-- **Dénormalisation** — dupliquer intentionnellement pour la performance
+- **Dénormalisation** : dupliquer pour la performance
 
   - Données pré-jointes, agrégats précalculés
   - Lectures rapides, moins de jointures
@@ -1002,13 +963,13 @@ En vous basant sur votre brief et les données du projet :
 
 <v-clicks>
 
-1. **Qualifier le workload** : votre usage principal est-il OLTP, OLAP, ou les deux ? Pour quelle partie ?
+1. **Qualifier le workload** : OLTP, OLAP ou les deux ? Pour quelle partie ?
 
-2. **Identifier les risques qualité** : quelles colonnes de vos fichiers Excel risquent de violer les 6 dimensions de qualité ? Donnez un exemple concret.
+2. **Identifier les risques qualité** : colonnes à risque + exemple concret
 
-3. **Choisir un modèle de déploiement** : si ce système allait en production pour la commune d'Yverdon, quel modèle de déploiement recommanderiez-vous ? Justifiez.
+3. **Choisir un modèle de déploiement** : on-premise, cloud ou hybride pour Yverdon ? Justifier
 
-4. **Identifier les transactions nécessaires** : quelles opérations de votre brief nécessitent une atomicité ?
+4. **Identifier les transactions nécessaires** : quelles opérations nécessitent une atomicité ?
 
 </v-clicks>
 
@@ -1020,9 +981,9 @@ En vous basant sur votre brief et les données du projet :
 
 Chaque groupe présente :
 
-- Sa qualification OLTP / OLAP
-- Un risque qualité identifié et comment le prévenir
-- Le modèle de déploiement choisi et pourquoi
+- Classification OLTP / OLAP
+- Un risque qualité + mesure préventive
+- Modèle de déploiement + justification
 
 </div>
 

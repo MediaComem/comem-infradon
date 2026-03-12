@@ -16,71 +16,49 @@ schema public   (types corrects, clés étrangères, données normalisées)
 
 ---
 
-## Étape 1 - Créer le schéma et les tables staging
+## Étape 1 - Exporter les Excel en CSV
+
+Pour chacun des 4 fichiers Excel :
+- `Fichier` → `Enregistrer sous` → **CSV UTF-8**
+- Placer dans `data/`
+
+> Excel sur Windows produit parfois du `windows-1252` — choisir explicitement **CSV UTF-8**.
+
+---
+
+## Étape 2 - Créer `initdb/02-staging.sql`
+
+Vous avez déjà `initdb/01-schema.sql` avec les tables de production. Créer un fichier `initdb/02-staging.sql` qui :
+1. Crée le schéma `staging`
+2. Crée les 4 tables staging (tout en `TEXT`)
+3. Importe les CSV avec `COPY`
+
+Ce fichier sera exécuté automatiquement par Docker au démarrage, après `01-schema.sql`.
 
 ```sql
+-- initdb/02-staging.sql
+
 CREATE SCHEMA IF NOT EXISTS staging;
-```
 
-Les tables staging reprennent exactement les colonnes des fichiers Excel, **tout en TEXT** :
-
-```sql
+-- Exemple pour inventaire_mobilier — reproduire pour les 3 autres tables
 CREATE TABLE staging.inventaire_mobilier (
     id TEXT, type TEXT, materiau TEXT, lieu TEXT,
     latitude TEXT, longitude TEXT,
     date_installation TEXT, etat TEXT, remarques TEXT
 );
 
-CREATE TABLE staging.signalements (
-    date TEXT, signale_par TEXT, objet TEXT,
-    description TEXT, urgence TEXT, statut TEXT
-);
+-- ... (signalements, interventions, fournisseurs)
 
-CREATE TABLE staging.interventions (
-    date TEXT, objet TEXT, type_intervention TEXT,
-    technicien TEXT, duree TEXT, cout_materiel TEXT, remarques TEXT
-);
-
-CREATE TABLE staging.fournisseurs (
-    entreprise TEXT, contact TEXT, telephone TEXT,
-    email TEXT, type_materiel TEXT, remarques TEXT
-);
-```
-
----
-
-## Étape 2 - Exporter les Excel et importer dans PostgreSQL
-
-### 2.1 Exporter en CSV
-
-Pour chacun des 4 fichiers Excel :
-- `Fichier` → `Enregistrer sous` → **CSV UTF-8**
-- Placer dans `data/`
-
-> Excel sur Windows produit parfois du `windows-1252` - choisir explicitement **CSV UTF-8**.
-
-### 2.2 Ouvrir un terminal psql
-
-**VS Code** (terminal intégré) :
-```bash
-docker exec -it infradon-postgres psql -U infradon -d infradon
-```
-
-**Docker Desktop** : conteneur `infradon-postgres` → onglet **Terminal** → `psql -U infradon -d infradon`
-
-### 2.3 Importer avec COPY
-
-Le dossier `data/` du projet est monté dans le conteneur sous `/data/`.
-
-```sql
+-- Import CSV — data/ est monté sous /data/ dans le conteneur
 COPY staging.inventaire_mobilier
 FROM '/data/inventaire_mobilier.csv'
 WITH (FORMAT csv, HEADER true, DELIMITER ',', ENCODING 'UTF8');
 
--- Répéter pour signalements, interventions, fournisseurs_contacts
+-- ... (répéter pour les 3 autres fichiers)
 ```
 
-**Vérifier :**
+Relancer le conteneur pour exécuter le script (`docker compose down -v && docker compose up -d`), puis vérifier :
+
 ```sql
 SELECT COUNT(*) FROM staging.inventaire_mobilier;  -- ~120
 SELECT COUNT(*) FROM staging.signalements;         -- ~200

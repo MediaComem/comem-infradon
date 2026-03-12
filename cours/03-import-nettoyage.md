@@ -318,21 +318,16 @@ layout: default
 
 <div>
 
-Les fichiers CSV sont placés dans `projet/data/`, monté comme volume dans le conteneur :
+Placer les fichiers CSV dans `data/` et vérifier que le volume est déclaré dans `docker-compose.yml` :
 
 ```yaml
-# docker-compose.yml
 volumes:
-  - ./projet/data:/data
+  - ./data:/data
 ```
 
-PostgreSQL voit les fichiers sous `/data/` — `COPY` peut donc les lire directement.
 
-<div class="accent-box mt-4">
 
-`COPY` lit depuis le **serveur** (le conteneur). C'est différent de `\copy` qui lit depuis le client.
 
-</div>
 
 </div>
 

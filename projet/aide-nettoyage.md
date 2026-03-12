@@ -55,7 +55,7 @@ CREATE TABLE staging.fournisseurs (
 
 Pour chacun des 4 fichiers Excel :
 - `Fichier` → `Enregistrer sous` → **CSV UTF-8**
-- Placer dans `projet/data/`
+- Placer dans `data/`
 
 > Excel sur Windows produit parfois du `windows-1252` - choisir explicitement **CSV UTF-8**.
 
@@ -70,7 +70,7 @@ docker exec -it infradon-postgres psql -U infradon -d infradon
 
 ### 2.3 Importer avec COPY
 
-Le dossier `projet/data/` est monté sous `/data/` dans le conteneur.
+Le dossier `data/` du projet est monté dans le conteneur sous `/data/`.
 
 ```sql
 COPY staging.inventaire_mobilier

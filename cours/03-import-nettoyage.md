@@ -140,7 +140,7 @@ layout: default
 
 <div class="accent-box mt-4">
 
-**Modéliser d'abord** : définir la structure cible, puis construire le pipeline de nettoyage pour y arriver.
+**Modéliser d'abord** : définir la structure cible, puis construire le pipeline de nettoyage pour y arriver
 
 </div>
 
@@ -495,7 +495,8 @@ layout: default
 
 
 
-`ROW_NUMBER()` est une **window function** : elle numérote les lignes au sein de chaque groupe défini par `PARTITION BY`.
+`ROW_NUMBER()` est une fonction de **fenêtrage** : attribue un numéro de ligne à chaque enregistrement. Combinée avec `PARTITION BY`, elle remet le compteur à 1 pour chaque groupe.
+
 
 En Java, l'équivalent serait :
 

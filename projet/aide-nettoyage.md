@@ -35,7 +35,7 @@ Vous avez déjà `initdb/01-schema.sql` avec les tables de production. Créer un
 
 Ce fichier sera exécuté automatiquement par Docker au démarrage, après `01-schema.sql`.
 
-```sql
+```pgsql
 -- initdb/02-staging.sql
 
 CREATE SCHEMA IF NOT EXISTS staging;
@@ -59,7 +59,7 @@ WITH (FORMAT csv, HEADER true, DELIMITER ',', ENCODING 'UTF8');
 
 Relancer le conteneur pour exécuter le script (`docker compose down -v && docker compose up -d`), puis vérifier :
 
-```sql
+```pgsql
 SELECT COUNT(*) FROM staging.inventaire_mobilier;  -- ~120
 SELECT COUNT(*) FROM staging.signalements;         -- ~200
 SELECT COUNT(*) FROM staging.interventions;        -- ~150
@@ -72,7 +72,7 @@ SELECT COUNT(*) FROM staging.fournisseurs;         -- ~15
 
 Avant de nettoyer, comprendre ce qu'il y a dans les données.
 
-```sql
+```pgsql
 -- Types de mobilier
 SELECT type, COUNT(*) FROM staging.inventaire_mobilier GROUP BY type ORDER BY 2 DESC;
 
@@ -104,13 +104,13 @@ GROUP BY lieu, type HAVING COUNT(*) > 1;
 
 ### Normaliser du texte (casse, espaces)
 
-```sql
+```pgsql
 LOWER(TRIM(colonne))
 ```
 
 ### Mapper des valeurs vers une valeur normalisée
 
-```sql
+```pgsql
 CASE LOWER(TRIM(colonne))
     WHEN 'valeur_brute_1' THEN 'valeur_propre'
     WHEN 'valeur_brute_2' THEN 'valeur_propre'
@@ -120,7 +120,7 @@ END
 
 ### Détecter des formats de date avec LIKE
 
-```sql
+```pgsql
 CASE
     WHEN colonne LIKE '%.%.%'    THEN TO_DATE(colonne, 'DD.MM.YYYY')
     WHEN colonne LIKE '____-__-__' THEN TO_DATE(colonne, 'YYYY-MM-DD')
@@ -130,21 +130,21 @@ END
 
 ### Nettoyer les coûts
 
-```sql
+```pgsql
 -- Supprimer tout sauf les chiffres, puis caster
 REGEXP_REPLACE(cout_materiel, '[^0-9]', '', 'g')::INTEGER
 ```
 
 ### Gérer les valeurs vides
 
-```sql
+```pgsql
 NULLIF(TRIM(colonne), '')          -- '' → NULL
 COALESCE(colonne, 'valeur_defaut') -- NULL → valeur par défaut
 ```
 
 ### Dédoublonner
 
-```sql
+```pgsql
 ROW_NUMBER() OVER (
     PARTITION BY LOWER(TRIM(col1)), LOWER(TRIM(col2))
     ORDER BY id
@@ -158,7 +158,7 @@ ROW_NUMBER() OVER (
 
 Pattern général :
 
-```sql
+```pgsql
 INSERT INTO public.table_finale (col1, col2, ...)
 SELECT
     transformation1,

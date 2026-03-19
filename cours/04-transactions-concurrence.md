@@ -665,149 +665,49 @@ layout: section
 
 <p class="section-subtitle">Comment PostgreSQL isole les transactions sans bloquer les lectures</p>
 
----
-layout: default
----
-
-# Plusieurs versions d'une même ligne
-
-<div class="grid grid-cols-2 gap-8 mt-4">
-
-<div>
-
-### Principe
-
-* Chaque modification crée une **nouvelle version** de la ligne (`tuple`)
-
-* Les anciennes versions restent accessibles aux transactions en cours
-
-* Chaque transaction voit un **snapshot** cohérent du passé
-
-### → Conséquence fondamentale
-  * Les lectures ne bloquent **jamais** les écritures
-  * Les écritures ne bloquent **jamais** les lectures
-
-</div>
-
-<div>
-
-```
-Ligne physique 1 (Alice) :
-┌──────────────────────────────────────────┐
-│ xmin=5  xmax=12  solde=500  (ancienne)   │
-│         ← visible pour les txn < 12      │
-├──────────────────────────────────────────┤
-│ xmin=12 xmax=null solde=400 (courante)   │
-│         ← visible pour les txn ≥ 12      │
-└──────────────────────────────────────────┘
-
-xmin = txn qui a créé la version
-xmax = txn qui l'a remplacée (null = active)
-
-T10 (avant txn 12)  → voit solde = 500
-T15 (après txn 12)  → voit solde = 400
-```
-
-</div>
-
-</div>
-
-<div class="footer"><a href="https://www.postgresql.org/docs/current/mvcc-intro.html">PostgreSQL · Introduction to MVCC</a></div>
 
 ---
 layout: default
 ---
 
-# MVCC : snapshot et visibilité
+# MVCC : après un UPDATE, deux versions coexistent
 
-<div class="grid grid-cols-2 gap-6 mt-2">
+Chaque ligne de table contient des métadonnées invisibles pour les utilisateurs, utilisées par MVCC pour gérer la concurrence :
+* `xmin` : ID de la transaction qui a créé la ligne
+* `xmax` : ID de la transaction qui a supprimé la ligne (ou `NULL` si toujours active)
 
-<div style="font-size: 0.8rem;">
 
-### Comment PostgreSQL décide ce que voit une transaction ?
 
-À chaque snapshot, PostgreSQL enregistre :
-- Le numéro de transaction courante
-- La liste des transactions **en cours** (non commitées)
-
-Une version de ligne est **visible** si :
-- `xmin` est commité et dans le snapshot
-- `xmax` est null ou pas encore commité
-
-</div>
-
-<div>
-
-```mermaid {scale: 0.65}
-%%{init: {"theme": "base", "themeVariables": {"actorBkg": "#ffffff", "actorBorder": "#000000", "actorTextColor": "#000000", "actorLineColor": "#e0e0e0", "signalColor": "#000000", "signalTextColor": "#000000", "noteBkgColor": "#FDF2F1", "noteTextColor": "#DA291C", "noteBorderColor": "#DA291C", "activationBkgColor": "#f5f5f5", "activationBorderColor": "#e0e0e0", "labelBoxBkgColor": "#ffffff", "labelBoxBorderColor": "#e0e0e0", "labelTextColor": "#000000"}}}%%
-sequenceDiagram
-    participant T10
-    participant T11 as T11 (virement)
-    participant T12
-    T11->>T11: UPDATE solde=400 (non commité)
-    T10->>T10: SELECT solde : 500
-    T12->>T12: SELECT solde : 500
-    Note over T10,T12: T11 non commitée = invisible
-    T11->>T11: COMMIT
-```
-
-</div>
-
-</div>
-
-<div class="footer"><a href="https://www.postgresql.org/docs/current/mvcc-intro.html">PostgreSQL · Introduction to MVCC</a></div>
+<MvccVersionsTimeline />
 
 ---
-layout: default
+layout: two-cols
 ---
 
-# MVCC : le coût → VACUUM
+# MVCC : le coût → dead tuples
 
-<div class="grid grid-cols-2 gap-8 mt-4">
+* **Dead tuple** : version d'une ligne rendue invalide par un `UPDATE` ou `DELETE`.
+PostgreSQL la conserve en place : une transaction concurrente pourrait encore en avoir besoin.
+Ces versions mortes s'accumulent dans la table → **table bloat**.
 
-<div>
+* **VACUUM** : scanne la table (*heap*), supprime les dead tuples du heap et des index, libère l'espace pour de nouvelles insertions.
 
-### Accumulation des anciennes versions
+* **autovacuum** : démon qui déclenche VACUUM automatiquement, sans lock exclusif, dès que :
 
-* Chaque `UPDATE` / `DELETE` laisse une **version morte** (*dead tuple*)
-
-* Ces versions s'accumulent → **table bloat**
-
-### → VACUUM : processus de nettoyage
-
-- Supprime les versions mortes invisibles pour toutes les transactions
-- `autovacuum` : déclenché automatiquement
-
-* ⚠ Une **transaction longue** bloque le VACUUM → les versions mortes s'accumulent tant qu'elle est ouverte
-
-</div>
-
-<div>
-
-```sql
--- Tables avec beaucoup de versions mortes
-SELECT relname,
-       n_dead_tup,
-       last_autovacuum,
-       n_live_tup
-FROM pg_stat_user_tables
-ORDER BY n_dead_tup DESC;
-
--- Transactions longues (bloquent le vacuum)
-SELECT pid,
-       now() - xact_start AS duree,
-       state,
-       query
-FROM pg_stat_activity
-WHERE xact_start IS NOT NULL
-ORDER BY duree DESC;
+```
+dead tuples  >  threshold + scale_factor × nb_lignes
+               (défaut: 50)   (défaut: 20%)
 ```
 
-</div>
 
-</div>
+::right::
 
-<div class="footer"><a href="https://www.postgresql.org/docs/current/routine-vacuuming.html">PostgreSQL · Routine Vacuuming</a> · <a href="https://www.postgresql.org/docs/current/mvcc-intro.html">PostgreSQL · MVCC</a></div>
+<figure style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%;">
+  <img src="/images/04-transactions-concurrence/Autovacuum1.png" alt="Schéma autovacuum PostgreSQL" style="max-width:100%;" />
+  <figcaption style="font-size:0.5rem; color:#aaa; margin-top:0.4rem;"><a href="https://www.geeksforgeeks.org/postgresql/postgresql-autovacuum/">geeksforgeeks.org — PostgreSQL Autovacuum</a></figcaption>
+</figure>
+
+<div class="footer"><a href="https://www.postgresql.org/docs/current/routine-vacuuming.html">PostgreSQL · Routine Vacuuming</a> · <a href="https://www.davepacheco.net/blog/2019/visualizing-postgresql-vacuum-progress/">Visualizing PostgreSQL VACUUM progress</a> · <a href="https://www.geeksforgeeks.org/postgresql/postgresql-autovacuum/">PostgreSQL Autovacuum</a></div>
 
 ---
 layout: section

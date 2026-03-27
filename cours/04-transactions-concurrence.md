@@ -1217,10 +1217,10 @@ SELECT solde FROM compte WHERE id = 1;
 
 UPDATE compte SET solde = solde - 50
   WHERE id = 1;
--- s'applique sur 100 (valeur réelle de T2)
--- 100 - 50 = 50
+-- ERROR: could not serialize access
+-- due to concurrent update → ROLLBACK
 
-COMMIT; -- solde final = 50
+-- solde final = 100 (valeur de T2)
 ```
 
 </div>
@@ -1239,9 +1239,9 @@ COMMIT;
 
 </div>
 
-<div class="question-box">Quel est le solde final après le <code>COMMIT</code> de T1 ?<br><br>A) 450 &nbsp;&nbsp;&nbsp; <strong>B) 50 ✓</strong> &nbsp;&nbsp;&nbsp; C) erreur</div>
+<div class="question-box">Quel est le solde final après le <code>COMMIT</code> de T1 ?<br><br>A) 450 &nbsp;&nbsp;&nbsp; B) 50 &nbsp;&nbsp;&nbsp; <strong>C) erreur ✓</strong></div>
 
-* Le snapshot protège les **lectures** — le `UPDATE` s'applique sur la valeur **commitée** par T2 (100), pas sur le snapshot (500). `100 − 50 = 50`.
+* T2 a commité **après le snapshot de T1** → PostgreSQL détecte le conflit d'écriture et annule T1 avec `ERROR: could not serialize access due to concurrent update`. L'application doit **réessayer** la transaction.
 
 ---
 layout: default

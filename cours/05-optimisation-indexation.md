@@ -97,21 +97,16 @@ CREATE INDEX idx_composite ON table(col1, col2);
 layout: default
 ---
 
-# B-Tree index
+# B-Tree : l'annuaire téléphonique
 
 <div class="grid grid-cols-2 gap-8 mt-4">
 
 <div>
 
-* Type d'index **par défaut** dans PostgreSQL.
-
-* Fonctionne très bien pour les comparaisons classiques : `=`, `<`, `>`, `BETWEEN`, `ORDER BY`, etc.
-
-* Structure sous forme d'**arbre équilibré** → accès rapide à la donnée triée.
-
-* Très efficace pour des recherches sur des colonnes de type `INT`, `TEXT`, `DATE`, etc.
-
-* Utilisé **automatiquement** pour les clés primaires et uniques.
+* Type d'index **par défaut** dans PostgreSQL
+* Fonctionne pour les comparaisons classiques : `=`, `<`, `>`, `BETWEEN`, `ORDER BY`, etc.
+* Structure sous forme d'**arbre équilibré** → accès rapide à la donnée triée
+* Utilisé **automatiquement** pour les clés primaires et uniques
 
 ```sql
 CREATE INDEX idx_btree ON ma_table(ma_colonne);
@@ -121,8 +116,13 @@ CREATE INDEX idx_btree ON ma_table(ma_colonne);
 
 <div>
 
-<img src="/images/05-optimisation/btree.png" class="rounded" style="max-height: 220px; object-fit: contain;" />
-<div class="text-xs text-gray-400 mt-1">Source : <a href="https://medium.com/@dhanushkamadushan" target="_blank">Dhanushka Madushan</a></div>
+<div class="mb-3 text-sm text-gray-500 italic">
+
+Imagine un annuaire trié : pour trouver "Dupont", tu ouvres au milieu, tu vois "M", tu coupes encore… En 3-4 étapes tu y es. Et comme tout est trié, "tous les noms entre D et G" est aussi facile.
+
+</div>
+
+<img src="/images/05-optimisation/btree_annuaire.svg" style="max-height: 220px; width: 100%; object-fit: contain;" />
 
 </div>
 
@@ -134,19 +134,16 @@ CREATE INDEX idx_btree ON ma_table(ma_colonne);
 layout: default
 ---
 
-# Hash index
+# Hash : les casiers d'un vestiaire
 
 <div class="grid grid-cols-2 gap-8 mt-4">
 
 <div>
 
-* Optimisé **uniquement** pour les recherches par égalité (`=`).
-
-* Ne peut **pas** être utilisé pour des tris ou intervalles (`<`, `>`, etc.).
-
-* Moins d'espace que B-tree, mais aussi moins polyvalent.
-
-* **Cas d'usage** : recherche exacte sur une clé alternative très utilisée.
+* Optimisé **uniquement** pour les recherches par égalité (`=`)
+* Ne peut **pas** être utilisé pour des tris ou intervalles (`<`, `>`, etc.)
+* Moins d'espace que B-tree, mais aussi moins polyvalent
+* **Cas d'usage** : recherche exacte sur une clé alternative très utilisée
 
 ```sql
 CREATE INDEX idx_hash
@@ -157,8 +154,13 @@ CREATE INDEX idx_hash
 
 <div>
 
-<img src="/images/05-optimisation/hash.png" class="rounded" style="max-height: 220px; object-fit: contain;" />
-<div class="text-xs text-gray-400 mt-1">Source : <a href="https://sqlpipe.com/blog/b-plus-tree-vs-hash-index" target="_blank">B+ Tree vs Hash Index (and when to use them), SQL Pipe</a></div>
+<div class="mb-3 text-sm text-gray-500 italic">
+
+Le vestiairiste applique une formule sur ton nom → "casier 7". Accès direct et immédiat. Mais "quels manteaux sont entre taille M et XL ?" : impossible, les casiers ne sont pas triés.
+
+</div>
+
+<img src="/images/05-optimisation/hash_vestiaire.svg" style="max-height: 220px; width: 100%; object-fit: contain;" />
 
 </div>
 
@@ -170,21 +172,15 @@ CREATE INDEX idx_hash
 layout: default
 ---
 
-# GIN index
+# GIN : l'index d'un livre
 
 <div class="grid grid-cols-2 gap-8 mt-4">
 
 <div>
 
-* Très performant pour faire des recherches dans :
-
-  - Du **texte** (avec `to_tsvector`, full-text search)
-  - Des colonnes de type **`ARRAY`**
-  - Des champs **`JSONB`** avec opérateurs `@>`, `?`, etc.
-
-* Permet de savoir dans quelles lignes un mot ou une valeur apparaît.
-
-* Plus lent à écrire et plus lourd, mais **indispensable pour les recherches complexes**.
+* Très performant pour les recherches dans du **texte** (`to_tsvector`, full-text search), des `ARRAY` et des champs **`JSONB`**
+* Permet de savoir dans quelles lignes un mot ou une valeur apparaît
+* Plus lent à écrire et plus lourd, mais **indispensable pour les recherches complexes**
 
 ```sql
 CREATE INDEX idx_gin
@@ -195,8 +191,13 @@ CREATE INDEX idx_gin
 
 <div>
 
-<img src="/images/05-optimisation/gin-index.png" class="rounded" style="max-height: 220px; object-fit: contain;" />
-<div class="text-xs text-gray-400 mt-1">Generalized Inverted Index (GIN)</div>
+<div class="mb-3 text-sm text-gray-500 italic">
+
+L'index d'un livre : "chat → lignes 3, 7, 42". GIN découpe tes données en morceaux et note pour chacun dans quelles lignes il apparaît. Chercher "chat" devient immédiat.
+
+</div>
+
+<img src="/images/05-optimisation/gin_livre.svg" style="max-height: 220px; width: 100%; object-fit: contain;" />
 
 </div>
 
@@ -208,20 +209,15 @@ CREATE INDEX idx_gin
 layout: default
 ---
 
-# (SP-)GiST index
+# SP-GiST : le plan de ville avec des quartiers
 
 <div class="grid grid-cols-2 gap-8 mt-4">
 
 <div>
 
-* Très flexible, peut indexer :
-
-  - Des **données géospatiales** (PostGIS)
-  - Des **recherches approximatives** (recherche floue, distances, etc.)
-
-* Structure adaptable à plusieurs types de logique (proximité, similarité…).
-
-* Un peu comme le **"couteau suisse"** des index PostgreSQL.
+* Très flexible : **données géospatiales** (PostGIS), adresses IP, préfixes
+* **Recherches approximatives** : distances, similarité, recherche floue
+* Structure adaptable à plusieurs types de logique (proximité, similarité…)
 
 ```sql
 CREATE INDEX idx_gist
@@ -232,14 +228,36 @@ CREATE INDEX idx_gist
 
 <div>
 
-<img src="/images/05-optimisation/sp-gist.png" class="rounded" style="max-height: 220px; object-fit: contain;" />
-<div class="text-xs text-gray-400 mt-1">Source : <a href="https://habr.com/en/articles/318096/" target="_blank">Indexes in PostgreSQL : 6 (SP-GiST), Habr</a></div>
+<div class="mb-3 text-sm text-gray-500 italic">
+
+Une ville découpée en quartiers, puis en sous-quartiers. Pour trouver une adresse, tu n'explores que le bon quartier : tu ignores tout le reste. Parfait pour les données "spatiales" naturelles.
+
+</div>
+
+<img src="/images/05-optimisation/spgist_ville.svg" style="max-height: 220px; width: 100%; object-fit: contain;" />
 
 </div>
 
 </div>
 
 <div class="footer"><a href="https://www.postgresql.org/docs/current/spgist.html">PostgreSQL · SP-GiST Indexes</a></div>
+
+---
+layout: default
+---
+
+# En résumé : les 4 index et leurs métaphores
+
+<div class="mt-6" style="font-size: 0.88rem;">
+
+| Index | Métaphore | Quand l'utiliser |
+|-------|-----------|-----------------|
+| **B-Tree** | Annuaire trié | Presque toujours : nombres, dates, textes |
+| **Hash** | Vestiaire à casiers | Uniquement si tu cherches une valeur exacte, jamais de plage |
+| **GIN** | Index d'un livre | Tableaux, texte à chercher par mots, JSON |
+| **SP-GiST** | Plan de ville découpé en quartiers | Coordonnées GPS, adresses IP, préfixes |
+
+</div>
 
 ---
 layout: default
@@ -301,6 +319,40 @@ layout: section
 layout: default
 ---
 
+# EXPLAIN (ANALYZE) : Tables utilisées dans les exemples
+
+<div class="grid grid-cols-2 gap-6 mt-4" style="font-size: 0.82rem;">
+
+<div>
+
+**Table `orders`** (~100 000 lignes)
+
+| id | user_id | product | amount | created_at |
+|----|---------|---------|--------|------------|
+| 1 | 42 | product_7 | 149.90 | 2024-01-03 |
+| 2 | 17 | product_3 | 299.00 | 2024-01-04 |
+| … | … | … | … | … |
+
+</div>
+
+<div>
+
+**Table `users`** (~50 000 lignes)
+
+| id | email | name |
+|----|-------|------|
+| 1 | user1@example.com | User 1 |
+| 2 | user2@example.com | User 2 |
+| … | … | … |
+
+</div>
+
+</div>
+
+---
+layout: default
+---
+
 # EXPLAIN (ANALYZE)
 
 <div class="grid grid-cols-2 gap-8 mt-4">
@@ -356,6 +408,15 @@ layout: default
 
 # EXPLAIN ANALYZE : Lire le résultat
 
+<div class="grid grid-cols-2 gap-6 mt-4" style="font-size: 0.82rem;">
+
+<div>
+
+```sql
+EXPLAIN ANALYZE
+  SELECT * FROM orders WHERE user_id = 42;
+```
+
 ```
 Seq Scan on orders  (cost=0.00..2450.00 rows=12 width=80)
                                    ↑        ↑       ↑
@@ -365,7 +426,9 @@ Seq Scan on orders  (cost=0.00..2450.00 rows=12 width=80)
   actual time=0.021..18.340 rows=12    ← temps réel et lignes retournées
 ```
 
-<div class="mt-4" style="font-size: 0.85rem;">
+</div>
+
+<div>
 
 | Champ | Signification |
 |-------|--------------|
@@ -374,6 +437,8 @@ Seq Scan on orders  (cost=0.00..2450.00 rows=12 width=80)
 | `actual time` | Temps d'exécution **réel** en ms |
 | `actual rows` | Nombre de lignes **réellement** retournées |
 | `Rows Removed by Filter` | Lignes lues mais rejetées → signe qu'un index manque |
+
+</div>
 
 </div>
 

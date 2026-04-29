@@ -44,32 +44,32 @@ layout: default
 
 <div class="mt-5" style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; font-size: 0.84rem;">
 
-<div style="background: #fafaf0; border: 1px solid #e5dfc5; border-radius: 4px; padding: 0.55rem 0.85rem;">
+<div style="background: #f5f5f5; border: 1px solid #e0e0e0; border-radius: 4px; padding: 0.55rem 0.85rem;">
   <div style="display: flex; align-items: center; gap: 0.35rem; font-weight: 600; margin-bottom: 0.1rem;"><carbon-locked style="color: #666;" /> Confidentialité</div>
   Protéger les données sensibles contre tout accès non autorisé
 </div>
 
-<div style="background: #fafaf0; border: 1px solid #e5dfc5; border-radius: 4px; padding: 0.55rem 0.85rem;">
+<div style="background: #f5f5f5; border: 1px solid #e0e0e0; border-radius: 4px; padding: 0.55rem 0.85rem;">
   <div style="display: flex; align-items: center; gap: 0.35rem; font-weight: 600; margin-bottom: 0.1rem;"><carbon-user style="color: #666;" /> Contrôle d'accès</div>
   Empêcher les intrusions et limiter qui peut faire quoi
 </div>
 
-<div style="background: #fafaf0; border: 1px solid #e5dfc5; border-radius: 4px; padding: 0.55rem 0.85rem;">
+<div style="background: #f5f5f5; border: 1px solid #e0e0e0; border-radius: 4px; padding: 0.55rem 0.85rem;">
   <div style="display: flex; align-items: center; gap: 0.35rem; font-weight: 600; margin-bottom: 0.1rem;"><carbon-warning style="color: #666;" /> Prévention des pertes</div>
   Éviter la suppression ou la corruption accidentelle de données
 </div>
 
-<div style="background: #fafaf0; border: 1px solid #e5dfc5; border-radius: 4px; padding: 0.55rem 0.85rem;">
+<div style="background: #f5f5f5; border: 1px solid #e0e0e0; border-radius: 4px; padding: 0.55rem 0.85rem;">
   <div style="display: flex; align-items: center; gap: 0.35rem; font-weight: 600; margin-bottom: 0.1rem;"><carbon-checkmark style="color: #666;" /> Intégrité</div>
   Garantir des données fiables et cohérentes dans le temps
 </div>
 
-<div style="background: #fafaf0; border: 1px solid #e5dfc5; border-radius: 4px; padding: 0.55rem 0.85rem;">
+<div style="background: #f5f5f5; border: 1px solid #e0e0e0; border-radius: 4px; padding: 0.55rem 0.85rem;">
   <div style="display: flex; align-items: center; gap: 0.35rem; font-weight: 600; margin-bottom: 0.1rem;"><carbon-document style="color: #666;" /> Conformité</div>
   Respecter les lois et régulations (RGPD, LPD, etc.)
 </div>
 
-<div style="background: #fafaf0; border: 1px solid #e5dfc5; border-radius: 4px; padding: 0.55rem 0.85rem;">
+<div style="background: #f5f5f5; border: 1px solid #e0e0e0; border-radius: 4px; padding: 0.55rem 0.85rem;">
   <div style="display: flex; align-items: center; gap: 0.35rem; font-weight: 600; margin-bottom: 0.1rem;"><carbon-analytics style="color: #666;" /> Protection financière</div>
   Réduire les risques d'amendes et de perte d'image
 </div>
@@ -177,8 +177,8 @@ CREATE USER bob
 Un rôle est un groupe de permissions, il ne se connecte pas directement
 
 ```sql
-CREATE ROLE lectrice;
-CREATE ROLE editeur;
+CREATE ROLE citoyen;
+CREATE ROLE technicien;
 CREATE ROLE responsable;
 ```
 
@@ -186,7 +186,7 @@ Supprimer :
 
 ```sql
 DROP USER alice;
-DROP ROLE lectrice;
+DROP ROLE citoyen;
 ```
 
 </div>
@@ -217,11 +217,11 @@ GRANT <privilège> ON <objet>
 Exemples :
 
 ```sql
-GRANT SELECT, UPDATE ON produits TO employe;
+GRANT SELECT, UPDATE ON mobilier TO technicien;
 
-GRANT ALL PRIVILEGES ON ventes TO responsable;
+GRANT ALL PRIVILEGES ON interventions TO responsable;
 
-GRANT SELECT ON clients TO lectrice;
+GRANT SELECT ON signalements TO citoyen;
 ```
 
 </div>
@@ -240,9 +240,9 @@ REVOKE <privilège> ON <objet>
 Exemples :
 
 ```sql
-REVOKE INSERT ON commandes FROM editeur;
+REVOKE INSERT ON signalements FROM citoyen;
 
-REVOKE ALL PRIVILEGES ON ventes FROM stagiaire;
+REVOKE ALL PRIVILEGES ON interventions FROM stagiaire;
 ```
 
 </div>
@@ -275,20 +275,20 @@ layout: default
 
 <div>
 
-<div style="background: #fafaf0; border: 1px solid #e5dfc5; border-radius: 4px; padding: 0.55rem 0.85rem; font-size: 0.84rem; margin-bottom: 1rem;">
-  <div style="display: flex; align-items: center; gap: 0.35rem; font-weight: 600; margin-bottom: 0.1rem;"><carbon-information style="color: #666;" /> Granularité</div>
+<div style="background: #fef2f2; border: 1px solid #C1002A; border-radius: 4px; padding: 0.55rem 0.85rem; font-size: 0.84rem; margin-bottom: 1rem;">
+  <div style="display: flex; align-items: center; gap: 0.35rem; font-weight: 600; margin-bottom: 0.1rem;"><carbon-information style="color: #C1002A;" /> Granularité</div>
   Sur toute la base, sur des tables spécifiques, ou sur des <strong>colonnes individuelles</strong>
 </div>
 
 ```sql
 -- Colonne spécifique
-GRANT SELECT (nom, prenom) ON clients TO lectrice;
+GRANT SELECT (latitude, longitude) ON mobilier TO citoyen;
 
 -- Toute la base
-GRANT CONNECT ON DATABASE mydb TO alice;
+GRANT CONNECT ON DATABASE yverdon TO alice;
 
 -- Tous les privilèges
-GRANT ALL PRIVILEGES ON ventes TO responsable;
+GRANT ALL PRIVILEGES ON interventions TO responsable;
 ```
 
 </div>
@@ -315,22 +315,22 @@ L'utilisation de rôles permet de :
 
 ```sql
 -- Créer un rôle avec ses permissions
-CREATE ROLE lectrice;
-GRANT SELECT ON clients TO lectrice;
+CREATE ROLE citoyen;
+GRANT SELECT ON signalements TO citoyen;
 
 -- Attribuer le rôle à des utilisateur·rice·s
-GRANT lectrice TO utilisateur1;
-GRANT lectrice TO utilisateur2;
+GRANT citoyen TO alice;
+GRANT citoyen TO bob;
 
 -- Retirer le rôle
-REVOKE lectrice FROM utilisateur1;
+REVOKE citoyen FROM alice;
 ```
 
 </div>
 
 <div>
 
-<div style="background: #fafaf0; border: 1px solid #e5dfc5; border-radius: 4px; padding: 0.55rem 0.85rem; font-size: 0.84rem; margin-bottom: 1rem;">
+<div style="background: #f5f5f5; border: 1px solid #e0e0e0; border-radius: 4px; padding: 0.55rem 0.85rem; font-size: 0.84rem; margin-bottom: 1rem;">
   <div style="display: flex; align-items: center; gap: 0.35rem; font-weight: 600; margin-bottom: 0.15rem;"><carbon-security style="color: #666;" /> Principe du moindre privilège (PoLP)</div>
   N'accorder que les permissions <strong>strictement nécessaires</strong> pour effectuer ses tâches → ni plus, ni moins
 </div>
@@ -339,8 +339,8 @@ REVOKE lectrice FROM utilisateur1;
 
 | Rôle | Permissions |
 |------|-------------|
-| `lectrice` | SELECT sur les tables publiques |
-| `editeur` | SELECT, INSERT, UPDATE |
+| `citoyen` | SELECT sur les tables publiques |
+| `technicien` | SELECT, INSERT, UPDATE |
 | `responsable` | ALL PRIVILEGES |
 
 </div>
@@ -357,27 +357,27 @@ layout: default
 
 <div class="mt-5" style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; font-size: 0.84rem;">
 
-<div style="background: #fafaf0; border: 1px solid #e5dfc5; border-radius: 4px; padding: 0.55rem 0.85rem;">
+<div style="background: #f5f5f5; border: 1px solid #e0e0e0; border-radius: 4px; padding: 0.55rem 0.85rem;">
   <div style="display: flex; align-items: center; gap: 0.35rem; font-weight: 600; margin-bottom: 0.1rem;"><carbon-security style="color: #666;" /> Moindre privilège</div>
   Donner uniquement les droits nécessaires, ne jamais accorder <code>ALL PRIVILEGES</code> par défaut
 </div>
 
-<div style="background: #fafaf0; border: 1px solid #e5dfc5; border-radius: 4px; padding: 0.55rem 0.85rem;">
+<div style="background: #f5f5f5; border: 1px solid #e0e0e0; border-radius: 4px; padding: 0.55rem 0.85rem;">
   <div style="display: flex; align-items: center; gap: 0.35rem; font-weight: 600; margin-bottom: 0.1rem;"><carbon-group style="color: #666;" /> Utiliser des rôles</div>
   Gérer les permissions par groupes, pas individuellement
 </div>
 
-<div style="background: #fafaf0; border: 1px solid #e5dfc5; border-radius: 4px; padding: 0.55rem 0.85rem;">
+<div style="background: #f5f5f5; border: 1px solid #e0e0e0; border-radius: 4px; padding: 0.55rem 0.85rem;">
   <div style="display: flex; align-items: center; gap: 0.35rem; font-weight: 600; margin-bottom: 0.1rem;"><carbon-password style="color: #666;" /> Mots de passe forts et changés régulièrement</div>
   Utiliser <code>VALID UNTIL</code> pour forcer le renouvellement
 </div>
 
-<div style="background: #fafaf0; border: 1px solid #e5dfc5; border-radius: 4px; padding: 0.55rem 0.85rem;">
+<div style="background: #f5f5f5; border: 1px solid #e0e0e0; border-radius: 4px; padding: 0.55rem 0.85rem;">
   <div style="display: flex; align-items: center; gap: 0.35rem; font-weight: 600; margin-bottom: 0.1rem;"><carbon-trash-can style="color: #666;" /> Supprimer les accès inutiles</div>
   Réduire la surface d'attaque en supprimant les comptes inactifs et les rôles obsolètes
 </div>
 
-<div style="background: #fafaf0; border: 1px solid #e5dfc5; border-radius: 4px; padding: 0.55rem 0.85rem; grid-column: span 2;">
+<div style="background: #f5f5f5; border: 1px solid #e0e0e0; border-radius: 4px; padding: 0.55rem 0.85rem; grid-column: span 2;">
   <div style="display: flex; align-items: center; gap: 0.35rem; font-weight: 600; margin-bottom: 0.1rem;"><carbon-activity style="color: #666;" /> Monitorer</div>
   Surveiller et auditer les accès via les logs PostgreSQL (<code>pg_log</code>) ou l'extension <code>pgaudit</code>
 </div>
@@ -400,22 +400,22 @@ layout: default
 
 <div class="mt-5" style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; font-size: 0.84rem;">
 
-<div style="background: #fafaf0; border: 1px solid #e5dfc5; border-radius: 4px; padding: 0.55rem 0.85rem;">
+<div style="background: #f5f5f5; border: 1px solid #e0e0e0; border-radius: 4px; padding: 0.55rem 0.85rem;">
   <div style="display: flex; align-items: center; gap: 0.35rem; font-weight: 600; margin-bottom: 0.1rem;"><carbon-user style="color: #666;" /> Erreurs humaines</div>
   Un <code>DELETE</code> ou <code>DROP TABLE</code> sans <code>WHERE</code> peut détruire des données en quelques secondes
 </div>
 
-<div style="background: #fafaf0; border: 1px solid #e5dfc5; border-radius: 4px; padding: 0.55rem 0.85rem;">
+<div style="background: #f5f5f5; border: 1px solid #e0e0e0; border-radius: 4px; padding: 0.55rem 0.85rem;">
   <div style="display: flex; align-items: center; gap: 0.35rem; font-weight: 600; margin-bottom: 0.1rem;"><carbon-warning-alt style="color: #666;" /> Pannes matérielles</div>
   Disque défaillant, serveur qui tombe, coupure électrique
 </div>
 
-<div style="background: #fafaf0; border: 1px solid #e5dfc5; border-radius: 4px; padding: 0.55rem 0.85rem;">
+<div style="background: #f5f5f5; border: 1px solid #e0e0e0; border-radius: 4px; padding: 0.55rem 0.85rem;">
   <div style="display: flex; align-items: center; gap: 0.35rem; font-weight: 600; margin-bottom: 0.1rem;"><carbon-warning style="color: #666;" /> Attaques</div>
   Ransomware, corruption volontaire, accès non autorisé
 </div>
 
-<div style="background: #fafaf0; border: 1px solid #e5dfc5; border-radius: 4px; padding: 0.55rem 0.85rem;">
+<div style="background: #f5f5f5; border: 1px solid #e0e0e0; border-radius: 4px; padding: 0.55rem 0.85rem;">
   <div style="display: flex; align-items: center; gap: 0.35rem; font-weight: 600; margin-bottom: 0.1rem;"><carbon-migrate style="color: #666;" /> Migrations</div>
   Déplacer une base vers un autre serveur ou environnement (dev → prod)
 </div>
@@ -440,8 +440,8 @@ layout: default
 
 Dans Docker Desktop, cliquer sur le conteneur PostgreSQL en cours d'exécution, puis sur l'onglet **Exec**
 
-<div class="mt-3" style="background: #fafaf0; border: 1px solid #e5dfc5; border-radius: 4px; padding: 0.55rem 0.85rem;">
-  <div style="display: flex; align-items: center; gap: 0.35rem; font-weight: 600; margin-bottom: 0.15rem;"><carbon-terminal style="color: #666;" /> Terminal dans le conteneur</div>
+<div class="mt-3" style="background: #fef2f2; border: 1px solid #C1002A; border-radius: 4px; padding: 0.55rem 0.85rem;">
+  <div style="display: flex; align-items: center; gap: 0.35rem; font-weight: 600; margin-bottom: 0.15rem;"><carbon-terminal style="color: #C1002A;" /> Terminal dans le conteneur</div>
   Le terminal s'ouvre directement à l'intérieur du conteneur, PostgreSQL et <code>pg_dump</code> y sont déjà disponibles
 </div>
 
@@ -460,8 +460,8 @@ pg_dump -U postgres -d mabase \
 
 Dans Docker Desktop, onglet **Files** → naviguer jusqu'à `/tmp` → clic droit sur `backup.dump` → **Save**
 
-<div class="mt-3" style="background: #fafaf0; border: 1px solid #e5dfc5; border-radius: 4px; padding: 0.55rem 0.85rem;">
-  <div style="display: flex; align-items: center; gap: 0.35rem; font-weight: 600; margin-bottom: 0.15rem;"><carbon-information style="color: #666;" /> Alternative via terminal local</div>
+<div class="mt-3" style="background: #fef2f2; border: 1px solid #C1002A; border-radius: 4px; padding: 0.55rem 0.85rem;">
+  <div style="display: flex; align-items: center; gap: 0.35rem; font-weight: 600; margin-bottom: 0.15rem;"><carbon-information style="color: #C1002A;" /> Alternative via terminal local</div>
   Si un terminal est disponible sur la machine hôte, copier le fichier avec :
 
 ```bash
@@ -569,8 +569,8 @@ pg_dump -U postgres -d mabase \
 
 </div>
 
-<div style="background: #fafaf0; border: 1px solid #e5dfc5; border-radius: 4px; padding: 0.55rem 0.85rem; font-size: 0.84rem;">
-  <div style="display: flex; align-items: center; gap: 0.35rem; font-weight: 600; margin-bottom: 0.2rem;"><carbon-information style="color: #666;" /> Format recommandé</div>
+<div style="background: #fef2f2; border: 1px solid #C1002A; border-radius: 4px; padding: 0.55rem 0.85rem; font-size: 0.84rem;">
+  <div style="display: flex; align-items: center; gap: 0.35rem; font-weight: 600; margin-bottom: 0.2rem;"><carbon-information style="color: #C1002A;" /> Format recommandé</div>
   <strong>Custom</strong> (<code>-F c</code>) : compression intégrée, restauration sélective, compatible <code>pg_restore</code><br/><br/>
   <strong>Plain SQL</strong> (<code>-F p</code>) : lisible mais sans restauration sélective → utiliser <code>psql</code> pour restaurer
 </div>
@@ -630,8 +630,8 @@ pg_dumpall -U postgres \
   -f tout.sql
 ```
 
-<div style="background: #fafaf0; border: 1px solid #e5dfc5; border-radius: 4px; padding: 0.55rem 0.85rem; font-size: 0.83rem; margin-top: 0.8rem;">
-  <div style="display: flex; align-items: center; gap: 0.35rem; font-weight: 600; margin-bottom: 0.1rem;"><carbon-information style="color: #666;" /> pg_dumpall</div>
+<div style="background: #fef2f2; border: 1px solid #C1002A; border-radius: 4px; padding: 0.55rem 0.85rem; font-size: 0.83rem; margin-top: 0.8rem;">
+  <div style="display: flex; align-items: center; gap: 0.35rem; font-weight: 600; margin-bottom: 0.1rem;"><carbon-information style="color: #C1002A;" /> pg_dumpall</div>
   Inclut les rôles, les mots de passe (hashés) et toutes les bases → utile pour migrer un serveur entier
 </div>
 
@@ -751,8 +751,8 @@ pg_restore -U postgres -d mabase \
 pg_restore --list sauvegarde.dump
 ```
 
-<div style="background: #fafaf0; border: 1px solid #e5dfc5; border-radius: 4px; padding: 0.55rem 0.85rem; font-size: 0.83rem; margin-top: 0.8rem;">
-  <div style="display: flex; align-items: center; gap: 0.35rem; font-weight: 600; margin-bottom: 0.1rem;"><carbon-information style="color: #666;" /> --clean</div>
+<div style="background: #fef2f2; border: 1px solid #C1002A; border-radius: 4px; padding: 0.55rem 0.85rem; font-size: 0.83rem; margin-top: 0.8rem;">
+  <div style="display: flex; align-items: center; gap: 0.35rem; font-weight: 600; margin-bottom: 0.1rem;"><carbon-information style="color: #C1002A;" /> --clean</div>
   Supprime les objets existants avant de les recréer → utile pour écraser une base sans la recréer manuellement
 </div>
 
@@ -792,7 +792,7 @@ layout: default
 
 <div class="mt-5" style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; font-size: 0.84rem;">
 
-<div style="background: #fafaf0; border: 1px solid #e5dfc5; border-radius: 4px; padding: 0.55rem 0.85rem;">
+<div style="background: #f5f5f5; border: 1px solid #e0e0e0; border-radius: 4px; padding: 0.55rem 0.85rem;">
   <div style="display: flex; align-items: center; gap: 0.35rem; font-weight: 600; margin-bottom: 0.2rem;"><carbon-repeat style="color: #666;" /> Automatiser les sauvegardes</div>
   Planifier avec <code>cron</code> ou un outil dédié, ne pas compter sur les sauvegardes manuelles
 
@@ -803,17 +803,17 @@ layout: default
 
 </div>
 
-<div style="background: #fafaf0; border: 1px solid #e5dfc5; border-radius: 4px; padding: 0.55rem 0.85rem;">
+<div style="background: #f5f5f5; border: 1px solid #e0e0e0; border-radius: 4px; padding: 0.55rem 0.85rem;">
   <div style="display: flex; align-items: center; gap: 0.35rem; font-weight: 600; margin-bottom: 0.1rem;"><carbon-checkmark style="color: #666;" /> Tester la restauration</div>
   Vérifier régulièrement que la sauvegarde est bien restaurable sur une base de test
 </div>
 
-<div style="background: #fafaf0; border: 1px solid #e5dfc5; border-radius: 4px; padding: 0.55rem 0.85rem;">
+<div style="background: #f5f5f5; border: 1px solid #e0e0e0; border-radius: 4px; padding: 0.55rem 0.85rem;">
   <div style="display: flex; align-items: center; gap: 0.35rem; font-weight: 600; margin-bottom: 0.1rem;"><carbon-cloud-upload style="color: #666;" /> Stocker hors site</div>
   Conserver les sauvegardes sur un serveur distant ou dans un stockage cloud (S3, etc.)
 </div>
 
-<div style="background: #fafaf0; border: 1px solid #e5dfc5; border-radius: 4px; padding: 0.55rem 0.85rem;">
+<div style="background: #f5f5f5; border: 1px solid #e0e0e0; border-radius: 4px; padding: 0.55rem 0.85rem;">
   <div style="display: flex; align-items: center; gap: 0.35rem; font-weight: 600; margin-bottom: 0.1rem;"><carbon-calendar style="color: #666;" /> Politique de rétention</div>
   Quotidien 7j, hebdomadaire 4 semaines, mensuel 12 mois
 </div>

@@ -1,0 +1,121 @@
+id_inventaire;type;materiau;entreprise
+B-001;banc;bois;Holz Design GmbH
+1002;Banc;bois;Holz Design GmbH
+B_3;banc;bois;Holz Design GmbH
+B_4;Banc;bois;Holz Design GmbH
+B-005;banc;bois;Holz Design GmbH
+1006;banc public;bois;Holz Design GmbH
+B_7;Banc;bois;Holz Design GmbH
+B-008;Banc;bois;Holz Design GmbH
+B-009;banc public;bois;Holz Design GmbH
+B-010;banc;bois;Holz Design GmbH
+1011;banc;bois;Holz Design GmbH
+1012;banc;bois;Holz Design GmbH
+B-013;banc;bois;Holz Design GmbH
+B_14;banc public;bois;Holz Design GmbH
+B-015;Banc;bois;Holz Design GmbH
+B-016;Banc;Métal;Bächler Metallbau AG
+1017;banc;Métal;Bächler Metallbau AG
+B-018;banc public;métal;Bächler Metallbau AG
+B-019;Banc;metal;Bächler Metallbau AG
+B_20;Banc;Métal;Bächler Metallbau AG
+1021;banc;Métal;Bächler Metallbau AG
+B-022;banc public;métal;Bächler Metallbau AG
+B-023;banc public;Métal;Bächler Metallbau AG
+1024;banc;metal;Bächler Metallbau AG
+1025;banc;métal;Bächler Metallbau AG
+1026;banc public;métal;Bächler Metallbau AG
+1027;Banc;métal;Bächler Metallbau AG
+B-028;Banc;metal;Bächler Metallbau AG
+B-029;Banc;metal;Bächler Metallbau AG
+1030;banc;métal;Bächler Metallbau AG
+1031;Banc;métal;Bächler Metallbau AG
+B_32;banc public;metal;Bächler Metallbau AG
+B_33;Banc;métal;Bächler Metallbau AG
+B-034;banc;métal;Bächler Metallbau AG
+1035;banc;Métal;Bächler Metallbau AG
+B-036;Banc;métal;Bächler Metallbau AG
+B_37;banc;Métal;Bächler Metallbau AG
+B-038;banc public;Métal;Bächler Metallbau AG
+1039;Banc;métal;Bächler Metallbau AG
+B-040;Banc;metal;Bächler Metallbau AG
+L-001;Lampadaire;sodium;Eclairage Public Romandie
+L-002;Lampadaire;sodium;Eclairage Public Romandie
+L-003;lampadaire;sodium;Eclairage Public Romandie
+L-004;Lampadaire;sodium;Eclairage Public Romandie
+L-005;lampadaire sodium;sodium;Eclairage Public Romandie
+L-006;lampadaire;sodium;Eclairage Public Romandie
+L-007;lampadaire sodium;sodium;Eclairage Public Romandie
+L-008;lampadaire;sodium;Eclairage Public Romandie
+L-009;lampadaire;sodium;Eclairage Public Romandie
+L-010;Lampadaire;sodium;Eclairage Public Romandie
+L-011;lampadaire sodium;sodium;Eclairage Public Romandie
+L-012;lampadaire sodium;sodium;Eclairage Public Romandie
+L-013;lampadaire LED;LED;Eclairage Public Romandie
+L-014;lampadaire LED;LED;Eclairage Public Romandie
+L_15;lampadaire LED;LED;Eclairage Public Romandie
+L-016;lampadaire sodium;sodium;Eclairage Public Romandie
+L_17;Lampadaire LED;LED;Eclairage Public Romandie
+L-018;Lampadaire LED;LED;Eclairage Public Romandie
+L-019;lampadaire;sodium;Eclairage Public Romandie
+L-020;lampadaire led;LED;Eclairage Public Romandie
+L_21;Lampadaire LED;LED;Eclairage Public Romandie
+L-022;lampadaire LED;LED;Eclairage Public Romandie
+L-023;lampadaire LED;LED;Eclairage Public Romandie
+L-024;lampadaire led;LED;Eclairage Public Romandie
+L_25;Lampadaire LED;LED;Eclairage Public Romandie
+1066;lampadaire LED;LED;Eclairage Public Romandie
+L_27;lampadaire LED;LED;Eclairage Public Romandie
+1068;lampadaire led;LED;Eclairage Public Romandie
+L_29;lampadaire LED;LED;Eclairage Public Romandie
+L_30;lampadaire led;LED;Eclairage Public Romandie
+L_31;lampadaire led;LED;Eclairage Public Romandie
+L_32;lampadaire LED;LED;Eclairage Public Romandie
+1073;lampadaire led;LED;Eclairage Public Romandie
+L_34;lampadaire LED;LED;Eclairage Public Romandie
+L-035;lampadaire LED;LED;Eclairage Public Romandie
+P-001;corbeille;metal;Bächler Metallbau AG
+P_2;poubelle tri;métal;Bächler Metallbau AG
+P-003;poubelle;metal;Bächler Metallbau AG
+P_4;poubelle tri;métal;Bächler Metallbau AG
+1080;Poubelle;metal;Bächler Metallbau AG
+P_6;poubelle tri;metal;Bächler Metallbau AG
+1082;poubelle tri;metal;Bächler Metallbau AG
+P_8;corbeille;métal;Bächler Metallbau AG
+1084;Poubelle;metal;Bächler Metallbau AG
+P-010;poubelle tri;métal;Bächler Metallbau AG
+P-011;corbeille;metal;Bächler Metallbau AG
+1087;Poubelle;metal;Bächler Metallbau AG
+P_13;poubelle tri;metal;Bächler Metallbau AG
+P-014;corbeille;métal;Bächler Metallbau AG
+P-015;poubelle;metal;Bächler Metallbau AG
+1091;poubelle tri;métal;Bächler Metallbau AG
+P-017;Poubelle;metal;Bächler Metallbau AG
+P-018;Poubelle;métal;Bächler Metallbau AG
+P-019;corbeille;métal;Bächler Metallbau AG
+P-020;Poubelle;métal;Bächler Metallbau AG
+P-021;poubelle;métal;Bächler Metallbau AG
+P-022;Poubelle;metal;Bächler Metallbau AG
+1098;poubelle;metal;Bächler Metallbau AG
+P-024;poubelle tri;métal;Bächler Metallbau AG
+P_25;corbeille;metal;Bächler Metallbau AG
+F-001;Fontaine;Pierre;Fontaines & Patrimoine Sàrl
+F-002;Fontaine;pierre;Fontaines & Patrimoine Sàrl
+F-003;Fontaine;pierre;Fontaines & Patrimoine Sàrl
+F-004;fontaine publique;Pierre;Fontaines & Patrimoine Sàrl
+F-005;fontaine;pierre;Fontaines & Patrimoine Sàrl
+F-006;fontaine;Pierre;Fontaines & Patrimoine Sàrl
+F-007;Fontaine;béton;Fontaines & Patrimoine Sàrl
+F-008;fontaine publique;béton;Fontaines & Patrimoine Sàrl
+F-009;Fontaine;Pierre;Fontaines & Patrimoine Sàrl
+F-010;fontaine publique;pierre;Fontaines & Patrimoine Sàrl
+1111;borne EV;;GreenCharge SA
+1112;Borne recharge;;GreenCharge SA
+EV_3;borne recharge EV;;GreenCharge SA
+1114;borne recharge EV;;GreenCharge SA
+EV_5;borne EV;;GreenCharge SA
+1116;panneau info;bois;Signalétique Vaud
+PA-002;panneau affichage;métal;Signalétique Vaud
+PA-003;panneau affichage;métal;Signalétique Vaud
+PA-004;Panneau;métal;Signalétique Vaud
+1120;panneau info;bois;Signalétique Vaud

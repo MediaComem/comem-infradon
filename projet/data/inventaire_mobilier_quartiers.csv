@@ -1,0 +1,121 @@
+id;type;lieu;quartier;latitude;longitude
+B-001;banc;Avenue de la Gare;Centre-ville;;
+1002;Banc;Rue du Lac;Centre-ville;46,77932212;6,637371232
+B_3;banc;Rue du Casino;Centre-ville;46,77885475;6,639355991
+B_4;Banc;HEIG-VD;Maillefer;46,78;6,66
+B-005;banc;Place de la Gare;Centre-ville;46,78106843;6,64157228
+1006;banc public;Place de la Gare;Centre-ville;46,78208324;6,641524
+B_7;Banc;Place Pestalozzi;Centre-ville;46,77850749;6,640148663
+B-008;Banc;Rue du Milieu;Centre-ville;46,77893365;6,639979194
+B-009;banc public;Y-Parc;Perreux;46,76481563;6,628153421
+B-010;banc;HEIG-VD;Maillefer;46,78115305;6,658205193
+1011;banc;Chemin de Maillefer;Maillefer;46,78101226;6,655518258
+1012;banc;Rue Haldimand;Centre-ville;46,78;6,65
+B-013;banc;Chemin de Maillefer;Maillefer;46,78117055;6,656742981
+B_14;banc public;Rue du Milieu;Centre-ville;;
+B-015;Banc;Chemin de Maillefer;Maillefer;46,78157542;6,655313372
+B-016;Banc;Rue de la Maison Rouge;Centre-ville;46,78;6,64
+1017;banc;Route de Lausanne;Perreux;46,76574288;6,641578676
+B-018;banc public;Rue du Casino;Centre-ville;46,78006955;6,638156654
+B-019;Banc;Avenue de la Gare;Centre-ville;46,78;6,64
+B_20;Banc;Centre sportif;Perreux;;
+1021;banc;Avenue de la Gare;Centre-ville;46,78012818;6,64129732
+B-022;banc public;Y-Parc;Perreux;46,76510436;6,627706192
+B-023;banc public;Quai de Nogent;Rives;46,78490298;6,635316069
+1024;banc;Avenue de la Gare;Centre-ville;46,78;6,64
+1025;banc;HEIG-VD;Maillefer;46,78208787;6,658448717
+1026;banc public;Rue du Milieu;Centre-ville;46,78;6,64
+1027;Banc;Route de Lausanne;Perreux;46,77;6,64
+B-028;Banc;Quai de Nogent;Rives;46,79;6,64
+B-029;Banc;Rue du Casino;Centre-ville;46,7799598;6,638172953
+1030;banc;Rue du Lac;Centre-ville;46,78;6,64
+1031;Banc;Avenue des Sports;Maillefer;46,77877368;6,651261212
+B_32;banc public;Y-Parc;Perreux;46,76529897;6,628704421
+B_33;Banc;Rue de la Plaine;Centre-ville;46,77985343;6,642843841
+B-034;banc;Rue des Pêcheurs;Perreux;46,76845721;6,635170659
+1035;banc;Rue de la Maison Rouge;Centre-ville;46,77841271;6,640736301
+B-036;Banc;Rue du Lac;Centre-ville;46,77831653;6,637363106
+B_37;banc;Route de Lausanne;Perreux;46,76555015;6,641486576
+B-038;banc public;Passage de l'Hôtel de Ville;Centre-ville;46,78085084;6,640507645
+1039;Banc;Rue du Casino;Centre-ville;46,77908279;6,638703796
+B-040;Banc;Parc des Rives;Rives;46,78;6,64
+L-001;Lampadaire;Avenue de la Gare;Centre-ville;46,78047778;6,641623979
+L-002;Lampadaire;Place de la Gare;Centre-ville;46,78112217;6,641570198
+L-003;lampadaire;Place de la Gare;Centre-ville;46,7815608;6,640634316
+L-004;Lampadaire;Avenue de la Gare;Centre-ville;46,78054;6,642407424
+L-005;lampadaire sodium;Avenue de la Gare;Centre-ville;46,78055994;6,642040231
+L-006;lampadaire;Place de la Gare;Centre-ville;46,7812577;6,640683023
+L-007;lampadaire sodium;Rue de la Plaine;Centre-ville;46,77946203;6,642697662
+L-008;lampadaire;Passage de l'Hôtel de Ville;Centre-ville;46,78102891;6,640088559
+L-009;lampadaire;Avenue de la Gare;Centre-ville;46,78105843;6,641110331
+L-010;Lampadaire;Passage de l'Hôtel de Ville;Centre-ville;46,78039678;6,640874072
+L-011;lampadaire sodium;Passage de l'Hôtel de Ville;Centre-ville;46,78009279;6,641195395
+L-012;lampadaire sodium;Passage de l'Hôtel de Ville;Centre-ville;46,78049089;6,640220023
+L-013;lampadaire LED;Plage d'Yverdon;Les Bains;46,78470569;6,63408617
+L-014;lampadaire LED;Avenue des Bains;Les Bains;46,78308929;6,635762336
+L_15;lampadaire LED;Plage d'Yverdon;Les Bains;46,78476886;6,634854055
+L-016;lampadaire sodium;Rue du Casino;Centre-ville;46,78003221;6,638473994
+L_17;Lampadaire LED;Rue du Lac;Centre-ville;46,77840205;6,638089538
+L-018;Lampadaire LED;Avenue des Bains;Les Bains;46,78407876;6,634882539
+L-019;lampadaire;Rue du Lac;Centre-ville;46,77942311;6,637670108
+L-020;lampadaire led;Avenue des Bains;Les Bains;46,78369364;6,635675409
+L_21;Lampadaire LED;Plage d'Yverdon;Les Bains;46,7845201;6,633704281
+L-022;lampadaire LED;Chemin de Maillefer;Maillefer;46,78057348;6,655623287
+L-023;lampadaire LED;Chemin de Maillefer;Maillefer;46,78046548;6,655692179
+L-024;lampadaire led;Avenue des Sports;Maillefer;46,77800076;6,651990072
+L_25;Lampadaire LED;Plage d'Yverdon;Les Bains;46,78547565;6,634131218
+1066;lampadaire LED;Plage d'Yverdon;Les Bains;46,78515202;6,634353357
+L_27;lampadaire LED;Route de Lausanne;Perreux;46,76608015;6,640927721
+1068;lampadaire led;Y-Parc;Perreux;46,76450013;6,627778847
+L_29;lampadaire LED;Centre sportif;Perreux;46,76747554;6,637246191
+L_30;lampadaire led;Plage d'Yverdon;Les Bains;46,78598761;6,635160688
+L_31;lampadaire led;Avenue des Bains;Les Bains;46,783472;6,635455552
+L_32;lampadaire LED;Chemin de Maillefer;Maillefer;46,78101238;6,656512879
+1073;lampadaire led;Avenue des Bains;Les Bains;46,78358307;6,635569488
+L_34;lampadaire LED;Route de Lausanne;Perreux;46,76595676;6,641661488
+L-035;lampadaire LED;Chemin de Maillefer;Maillefer;46,78090449;6,656041522
+P-001;corbeille;Rue des Pêcheurs;Perreux;46,76819722;6,634835973
+P_2;poubelle tri;Avenue des Sports;Maillefer;46,77818794;6,651575632
+P-003;poubelle;Passage de l'Hôtel de Ville;Centre-ville;46,77996618;6,640179146
+P_4;poubelle tri;Parc des Rives;Rives;46,78359072;6,637359283
+1080;Poubelle;Place Pestalozzi;Centre-ville;46,77906053;6,639228988
+P_6;poubelle tri;Avenue des Bains;Les Bains;46,78378418;6,634952761
+1082;poubelle tri;Rue Haldimand;Centre-ville;46,77901875;6,647815509
+P_8;corbeille;Rue du Casino;Centre-ville;46,78026471;6,639053168
+1084;Poubelle;HEIG-VD;Maillefer;46,78125041;6,658504211
+P-010;poubelle tri;Place Pestalozzi;Centre-ville;46,77852732;6,640171776
+P-011;corbeille;Avenue des Bains;Les Bains;46,78402876;6,635111152
+1087;Poubelle;Parc des Rives;Rives;46,78474763;6,63798734
+P_13;poubelle tri;Y-Parc;Perreux;46,76527653;6,628275745
+P-014;corbeille;Parc des Rives;Rives;46,78423624;6,637716646
+P-015;poubelle;Avenue des Bains;Les Bains;46,78429348;6,634885793
+1091;poubelle tri;Rue du Casino;Centre-ville;46,78011666;6,639047875
+P-017;Poubelle;Centre sportif;Perreux;46,76741151;6,63757778
+P-018;Poubelle;Plage d'Yverdon;Les Bains;46,78591842;6,635018706
+P-019;corbeille;Rue de la Maison Rouge;Centre-ville;46,77898211;6,641459165
+P-020;Poubelle;Chemin de Maillefer;Maillefer;46,78064364;6,656774445
+P-021;poubelle;Quai de Nogent;Rives;46,78372378;6,636463975
+P-022;Poubelle;Parc des Rives;Rives;46,78404174;6,637893064
+1098;poubelle;Parc des Rives;Rives;46,78393287;6,638242442
+P-024;poubelle tri;Route de Lausanne;Perreux;46,76663883;6,640715379
+P_25;corbeille;Rue du Milieu;Centre-ville;46,77880888;6,640088319
+F-001;Fontaine;Place de la Gare;Centre-ville;46,78182387;6,641137968
+F-002;Fontaine;Avenue des Bains;Les Bains;46,78379891;6,635458829
+F-003;Fontaine;Rue du Casino;Centre-ville;46,77959019;6,638938344
+F-004;fontaine publique;Parc des Rives;Rives;46,78458895;6,637853697
+F-005;fontaine;Plage d'Yverdon;Les Bains;46,78545078;6,634058792
+F-006;fontaine;Rue de la Plaine;Centre-ville;46,78055225;6,643759275
+F-007;Fontaine;Avenue de la Gare;Centre-ville;46,78121986;6,64247446
+F-008;fontaine publique;Rue du Lac;Centre-ville;46,7797549;6,636846812
+F-009;Fontaine;Avenue des Bains;Les Bains;46,78385455;6,635942937
+F-010;fontaine publique;Place Pestalozzi;Centre-ville;46,77867835;6,639435365
+1111;borne EV;Route de Lausanne;Perreux;46,76538211;6,640887862
+1112;Borne recharge;Rue de la Maison Rouge;Centre-ville;46,77747267;6,640832421
+EV_3;borne recharge EV;Avenue de la Gare;Centre-ville;46,78122266;6,641463115
+1114;borne recharge EV;Passage de l'Hôtel de Ville;Centre-ville;46,78030833;6,640825874
+EV_5;borne EV;Rue du Milieu;Centre-ville;46,77806768;6,639429986
+1116;panneau info;Passage de l'Hôtel de Ville;Centre-ville;46,78016322;6,640348052
+PA-002;panneau affichage;Rue de la Plaine;Centre-ville;46,77989708;6,64284072
+PA-003;panneau affichage;Rue de la Plaine;Centre-ville;46,78001677;6,642382443
+PA-004;Panneau;Place de la Gare;Centre-ville;46,7807776;6,640744592
+1120;panneau info;Passage de l'Hôtel de Ville;Centre-ville;46,78108279;6,640703548

@@ -50,12 +50,12 @@ Un fichier `docker-compose.yml` est fourni pour démarrer PostgreSQL + PostGIS.
 
 | Composante | Poids |
 |---|---|
-| Projet — présentation + poster A3 | 50% |
-| Examen final — semaine d'examen | 50% |
+| Projet : présentation + poster A3 | 50% |
+| Examen final : semaine d'examen | 50% |
 
 ---
 
-## Projet fil rouge — Service technique communal d'Yverdon-les-Bains
+## Projet fil rouge : Service technique communal d'Yverdon-les-Bains
 
 ### Contexte
 
@@ -91,12 +91,12 @@ Chaque groupe (2-3 personnes) reçoit les mêmes données mais un brief différe
 
 | Jalon | Semaines | Livrable | Cours |
 |---|---|---|---|
-| **J0** — Exploration et modélisation | 1-2 | MCD et MLD. Identifier les entités, relations et cardinalités. Documenter les problèmes de qualité observés dans les Excel | 01-02 |
-| **J1** — Import et nettoyage | 3-4 | MPD (CREATE TABLE). Import des données brutes dans des tables staging. Nettoyage SQL : TRIM, COALESCE, regexp_replace, dédoublonnage. Migration staging vers tables finales | 03-04 |
-| **J2** — Requêtes et optimisation | 5-6 | Premières requêtes métier pour le brief. EXPLAIN ANALYZE, index pertinents. Premières vues SQL | 05-06 |
-| **J3** — Sécurité et ouverture | 7-8 | Rôles et permissions (lecture seule pour citoyen-ne, écriture pour technicien-ne). Réflexion sur les structures alternatives adaptées au cas d'usage | 07 |
-| **J4** — Vues métier + poster | 9-10 | Finalisation des requêtes et vues SQL pour le brief. Réflexion sur les structures de données. Préparation du poster A3 | 07-08 |
-| **J5** — Présentation + poster | 28-29 mai | Poster A3 affiché en classe + présentation et discussion | 08 |
+| **J0** : Exploration et modélisation | 1-2 | MCD et MLD. Identifier les entités, relations et cardinalités. Documenter les problèmes de qualité observés dans les Excel | 01-02 |
+| **J1** : Import et nettoyage | 3-4 | MPD (CREATE TABLE). Import des données brutes dans des tables staging. Nettoyage SQL : TRIM, COALESCE, regexp_replace, dédoublonnage. Migration staging vers tables finales | 03-04 |
+| **J2** : Requêtes et optimisation | 5-6 | Premières requêtes métier pour le brief. EXPLAIN ANALYZE, index pertinents. Premières vues SQL | 05-06 |
+| **J3** : Sécurité et ouverture | 7-8 | Rôles et permissions (lecture seule pour citoyen-ne, écriture pour technicien-ne). Réflexion sur les structures alternatives adaptées au cas d'usage | 07 |
+| **J4** : Vues métier + poster | 9-10 | Finalisation des requêtes et vues SQL pour le brief. Réflexion sur les structures de données. Préparation du poster A3 | 07-08 |
+| **J5** : Présentation + poster | 28-29 mai | Poster A3 affiché en classe + présentation et discussion | 08 |
 | **Rendu final** | 31 mai | Scripts, jalons, adaptations selon retour des présentations | 08 |
 
 ---
@@ -105,17 +105,17 @@ Chaque groupe (2-3 personnes) reçoit les mêmes données mais un brief différe
 
 ### Livres
 
-- **Designing Data-Intensive Applications** — Kleppmann (2017), O'Reilly Media
-- **Data Feminism** — D'Ignazio & Klein (2020), MIT Press — [accès libre](https://data-feminism.mitpress.mit.edu/)
-- **Atlas of AI** — Crawford (2021), Yale University Press
-- **Data Mesh** — Dehghani (2022), O'Reilly Media
+- **Designing Data-Intensive Applications** : Kleppmann (2017), O'Reilly Media
+- **Data Feminism**, D'Ignazio & Klein (2020), MIT Press : [accès libre](https://data-feminism.mitpress.mit.edu/)
+- **Atlas of AI**, Crawford (2021), Yale University Press
+- **Data Mesh**, Dehghani (2022), O'Reilly Media
 
 ### En ligne
 
 - [PostgreSQL Documentation](https://www.postgresql.org/docs/)
 - [Use The Index, Luke!](https://use-the-index-luke.com/)
 - [Data Mesh Principles](https://martinfowler.com/articles/data-mesh-principles.html)
-- [Enjeux et perspectives pour une IA éthique et durable](https://stm.cairn.info/revue-enjeux-numeriques-2025-1-page-8?lang=fr) — *Annales des Mines — Enjeux numériques* n°29, 2025
+- [Enjeux et perspectives pour une IA éthique et durable](https://stm.cairn.info/revue-enjeux-numeriques-2025-1-page-8?lang=fr) : *Annales des Mines, Enjeux numériques* n°29, 2025
 
 ---
 

@@ -943,7 +943,7 @@ layout: default
 | **Qualité** | Custodiens centraux | Chaque domaine à la source |
 | **Sécurité** | Manuelle, centralisée | Automatisée par la plateforme |
 | **Modèle** | Schéma canonique unique | Schéma par domaine |
-| **Indicateur** | Volume gouverné | Utilisation inter-domaines |
+| **Succès mesuré par** | Volume de données catalogué | Utilisation des données entre domaines |
 
 <div class="accent-box mt-4" style="font-size: 0.82rem;">
 

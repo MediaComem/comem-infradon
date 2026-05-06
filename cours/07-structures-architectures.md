@@ -1107,8 +1107,8 @@ layout: default
 
 
 ### Pipeline ELT (Extract-Load-Transform)
-  * Documenter le pipeline ELT déjà en place (sources Excel, tables staging, tables finales
-  * Identifier les transformations réalisées à chaque étape)
+  * Documenter le pipeline ELT déjà en place (sources Excel, tables staging, tables finales)
+  * Identifier les transformations réalisées à chaque étape
 
 
 

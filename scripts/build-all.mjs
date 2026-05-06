@@ -12,10 +12,8 @@ const decks = [
   { src: 'cours/04-transactions-concurrence.md',     out: '04-transactions-concurrence' },
   { src: 'cours/05-optimisation-indexation.md',      out: '05-optimisation-indexation' },
   { src: 'cours/06-securite-roles-sauvegarde.md',    out: '06-securite-roles-sauvegarde' },
-  { src: 'cours/07-structures-donnees.md',           out: '07-structures-donnees' },
-  { src: 'cours/08-flux-donnees-data-engineering.md', out: '08-flux-donnees' },
-  { src: 'cours/09-architectures-modernes.md',       out: '09-architectures-modernes' },
-  { src: 'cours/10-ethique-durabilite.md',           out: '10-ethique-durabilite' },
+  { src: 'cours/07-structures-architectures.md',     out: '07-structures-architectures' },
+  { src: 'cours/08-ethique-donnees.md',              out: '08-ethique-donnees' },
 ]
 
 // Copy shared images once to dist root

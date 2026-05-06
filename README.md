@@ -25,7 +25,6 @@ Ce document est mis à jour au fur et à mesure du semestre avec les information
 |---|---|
 | [PostgreSQL](https://www.postgresql.org/) + [PostGIS](https://postgis.net/) | SGBD principal |
 | [Docker](https://www.docker.com/) | Conteneurisation de l'environnement |
-| [dbt](https://www.getdbt.com/) | Transformation et pipelines de données |
 | [Git / GitHub](https://github.com/) | Versioning du projet |
 
 Un fichier `docker-compose.yml` est fourni pour démarrer PostgreSQL + PostGIS.
@@ -42,10 +41,8 @@ Un fichier `docker-compose.yml` est fourni pour démarrer PostgreSQL + PostGIS.
 | 04 | [Transactions et concurrence](https://comem-infradon.onrender.com/04-transactions-concurrence/) | Niveaux d'isolation, verrous, deadlocks |
 | 05 | [Optimisation et indexation](https://comem-infradon.onrender.com/05-optimisation-indexation/) | EXPLAIN ANALYZE, types d'index (B-tree, GIN, GiST), vues matérialisées |
 | 06 | [Sécurité, rôles et sauvegarde](https://comem-infradon.onrender.com/06-securite-roles-sauvegarde/) | GRANT/REVOKE, Row-Level Security, pg_dump/pg_restore, stratégies de backup |
-| 07 | [Structures de données](https://comem-infradon.onrender.com/07-structures-donnees/) | Relationnel vs NoSQL (document, key-value, colonnes, graph), stockage médias, cas concrets (Instagram, TikTok, Spotify) |
-| 08 | [Flux de données et data engineering](https://comem-infradon.onrender.com/08-flux-donnees/) | ETL vs ELT, triggers, CDC, dbt (models, sources, tests, seeds), workflows de transformation |
-| 09 | [Architectures modernes](https://comem-infradon.onrender.com/09-architectures-modernes/) | Data mesh, architecture medallion, lakehouse, RAG, systèmes cloud |
-| 10 | [Éthique et durabilité des données](https://comem-infradon.onrender.com/10-ethique-durabilite/) | Impact environnemental, biais, gouvernance, RGPD/nLPD, data feminism |
+| 07 | [Structures, flux et architectures modernes](https://comem-infradon.onrender.com/07-structures-architectures/) | Relationnel vs NoSQL (document, key-value, colonnes, graph), JSONB et arrays PostgreSQL, ETL vs ELT, Data Mesh, architecture medallion, lakehouse, RAG |
+| 08 | [Éthique des données](https://comem-infradon.onrender.com/08-ethique-donnees/) | Impact environnemental, biais algorithmiques, Data Feminism, RGPD/nLPD, gouvernance |
 
 ---
 
@@ -97,10 +94,10 @@ Chaque groupe (2-3 personnes) reçoit les mêmes données mais un brief différe
 | **J0** — Exploration et modélisation | 1-2 | MCD et MLD. Identifier les entités, relations et cardinalités. Documenter les problèmes de qualité observés dans les Excel | 01-02 |
 | **J1** — Import et nettoyage | 3-4 | MPD (CREATE TABLE). Import des données brutes dans des tables staging. Nettoyage SQL : TRIM, COALESCE, regexp_replace, dédoublonnage. Migration staging vers tables finales | 03-04 |
 | **J2** — Requêtes et optimisation | 5-6 | Premières requêtes métier pour le brief. EXPLAIN ANALYZE, index pertinents. Premières vues SQL | 05-06 |
-| **J3** — Sécurité et ouverture | 7-8 | Rôles et permissions (lecture seule pour citoyen-ne, écriture pour technicien-ne). Réflexion sur les structures alternatives adaptées au cas d'usage | 07-08 |
-| **J4** — Pipeline dbt + poster | 9-10 | Refactoring du nettoyage avec dbt (staging vers marts). Tests dbt. Documentation. Préparation du poster A3 | 08-09 |
-| **J5** — Présentation + poster | 28-29 mai | Poster A3 affiché en classe + présentation et discussion | 09-10 |
-| **Rendu final** | 31 mai | Scripts, jalons, adaptations selon retour des présentations | — |
+| **J3** — Sécurité et ouverture | 7-8 | Rôles et permissions (lecture seule pour citoyen-ne, écriture pour technicien-ne). Réflexion sur les structures alternatives adaptées au cas d'usage | 07 |
+| **J4** — Vues métier + poster | 9-10 | Finalisation des requêtes et vues SQL pour le brief. Réflexion sur les structures de données. Préparation du poster A3 | 07-08 |
+| **J5** — Présentation + poster | 28-29 mai | Poster A3 affiché en classe + présentation et discussion | 08 |
+| **Rendu final** | 31 mai | Scripts, jalons, adaptations selon retour des présentations | 08 |
 
 ---
 
@@ -117,7 +114,6 @@ Chaque groupe (2-3 personnes) reçoit les mêmes données mais un brief différe
 
 - [PostgreSQL Documentation](https://www.postgresql.org/docs/)
 - [Use The Index, Luke!](https://use-the-index-luke.com/)
-- [dbt Documentation](https://docs.getdbt.com/)
 - [Data Mesh Principles](https://martinfowler.com/articles/data-mesh-principles.html)
 - [Enjeux et perspectives pour une IA éthique et durable](https://stm.cairn.info/revue-enjeux-numeriques-2025-1-page-8?lang=fr) — *Annales des Mines — Enjeux numériques* n°29, 2025
 

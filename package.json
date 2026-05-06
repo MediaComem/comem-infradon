@@ -10,10 +10,8 @@
     "dev:04": "slidev cours/04-transactions-concurrence.md --open",
     "dev:05": "slidev cours/05-optimisation-indexation.md --open",
     "dev:06": "slidev cours/06-securite-roles-sauvegarde.md --open",
-    "dev:07": "slidev cours/07-structures-donnees.md --open",
-    "dev:08": "slidev cours/08-flux-donnees-data-engineering.md --open",
-    "dev:09": "slidev cours/09-architectures-modernes.md --open",
-    "dev:10": "slidev cours/10-ethique-durabilite.md --open",
+    "dev:07": "slidev cours/07-structures-architectures.md --open",
+    "dev:08": "slidev cours/08-ethique-donnees.md --open",
     "build": "slidev build",
     "build:all": "node scripts/build-all.mjs",
     "export": "slidev export"

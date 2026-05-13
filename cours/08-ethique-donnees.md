@@ -93,7 +93,7 @@ layout: default
 - Revenus captés par des multinationales, communautés indigènes affectées
 
 ### Cobalt : droits humains
-- **+60%** de l'approvisionnement mondial vient de la RDC
+- **+60%** de l'approvisionnement mondial vient de la RDC (République Démocratique du Congo)
 - Mineurs artisanaux sans équipements, exposition à des substances toxiques
 - Enfants parmi les travailleurs des mines
 
@@ -172,7 +172,6 @@ layout: default
 - **6–8%** de l'électricité suisse (vs 3% mondiale)
 - Projection : **10–15% d'ici 2030** (HSLU)
 - **+4,6 TWh** supplémentaires nécessaires (ETH Zurich)
-- > consommation totale du canton de Zurich (2023)
 
 ### Tensions et attentes
 - Réseau haute tension zurichois déjà à la limite
@@ -534,6 +533,14 @@ layout: default
 
 </div>
 
+<div class="box mt-3" style="background: #f0f6ff; border-color: #90b4d8;">
+  <div class="box-title" style="color: #4a7fb5;"><carbon-book /> Définitions</div>
+  <ul>
+    <li><strong>PUE</strong> (Power Usage Effectiveness) : ratio énergie totale datacenter / énergie serveurs seuls — idéal = 1.0</li>
+    <li><strong>Hyperscalers</strong> : grands opérateurs cloud mondiaux (AWS, Google Cloud, Azure)</li>
+  </ul>
+</div>
+
 <div class="footer">Source · <a href="https://www.rts.ch/info/economie/2026/article/entre-crainte-ecologique-et-opportunite-economique-l-expansion-des-datacenters-en-suisse-interroge-29235422.html">RTS (2026)</a> · <a href="https://www.climatiq.io/blog/measure-greenhouse-gas-emissions-carbon-data-centres-cloud-computing">Climatiq</a> · <a href="https://www.sciencedirect.com/science/article/pii/S2666389925002788">ScienceDirect (2025)</a> · <a href="https://www.theguardian.com/technology/2026/apr/24/officials-hugely-underestimated-impact-of-ai-datacentres-on-uk-carbon-emissions">The Guardian (2026)</a> · <a href="https://www.seedling.earth/post/the-carbon-footprint-of-data-centres-our-guide">Seedling Earth</a></div>
 
 ---
@@ -683,7 +690,8 @@ layout: default
 </div>
 
 <div class="box" style="background: #fffbe6; border-color: #f0d060;">
-  <div style="font-size: 0.65rem; color: #555; line-height: 1.5;"><carbon-warning-alt style="color: #c8a000;" /> La conformité n'est pas une case à cocher. C'est un processus continu intégré dans l'architecture.</div>
+  <div class="box-title" style="color: #c8a000;"><carbon-warning-alt /> À noter</div>
+  <div style="font-size: 0.65rem; color: #555; line-height: 1.5;">La conformité n'est pas une case à cocher. C'est un processus continu intégré dans l'architecture.</div>
 </div>
 
 </div>
@@ -755,6 +763,8 @@ layout: section
 
 # Questions ouvertes
 
+<p class="section-subtitle">À traiter dans le poster de rendu</p>
+
 ---
 layout: default
 ---
@@ -763,7 +773,7 @@ layout: default
 
 <div class="mt-4" style="font-size: 0.88rem;">
 
-Ces questions n'ont pas de réponse unique. Elles font partie du travail.
+Ces questions n'ont pas de réponse unique. Choisissez-en **au moins une** à analyser dans votre poster de rendu.
 
 </div>
 
@@ -786,6 +796,76 @@ Ces questions n'ont pas de réponse unique. Elles font partie du travail.
 </div>
 
 </div>
+
+---
+layout: default
+---
+
+# Poster A3 : consignes de rendu
+
+<div class="grid grid-cols-2 gap-6 mt-4">
+
+<div>
+
+### Structure (A3 portrait)
+
+<div style="border: 1px solid #e0e0e0; border-radius: 4px; padding: 0.5rem; display: grid; grid-template-columns: 1fr; grid-template-rows: auto auto auto auto; gap: 3px; background: #f9f9f9; font-family: 'Roboto Mono', monospace; font-size: 0.58rem; margin-top: 0.5rem;">
+  <div style="background: #fff; border: 1px solid #ddd; border-radius: 2px; padding: 0.4rem; color: #555; line-height: 1.4;">Contexte & périmètre</div>
+  <div style="background: #fff; border: 2px solid var(--heig-red); border-radius: 2px; padding: 0.8rem 0.4rem; color: #333; line-height: 1.4; font-weight: 600; text-align: center;">Modèle logique<br/>(E/R · tables · relations)</div>
+  <div style="background: #fff; border: 1px solid #ddd; border-radius: 2px; padding: 0.4rem; color: #555; line-height: 1.4;">Workflow de pensée</div>
+  <div style="background: #fef2f2; border: 1px solid var(--heig-red); border-radius: 2px; padding: 0.4rem; color: #555; line-height: 1.4;">Réflexion éthique · nLPD · questions ouvertes</div>
+</div>
+
+<div class="box mt-3" style="background: #fef2f2; border-color: var(--heig-red);">
+  <div class="box-title"><carbon-calendar /> Présentation · 20 mai &nbsp;|&nbsp; Rendu final · 31 mai</div>
+  <div style="font-size: 0.65rem; color: #555; line-height: 1.6;">
+    <strong>20 mai</strong> : poster A3 imprimé · affiché en classe · présentation et discussion<br/>
+    <strong>31 mai</strong> : scripts SQL · jalons · adaptations selon retour des présentations · lien GitHub<br/>
+    <strong>GitHub</strong> : <code>git clone</code> + <code>docker compose up -d</code> → base de données opérationnelle
+  </div>
+</div>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 0.4rem;">
+
+<div class="box-sm">
+  <div class="box-title">Contexte & périmètre</div>
+  <ul>
+    <li>Projet · données sources · périmètre</li>
+    <li>Contraintes identifiées</li>
+  </ul>
+</div>
+
+<div class="box-sm">
+  <div class="box-title">Modèle logique <em>(zone centrale)</em></div>
+  <ul>
+    <li>Schéma UML · tables · relations · cardinalités</li>
+    <li>Contraintes · index clés · types</li>
+  </ul>
+</div>
+
+<div class="box-sm">
+  <div class="box-title">Workflow de pensée</div>
+  <ul>
+    <li>Décisions de modélisation et pourquoi</li>
+    <li>Alternatives rejetées · compromis</li>
+    <li>Difficultés rencontrées</li>
+  </ul>
+</div>
+
+<div class="box-sm">
+  <div class="box-title">Réflexion éthique <em>(bandeau bas)</em></div>
+  <ul>
+    <li>Au moins une question de ce cours</li>
+    <li>Gouvernance · nLPD · accès · cycle de vie</li>
+  </ul>
+</div>
+
+</div>
+
+</div>
+
+
 
 ---
 layout: default

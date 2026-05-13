@@ -34,9 +34,9 @@ layout: none
 layout: section
 ---
 
-# Impact environnemental
+# L'infrastructure des données comme industrie extractive
 
-<p class="section-subtitle">Le cloud n'est pas dans les nuages</p>
+<p class="section-subtitle">Les coûts cachés du numérique</p>
 
 ---
 layout: default
@@ -50,77 +50,185 @@ layout: default
 
 L'infrastructure de données repose sur des **ressources physiques** :
 
-<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; font-size: 0.82rem; margin-top: 0.8rem;">
-<div style="background: #f5f5f5; border: 1px solid #e0e0e0; border-radius: 4px; padding: 0.5rem 0.7rem; text-align: center;"><div style="font-size: 1.2rem; margin-bottom: 0.2rem;"><carbon-chip /></div><div style="font-weight: 600; font-size: 0.76rem;">Serveurs</div><div style="font-size: 0.72rem; color: #555; margin-top: 0.15rem;">Électricité 24h/24</div></div>
-<div style="background: #f5f5f5; border: 1px solid #e0e0e0; border-radius: 4px; padding: 0.5rem 0.7rem; text-align: center;"><div style="font-size: 1.2rem; margin-bottom: 0.2rem;"><carbon-temperature /></div><div style="font-weight: 600; font-size: 0.76rem;">Eau</div><div style="font-size: 0.72rem; color: #555; margin-top: 0.15rem;">Refroidissement</div></div>
-<div style="background: #f5f5f5; border: 1px solid #e0e0e0; border-radius: 4px; padding: 0.5rem 0.7rem; text-align: center;"><div style="font-size: 1.2rem; margin-bottom: 0.2rem;"><carbon-chemistry /></div><div style="font-weight: 600; font-size: 0.76rem;">Matériaux rares</div><div style="font-size: 0.72rem; color: #555; margin-top: 0.15rem;">Lithium, cobalt</div></div>
-<div style="background: #f5f5f5; border: 1px solid #e0e0e0; border-radius: 4px; padding: 0.5rem 0.7rem; text-align: center;"><div style="font-size: 1.2rem; margin-bottom: 0.2rem;"><carbon-building /></div><div style="font-weight: 600; font-size: 0.76rem;">Bâtiments</div><div style="font-size: 0.72rem; color: #555; margin-top: 0.15rem;">Hébergement</div></div>
-<div style="background: #f5f5f5; border: 1px solid #e0e0e0; border-radius: 4px; padding: 0.5rem 0.7rem; text-align: center; grid-column: span 2;"><div style="font-size: 1.2rem; margin-bottom: 0.2rem;"><carbon-network-4 /></div><div style="font-weight: 600; font-size: 0.76rem;">Câbles sous-marins</div><div style="font-size: 0.72rem; color: #555; margin-top: 0.15rem;">Connectivité mondiale</div></div>
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; margin-top: 0.8rem;">
+<div class="box" style="text-align: center;"><div style="font-size: 1.2rem; margin-bottom: 0.2rem;"><carbon-chip /></div><div style="font-weight: 600; font-size: 0.76rem;">Serveurs</div><div style="font-size: 0.72rem; color: #555; margin-top: 0.15rem;">Électricité 24h/24</div></div>
+<div class="box" style="text-align: center;"><div style="font-size: 1.2rem; margin-bottom: 0.2rem;"><carbon-temperature /></div><div style="font-weight: 600; font-size: 0.76rem;">Eau</div><div style="font-size: 0.72rem; color: #555; margin-top: 0.15rem;">Refroidissement</div></div>
+<div class="box" style="text-align: center;"><div style="font-size: 1.2rem; margin-bottom: 0.2rem;"><carbon-chemistry /></div><div style="font-weight: 600; font-size: 0.76rem;">Matériaux rares</div><div style="font-size: 0.72rem; color: #555; margin-top: 0.15rem;">Lithium, cobalt</div></div>
+<div class="box" style="text-align: center;"><div style="font-size: 1.2rem; margin-bottom: 0.2rem;"><carbon-building /></div><div style="font-weight: 600; font-size: 0.76rem;">Bâtiments</div><div style="font-size: 0.72rem; color: #555; margin-top: 0.15rem;">Hébergement</div></div>
+<div class="box" style="text-align: center; grid-column: span 2;"><div style="font-size: 1.2rem; margin-bottom: 0.2rem;"><carbon-network-4 /></div><div style="font-weight: 600; font-size: 0.76rem;">Câbles sous-marins</div><div style="font-size: 0.72rem; color: #555; margin-top: 0.15rem;">Connectivité mondiale</div></div>
 </div>
 
 </div>
 
 <div style="display: flex; flex-direction: column; align-items: center; gap: 0.4rem;">
-<a href="https://whitmanwire.com/science-environment/2024/10/03/the-environmental-impact-of-data-centers-balancing-ai-growth-and-energy-infrastructure-in-eastern-washington/" target="_blank"><img src="/images/08-ethique/Aibadforenv_yee_es_3-edited-586x600.png" style="max-height: 340px; width: 100%; object-fit: contain; border-radius: 4px;" /></a>
-<div style="font-size: 0.68rem; color: #9e9e9e; text-align: center;">Illustration · Emily Yee · <a href="https://whitmanwire.com/science-environment/2024/10/03/the-environmental-impact-of-data-centers-balancing-ai-growth-and-energy-infrastructure-in-eastern-washington/" style="color: #9e9e9e;">Whitman Wire (2024)</a></div>
+  <a href="https://whitmanwire.com/science-environment/2024/10/03/the-environmental-impact-of-data-centers-balancing-ai-growth-and-energy-infrastructure-in-eastern-washington/" target="_blank"><img src="/images/08-ethique/Aibadforenv_yee_es_3-edited-586x600.png" style="max-height: 340px; width: 100%; object-fit: contain; border-radius: 4px;" /></a>
+  <div class="img-caption">Illustration · Emily Yee · <a href="https://whitmanwire.com/science-environment/2024/10/03/the-environmental-impact-of-data-centers-balancing-ai-growth-and-energy-infrastructure-in-eastern-washington/">Whitman Wire (2024)</a></div>
 </div>
 
 </div>
 
-<div class="footer">Source · Crawford, <em>Atlas of AI</em> (2021) · <a href="https://www.iea.org/reports/electricity-2024">IEA — Electricity 2024</a></div>
+<div class="footer">Source · Crawford, <em>Atlas of AI</em> (2021) · <a href="https://www.iea.org/reports/electricity-2024">IEA · Electricity 2024</a></div>
+
+---
+layout: section
+---
+
+# Extraction minière et matériaux
+
+<p class="section-subtitle">Lithium, cobalt et terres rares</p>
 
 ---
 layout: default
 ---
 
-# La Suisse et ses datacenters
+# Lithium et cobalt
 
 <div class="grid grid-cols-2 gap-8 mt-4">
 
-<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; font-size: 0.82rem; align-content: start;">
+<div>
 
-<div style="background: #f5f5f5; border: 1px solid #e0e0e0; border-radius: 4px; padding: 0.55rem 0.85rem;">
-  <div style="display: flex; align-items: center; gap: 0.35rem; font-weight: 600; margin-bottom: 0.1rem;"><carbon-data-center style="color: #666;" /> ~120 datacenters</div>
-  Parmi les plus fortes densités au monde. 10+ nouveaux sites en construction. Principaux acteurs : Google, Microsoft, AWS, Equinix, Green Datacenter.
-</div>
+### Lithium : eau et communautés
+- "Triangle du lithium" : Chili, Argentine, Bolivie
+- Millions de litres/jour → pression sur les ressources locales
+- Revenus captés par des multinationales, communautés indigènes affectées
 
-<div style="background: #f5f5f5; border: 1px solid #e0e0e0; border-radius: 4px; padding: 0.55rem 0.85rem;">
-  <div style="display: flex; align-items: center; gap: 0.35rem; font-weight: 600; margin-bottom: 0.1rem;"><carbon-lightning style="color: #666;" /> 6-8% de l'électricité suisse</div>
-  Aujourd'hui, contre 3% en moyenne mondiale. Pourrait atteindre <strong>10-15% d'ici 2030</strong>, selon Adrian Altenburger (HSLU). Plus que toute la consommation du canton de Zurich en 2023.
-</div>
-
-<div style="background: #f5f5f5; border: 1px solid #e0e0e0; border-radius: 4px; padding: 0.55rem 0.85rem;">
-  <div style="display: flex; align-items: center; gap: 0.35rem; font-weight: 600; margin-bottom: 0.1rem;"><carbon-warning-alt style="color: #C1002A;" /> Zurich : réseau saturé</div>
-  Le réseau haute tension est déjà à la limite dans plusieurs zones. Certains opérateurs migrent vers Argovie et Schaffhouse. Irlande et Pays-Bas ont déjà gelé les nouvelles constructions.
-</div>
-
-<div style="background: #f5f5f5; border: 1px solid #e0e0e0; border-radius: 4px; padding: 0.55rem 0.85rem;">
-  <div style="display: flex; align-items: center; gap: 0.35rem; font-weight: 600; margin-bottom: 0.1rem;"><carbon-user-multiple style="color: #666;" /> Opinion publique</div>
-  <strong>72%</strong> des Suisses souhaitent que les nouveaux datacenters soient alimentés uniquement en énergie renouvelable. <strong>80%</strong> veulent plus de transparence sur la consommation. (AlgorithmWatch CH)
-</div>
+### Cobalt : droits humains
+- **+60%** de l'approvisionnement mondial vient de la RDC
+- Mineurs artisanaux sans équipements, exposition à des substances toxiques
+- Enfants parmi les travailleurs des mines
 
 </div>
 
 <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-  <div style="display: flex; gap: 0.5rem; align-items: flex-start;">
-    <div style="flex: 1;">
-      <iframe src="https://www.rts.ch/play/embed?urn=urn:rts:video:13475123" style="width: 100%; height: 200px; border: none; border-radius: 4px; display: block;" allowfullscreen></iframe>
-      <div style="font-size: 0.65rem; color: #9e9e9e; margin-top: 0.25rem; text-align: center;"><a href="https://www.rts.ch/play/tv/-/video/-?urn=urn:rts:video:13475123" style="color: #9e9e9e;">RTS — Le diesel des datacenters (2022)</a></div>
-    </div>
-    <div style="flex: 1;">
-      <a href="https://www.swissinfo.ch/eng/swiss-ai/can-switzerlands-power-grid-keep-up-with-its-data-centres/90710181" target="_blank"><img src="/images/08-ethique/swissinfo-data-centers.png" style="width: 100%; height: 200px; object-fit: cover; border-radius: 4px; display: block;" /></a>
-      <div style="font-size: 0.65rem; color: #9e9e9e; margin-top: 0.25rem; text-align: center;"><a href="https://www.swissinfo.ch/eng/swiss-ai/can-switzerlands-power-grid-keep-up-with-its-data-centres/90710181" style="color: #9e9e9e;">swissinfo.ch (2026)</a></div>
-    </div>
+  <div class="box">
+    <div class="box-title">Où les trouve-t-on dans l'infrastructure ?</div>
+    <ul>
+      <li><strong>Batteries de secours (UPS)</strong> des datacenters → lithium</li>
+      <li><strong>Puces, SSD, cartes réseau</strong> → cobalt dans les alliages</li>
+      <li><strong>Smartphones et laptops</strong> des équipes → les deux</li>
+      <li><strong>Câbles sous-marins</strong> → terres rares dans les amplificateurs</li>
+    </ul>
   </div>
-  <div style="display: flex; flex-direction: column; align-items: center;">
-    <a href="https://www.datacentermap.com/switzerland/" target="_blank"><img src="/images/08-ethique/data-centers-switzerland.png" style="max-height: 100px; object-fit: contain; border-radius: 4px;" /></a>
-    <div style="font-size: 0.62rem; color: #9e9e9e; margin-top: 0.15rem;"><a href="https://www.datacentermap.com/switzerland/" style="color: #9e9e9e;">datacentermap.com — Suisse</a></div>
-  </div>
+  <a href="https://reporterre.net/Guillaume-Pitron-Un-telephone-portable-ne-pese-pas-150-grammes-mais-150-kilos" target="_blank"><img src="/images/08-ethique/reporterre.webp" style="width: 100%; object-fit: contain; border-radius: 4px;" /></a>
+  <div class="img-caption">© Sanaga / <a href="https://reporterre.net/Guillaume-Pitron-Un-telephone-portable-ne-pese-pas-150-grammes-mais-150-kilos">Reporterre · G. Pitron : « Un téléphone ne pèse pas 150 g mais 150 kg »</a></div>
 </div>
 
 </div>
 
-<div class="footer">Source · <a href="https://www.swissinfo.ch/eng/swiss-ai/can-switzerlands-power-grid-keep-up-with-its-data-centres/90710181">swissinfo.ch (2026)</a> · <a href="https://www.rts.ch/play/tv/-/video/-?urn=urn:rts:video:13475123">RTS (2023)</a></div>
+<div class="footer">Source · Crawford, <em>Atlas of AI</em>, Ch. 1 · Earth (2021) · <a href="https://reporterre.net/Guillaume-Pitron-Un-telephone-portable-ne-pese-pas-150-grammes-mais-150-kilos">Reporterre · Pitron</a> · <a href="https://www.klover.ai/why-ai-ethics-must-confront-environmental-and-labor-justice/">Klover.ai</a></div>
+
+---
+layout: section
+---
+
+# Énergie, eau et empreinte carbone
+
+<p class="section-subtitle">Le cloud n'est pas dans les nuages</p>
+
+---
+layout: default
+---
+
+# Empreinte carbone du numérique
+
+<div class="grid grid-cols-2 gap-6 mt-4">
+
+<div>
+
+### Le numérique dans les émissions mondiales
+- Numérique au global : **~4%** des émissions de CO₂ (IEA)
+- Datacenters seuls : **~1%** (en forte croissance)
+- Fabrication des équipements : souvent **> émissions d'exploitation**
+
+### Ordres de grandeur
+- Recherche Google : ~0.3 g CO₂
+- Requête ChatGPT : ~0.15 g CO₂
+- Email sans pièce jointe : ~4 g CO₂
+- Email avec pièce jointe : ~50 g CO₂
+- Fabrication d'un serveur : **plusieurs tonnes** CO₂
+
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 0.4rem; align-items: center;">
+  <a href="https://www.climatiq.io/blog/measure-greenhouse-gas-emissions-carbon-data-centres-cloud-computing" target="_blank"><img src="/images/08-ethique/cloud-emission.jpg" style="width: 100%; object-fit: contain; border-radius: 4px;" /></a>
+  <div class="img-caption"><a href="https://www.climatiq.io/blog/measure-greenhouse-gas-emissions-carbon-data-centres-cloud-computing">Climatiq · Measuring GHG emissions from cloud (2024)</a></div>
+</div>
+
+</div>
+
+<div class="footer">Source · <a href="https://www.iea.org/reports/electricity-2024">IEA (2024)</a> · <a href="https://www.climatiq.io/blog/measure-greenhouse-gas-emissions-carbon-data-centres-cloud-computing">Climatiq (2024)</a> · <a href="https://news.mit.edu/2025/explained-generative-ai-environmental-impact-0117">MIT News (2025)</a></div>
+
+---
+layout: default
+---
+
+# Contexte suisse : datacenters
+
+<div class="grid grid-cols-2 gap-8 mt-4">
+
+<div>
+
+### Consommation électrique
+- **6–8%** de l'électricité suisse (vs 3% mondiale)
+- Projection : **10–15% d'ici 2030** (HSLU)
+- **+4,6 TWh** supplémentaires nécessaires (ETH Zurich)
+- > consommation totale du canton de Zurich (2023)
+
+### Tensions et attentes
+- Réseau haute tension zurichois déjà à la limite
+- Migration vers Argovie et Schaffhouse
+- **72%** des Suisses : énergie 100% renouvelable (AlgorithmWatch CH)
+- **80%** : plus de transparence sur la consommation
+
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 0.4rem;">
+
+### Densité et croissance
+- ~120 datacenters : parmi les plus fortes densités mondiales
+- Canton de Zurich : 114 000 m² (≈ 16 terrains de football)
+- 10+ nouveaux sites en construction
+
+<a href="https://www.datacentermap.com/switzerland/" target="_blank"><img src="/images/08-ethique/data-centers-switzerland.png" style="width: 100%; object-fit: contain; border-radius: 4px; height: 200px" /></a>
+<div class="img-caption"><a href="https://www.datacentermap.com/switzerland/">datacentermap.com · Suisse</a></div>
+</div>
+
+</div>
+
+<div class="footer">Source · <a href="https://www.swissinfo.ch/eng/swiss-ai/can-switzerlands-power-grid-keep-up-with-its-data-centres/90710181">swissinfo.ch (2026)</a> · ETH Zurich · AlgorithmWatch CH · OFEN (2021)</div>
+
+---
+layout: default
+---
+
+# Crainte écologique ou opportunité économique ?
+
+<div class="grid grid-cols-2 gap-8 mt-4">
+
+<div>
+
+### Opportunité
+- Emplois qualifiés et attractivité tech
+- Revenus fiscaux pour les cantons
+- Exportation de services numériques
+
+### Crainte
+- Pression sur le réseau électrique suisse
+- Consommation d'eau (refroidissement)
+- Conflits avec les objectifs climatiques
+- Opacité des opérateurs sur la consommation réelle
+
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 0.4rem;">
+  <a href="https://www.rts.ch/info/economie/2026/article/entre-crainte-ecologique-et-opportunite-economique-l-expansion-des-datacenters-en-suisse-interroge-29235422.html" target="_blank"><img src="/images/08-ethique/crainte-ecologique-opportunite-econonique-rts.png" style="width: 100%; height: 120px; object-fit: cover; border-radius: 4px;" /></a>
+  <iframe src="https://www.rts.ch/play/embed?urn=urn:rts:video:9c5086b3-8691-3d48-a06f-81ec2b9bb2b1&subdivisions=false" style="width: 100%; height: 210px; border: none; border-radius: 4px; display: block;" allowfullscreen allow="geolocation *; autoplay; encrypted-media"></iframe>
+  <div class="img-caption"><a href="https://www.rts.ch/info/economie/2026/article/entre-crainte-ecologique-et-opportunite-economique-l-expansion-des-datacenters-en-suisse-interroge-29235422.html">RTS Forum · L'expansion des datacenters en Suisse interroge (2026)</a></div>
+</div>
+
+</div>
+
+<div class="footer">Source · <a href="https://www.rts.ch/info/economie/2026/article/entre-crainte-ecologique-et-opportunite-economique-l-expansion-des-datacenters-en-suisse-interroge-29235422.html">RTS (2026)</a></div>
 
 ---
 layout: none
@@ -141,209 +249,127 @@ layout: none
 layout: default
 ---
 
-# Les chiffres concrets : Suisse
-
-<div class="mt-4" style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; font-size: 0.84rem;">
-
-<div style="background: #f5f5f5; border: 1px solid #e0e0e0; border-radius: 4px; padding: 0.55rem 0.85rem;">
-  <div style="display: flex; align-items: center; gap: 0.35rem; font-weight: 600; margin-bottom: 0.1rem;"><carbon-lightning style="color: #666;" /> Consommation électrique</div>
-  Les datacenters représentent <strong>6-8% de l'électricité suisse</strong> aujourd'hui, contre 3% en moyenne mondiale. Projection : <strong>10-15% d'ici 2030</strong>, soit plus que toute la consommation du canton de Zurich en 2023.
-</div>
-
-<div style="background: #f5f5f5; border: 1px solid #e0e0e0; border-radius: 4px; padding: 0.55rem 0.85rem;">
-  <div style="display: flex; align-items: center; gap: 0.35rem; font-weight: 600; margin-bottom: 0.1rem;"><carbon-data-center style="color: #666;" /> Densité record</div>
-  ~<strong>120 datacenters</strong> en Suisse, parmi les plus fortes densités au monde par habitant. Le canton de Zurich abrite plus de <strong>114 000 m²</strong> de surface datacenter — l'équivalent de 16 terrains de football.
-</div>
-
-<div style="background: #f5f5f5; border: 1px solid #e0e0e0; border-radius: 4px; padding: 0.55rem 0.85rem;">
-  <div style="display: flex; align-items: center; gap: 0.35rem; font-weight: 600; margin-bottom: 0.1rem;"><carbon-warning-alt style="color: #C1002A;" /> Réseau sous tension</div>
-  L'ETH Zurich estime que la Suisse devra produire ou importer <strong>+4,6 TWh</strong> supplémentaires pour satisfaire la demande des datacenters. Le réseau haute tension zurichois est déjà <strong>à la limite</strong> dans plusieurs zones.
-</div>
-
-<div style="background: #f5f5f5; border: 1px solid #e0e0e0; border-radius: 4px; padding: 0.55rem 0.85rem;">
-  <div style="display: flex; align-items: center; gap: 0.35rem; font-weight: 600; margin-bottom: 0.1rem;"><carbon-user-multiple style="color: #666;" /> Ce que veulent les Suisses</div>
-  <strong>72%</strong> souhaitent que les nouveaux datacenters soient alimentés uniquement en énergie renouvelable. <strong>80%</strong> réclament plus de transparence sur leur consommation réelle. (AlgorithmWatch CH)
-</div>
-
-</div>
-
-<div class="accent-box mt-4">
-
-Plus de <strong>40%</strong> du potentiel d'efficacité énergétique des datacenters suisses reste inexploité — accessible via une meilleure gestion IT, selon l'Office fédéral de l'énergie (OFEN, 2021).
-
-</div>
-
-<div style="background: #fef2f2; border: 1px solid #C1002A; border-radius: 4px; padding: 0.55rem 0.85rem; margin-top: 0.6rem; font-size: 0.83rem;"><div style="display: flex; align-items: center; gap: 0.35rem; font-weight: 600; margin-bottom: 0.2rem; color: #C1002A;"><carbon-warning-alt /> Impact de l'IA générative</div>L'IA amplifie ces chiffres : chaque requête ChatGPT consomme ~<strong>5x plus</strong> qu'une recherche Google. L'entraînement d'un LLM mobilise énergie, eau (refroidissement GPU) et matériaux rares à grande échelle. Source · <a href="https://news.mit.edu/2025/explained-generative-ai-environmental-impact-0117" style="color: #C1002A;">MIT News (2025)</a></div>
-
-<div class="footer">Source · <a href="https://www.swissinfo.ch/eng/swiss-ai/can-switzerlands-power-grid-keep-up-with-its-data-centres/90710181">swissinfo.ch (2026)</a> · ETH Zurich · AlgorithmWatch CH · OFEN (2021)</div>
-
----
-layout: default
----
-
 # Infomaniak
 
-<div class="grid grid-cols-2 gap-8 mt-4">
+<div class="grid grid-cols-4 gap-3 mt-4">
 
-<div style="display: flex; flex-direction: column; gap: 0.65rem; font-size: 0.83rem;">
-<div style="background: #f5f5f5; border: 1px solid #e0e0e0; border-radius: 4px; padding: 0.55rem 0.85rem;"><div style="display: flex; align-items: center; gap: 0.35rem; font-weight: 600; margin-bottom: 0.1rem;"><carbon-lightning style="color: #666;" /> Énergie 100% verte</div>60% hydroélectricité + 40% solaire/petite hydro. Propres centrales solaires avec panneaux européens (Meyer Burger). Objectif 100% atteint.</div>
-<div style="background: #f5f5f5; border: 1px solid #e0e0e0; border-radius: 4px; padding: 0.55rem 0.85rem;"><div style="display: flex; align-items: center; gap: 0.35rem; font-weight: 600; margin-bottom: 0.1rem;"><carbon-recycle style="color: #666;" /> Compensation 200% CO2</div>Compense le double de ses émissions : fabrication des serveurs, électricité, transport des collaborateurs, vols d'affaires.</div>
-<div style="background: #f5f5f5; border: 1px solid #e0e0e0; border-radius: 4px; padding: 0.55rem 0.85rem;"><div style="display: flex; align-items: center; gap: 0.35rem; font-weight: 600; margin-bottom: 0.1rem;"><carbon-temperature style="color: #666;" /> Récupération de chaleur</div>Le datacenter D4 récupère <strong>100% de la chaleur fatale</strong> des serveurs et l'injecte dans le réseau de chauffage à distance pour des milliers de foyers.</div>
-<div style="background: #f5f5f5; border: 1px solid #e0e0e0; border-radius: 4px; padding: 0.55rem 0.85rem;"><div style="display: flex; align-items: center; gap: 0.35rem; font-weight: 600; margin-bottom: 0.1rem;"><carbon-time style="color: #666;" /> Durée de vie étendue</div>Durée de vie des serveurs étendue de 7-10 ans à <strong>15 ans</strong> pour réduire l'empreinte carbone de la fabrication. Certifications ISO 14001, ISO 50001 (depuis 2015).</div>
+<div class="box-sm">
+  <div class="box-title">Énergie 100% verte</div>
+  <ul>
+    <li>60% hydro + 40% solaire</li>
+    <li>Panneaux Meyer Burger (EU)</li>
+    <li>Objectif 100% RE atteint</li>
+  </ul>
 </div>
 
-<div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.4rem;">
-<a href="https://www.infomaniak.com/fr/ecologie" target="_blank"><img src="/images/08-ethique/infomaniak-nous-polluons.png" style="width: 100%; object-fit: contain; border-radius: 4px;" /></a>
-<div style="font-size: 0.65rem; color: #9e9e9e; text-align: center;"><a href="https://www.infomaniak.com/fr/ecologie" style="color: #9e9e9e;">infomaniak.com/fr/ecologie</a></div>
+<div class="box-sm">
+  <div class="box-title">Compensation 200% CO₂</div>
+  <ul>
+    <li>Double des émissions compensées</li>
+    <li>Couvre : fabrication, électricité, transport, vols</li>
+  </ul>
+</div>
+
+<div class="box-sm">
+  <div class="box-title">Récupération de chaleur</div>
+  <ul>
+    <li>D4 : <strong>100%</strong> de la chaleur fatale récupérée</li>
+    <li>Injectée dans le chauffage à distance</li>
+  </ul>
+</div>
+
+<div class="box-sm">
+  <div class="box-title">Durée de vie étendue</div>
+  <ul>
+    <li>Serveurs : 7–10 ans → <strong>15 ans</strong></li>
+    <li>ISO 14001, ISO 50001 (depuis 2015)</li>
+  </ul>
 </div>
 
 </div>
 
-<div class="accent-box mt-4">
-
-Infomaniak est basé à Genève. Un exemple suisse de datacenter qui assume sa pollution et investit structurellement pour la réduire — plutôt que de la rendre invisible.
-
+<div style="margin-top: 0.5rem; height: 45vh; display: flex; flex-direction: column; align-items: center; gap: 0.3rem;">
+  <a href="https://www.infomaniak.com/fr/ecologie" target="_blank" style="flex: 1; min-height: 0; display: block;"><img src="/images/08-ethique/infomaniak-nous-polluons.png" style="width: 100%; height: 100%; object-fit: contain; border-radius: 4px;" /></a>
+  <div class="img-caption"><a href="https://www.infomaniak.com/fr/ecologie">infomaniak.com/fr/ecologie</a></div>
 </div>
 
 <div class="footer">Source · <a href="https://www.infomaniak.com/fr/ecologie">infomaniak.com/fr/ecologie</a></div>
 
 ---
-layout: default
----
-
-# Souveraineté numérique : qu'est-ce que c'est ?
-
-<div class="grid grid-cols-2 gap-8 mt-4">
-
-<div style="font-size: 0.85rem;">
-
-La **souveraineté numérique** désigne la capacité d'un État, d'une entreprise ou d'un individu à **contrôler ses propres données, infrastructures et services numériques** sans dépendre de tiers étrangers.
-
-<div style="background: #f5f5f5; border: 1px solid #e0e0e0; border-radius: 4px; padding: 0.55rem 0.85rem; margin-top: 0.7rem;"><div style="font-weight: 600; margin-bottom: 0.2rem;">Trois dimensions</div><ul style="padding-left: 1rem; margin: 0.3rem 0 0 0;"><li><strong>Données</strong> : où sont-elles stockées ? Sous quelle juridiction ?</li><li><strong>Infrastructure</strong> : qui possède et opère les serveurs ?</li><li><strong>Logiciels</strong> : open source ou dépendance à des plateformes propriétaires étrangères ?</li></ul></div>
-
-<div style="background: #f5f5f5; border: 1px solid #e0e0e0; border-radius: 4px; padding: 0.55rem 0.85rem; margin-top: 0.6rem;"><div style="font-weight: 600; margin-bottom: 0.2rem;">Pourquoi c'est un enjeu ?</div>Les données hébergées à l'étranger sont soumises aux lois locales — dont le <strong>Cloud Act américain</strong> (2018), qui permet aux autorités US d'accéder aux données de sociétés américaines, où qu'elles soient stockées.</div>
-
-</div>
-
-<div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
-<a href="https://news.infomaniak.com/souverainete-numerique-de-la-suisse/" target="_blank"><img src="/images/08-ethique/news-infomaniak.png" style="width: 100%; object-fit: contain; border-radius: 4px;" /></a>
-<div style="font-size: 0.62rem; color: #9e9e9e; text-align: center;"><a href="https://news.infomaniak.com/souverainete-numerique-de-la-suisse/" style="color: #9e9e9e;">Infomaniak — Souveraineté numérique de la Suisse (2021)</a></div>
-<a href="https://www.rts.ch/info/suisse/13419618-les-contrats-avec-cinq-geants-du-numerique-pour-le-cloud-de-la-confederation-ont-ete-signes.html" target="_blank"><img src="/images/08-ethique/contrats-suisse-cloud.png" style="width: 100%; object-fit: contain; border-radius: 4px;" /></a>
-<div style="font-size: 0.62rem; color: #9e9e9e; text-align: center;"><a href="https://www.rts.ch/info/suisse/13419618-les-contrats-avec-cinq-geants-du-numerique-pour-le-cloud-de-la-confederation-ont-ete-signes.html" style="color: #9e9e9e;">RTS — Contrats cloud de la Confédération (oct. 2022)</a></div>
-</div>
-
-</div>
-
-<div class="footer">Source · <a href="https://news.infomaniak.com/souverainete-numerique-de-la-suisse/">Infomaniak — Souveraineté numérique (2021)</a> · <a href="https://www.rts.ch/info/suisse/13419618-les-contrats-avec-cinq-geants-du-numerique-pour-le-cloud-de-la-confederation-ont-ete-signes.html">RTS (2022)</a></div>
-
----
-layout: default
----
-
-# La Suisse et le cloud fédéral
-
-<div class="grid grid-cols-2 gap-8 mt-4">
-
-<div style="font-size: 0.85rem;">
-
-En 2022, la Confédération suisse a signé des contrats cloud avec **5 géants du numérique** pour un montant de **CHF 110 millions** sur 5 ans.
-
-<div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.5rem; margin-top: 0.7rem; font-size: 0.78rem; text-align: center;">
-<div style="background: #f5f5f5; border: 1px solid #e0e0e0; border-radius: 4px; padding: 0.4rem;"><img src="https://cdn.simpleicons.org/amazonaws/FF9900" style="height: 20px; margin-bottom: 0.2rem;" /><div>Amazon AWS</div></div>
-<div style="background: #f5f5f5; border: 1px solid #e0e0e0; border-radius: 4px; padding: 0.4rem;"><img src="https://cdn.simpleicons.org/microsoftazure/0078D4" style="height: 20px; margin-bottom: 0.2rem;" /><div>Microsoft Azure</div></div>
-<div style="background: #f5f5f5; border: 1px solid #e0e0e0; border-radius: 4px; padding: 0.4rem;"><img src="https://cdn.simpleicons.org/oracle/F80000" style="height: 20px; margin-bottom: 0.2rem;" /><div>Oracle</div></div>
-<div style="background: #f5f5f5; border: 1px solid #e0e0e0; border-radius: 4px; padding: 0.4rem;"><img src="https://cdn.simpleicons.org/ibm/052FAD" style="height: 20px; margin-bottom: 0.2rem;" /><div>IBM</div></div>
-<div style="background: #f5f5f5; border: 1px solid #e0e0e0; border-radius: 4px; padding: 0.4rem;"><img src="https://cdn.simpleicons.org/alibabacloud/FF6A00" style="height: 20px; margin-bottom: 0.2rem;" /><div>Alibaba Cloud</div></div>
-<div style="background: #fef2f2; border: 1px solid #C1002A; border-radius: 4px; padding: 0.4rem; color: #C1002A; font-weight: 600; display: flex; align-items: center; justify-content: center;">0 acteur suisse ou européen</div>
-</div>
-
-<div style="background: #fffbe6; border: 1px solid #f0d060; border-radius: 4px; padding: 0.55rem 0.85rem; margin-top: 0.7rem; font-size: 0.82rem;"><carbon-warning-alt style="color: #c8a000;" /> Les critères du appel d'offres (24+ services sur 32, présence sur 3 continents) excluaient structurellement les prestataires suisses et européens.</div>
-
-</div>
-
-<div style="font-size: 0.85rem;">
-
-<div style="background: #f5f5f5; border: 1px solid #e0e0e0; border-radius: 4px; padding: 0.6rem 0.85rem; margin-bottom: 0.6rem;"><div style="font-weight: 600; margin-bottom: 0.2rem;">Ce que ça implique</div><ul style="padding-left: 1rem; margin: 0;"><li>Les données de la Confédération hébergées par des entreprises étrangères</li><li>Soumises potentiellement au <strong>Cloud Act</strong> américain</li><li>Dépendance technologique à long terme</li></ul></div>
-
-<div style="background: #f5f5f5; border: 1px solid #e0e0e0; border-radius: 4px; padding: 0.6rem 0.85rem;"><div style="font-weight: 600; margin-bottom: 0.2rem;">La question posée</div>Un pays peut-il déléguer son infrastructure numérique à des acteurs étrangers <strong>sans perdre le contrôle</strong> de ses propres données publiques ?</div>
-
-</div>
-
-</div>
-
-<div style="background: #f5f5f5; border: 1px solid #e0e0e0; border-radius: 4px; padding: 0.5rem 0.7rem; margin-top: 0.6rem; font-size: 0.82rem; display: flex; align-items: center; gap: 0.7rem;"><a href="https://www.letemps.ch/cyber/souverainete-numerique/infomaniak-retire-son-recours-contre-la-prolongation-par-la-confederation-des-contrats-avec-les-geants-du-cloud" target="_blank"><img src="/images/08-ethique/le-temps-infomaniak.png" style="height: 60px; object-fit: contain; border-radius: 3px; flex-shrink: 0;" /></a><div>Infomaniak avait déposé un recours contre la prolongation des contrats — puis l'a retiré. <a href="https://www.letemps.ch/cyber/souverainete-numerique/infomaniak-retire-son-recours-contre-la-prolongation-par-la-confederation-des-contrats-avec-les-geants-du-cloud" style="color: #555; font-style: italic;">Le Temps</a></div></div>
-
-<div class="footer">Source · <a href="https://news.infomaniak.com/souverainete-numerique-de-la-suisse/">Infomaniak (juil. 2021)</a> · <a href="https://www.rts.ch/info/suisse/13419618-les-contrats-avec-cinq-geants-du-numerique-pour-le-cloud-de-la-confederation-ont-ete-signes.html">RTS (oct. 2022)</a> · <a href="https://www.letemps.ch/cyber/souverainete-numerique/infomaniak-retire-son-recours-contre-la-prolongation-par-la-confederation-des-contrats-avec-les-geants-du-cloud">Le Temps</a></div>
-
----
-layout: default
----
-
-# La chaîne d'approvisionnement invisible
-
-<div class="grid grid-cols-2 gap-8 mt-4">
-
-<div>
-
-Derrière chaque requête SQL se cache une longue chaîne :
-
-
-- **Extraction minière** : lithium, cobalt, terres rares pour les puces et batteries
-- **Fabrication** : usines avec conditions de travail et bilan carbone importants
-- **Transport** : acheminement global des composants
-- **Exploitation** : technicien·ne·s qui maintiennent les serveurs 24h/24
-- **Fin de vie** : déchets électroniques, souvent mal recyclés
-
-
-</div>
-
-<div class="flex items-center justify-center h-full">
-
-<div style="height: 220px; background: #f5f5f5; border: 1px dashed #ccc; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: #9e9e9e; font-family: 'Roboto Mono', monospace; font-size: 0.7rem; text-align: center; padding: 1rem; line-height: 1.5;">carte / schéma de la chaîne<br/>d'approvisionnement numérique</div>
-
-</div>
-
-</div>
-
-<div class="footer">Source · Crawford, <em>Atlas of AI</em>, Ch. 1 — Earth (2021)</div>
-
----
 layout: section
 ---
 
-# Biais et représentation
+# Biais
 
-<p class="section-subtitle">Ce que les données ne voient pas</p>
+<p class="section-subtitle">Quand les machines reproduisent nos préjugés</p>
 
 ---
 layout: default
 ---
 
-# Garbage in, garbage out, amplifié par l'IA
+# Sources et conséquences des biais
 
 <div class="grid grid-cols-2 gap-8 mt-4">
 
 <div>
 
-Les algorithmes apprennent à partir de données historiques. Si ces données **reflètent des inégalités passées**, l'algorithme les reproduit et les amplifie.
+### Sources de biais
+- **Données d'entraînement** : historique discriminatoire utilisé comme vérité
+- **Objectifs d'optimisation** : maximiser l'engagement favorise le contenu extrême
+- **Boucles de rétroaction** : les prédictions influencent la réalité qu'elles mesurent
+- **Choix de design** : quelles variables inclure, lesquelles ignorer ?
 
-
-- **COMPAS** (outil de prédiction de récidive, USA) : classait les personnes noires comme deux fois plus à risque que les personnes blanches pour des délits similaires
-- **Amazon Recruitment Tool** : outil d'évaluation de CV pénalisait automatiquement les candidatures avec le mot "femmes"
-- **Reconnaissance faciale** : taux d'erreur jusqu'à **35%** sur les visages de femmes à peau foncée vs **1%** sur les hommes à peau claire
-
-
-</div>
-
-<div class="flex items-center justify-center h-full">
-
-<div style="height: 220px; background: #f5f5f5; border: 1px dashed #ccc; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: #9e9e9e; font-family: 'Roboto Mono', monospace; font-size: 0.7rem; text-align: center; padding: 1rem; line-height: 1.5;">illustration / BD<br/>sur les biais algorithmiques</div>
+### Conséquences
+- Discrimination systématique à grande échelle
+- Opacité : décisions automatisées sans explication
+- Difficulté à contester (boîte noire)
 
 </div>
 
+<div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem;">
+  <img src="/images/08-ethique/megaphone.jpg" style="width: 100%; max-height: 260px; object-fit: contain; border-radius: 4px;" />
 </div>
 
-<div class="footer">Source · <a href="https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing">ProPublica — Machine Bias</a> · Buolamwini & Gebru, <em>Gender Shades</em> (2018)</div>
+</div>
+
+<div class="footer">Source · <a href="https://nyupress.org/9781479837243/algorithms-of-oppression/">Noble, <em>Algorithms of Oppression</em> (2018)</a></div>
+
+---
+layout: default
+---
+
+# Le cas COMPAS
+
+<div class="grid grid-cols-2 gap-8 mt-4">
+
+<div>
+
+### Qu'est-ce que COMPAS ?
+- Utilisé par les tribunaux américains
+- Prédit le risque de récidive (score de 1 à 10)
+- Influence les décisions de libération conditionnelle
+
+### ProPublica (2016) : enquête sur 7 000 détenu·e·s
+- Taux de faux positifs **2× plus élevé** pour les personnes racisées
+- Taux de faux négatifs **2× plus élevé** pour les personnes non racisées
+- Le score intégrait des variables corrélées au phénotype
+
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 0.5rem;">
+  <div>
+    <a href="https://medium.com/@danaytaman/algorithmic-bias-in-data-and-machine-learning-models-cc3ac681b440" target="_blank"><img src="/images/08-ethique/compas.webp" style="width: 100%; height: 190px; object-fit: contain; border-radius: 4px; display: block;" /></a>
+    <div class="img-caption"><a href="https://medium.com/@danaytaman/algorithmic-bias-in-data-and-machine-learning-models-cc3ac681b440">Dayana Taman · Medium</a></div>
+  </div>
+  <div>
+    <a href="https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing" target="_blank"><img src="/images/08-ethique/Risk3.png" style="width: 100%; height: 160px; object-fit: contain; border-radius: 4px; display: block;" /></a>
+    <div class="img-caption"><a href="https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing">ProPublica · Machine Bias (2016)</a></div>
+  </div>
+</div>
+
+</div>
+
+<div class="footer">Source · <a href="https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing">ProPublica · Machine Bias (2016)</a></div>
 
 ---
 layout: default
@@ -355,64 +381,160 @@ layout: default
 
 <div>
 
-Chaque base de données, chaque pipeline, chaque modèle d'IA repose sur des **choix humains** :
+Chaque pipeline, chaque modèle repose sur des **choix humains** :
 
-
+### Questions à se poser
 - Qui décide **quoi collecter** ?
 - Qui est **représenté** dans les données ?
 - Qui **bénéficie** de l'analyse ?
 - Qui **supporte** le coût de l'infrastructure ?
 - Qui est **exclu** ou rendu invisible ?
 
-
 </div>
 
 <div class="flex items-center justify-center h-full">
-
-<a href="https://data-feminism.mitpress.mit.edu/" target="_blank" style="display: inline-block;">
-  <img src="/images/01-introduction/Data_Feminism.jpg" style="height: 260px; width: auto; display: block; border-radius: 2px 6px 6px 2px; transform: perspective(600px) rotateY(-8deg); box-shadow: -6px 0 10px rgba(0,0,0,0.25), 6px 6px 30px rgba(0,0,0,0.4), inset -4px 0 8px rgba(0,0,0,0.15);" />
-</a>
-
+  <a href="https://data-feminism.mitpress.mit.edu/" target="_blank" style="display: inline-block;">
+    <img src="/images/01-introduction/Data_Feminism.jpg" style="height: 260px; width: auto; display: block; border-radius: 2px 6px 6px 2px; transform: perspective(600px) rotateY(-8deg); box-shadow: -6px 0 10px rgba(0,0,0,0.25), 6px 6px 30px rgba(0,0,0,0.4), inset -4px 0 8px rgba(0,0,0,0.15);" />
+  </a>
 </div>
 
 </div>
 
-<div class="accent-box mt-4">
-
-L'infrastructure de données n'est pas un outil neutre. Elle encode des priorités, des valeurs et des rapports de pouvoir.
-
+<div class="box mt-4" style="background: #fef2f2; border-color: var(--heig-red);">
+  <div class="box-title"><carbon-information /> À retenir</div>
+  <div style="font-size: 0.65rem; color: #555; line-height: 1.5;">L'infrastructure de données n'est pas un outil neutre. Elle encode des priorités, des valeurs et des rapports de pouvoir.</div>
 </div>
 
 <div class="footer">Source · D'Ignazio & Klein, <em>Data Feminism</em> (2020) · Crawford, <em>Atlas of AI</em> (2021)</div>
 
 ---
+layout: section
+---
+
+# Fin de vie et e-déchets
+
+<p class="section-subtitle">L'autre face du numérique</p>
+
+---
 layout: default
 ---
 
-# Madagascar, terrain d'entraînement de l'IA
+# Fin de vie : l'e-waste invisible
+
+<div class="grid grid-cols-2 gap-6 mt-4">
+
+<div>
+
+### Cycle de renouvellement
+- Hardware obsolète tous les 3–5 ans dans les datacenters
+- La demande IA accélère encore ce rythme (Schneider Electric)
+- Serveurs, cartes réseau, baies de stockage → tout finit remplacé
+
+### Impacts sanitaires et environnementaux
+- Plomb, mercure, cadmium dans les décharges
+- **80%** des e-déchets mondiaux vers des pays à bas revenus
+- Recycleurs exposés sans protection (ETH Zurich CSS, 2023)
+
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 0.5rem;">
+  <div class="box">
+    <div class="box-title">Recommandations</div>
+    <ul>
+      <li>Concevoir pour la <strong>longévité</strong> → pas l'obsolescence programmée</li>
+      <li>Transparence sur la fin de vie des équipements</li>
+      <li>Infomaniak : durée de vie étendue à <strong>15 ans</strong></li>
+    </ul>
+  </div>
+  <div>
+    <a href="https://datacentremagazine.com/articles/schneider-electric-races-to-meet-ai-data-centre-demands" target="_blank"><img src="https://assets.bizclikmedia.net/900/e62dc1ec1aa0ca90dd81380d2859d86a:f95a70970d3645231fd3a0ccd2951ffe/gettyimages-1007702270-2048x2048.webp" style="width: 100%; height: 140px; object-fit: cover; border-radius: 4px; display: block;" /></a>
+    <div class="img-caption"><a href="https://datacentremagazine.com/articles/schneider-electric-races-to-meet-ai-data-centre-demands">Data Centre Magazine · Schneider Electric & AI demand (2024)</a></div>
+  </div>
+  <div>
+    <a href="https://ethz.ch/content/dam/ethz/special-interest/gess/cis/center-for-securities-studies/pdfs/PP11-3_2023-EN.pdf" target="_blank"><img src="https://css.ethz.ch/en/center/CSS-news/2023/08/mind-the-e-waste-a-case-for-switzerland/_jcr_content/par/lead/imagePanorama.imageformat.carousel.1496881384.jpg" style="width: 100%; height: 140px; object-fit: cover; border-radius: 4px; display: block;" /></a>
+    <div class="img-caption"><a href="https://ethz.ch/content/dam/ethz/special-interest/gess/cis/center-for-securities-studies/pdfs/PP11-3_2023-EN.pdf">ETH Zurich CSS · Mind the E-Waste: A Case for Switzerland (2023)</a></div>
+  </div>
+</div>
+
+</div>
+
+<div class="footer">Source · Crawford, <em>Atlas of AI</em> (2021) · <a href="https://datacentremagazine.com/articles/schneider-electric-races-to-meet-ai-data-centre-demands">Data Centre Magazine</a> · <a href="https://ethz.ch/content/dam/ethz/special-interest/gess/cis/center-for-securities-studies/pdfs/PP11-3_2023-EN.pdf">ETH Zurich CSS (2023)</a></div>
+
+---
+layout: section
+---
+
+# Souveraineté numérique
+
+<p class="section-subtitle">Qui contrôle vos données ?</p>
+
+---
+layout: default
+---
+
+# Souveraineté numérique : qu'est-ce que c'est ?
 
 <div class="grid grid-cols-2 gap-8 mt-4">
 
 <div>
 
-<a href="https://pulitzercenter.org/fr/stories/madagascar-terrain-dentrainement-de-lia" target="_blank" style="display: block; position: relative; border-radius: 4px; overflow: hidden;"><img src="/images/08-ethique/madagascar%201.jpg.webp" style="width: 100%; height: 280px; object-fit: cover; display: block; border-radius: 4px;" /></a>
-<div style="font-size: 0.62rem; color: #9e9e9e; margin-top: 0.3rem; line-height: 1.4;">Fondée en 2015, TelesourcIA est une des plus anciennes entreprises d'annotation d'Antananarivo. La compagnie peut employer jusqu'à 300 personnes.<br/><span style="font-style: italic;">Image · Eugénie Baccot / Le Temps</span></div>
+**Souveraineté numérique** : contrôler ses propres données et infrastructures **sans dépendre de tiers étrangers**
+
+### Trois dimensions
+- **Données** : où stockées ? quelle juridiction ?
+- **Infrastructure** : qui possède et opère les serveurs ?
+- **Logiciels** : open source ou plateformes propriétaires étrangères ?
+
+### Pourquoi c'est un enjeu ?
+- Données hébergées à l'étranger → soumises aux lois locales
+- **Cloud Act (2018)** : accès aux données de sociétés US, partout dans le monde
 
 </div>
 
-<div style="font-size: 0.85rem;">
+<div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+  <a href="https://news.infomaniak.com/souverainete-numerique-de-la-suisse/" target="_blank"><img src="/images/08-ethique/news-infomaniak.png" style="width: 100%; object-fit: contain; border-radius: 4px;" /></a>
+  <div class="img-caption"><a href="https://news.infomaniak.com/souverainete-numerique-de-la-suisse/">Infomaniak · Souveraineté numérique de la Suisse (2021)</a></div>
+  <a href="https://www.rts.ch/info/suisse/13419618-les-contrats-avec-cinq-geants-du-numerique-pour-le-cloud-de-la-confederation-ont-ete-signes.html" target="_blank"><img src="/images/08-ethique/contrats-suisse-cloud.png" style="width: 100%; object-fit: contain; border-radius: 4px;" /></a>
+  <div class="img-caption"><a href="https://www.rts.ch/info/suisse/13419618-les-contrats-avec-cinq-geants-du-numerique-pour-le-cloud-de-la-confederation-ont-ete-signes.html">RTS · Contrats cloud de la Confédération (oct. 2022)</a></div>
+</div>
 
-Derrière chaque modèle d'IA, des milliers d'humains **annotent les données** — souvent invisibles, souvent précaires.
+</div>
 
-<div style="background: #f5f5f5; border: 1px solid #e0e0e0; border-radius: 4px; padding: 0.55rem 0.85rem; margin-top: 0.7rem;"><div style="font-weight: 600; margin-bottom: 0.2rem;">Ce qu'ils font</div>Classer des images, transcrire de l'audio, modérer des contenus violents, corriger des réponses de chatbots. Un travail répétitif, invisible, mal rémunéré — qui rend l'IA "intelligente".</div>
+<div class="footer">Source · <a href="https://news.infomaniak.com/souverainete-numerique-de-la-suisse/">Infomaniak · Souveraineté numérique (2021)</a> · <a href="https://www.rts.ch/info/suisse/13419618-les-contrats-avec-cinq-geants-du-numerique-pour-le-cloud-de-la-confederation-ont-ete-signes.html">RTS (2022)</a></div>
 
-<div style="background: #f5f5f5; border: 1px solid #e0e0e0; border-radius: 4px; padding: 0.55rem 0.85rem; margin-top: 0.6rem;"><div style="font-weight: 600; margin-bottom: 0.2rem;">Pourquoi Madagascar ?</div>Faibles salaires, francophonie, jeune population instruite. Des entreprises comme TelesourcIA (fondée en 2015, jusqu'à 300 employés) répondent à la demande mondiale en annotation de données.</div>
+---
+layout: default
+---
+
+# Cloud externe : pour et contre
+
+<div class="grid grid-cols-2 gap-8 mt-4">
+
+<div>
+
+### Pour : efficacité et scalabilité
+- PUE ~1.2 (hyperscalers) vs ~2.0 en infrastructure interne
+- Économies d'échelle : infrastructure mutualisée
+- Engagements renouvelables (Google, Microsoft : objectifs 100% RE)
+- Redondance et résilience mondiale
+- Pas de gestion de fin de vie matériel en interne
+
+</div>
+
+<div>
+
+### Contre : dépendance et opacité
+- **Cloud Act (2018)** : données accessibles par les autorités US
+- Lock-in technologique et fournisseur
+- Émissions de fabrication et fin de vie sous-estimées (rarement divulguées)
+- Consommation réelle non divulguée par les opérateurs
+- 3 acteurs contrôlent ~65% du marché mondial du cloud
 
 </div>
 
 </div>
 
-<div class="footer">Source · <a href="https://pulitzercenter.org/fr/stories/madagascar-terrain-dentrainement-de-lia">Pulitzer Center — Madagascar, terrain d'entraînement de l'IA</a> · Eugénie Baccot / Le Temps</div>
+<div class="footer">Source · <a href="https://www.rts.ch/info/economie/2026/article/entre-crainte-ecologique-et-opportunite-economique-l-expansion-des-datacenters-en-suisse-interroge-29235422.html">RTS (2026)</a> · <a href="https://www.climatiq.io/blog/measure-greenhouse-gas-emissions-carbon-data-centres-cloud-computing">Climatiq</a> · <a href="https://www.sciencedirect.com/science/article/pii/S2666389925002788">ScienceDirect (2025)</a> · <a href="https://www.theguardian.com/technology/2026/apr/24/officials-hugely-underestimated-impact-of-ai-datacentres-on-uk-carbon-emissions">The Guardian (2026)</a> · <a href="https://www.seedling.earth/post/the-carbon-footprint-of-data-centres-our-guide">Seedling Earth</a></div>
 
 ---
 layout: section
@@ -436,39 +558,96 @@ layout: default
 
 Deux réglementations qui encadrent le traitement des **données personnelles** :
 
-
 - **RGPD** : Règlement Général sur la Protection des Données (EU, 2018)
 - **nLPD** : nouvelle Loi sur la Protection des Données (Suisse, 2023)
 
-Les deux s'appliquent dès que des données sur des **personnes physiques** sont traitées, qu'elles soient citoyen·ne·s, employé·e·s ou technicien·ne·s.
-
+S'appliquent dès qu'une **personne physique** est concernée : citoyen·ne·s, employé·e·s, technicien·ne·s.
 
 </div>
 
 <div>
 
-<div style="background: #f5f5f5; border: 1px solid #e0e0e0; border-radius: 4px; padding: 0.55rem 0.85rem; font-size: 0.84rem; margin-bottom: 0.8rem;">
-
-**Droits des personnes concernées**
-
-- Accès à leurs données
-- Rectification des erreurs
-- Suppression ("droit à l'oubli")
-- Portabilité (recevoir ses données dans un format standard)
-- Opposition à certains traitements
-
+<div class="box" style="margin-bottom: 0.8rem;">
+  <div class="box-title">Droits des personnes concernées</div>
+  <ul>
+    <li>Accès à leurs données</li>
+    <li>Rectification des erreurs</li>
+    <li>Suppression ("droit à l'oubli")</li>
+    <li>Portabilité (recevoir ses données dans un format standard)</li>
+    <li>Opposition à certains traitements</li>
+  </ul>
 </div>
 
-<div style="background: #fef2f2; border: 1px solid #C1002A; border-radius: 4px; padding: 0.55rem 0.85rem; font-size: 0.84rem;">
-  <div style="display: flex; align-items: center; gap: 0.35rem; font-weight: 600; margin-bottom: 0.1rem;"><carbon-information style="color: #C1002A;" /> Dans votre projet</div>
-  Les noms et contacts des technicien·ne·s sont des données personnelles. Leur traitement est encadré par la nLPD.
-</div>
-
+<div class="box" style="background: #fef2f2; border-color: var(--heig-red);">
+  <div class="box-title"><carbon-information /> Dans votre projet</div>
+  <div style="font-size: 0.65rem; color: #555; line-height: 1.5;">Les noms et contacts des technicien·ne·s sont des données personnelles. Leur traitement est encadré par la nLPD.</div>
 </div>
 
 </div>
 
-<div class="footer">Source · <a href="https://www.fedlex.admin.ch/eli/cc/2022/491/fr">nLPD — fedlex.admin.ch</a> · <a href="https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=CELEX:32016R0679">RGPD — eur-lex.europa.eu</a></div>
+</div>
+
+<div class="footer">Source · <a href="https://www.fedlex.admin.ch/eli/cc/2022/491/fr">nLPD · fedlex.admin.ch</a> · <a href="https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=CELEX:32016R0679">RGPD · eur-lex.europa.eu</a></div>
+
+---
+layout: default
+---
+
+# Données personnelles et données sensibles
+
+<div class="grid grid-cols-2 gap-8 mt-4">
+
+<div class="list-compact">
+
+### Donnée personnelle
+Toute information permettant d'identifier une **personne physique**
+- Nom, prénom, adresse
+- Email, numéro de téléphone
+- Adresse IP, cookie
+- Position GPS
+
+### Donnée sensible
+Sous-catégorie à **risque élevé de discrimination**
+- Santé, handicap
+- Origine raciale / ethnique
+- Convictions religieuses / politiques
+- Données biométriques / génétiques
+- Vie et orientation sexuelle
+- Casier judiciaire
+
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 0.6rem;">
+
+<div class="box">
+  <div class="box-title">🇨🇭 nLPD · art. 5 let. c (2023)</div>
+  <ul>
+    <li>Santé, sphère intime</li>
+    <li>Origine raciale</li>
+    <li>Opinions religieuses, philosophiques, politiques, syndicales</li>
+    <li>Poursuites pénales / administratives</li>
+    <li>Mesures d'aide sociale</li>
+    <li>Profil de personnalité</li>
+  </ul>
+</div>
+
+<div class="box">
+  <div class="box-title">🇪🇺 RGPD · art. 9 (2018)</div>
+  <ul>
+    <li>Origine raciale / ethnique</li>
+    <li>Opinions politiques, convictions religieuses</li>
+    <li>Données génétiques, biométriques</li>
+    <li>Santé, orientation sexuelle</li>
+    <li>Traitement <strong>interdit par défaut</strong></li>
+  </ul>
+</div>
+
+
+</div>
+
+</div>
+
+<div class="footer">Source · <a href="https://www.fedlex.admin.ch/eli/cc/2022/491/fr">nLPD art. 5 · fedlex.admin.ch</a> · <a href="https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=CELEX:32016R0679">RGPD art. 9 · eur-lex.europa.eu</a> · <a href="https://www.congress.gov/bill/115th-congress/senate-bill/2383">Cloud Act (2018)</a></div>
 
 ---
 layout: default
@@ -482,21 +661,20 @@ layout: default
 
 **Privacy by design** : intégrer la protection des données **dès la conception**, pas en réaction à un incident.
 
-
+### Principes
 - Collecter **seulement ce qui est nécessaire** (minimisation des données)
 - Définir une **durée de rétention** et supprimer après expiration
 - **Chiffrer** les données sensibles au repos et en transit
-- Limiter l'accès au **strict nécessaire** (principe du moindre privilège, déjà vu au cours 06)
+- Limiter l'accès au **strict nécessaire** (principe du moindre privilège, <a href="https://comem-infradon.onrender.com/06-securite-roles-sauvegarde/" class="module-link">cours 06</a>)
 - **Documenter** quelles données sont traitées, pour quoi et par qui
-
 
 </div>
 
 <div>
 
-<div style="background: #f5f5f5; border: 1px solid #e0e0e0; border-radius: 4px; padding: 0.55rem 0.85rem; font-size: 0.84rem; margin-bottom: 0.8rem;">
-  <div style="font-weight: 600; margin-bottom: 0.2rem;">Ce que ça implique pour l'infrastructure</div>
-  <ul style="padding-left: 1rem; margin: 0.3rem 0 0 0;">
+<div class="box" style="margin-bottom: 0.8rem;">
+  <div class="box-title">Ce que ça implique pour l'infrastructure</div>
+  <ul>
     <li>Logs d'audit (qui a accédé à quoi, quand)</li>
     <li>Politique de rétention automatisée (purge après N ans)</li>
     <li>Pseudonymisation ou anonymisation des données de test</li>
@@ -504,15 +682,15 @@ layout: default
   </ul>
 </div>
 
-<div style="background: #fffbe6; border: 1px solid #f0d060; border-radius: 4px; padding: 0.55rem 0.85rem; font-size: 0.84rem;">
-  <carbon-warning-alt style="color: #c8a000;" /> La conformité n'est pas une case à cocher. C'est un processus continu intégré dans l'architecture.
+<div class="box" style="background: #fffbe6; border-color: #f0d060;">
+  <div style="font-size: 0.65rem; color: #555; line-height: 1.5;"><carbon-warning-alt style="color: #c8a000;" /> La conformité n'est pas une case à cocher. C'est un processus continu intégré dans l'architecture.</div>
 </div>
 
 </div>
 
 </div>
 
-<div class="footer">Source · <a href="https://www.edoeb.admin.ch/edoeb/fr/home/datenschutz/grundlagen/datenschutz-durch-technik.html">PFPDT — Privacy by Design</a></div>
+<div class="footer">Source · <a href="https://www.edoeb.admin.ch/edoeb/fr/home/datenschutz/grundlagen/datenschutz-durch-technik.html">PFPDT · Privacy by Design</a></div>
 
 ---
 layout: default
@@ -520,34 +698,55 @@ layout: default
 
 # Gouvernance des données
 
-<div class="mt-4" style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; font-size: 0.84rem;">
+<div class="mt-2 list-compact">
 
-<div style="background: #f5f5f5; border: 1px solid #e0e0e0; border-radius: 4px; padding: 0.55rem 0.85rem;">
-  <div style="display: flex; align-items: center; gap: 0.35rem; font-weight: 600; margin-bottom: 0.1rem;"><carbon-catalog style="color: #666;" /> Catalogue de données</div>
-  Documenter quelles données existent, où elles sont, qui en est responsable, quelle qualité est garantie
-</div>
-
-<div style="background: #f5f5f5; border: 1px solid #e0e0e0; border-radius: 4px; padding: 0.55rem 0.85rem;">
-  <div style="display: flex; align-items: center; gap: 0.35rem; font-weight: 600; margin-bottom: 0.1rem;"><carbon-task style="color: #666;" /> Registre des traitements</div>
-  Obligatoire sous nLPD pour les organisations traitant des données sensibles à grande échelle
-</div>
-
-<div style="background: #f5f5f5; border: 1px solid #e0e0e0; border-radius: 4px; padding: 0.55rem 0.85rem;">
-  <div style="display: flex; align-items: center; gap: 0.35rem; font-weight: 600; margin-bottom: 0.1rem;"><carbon-user-access style="color: #666;" /> Contrôle d'accès granulaire</div>
-  Qui peut voir quoi, avec quel rôle : le travail fait en cours 06 est exactement ça
-</div>
-
-<div style="background: #f5f5f5; border: 1px solid #e0e0e0; border-radius: 4px; padding: 0.55rem 0.85rem;">
-  <div style="display: flex; align-items: center; gap: 0.35rem; font-weight: 600; margin-bottom: 0.1rem;"><carbon-recycle style="color: #666;" /> Cycle de vie des données</div>
-  Définir quand et comment les données sont archivées, anonymisées ou supprimées
-</div>
+### <a href="https://comem-infradon.onrender.com/07-structures-architectures/" class="module-link">Cours 07</a> : rappels
+- **Catalogue de métadonnées** (Lakehouse) : schéma · propriétaire · lineage
+- **Medallion** : Bronze → Silver → Gold → cycle de vie contrôlé
+- **Gouvernance fédérée** (Data Mesh) : conformité RGPD / nLPD automatisée par la plateforme
 
 </div>
 
-<div class="accent-box mt-4">
+<div class="mt-3 grid grid-cols-2 gap-3">
 
-La gouvernance n'est pas réservée aux grandes entreprises. Même un projet de service communal traitant des noms et des positions GPS a des obligations.
+<div class="box">
+  <div class="box-title"><carbon-catalog /> Catalogue de données</div>
+  <ul>
+    <li>Quelles données · où · qui est responsable · quelle qualité</li>
+    <li>Schéma · propriétaire · lineage (Lakehouse)</li>
+    <li>"Données comme produit" (Data Mesh)</li>
+  </ul>
+</div>
 
+<div class="box">
+  <div class="box-title"><carbon-task /> Registre des traitements</div>
+  <ul>
+    <li>Obligatoire nLPD pour traitements de données sensibles à grande échelle</li>
+    <li>Chaque domaine responsable à la source (gouvernance fédérée)</li>
+  </ul>
+</div>
+
+<div class="box">
+  <div class="box-title"><carbon-user-access /> Contrôle d'accès granulaire</div>
+  <ul>
+    <li>GRANT/REVOKE · principe du moindre privilège (<a href="https://comem-infradon.onrender.com/06-securite-roles-sauvegarde/" class="module-link">cours 06</a>)</li>
+    <li>Automatisé par la plateforme en Data Mesh (<a href="https://comem-infradon.onrender.com/07-structures-architectures/" class="module-link">cours 07</a>)</li>
+  </ul>
+</div>
+
+<div class="box">
+  <div class="box-title"><carbon-recycle /> Cycle de vie des données</div>
+  <ul>
+    <li>Medallion : Bronze → Silver → Gold → archivage</li>
+    <li>Durées de rétention · anonymisation · suppression (nLPD)</li>
+  </ul>
+</div>
+
+</div>
+
+<div class="box mt-3" style="background: #fef2f2; border-color: var(--heig-red);">
+  <div class="box-title"><carbon-information /> Dans votre projet</div>
+  <div style="font-size: 0.65rem; color: #555; line-height: 1.5;">La gouvernance n'est pas réservée aux grandes entreprises. Même un projet de service communal traitant des noms et des positions GPS a des obligations.</div>
 </div>
 
 ---
@@ -596,7 +795,6 @@ layout: default
 
 <div class="mt-4" style="font-size: 0.85rem;">
 
-
 1. **Introduction et fondamentaux** : CRUD, ACID, modélisation relationnelle, OLTP vs OLAP
 2. **Import et nettoyage** : staging, TRIM, COALESCE, regexp_replace, dédoublonnage
 3. **Transactions et concurrence** : niveaux d'isolation, verrous, deadlocks
@@ -604,15 +802,13 @@ layout: default
 5. **Sécurité, rôles et sauvegarde** : GRANT/REVOKE, principe du moindre privilège, pg_dump
 6. **Structures et flux de données** : NoSQL, JSONB, ETL/ELT, triggers, CDC, dbt
 7. **Architectures modernes** : Data mesh, Medallion, Lakehouse, RAG
-8. **Éthique et durabilité** : impact environnemental, biais, Data Feminism, RGPD/nLPD
-
+8. **Éthique et durabilité** : impact environnemental, biais algorithmiques, Data Feminism, RGPD/nLPD
 
 </div>
 
-<div class="accent-box mt-4">
-
-Une infrastructure de données n'est pas qu'un problème technique. C'est un système sociotechnique avec des conséquences réelles sur des personnes réelles.
-
+<div class="box mt-4" style="background: #fef2f2; border-color: var(--heig-red);">
+  <div class="box-title"><carbon-information /> À retenir</div>
+  <div style="font-size: 0.65rem; color: #555; line-height: 1.5;">Une infrastructure de données n'est pas qu'un problème technique. C'est un système sociotechnique avec des conséquences réelles sur des personnes réelles.</div>
 </div>
 
 ---
@@ -627,16 +823,16 @@ layout: default
 
 ### Livres
 
-- **Data Feminism** — D'Ignazio & Klein (2020)
-  <br><small>MIT Press — <a href="https://data-feminism.mitpress.mit.edu/">accès libre en ligne</a></small>
+- **Data Feminism** · D'Ignazio & Klein (2020)
+  <br><small>MIT Press · <a href="https://data-feminism.mitpress.mit.edu/">accès libre en ligne</a></small>
 
-- **Atlas of AI** — Crawford (2021)
+- **Atlas of AI** · Crawford (2021)
   <br><small>Yale University Press</small>
 
-- **Data Mesh** — Dehghani (2022)
+- **Data Mesh** · Dehghani (2022)
   <br><small>O'Reilly Media</small>
 
-- **Designing Data-Intensive Applications** — Kleppmann (2017)
+- **Designing Data-Intensive Applications** · Kleppmann (2017)
   <br><small>O'Reilly Media</small>
 
 </div>
@@ -645,14 +841,14 @@ layout: default
 
 ### En ligne
 
-- [Data Mesh Principles](https://martinfowler.com/articles/data-mesh-principles.html) — martinfowler.com
-- [Medallion Architecture](https://www.databricks.com/glossary/medallion-architecture) — Databricks
-- [Gender Shades](http://gendershades.org/) — Buolamwini & Gebru
-- [Machine Bias](https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing) — ProPublica
-- [Enjeux et perspectives pour une IA éthique et durable](https://stm.cairn.info/revue-enjeux-numeriques-2025-1-page-8?lang=fr) — Annales des Mines n°29 (2025)
-- [Explained: Generative AI's environmental impact](https://news.mit.edu/2025/explained-generative-ai-environmental-impact-0117) — MIT News (2025)
-- [MIT GenAI Impact Paper](https://mit-genai.pubpub.org/pub/8ulgrckc/release/2) — MIT (2025)
-- [PFPDT — Protection des données](https://www.edoeb.admin.ch/) — edoeb.admin.ch
+- [Data Mesh Principles](https://martinfowler.com/articles/data-mesh-principles.html) · martinfowler.com
+- [Medallion Architecture](https://www.databricks.com/glossary/medallion-architecture) · Databricks
+- [Gender Shades](http://gendershades.org/) · Buolamwini & Gebru
+- [Machine Bias](https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing) · ProPublica
+- [Enjeux et perspectives pour une IA éthique et durable](https://stm.cairn.info/revue-enjeux-numeriques-2025-1-page-8?lang=fr) · Annales des Mines n°29 (2025)
+- [Explained: Generative AI's environmental impact](https://news.mit.edu/2025/explained-generative-ai-environmental-impact-0117) · MIT News (2025)
+- [MIT GenAI Impact Paper](https://mit-genai.pubpub.org/pub/8ulgrckc/release/2) · MIT (2025)
+- [PFPDT · Protection des données](https://www.edoeb.admin.ch/) · edoeb.admin.ch
 
 </div>
 

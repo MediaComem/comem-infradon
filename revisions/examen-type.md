@@ -129,21 +129,12 @@ Une seule bonne réponse par question. Aucune justification requise.
 
 ---
 
-**Q8.** Après l'importation des données CSV dans une table de staging (tout en `TEXT`), on exécute :
+**Q8.** La colonne `statut` dans la table de staging contient des valeurs comme `'valide'`, `'  '` (espaces seulement) et `NULL`. Quelle expression renvoie `NULL` dans les deux derniers cas ?
 
-```sql
-SELECT mode_paiement, COUNT(*)
-FROM staging.ventes
-GROUP BY mode_paiement
-ORDER BY COUNT(*) DESC;
-```
-
-Quel est l'objectif de cette requête avant de transférer les données en production ?
-
-- [ ] A) Créer un index sur `mode_paiement`
-- [ ] B) Valider que les valeurs présentes sont cohérentes avant d'appliquer le `CASE WHEN` de normalisation
-- [ ] C) Compter le nombre total de ventes
-- [ ] D) Vérifier que la table de staging est vide
+- [ ] A) `TRIM(statut)`
+- [ ] B) `COALESCE(statut, 'inconnu')`
+- [ ] C) `NULLIF(TRIM(statut), '')`
+- [ ] D) `LOWER(statut)`
 
 ---
 

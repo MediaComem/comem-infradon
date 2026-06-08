@@ -101,6 +101,34 @@ Chaque groupe (2-3 personnes) reçoit les mêmes données mais un brief différe
 
 ---
 
+## Structure du projet
+
+```
+comem-infradon-1/
+├── cours/                        # Slides Slidev (01-08)
+│   ├── 01-introduction.md
+│   ├── 02-fondamentaux.md
+│   ├── 03-import-nettoyage.md
+│   ├── 04-transactions-concurrence.md
+│   ├── 05-optimisation-indexation.md
+│   ├── 06-securite-roles-sauvegarde.md
+│   ├── 07-structures-architectures.md
+│   ├── 08-ethique-donnees.md
+│   └── components/               # Composants Vue.js pour les slides
+├── projet/                       # Ressources du projet fil rouge
+│   ├── briefs/                   # Briefs par groupe (A, B, C, D)
+│   ├── data/                     # Fichiers Excel source (non versionnés)
+│   └── aide-nettoyage.md         # Guide SQL de nettoyage
+├── revisions/                    # Préparation à l'examen final
+│   ├── examen-type.md            # Examen type (festival)
+│   └── README.md                 # Ce qu'il faut maîtriser
+├── scripts/                      # Scripts utilitaires (build, génération de données)
+├── package.json                  # Config Slidev
+└── README.md
+```
+
+---
+
 ## Ressources
 
 ### Livres

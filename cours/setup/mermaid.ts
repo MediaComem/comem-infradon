@@ -21,4 +21,8 @@ export default defineMermaidSetup(() => ({
     attributeBackgroundColorOdd: '#ffffff',
     attributeBackgroundColorEven: '#f5f5f5',
   },
+  // Diagrammes de sequence : pas de participants repetes en bas
+  sequence: {
+    mirrorActors: false,
+  },
 }))

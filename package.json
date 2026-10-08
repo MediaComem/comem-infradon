@@ -7,6 +7,11 @@
   "scripts": {
     "dev": "node scripts/dev.mjs",
     "dev:01": "slidev cours/01-introduction.md --open",
+    "dev:02": "slidev cours/02-import-nettoyage.md --open",
+    "dev:03": "slidev cours/03-transactions-concurrence.md --open",
+    "dev:04": "slidev cours/04-securite-roles-sauvegarde.md --open",
+    "dev:05": "slidev cours/05-structures-architectures.md --open",
+    "dev:06": "slidev cours/06-ethique-donnees.md --open",
     "build": "node scripts/build-all.mjs",
     "build:force": "node scripts/build-all.mjs --force",
     "index": "node scripts/generate-index.mjs"

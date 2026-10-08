@@ -13,3 +13,18 @@ services:
       - type: rewrite
         source: /01-introduction/*
         destination: /01-introduction/index.html
+      - type: rewrite
+        source: /02-import-nettoyage/*
+        destination: /02-import-nettoyage/index.html
+      - type: rewrite
+        source: /03-transactions-concurrence/*
+        destination: /03-transactions-concurrence/index.html
+      - type: rewrite
+        source: /04-securite-roles-sauvegarde/*
+        destination: /04-securite-roles-sauvegarde/index.html
+      - type: rewrite
+        source: /05-structures-architectures/*
+        destination: /05-structures-architectures/index.html
+      - type: rewrite
+        source: /06-ethique-donnees/*
+        destination: /06-ethique-donnees/index.html

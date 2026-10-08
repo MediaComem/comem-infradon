@@ -35,14 +35,14 @@ Un fichier `docker-compose.yml` est fourni pour démarrer PostgreSQL + PostGIS.
 
 | # | Module | Contenu |
 |---|--------|---------|
-| 01 | [Introduction](https://comem-infradon.onrender.com/01-introduction/) | Présentation du cours, outils, projet fil rouge |
-| 02 | [Fondamentaux des bases de données](https://comem-infradon.onrender.com/02-fondamentaux/) | CRUD, ACID, OLAP vs OLTP, vues, vues matérialisées |
-| 03 | [Import et nettoyage des données](https://comem-infradon.onrender.com/03-import-nettoyage/) | Import Excel vers PostgreSQL, staging, CAST, TRIM, COALESCE, regexp_replace, dédoublonnage |
-| 04 | [Transactions et concurrence](https://comem-infradon.onrender.com/04-transactions-concurrence/) | Niveaux d'isolation, verrous, deadlocks |
-| 05 | [Optimisation et indexation](https://comem-infradon.onrender.com/05-optimisation-indexation/) | EXPLAIN ANALYZE, types d'index (B-tree, GIN, GiST), vues matérialisées |
-| 06 | [Sécurité, rôles et sauvegarde](https://comem-infradon.onrender.com/06-securite-roles-sauvegarde/) | GRANT/REVOKE, Row-Level Security, pg_dump/pg_restore, stratégies de backup |
-| 07 | [Structures, flux et architectures modernes](https://comem-infradon.onrender.com/07-structures-architectures/) | Relationnel vs NoSQL (document, key-value, colonnes, graph), JSONB et arrays PostgreSQL, ETL vs ELT, Data Mesh, architecture medallion, lakehouse, RAG |
-| 08 | [Éthique des données](https://comem-infradon.onrender.com/08-ethique-donnees/) | Impact environnemental, biais algorithmiques, Data Feminism, RGPD/nLPD, gouvernance |
+| 01 | [Introduction](https://comem-infradon.onrender.com/01-introduction/) | Composants d'une infrastructure, modèles de déploiement, projet fil rouge |
+| 02 | [Import et nettoyage](https://comem-infradon.onrender.com/02-import-nettoyage/) | Qualité des données, staging, COPY, CASE, TRIM, COALESCE, TO_DATE, ROW_NUMBER, idempotence et ON CONFLICT |
+| 03 | [Transactions et concurrence](https://comem-infradon.onrender.com/03-transactions-concurrence/) | ACID, anomalies de concurrence, niveaux d'isolation, MVCC, verrous, interblocages |
+| 04 | [Sécurité, rôles et sauvegarde](https://comem-infradon.onrender.com/04-securite-roles-sauvegarde/) | GRANT/REVOKE, moindre privilège, suppression physique ou logique, pg_dump/pg_restore |
+| 05 | [Structures et architectures](https://comem-infradon.onrender.com/05-structures-architectures/) | JSONB, index GIN et GiST, EXPLAIN ANALYZE, NoSQL, CAP et BASE, OLTP/OLAP, vues matérialisées, ETL/ELT, medallion, lakehouse, data mesh |
+| 06 | [Éthique des données](https://comem-infradon.onrender.com/06-ethique-donnees/) | Impact environnemental, biais algorithmiques, souveraineté, nLPD/RGPD, gouvernance |
+
+Les notions de base (CRUD, vues simples, index B-tree, plan d'exécution) sont vues au cours [Modélisation de Données](https://github.com/romanoe/comem-modeldon) du semestre 1.
 
 ---
 
@@ -92,12 +92,12 @@ Chaque groupe (2-3 personnes) reçoit les mêmes données mais un brief différe
 | Jalon | Semaines | Livrable | Cours |
 |---|---|---|---|
 | **J0** : Exploration et modélisation | 1-2 | MCD et MLD. Identifier les entités, relations et cardinalités. Documenter les problèmes de qualité observés dans les Excel | 01-02 |
-| **J1** : Import et nettoyage | 3-4 | MPD (CREATE TABLE). Import des données brutes dans des tables staging. Nettoyage SQL : TRIM, COALESCE, regexp_replace, dédoublonnage. Migration staging vers tables finales | 03-04 |
-| **J2** : Requêtes et optimisation | 5-6 | Premières requêtes métier pour le brief. EXPLAIN ANALYZE, index pertinents. Premières vues SQL | 05-06 |
-| **J3** : Sécurité et ouverture | 7-8 | Rôles et permissions (lecture seule pour citoyen-ne, écriture pour technicien-ne). Réflexion sur les structures alternatives adaptées au cas d'usage | 07 |
-| **J4** : Vues métier + poster | 9-10 | Finalisation des requêtes et vues SQL pour le brief. Réflexion sur les structures de données. Préparation du poster A3 | 07-08 |
-| **J5** : Présentation + poster | 28-29 mai | Poster A3 affiché en classe + présentation et discussion | 08 |
-| **Rendu final** | 31 mai | Scripts, jalons, adaptations selon retour des présentations | 08 |
+| **J1** : Import et nettoyage | 3-4 | MPD (CREATE TABLE). Import des données brutes dans des tables staging. Nettoyage SQL : TRIM, COALESCE, regexp_replace, dédoublonnage. Migration staging vers tables finales | 02-03 |
+| **J2** : Requêtes et optimisation | 5-6 | Premières requêtes métier pour le brief. EXPLAIN ANALYZE, index pertinents. Premières vues SQL | 03, 05 |
+| **J3** : Sécurité et ouverture | 7-8 | Rôles et permissions (lecture seule pour citoyen-ne, écriture pour technicien-ne). Réflexion sur les structures alternatives adaptées au cas d'usage | 04 |
+| **J4** : Vues métier + poster | 9-10 | Finalisation des requêtes et vues SQL pour le brief. Réflexion sur les structures de données. Préparation du poster A3 | 05-06 |
+| **J5** : Présentation + poster | 28-29 mai | Poster A3 affiché en classe + présentation et discussion | 06 |
+| **Rendu final** | 31 mai | Scripts, jalons, adaptations selon retour des présentations | 06 |
 
 ---
 
@@ -106,18 +106,16 @@ Chaque groupe (2-3 personnes) reçoit les mêmes données mais un brief différe
 ```
 comem-infradon-1/
 ├── course.config.json            # Configuration du cours : titre, decks, liens TP
-├── cours/                        # Slides Slidev, thème slidev-theme-pixel
+├── cours/                        # Slides Slidev (01-06), thème slidev-theme-pixel
 │   ├── 01-introduction.md
-│   ├── 02-fondamentaux.md        # Decks 02-08 : en cours de migration
-│   ├── 03-import-nettoyage.md
-│   ├── 04-transactions-concurrence.md
-│   ├── 05-optimisation-indexation.md
-│   ├── 06-securite-roles-sauvegarde.md
-│   ├── 07-structures-architectures.md
-│   ├── 08-ethique-donnees.md
-│   ├── components/               # Composants Vue.js propres au cours
+│   ├── 02-import-nettoyage.md
+│   ├── 03-transactions-concurrence.md
+│   ├── 04-securite-roles-sauvegarde.md
+│   ├── 05-structures-architectures.md
+│   ├── 06-ethique-donnees.md
+│   ├── components/               # Composants Vue.js propres au cours (vide)
 │   ├── setup/                    # Thème Mermaid
-│   └── public/                   # Images et page d'accueil générée
+│   └── public/                   # Images par cours (images/NN/), page d'accueil générée
 ├── projet/                       # Ressources du projet fil rouge
 │   ├── briefs/                   # Briefs par groupe (A, B, C, D)
 │   ├── data/                     # Fichiers Excel source (non versionnés)
@@ -134,7 +132,7 @@ comem-infradon-1/
 ### Commandes
 
 ```bash
-npm run dev -- 01      # serveur de dev pour le deck 01
+npm run dev -- 01      # serveur de dev pour le deck 01 (ou npm run dev:01)
 npm run build          # build incrémental des decks modifiés
 npm run build:force    # rebuild complet
 npm run index          # régénère la page d'accueil depuis course.config.json

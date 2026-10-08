@@ -106,8 +106,134 @@ Systèmes réels, avec de vraies personnes utilisatrices
 </Card>
 
 ---
+layout: section
+---
+
+# Infrastructure de données
+
+---
 layout: image-right
-image: /images/01-introduction/web-app-architecture.png
+image: /images/01/schema-infrastructure.jpg
+backgroundSize: contain
+references:
+  - "Acceldata, <em>Data Infrastructure: Building Reliable Data Ecosystems</em> (2024)"
+  - "Fortra, <em>What Is Data Infrastructure?</em> (2024)"
+---
+
+# Plomberie numérique
+
+- Outils, processus et technologies
+- Collecter, stocker, traiter, exposer les données
+- **Invisible** quand tout marche
+- **Critique** quand ça casse
+- Sans elle : des données inutilisables
+
+---
+layout: grid
+cols: 3
+align: stretch
+content: center
+references: "Fortra, <em>What Is Data Infrastructure? A Simple Overview</em> (2024)"
+---
+
+# Composants d'une infrastructure
+
+<Card title="Stockage">
+<template #icon><pixelarticons-database /></template>
+Bases de données, data lakes, entrepôts, stockage objet.
+</Card>
+<Card title="Traitement">
+<template #icon><pixelarticons-repeat /></template>
+Pipelines ETL et ELT, moteurs de calcul, orchestration.
+</Card>
+<Card title="Accès">
+<template #icon><pixelarticons-external-link /></template>
+API, interfaces SQL, outils BI, tableaux de bord.
+</Card>
+<Card title="Sécurité">
+<template #icon><pixelarticons-lock /></template>
+Chiffrement, contrôle d'accès, audit, conformité nLPD et RGPD.
+</Card>
+<Card title="Gouvernance">
+<template #icon><pixelarticons-book-open /></template>
+Catalogue de données, traçabilité, règles de qualité.
+</Card>
+<Card title="Monitoring">
+<template #icon><pixelarticons-chart /></template>
+Observabilité, alertes, mesure continue de la qualité.
+</Card>
+
+---
+layout: grid
+cols: 3
+align: stretch
+content: center
+references: "Acceldata, <em>Building Reliable Data Ecosystems</em> (2024)"
+---
+
+# Modèles de déploiement
+
+<Card title="Sur site">
+<template #icon><pixelarticons-server /></template>
+Serveurs dans vos locaux.<br>
+<strong>+</strong> Contrôle total, souveraineté<br>
+<strong>-</strong> Investissement, maintenance interne
+</Card>
+<Card title="Cloud">
+<template #icon><pixelarticons-cloud /></template>
+Serveurs loués à un fournisseur.<br>
+<strong>+</strong> Flexibilité, mise à l'échelle<br>
+<strong>-</strong> Dépendance, juridiction des données
+</Card>
+<Card title="Hybride">
+<template #icon><pixelarticons-git-merge /></template>
+Combinaison des deux.<br>
+<strong>+</strong> Équilibre contrôle et flexibilité<br>
+<strong>-</strong> Complexité, latence réseau
+</Card>
+
+Aucun modèle universel : le choix engage l'organisation sur le long terme.
+
+---
+layout: two-cols
+---
+
+::title::
+# Panne du serveur
+
+::left::
+
+### Situation
+
+> « Toutes nos données sont sur un serveur PostgreSQL, dans le bureau du responsable. Vendredi soir, une surtension a grillé le disque. »
+
+### La question
+
+Qu'est-ce qui n'allait pas ?
+
+::right::
+
+<v-click>
+
+<Card title="Problèmes" color="#e92528">
+<template #icon><pixelarticons-close /></template>
+Aucune sauvegarde : trois ans de signalements perdus. Un seul serveur, aucune redondance.
+</Card>
+
+</v-click>
+
+<v-click>
+
+<Card title="À prévoir" color="#16a34a" footer="cours 04 · Sécurité, rôles et sauvegarde">
+<template #icon><pixelarticons-check /></template>
+Sauvegarde quotidienne vers un site distant. Plan de reprise documenté. Réplication sur un second serveur.
+</Card>
+
+</v-click>
+
+---
+layout: image-right
+image: /images/01/web-app-architecture.png
 backgroundSize: contain
 caption: "Zealous Systems, <a href='https://www.zealousys.com/blog/web-application-architecture/'><em>What is Web Application Architecture</em></a>"
 ---
@@ -432,19 +558,19 @@ cols: 3
 
 <Figure
   class="w-1/2 mx-auto"
-  src="/images/01-introduction/designing_data_intensive_applications.avif"
+  src="/images/01/designing_data_intensive_applications.avif"
   caption="Kleppmann, <em>Designing Data-Intensive Applications</em> (2017)"
   alt="Couverture de Designing Data-Intensive Applications"
 />
 <Figure
   class="w-1/2 mx-auto"
-  src="/images/01-introduction/data_mesh.jpeg"
+  src="/images/01/data_mesh.jpeg"
   caption="Dehghani, <em>Data Mesh</em> (2022)"
   alt="Couverture de Data Mesh"
 />
 <Figure
   class="w-1/2 mx-auto"
-  src="/images/01-introduction/Data_Feminism.jpg"
+  src="/images/01/Data_Feminism.jpg"
   caption="D'Ignazio et Klein, <em>Data Feminism</em> (2020)"
   href="https://data-feminism.mitpress.mit.edu/"
   alt="Couverture de Data Feminism"

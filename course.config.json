@@ -13,6 +13,36 @@
       "out": "01-introduction",
       "title": "Introduction",
       "tp": "01-introduction/tp"
+    },
+    {
+      "src": "cours/02-import-nettoyage.md",
+      "out": "02-import-nettoyage",
+      "title": "Import et nettoyage",
+      "tp": "02-import-nettoyage/tp"
+    },
+    {
+      "src": "cours/03-transactions-concurrence.md",
+      "out": "03-transactions-concurrence",
+      "title": "Transactions et concurrence",
+      "tp": "03-transactions-concurrence/tp"
+    },
+    {
+      "src": "cours/04-securite-roles-sauvegarde.md",
+      "out": "04-securite-roles-sauvegarde",
+      "title": "Sécurité, rôles et sauvegarde",
+      "tp": "04-securite-roles-sauvegarde/tp"
+    },
+    {
+      "src": "cours/05-structures-architectures.md",
+      "out": "05-structures-architectures",
+      "title": "Structures et architectures",
+      "tp": "05-structures-architectures/tp"
+    },
+    {
+      "src": "cours/06-ethique-donnees.md",
+      "out": "06-ethique-donnees",
+      "title": "Éthique des données",
+      "tp": "06-ethique-donnees/tp"
     }
   ]
 }

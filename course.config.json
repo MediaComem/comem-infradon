@@ -1,0 +1,18 @@
+{
+  "name": "Infrastructure de Données",
+  "slug": "comem-infradon",
+  "subtitle": "HEIG-VD / COMEM+",
+  "year": 2027,
+  "author": "Noemi Romano",
+  "email": "noemi.romano@heig-vd.ch",
+  "github": "https://github.com/MediaComem/comem-infradon",
+  "license": "CC BY 4.0",
+  "decks": [
+    {
+      "src": "cours/01-introduction.md",
+      "out": "01-introduction",
+      "title": "Introduction",
+      "tp": "01-introduction/tp"
+    }
+  ]
+}

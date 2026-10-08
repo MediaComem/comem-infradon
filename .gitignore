@@ -11,3 +11,5 @@ components.d.ts
 projet/data/.~l*
 revisions/corrige-*.md
 revisions/examen-type-*.md
+.build-cache.json
+cours/node_modules

@@ -2,10 +2,14 @@ services:
   - type: web
     name: comem-infradon
     runtime: static
-    buildCommand: npm ci && node scripts/build-all.mjs
+    buildCommand: npm ci && node scripts/build-all.mjs --force
     staticPublishPath: ./dist
     envVars:
       - key: NODE_VERSION
         value: 20
       - key: NODE_OPTIONS
         value: --max-old-space-size=2048
+    routes:
+      - type: rewrite
+        source: /01-introduction/*
+        destination: /01-introduction/index.html

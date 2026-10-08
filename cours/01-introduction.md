@@ -1,564 +1,468 @@
 ---
-theme: default
+theme: pixel
+number: "01"
+title: "Introduction"
+subtitle: "Infrastructure de Données"
+author: "Noemi Romano"
+email: "noemi.romano@heig-vd.ch"
+github: "https://github.com/MediaComem/comem-infradon"
+breadcrumb: "Infrastructure de Données"
+logos:
+  - src: /images/logo-heig-vd.svg
+    height: 60px
+    link: https://www.heig-vd.ch/
+    alt: "HEIG-VD"
+    title: "HEIG-VD"
+    class: "logo-heig"
+  - src: /images/logo-hes-so.png
+    height: 79px
+    link: https://www.hes-so.ch/
+    alt: "HES-SO"
+    title: "HES-SO"
+    class: "logo-hesso"
+
 download: true
-title: "01 - Introduction"
-drawings:
-    persist: false
-transition: slide-left
 mdc: true
-fonts:
-  sans: Roboto
-  serif: Roboto Slab
-  mono: Roboto Mono
-layout: none
+layout: cover
 ---
 
-<div class="cover-custom">
-  <img src="/images/logo.png" class="cover-logo" />
-  <div class="cover-content">
-    <h1 class="cover-title">01 — Introduction</h1>
-    <p class="cover-subtitle">Infrastructure de données</p>
-    <div style="display: flex; align-items: center; gap: 0.75rem; margin-top: 0.5rem;">
-      <a href="https://github.com/MediaComem/comem-infradon" class="cover-email" style="display: flex; align-items: center; gap: 0.25rem;"><carbon-logo-github /> GitHub</a>
-      <a href="https://creativecommons.org/licenses/by/4.0/"><img src="https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg" style="height: 12px; opacity: 0.6;" /></a>
-    </div>
-    <div class="cover-meta">
-      <span class="cover-author">Noemi Romano</span>
-      <a href="mailto:noemi.romano@heig-vd.ch" class="cover-email">noemi.romano@heig-vd.ch</a>
-      <span class="cover-date">{{ new Date().toLocaleDateString('fr-CH') }}</span>
-    </div>
-  </div>
-</div>
-
 ---
-layout: section
+layout: grid
+cols: 3
 ---
 
-# D'où venez-vous ?
+# Ce cours dans la formation
 
----
-layout: default
----
+A travers le cycle de vie de la donnée :
 
-# Rappel : le cours de modélisation
-
-Le cours de **Modélisation de données** vous a appris à :
-
-<v-clicks>
-
-- Analyser un problème client pour **identifier les données nécessaires**
-- Conceptualiser une solution sous forme d'un **modèle conceptuel** (MCD)
-- Traduire le modèle conceptuel en **modèle logique** relationnel (MLD)
-- L'implémenter en **modèle physique** (MPD)
-- Écrire des requêtes **SQL**
-
-</v-clicks>
-
-<div v-click class="accent-box mt-6">
-
-**Question** : Une fois vos tables créées... que se passe-t-il quand 1000 utilisateurs y accèdent simultanément ?
-
-</div>
-
----
-layout: default
----
-
-# Ce cours : la suite logique
-
-<div class="grid grid-cols-2 gap-8 mt-4">
-
-<div>
-
-<v-clicks>
-
-- Comprendre les enjeux d'**infrastructure** : concurrence, performance, sécurité, durabilité
-- **Importer, nettoyer et transformer** des données brutes en base exploitable
-- **Comparer les structures** de données et choisir la plus adaptée
-- Concevoir des **pipelines de transformation** (ETL/ELT)
-- **Sécuriser, optimiser** et automatiser une infrastructure
-- Porter un **regard critique** sur les dimensions éthiques et environnementales
-
-</v-clicks>
-
-</div>
-
-<div class="flex items-center justify-center">
-
-```mermaid {scale: 0.75}
-%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#f5f5f5', 'primaryTextColor': '#000', 'primaryBorderColor': '#e0e0e0', 'lineColor': '#9e9e9e', 'fontFamily': 'Roboto Mono', 'fontSize': '12px'}, 'flowchart': {'htmlLabels': true, 'useMaxWidth': false}}}%%
-graph TB
-    A["<div style='min-width:220px;text-align:center;padding:8px'><strong>Modélisation</strong><br/>Quoi stocker</div>"] --> B["<div style='min-width:220px;text-align:center;padding:8px'><strong>Infrastructure</strong><br/>Comment le stocker,<br/>le protéger, le faire évoluer</div>"]
-    B --> C["<div style='min-width:220px;text-align:center;padding:8px'><strong>Production</strong><br/>Systèmes réels<br/>avec vrais utilisateurs</div>"]
-
-    style A fill:#f5f5f5,stroke:#e0e0e0,color:#000
-    style B fill:#DA291C,stroke:#DA291C,color:#fff
-    style C fill:#f5f5f5,stroke:#e0e0e0,color:#000
-
-    linkStyle default stroke:#9e9e9e,stroke-width:2px
-```
-
-</div>
-
-</div>
-
----
-layout: default
----
-
-# Zoom arrière : la base de données est un composant
-
-<div class="grid grid-cols-2 gap-8 mt-4">
-
-<div>
-
-<v-clicks>
-
-- La base de données est **essentielle** mais **pas suffisante**
-- Elle coexiste avec des caches, des files d'attente, du stockage objet, des moteurs de recherche
-- Chaque composant a ses forces : le bon outil pour le bon usage
-- Ce cours se concentre sur la **couche données** — mais en gardant la vue d'ensemble
-
-</v-clicks>
-
-</div>
-
-<div>
-
-<img src="/images/01-introduction/web-app-architecture.png" class="h-64" />
-<figcaption><a href="https://www.zealousys.com/blog/web-application-architecture/">Zealous Systems - What is Web Application Architecture: The Complete Guide</a></figcaption>
-
-</div>
-
-</div>
+<Card title="Modélisation" color="#6b7280" footer="ModelDon · semestre 1">
+<template #icon><pixelarticons-tree /></template>
+Structurer et formaliser les données d'un domaine métier
+</Card>
+<Card title="Infrastructure" color="#e92528" footer="InfraDon · semestre 2">
+<template #icon><pixelarticons-server /></template>
+Stocker, gérer et exposer des données fiables et accessibles à grande échelle. <strong>Ce cours</strong>
+</Card>
+<Card title="Visualisation" color="#6b7280" footer="VisualDon · semestre 5">
+<template #icon><pixelarticons-chart-bar /></template>
+Représenter les données pour en tirer du sens, raconter une histoire et appuyer les décisions
+</Card>
 
 ---
 layout: section
 ---
 
-# Les 10 modules du semestre
+# Point de départ
+
+---
+layout: two-cols
+---
+
+::title::
+# Acquis de ModelDon
+
+::left::
+
+- Besoin métier, puis données à stocker
+- Modèle conceptuel, logique, physique
+- `CREATE TABLE` et contraintes
+- Requêtes, jointures, agrégations, vues
+- Index et données JSON
+
+::right::
+
+<v-click>
+
+<Card title="La question" color="#e92528">
+<template #icon><pixelarticons-users /></template>
+Les tables existent. Que se passe-t-il quand <strong>mille personnes</strong> y accèdent en même temps ?
+</Card>
+
+</v-click>
+
+---
+layout: grid
+cols: 3fr 1fr 3fr 1fr 3fr
+align: stretch
+content: center
+clicks: 2
+---
+
+# Modélisation, infrastructure, production
+
+<Card title="Modélisation" :at="0" footer="ModelDon">
+<template #icon><pixelarticons-tree /></template>
+Quoi stocker
+</Card>
+<pixelarticons-arrow-right v-click="1" class="text-3xl self-center" />
+<Card title="Infrastructure" :at="1" footer="Ce cours">
+<template #icon><pixelarticons-server /></template>
+Comment le stocker, le protéger, le faire évoluer
+</Card>
+<pixelarticons-arrow-right v-click="2" class="text-3xl self-center" />
+<Card title="Production" :at="2">
+<template #icon><pixelarticons-users /></template>
+Systèmes réels, avec de vraies personnes utilisatrices
+</Card>
+
+---
+layout: image-right
+image: /images/01-introduction/web-app-architecture.png
+backgroundSize: contain
+caption: "Zealous Systems, <a href='https://www.zealousys.com/blog/web-application-architecture/'><em>What is Web Application Architecture</em></a>"
+---
+
+# Base de données comme composant
+
+- Essentielle, mais pas suffisante
+- À côté : caches, files d'attente, stockage objet
+- Un outil par usage
+- Ce cours : la **couche données**
+
+---
+layout: section
+---
+
+# Programme
+
+---
+
+# Compétences par cours
+
+| # | Cours | Compétences |
+|---|---|---|
+| 01 | Introduction | Situer la base de données dans une infrastructure |
+| 02 | Import et nettoyage | Importer des données brutes, les nettoyer en SQL |
+| 03 | Transactions et concurrence | Garantir la cohérence face aux accès simultanés |
+| 04 | Sécurité, rôles et sauvegarde | Protéger l'accès, sauvegarder et restaurer |
+| 05 | Structures et architectures | Choisir une structure, concevoir un flux de données |
+| 06 | Éthique des données | Évaluer les impacts environnementaux et sociaux |
 
 ---
 layout: default
 ---
 
-# Les 10 modules en un coup d'oeil
-
-| Module | Mots-clés |
-|---|---|
-| 02 · Fondamentaux | CRUD, ACID, OLTP/OLAP, vues |
-| 03 · Import et nettoyage | Staging, qualité, nettoyage SQL |
-| 04 · Transactions | Isolation, verrous, deadlocks |
-| 05 · Optimisation | Plans d'exécution, index |
-| 06 · Sécurité et sauvegarde | Rôles, permissions, backup |
-| 07 · Structures de données | NoSQL, graph, stockage médias |
-| 08 · Flux de données | ETL/ELT, CDC, dbt |
-| 09 · Architectures modernes | Data mesh, medallion, RAG |
-| 10 · Éthique et durabilité | Environnement, souveraineté |
-
----
-layout: default
----
-
-# Penser l'infrastructure : technique, valeurs et impacts
-
-Tout au long du semestre, nous questionnerons nos décisions techniques :
+# Choix techniques et valeurs
 
 | Décision | Question |
 |---|---|
-| **Cloud vs on-premise** | Juridiction ? Souveraineté des données ? |
-| **Propriétaire vs open source** | Vendor lock-in ? |
-| **Dimensionnement** | Coût énergétique vs coût humain |
-| **Rétention** | Que garde-t-on, combien de temps ? |
-| **Redondance et backups** | Coût acceptable d'une perte ? |
-| **Choix de structure** | Relationnel, NoSQL, graph — quel usage ? |
+| **Cloud ou sur site** | Juridiction ? Souveraineté des données ? |
+| **Propriétaire ou open source** | Dépendance à un fournisseur ? |
+| **Dimensionnement** | Coût énergétique ou coût humain ? |
+| **Rétention** | Que garder, et combien de temps ? |
+| **Redondance et sauvegarde** | Quel coût pour une perte ? |
+| **Structure** | Relationnel, NoSQL, graphe : pour quel usage ? |
 
-<div v-click class="accent-box mt-4">
+<v-click>
 
-Il n'y a pas de choix neutre. Une infrastructure bien conçue est une infrastructure dont les compromis sont **documentés et assumés**.
+<Card title="Aucun choix neutre" color="#e92528">
+<template #icon><pixelarticons-scale /></template>
+Une infrastructure bien conçue documente et assume ses compromis.
+</Card>
 
-</div>
+</v-click>
 
-<div class="footer"><a href="https://www.edoeb.admin.ch/fr/protection-des-donnees">nLPD</a> · <a href="https://stm.cairn.info/revue-enjeux-numeriques-2025-1-page-8?lang=fr">Enjeux et perspectives pour une IA éthique et durable, <em>Annales des Mines</em> n°29, 2025</a></div>
+<div class="ref"><a href="https://www.edoeb.admin.ch/fr/protection-des-donnees">nLPD</a> · <a href="https://stm.cairn.info/revue-enjeux-numeriques-2025-1-page-8?lang=fr">Enjeux et perspectives pour une IA éthique et durable, <em>Annales des Mines</em> n°29 (2025)</a></div>
 
 ---
 layout: section
 ---
 
-# Organisation du cours
+# Organisation
 
 ---
-layout: default
+layout: grid
+cols: 3
+align: stretch
+content: center
 ---
 
-# Supports
+# Outils
 
-<div class="grid grid-cols-2 gap-8 mt-4">
-
-<div>
-
-### Cours (slides)
-
-[comem-infradon.onrender.com](https://comem-infradon.onrender.com/)
-
-</div>
-
-<div>
-
-### <carbon-logo-github /> GitHub
-
-[github.com/MediaComem/comem-infradon](https://github.com/MediaComem/comem-infradon)
-
-- Description du cours et objectifs
-- Données et briefs du projet
-- Jalons et évaluation
-
-</div>
-
-</div>
+<Card title="PostgreSQL + PostGIS">
+<template #icon><logos-postgresql /></template>
+Le SGBD du cours, extension spatiale comprise.
+</Card>
+<Card title="Docker">
+<template #icon><logos-docker-icon /></template>
+Un <code>docker-compose.yml</code> fourni démarre la base.
+</Card>
+<Card title="Git et GitHub">
+<template #icon><logos-github-icon /></template>
+Un dépôt par groupe pour le projet.
+</Card>
 
 ---
-layout: default
+layout: grid
+cols: 2
+align: stretch
+content: center
+---
+
+# Liens utiles
+
+<Card title="Slides du cours">
+<template #icon><pixelarticons-external-link /></template>
+<a href="https://comem-infradon.onrender.com">comem-infradon.onrender.com</a><br>
+Tous les cours du semestre, mis à jour au fil des séances.
+</Card>
+<Card title="Dépôt du cours">
+<template #icon><logos-github-icon /></template>
+<a href="https://github.com/MediaComem/comem-infradon">github.com/MediaComem/comem-infradon</a><br>
+Objectifs, briefs et données du projet, jalons.
+</Card>
+
+---
+layout: section
 ---
 
 # Évaluation
 
-<img src="/images/evaluation.svg" class="w-full mx-auto mt-4" />
+---
+layout: two-cols
+---
 
-<div class="grid grid-cols-2 gap-8 mt-6">
+::title::
+# Répartition
 
-<div v-click>
+::left::
 
-### Projet (50%)
+<Card title="Projet · 50%">
+<template #icon><pixelarticons-users /></template>
+Groupes de 2-3 · Poster A3 affiché en classe · Présentation et questions · Rendu final des scripts
+</Card>
 
-- Par groupes de 2-3
-- **Poster A3** synthétisant les étapes du projet (affiché en classe)
-- Présentation du poster + questions — **28-29 mai**
-- Rendu final : scripts, jalons, adaptations — **31 mai**
+::right::
 
-</div>
-
-<div v-click>
-
-### Examen final (50%)
-
-- Individuel, en semaine d'examen
-- Sur ordinateur · 3h
-- Mise en situation : un schéma, un cas, un problème — proposer et justifier une solution
-
-</div>
-
-</div>
+<Card title="Examen final · 50%" color="#16a34a">
+<template #icon><pixelarticons-edit-box /></template>
+Semaine d'examen · Individuel · Sur ordinateur · 3h
+</Card>
 
 ---
 layout: default
 ---
 
-# Outils et prérequis
+# Examen final
 
-<div class="grid grid-cols-2 gap-8 mt-4">
+Une mise en situation, comme sur le terrain.
 
-<div>
-
-### Ce que vous connaissez déjà
-
-<v-clicks>
-
-- <carbon-data-base /> **PostgreSQL** + **PostGIS** — Notre SGBD principal
-- <carbon-logo-github /> **Git / GitHub** — Versioning du projet
-- <carbon-container-software /> **Docker** — Conteneurisation
-
-</v-clicks>
-
-</div>
-
-<div v-click>
-
-### Ce que nous ajouterons
-
-- <carbon-chart-treemap /> **Index** (B-tree, GIN, GiST) — Optimisation
-- <carbon-search /> **EXPLAIN ANALYZE** — Analyse de requêtes
-- <carbon-locked /> **Rôles et permissions** — Sécurité
-- <carbon-save /> **pg_dump / pg_restore** — Sauvegarde
-- <carbon-flow /> **dbt** — Pipelines de transformation
-
-</div>
-
-</div>
+| Élément | Détail |
+|---|---|
+| Point de départ | Un schéma, un cas, un problème |
+| Attendu | Proposer et justifier une solution |
+| Format | Individuel, sur ordinateur, 3h |
+| Poids | 50% de la note finale |
 
 ---
 layout: section
 ---
 
-# Le projet fil rouge
+# Projet fil rouge
 
-Service technique communal d'Yverdon-les-Bains
+---
+layout: two-cols
+---
+
+::title::
+# Service technique d'Yverdon-les-Bains
+
+::left::
+
+- Mobilier urbain suivi dans Excel depuis 2018
+- Bancs, lampadaires, fontaines, poubelles, bornes
+- Signalements de la population
+- Interventions de maintenance
+- Liste de fournisseurs
+
+::right::
+
+<Card title="Mission" color="#e92528">
+<template #icon><pixelarticons-flag /></template>
+Quatre fichiers Excel, tels quels. En faire une <strong>infrastructure de données</strong> fonctionnelle, optimisée et utile.
+</Card>
+<Card color="#6b7280" tag="note" title="Données fictives">
+<template #icon><pixelarticons-note /></template>
+Noms, numéros et coordonnées générés pour le cours.
+</Card>
+
+---
+layout: grid
+cols: 2
+align: stretch
+---
+
+# Données du Service technique
+
+<Card title="inventaire_mobilier.xlsx">
+<template #icon><pixelarticons-map-pin /></template>
+~120 objets avec leur position GPS dans la commune.
+</Card>
+<Card title="signalements.xlsx">
+<template #icon><pixelarticons-warning-box /></template>
+~200 signalements : dates, texte libre, urgence, statut.
+</Card>
+<Card title="interventions.xlsx">
+<template #icon><pixelarticons-tool-case /></template>
+~150 interventions : technicien·ne·s, durée, coûts.
+</Card>
+<Card title="fournisseurs_contacts.xlsx">
+<template #icon><pixelarticons-truck /></template>
+~15 fournisseurs régionaux : contacts, spécialités.
+</Card>
+
+Données volontairement **imparfaites**, comme de vrais fichiers Excel faits à la main.
+
+---
+layout: grid
+cols: 2
+align: stretch
+---
+
+# Briefs
+
+Mêmes données pour tous les groupes, un brief différent par groupe.
+
+<Card title="A · Rapport budgétaire">
+<template #icon><pixelarticons-money /></template>
+Coût par type de mobilier, top 5 des objets coûteux, saisonnalité.
+</Card>
+<Card title="B · Délais de traitement">
+<template #icon><pixelarticons-clock /></template>
+Délai moyen par quartier, signalements ouverts depuis plus de 30 jours.
+</Card>
+<Card title="C · Remplacement des lampadaires">
+<template #icon><pixelarticons-lightbulb /></template>
+Score de priorité, sélection dans un budget de CHF 50'000.-.
+</Card>
+<Card title="D · Renouvellement des bancs">
+<template #icon><pixelarticons-building-community /></template>
+État du parc, bancs à remplacer sous 2 ans, estimation budgétaire.
+</Card>
 
 ---
 layout: default
+class: compact
 ---
 
-# Le contexte
+# Jalons du projet
 
-La personne en charge du Service technique de la Commune d'Yverdon-les-Bains gère depuis 2018 le **mobilier urbain** dans des fichiers Excel : bancs, lampadaires, fontaines, poubelles, bornes de recharge.
+Formatifs : le retour en classe ne compte pas dans la note.
 
-<v-clicks>
-
-- Elle note les **signalements** de la population (un banc cassé, un lampadaire éteint)
-- Elle enregistre les **interventions** de maintenance
-- Elle tient une liste de **fournisseurs** pour commander du matériel
-
-</v-clicks>
-
-<div v-click class="accent-box mt-4">
-
-Vous recevez les **4 fichiers Excel** tels quels. Votre mission : en faire une **infrastructure de données** fonctionnelle, optimisée, et utile.
-
-Les données sont **fictives** — les noms, numéros et coordonnées ont été générés pour les besoins du cours.
-
-</div>
-
----
-layout: default
----
-
-# Les données du Service technique
-
-<div class="grid grid-cols-2 gap-4 mt-4 text-sm">
-
-<div class="p-3 border rounded">
-
-### inventaire_mobilier.xlsx
-
-~120 objets : bancs, lampadaires, fontaines, poubelles, bornes EV
-
-Positions GPS dans la commune d'Yverdon
-
-</div>
-
-<div class="p-3 border rounded">
-
-### signalements.xlsx
-
-~200 signalements de la population et de patrouilles
-
-Dates, descriptions en texte libre, urgence, statut
-
-</div>
-
-<div class="p-3 border rounded">
-
-### interventions.xlsx
-
-~150 interventions de maintenance
-
-Dates, technicien-ne-s, durée, coûts, type d'intervention
-
-</div>
-
-<div class="p-3 border rounded">
-
-### fournisseurs_contacts.xlsx
-
-~15 fournisseurs régionaux
-
-Contacts, spécialités
-
-</div>
-
-</div>
-
-<div v-click class="accent-box mt-4">
-
-Les données sont volontairement **imparfaites** : comme de vrais Excel faits à la main.
-
-</div>
-
----
-layout: default
----
-
-# Un brief par groupe
-
-Chaque groupe reçoit les **mêmes données** mais un **brief différent** :
-
-<div class="grid grid-cols-2 gap-4 mt-4 text-sm">
-
-<div v-click class="p-3 border rounded">
-
-### A — Rapport au Conseil communal
-
-Coût d'entretien par type de mobilier, top 5 des objets les plus coûteux, saisonnalité des interventions.
-
-</div>
-
-<div v-click class="p-3 border rounded">
-
-### B — Plainte du quartier de la Gare
-
-Délai moyen signalement → intervention par quartier, signalements ouverts > 30 jours, taux de résolution.
-
-</div>
-
-<div v-click class="p-3 border rounded">
-
-### C — Remplacement des lampadaires
-
-Fiche par lampadaire, score de priorité (pannes × âge × coût), sélection dans un budget de CHF 50'000.-.
-
-</div>
-
-<div v-click class="p-3 border rounded">
-
-### D — Renouvellement des bancs
-
-État du parc bois vs métal, bancs à remplacer sous 2 ans, estimation budgétaire et recommandation matériau.
-
-</div>
-
-</div>
-
----
-layout: default
----
-
-# Jalons du projet (formatifs, non notés)
-
-Chaque jalon vous fait progresser — le feedback en classe ne compte pas dans la note.
-
-| Jalon | Sem. | Livrable |
+| Jalon | Semaines | Livrable |
 |---|---|---|
-| **J0** Modélisation | 1-2 | MCD, MLD, qualité |
-| **J1** Import | 3-4 | MPD, staging, nettoyage |
-| **J2** Requêtes | 5-6 | Requêtes métier, index |
-| **J3** Sécurité | 7-8 | Rôles, permissions |
-| **J4** dbt + poster | 9-10 | Staging → marts, poster A3 |
-| **J5** Présentation + poster | 28-29 mai | Poster A3 affiché + présentation |
-| **Rendu final** | 31 mai | Scripts, jalons, adaptations |
+| **J0** Exploration et modélisation | 1-2 | MCD, MLD, problèmes de qualité |
+| **J1** Import et nettoyage | 3-4 | MPD, staging, nettoyage SQL |
+| **J2** Requêtes et optimisation | 5-6 | Requêtes métier, index, premières vues |
+| **J3** Sécurité et ouverture | 7-8 | Rôles et permissions, structures alternatives |
+| **J4** Vues métier et poster | 9-10 | Vues finales, poster A3 |
+| **J5** Présentation | Fin du semestre | Poster affiché, présentation |
+| **Rendu final** | Fin du semestre | Scripts, jalons, adaptations |
 
 ---
 layout: section
 ---
 
-# Activité : premiers pas
+# Travaux pratiques
 
 ---
-layout: default
+layout: two-cols
+routeAlias: tp
 ---
 
-# Activité en classe (30 min)
+::title::
+# Travail pratique · Semaine 1
 
-<div class="grid grid-cols-2 gap-8 mt-4">
+::left::
 
-<div>
+### Étapes
 
-### Étape 1 — Formation des groupes
+1. Former les groupes de 2-3
+2. Tirer au sort un brief : A, B, C ou D
+3. Ouvrir et explorer les quatre fichiers Excel
 
-<v-clicks>
+<Card color="#6b7280" tag="note" title="Pas de bonne réponse">
+<template #icon><pixelarticons-zoom-in /></template>
+Observer les données telles qu'elles sont, avant de les transformer.
+</Card>
 
-1. **Former les groupes** (2-3 personnes)
-2. **Tirer au sort** votre brief (A, B, C ou D)
-3. **Ouvrir les 4 fichiers Excel** et les explorer
+::right::
 
-</v-clicks>
+### Observations
 
-</div>
-
-<div v-click>
-
-### Étape 2 — Premières observations
-
-En groupe, notez :
-
-- Quels **problèmes de qualité** voyez-vous dans les données ?
-- Quelles **colonnes** vous semblent utiles pour votre brief ?
-- Quelles **relations** existent entre les fichiers ?
-- Qu'est-ce qui **manque** pour répondre à votre brief ?
-
-</div>
-
-</div>
-
-<div v-click class="accent-box mt-4">
-
-Il n'y a pas de bonne réponse aujourd'hui. L'objectif est d'observer les données telles qu'elles sont, avant de les transformer.
-
-</div>
+- Problèmes de qualité
+- Colonnes utiles au brief
+- Relations entre les fichiers
+- Données manquantes pour le brief
 
 ---
-layout: default
+layout: two-cols
 ---
 
-# Pour la semaine prochaine
+::title::
+# Pour la prochaine séance
 
-<div class="grid grid-cols-2 gap-8">
-
-<div>
+::left::
 
 ### À faire
 
-- **Créer un repo GitHub** de groupe
-- **Lancer le `docker-compose`** fourni (PostgreSQL + PostGIS)
-- **Explorer les 4 fichiers Excel** et noter les problèmes de qualité
-- **Commencer le MCD** : quelles entités ? quelles relations ?
+- Créer un dépôt GitHub de groupe
+- Lancer le `docker-compose` fourni
+- Noter les problèmes de qualité
+- Esquisser le MCD : entités et relations
 
-</div>
+::right::
 
-<div>
+### Lectures
 
-### À lire (optionnel mais recommandé)
+- [Data Feminism, introduction](https://data-feminism.mitpress.mit.edu/pub/frfa9szd)
+- [PostgreSQL, isolation des transactions](https://www.postgresql.org/docs/current/transaction-iso.html)
 
-- [Data Feminism, Introduction](https://data-feminism.mitpress.mit.edu/pub/frfa9szd)
-- [PostgreSQL ACID](https://www.postgresql.org/docs/current/transaction-iso.html)
+<Card title="Prochain cours" color="#e92528" footer="cours 02 · Import et nettoyage">
+<template #icon><pixelarticons-arrow-right /></template>
+Staging, qualité des données, nettoyage SQL.
+</Card>
 
-</div>
+---
+layout: grid
+cols: 3
+---
 
-</div>
+# Ressources
 
-<div v-click class="accent-box mt-8">
-
-**Prochain cours** : Module 02 — [Fondamentaux des bases de données](https://comem-infradon.onrender.com/02-fondamentaux/)
-
-_CRUD, ACID, OLTP vs OLAP, vues et vues matérialisées_
-
-</div>
+<Figure
+  class="w-1/2 mx-auto"
+  src="/images/01-introduction/designing_data_intensive_applications.avif"
+  caption="Kleppmann, <em>Designing Data-Intensive Applications</em> (2017)"
+  alt="Couverture de Designing Data-Intensive Applications"
+/>
+<Figure
+  class="w-1/2 mx-auto"
+  src="/images/01-introduction/data_mesh.jpeg"
+  caption="Dehghani, <em>Data Mesh</em> (2022)"
+  alt="Couverture de Data Mesh"
+/>
+<Figure
+  class="w-1/2 mx-auto"
+  src="/images/01-introduction/Data_Feminism.jpg"
+  caption="D'Ignazio et Klein, <em>Data Feminism</em> (2020)"
+  href="https://data-feminism.mitpress.mit.edu/"
+  alt="Couverture de Data Feminism"
+/>
 
 ---
 layout: default
 ---
 
-# Ressources du cours
-
-### Livres
-
-<div class="mosaic mosaic-3 mosaic-books mt-4" style="height: 200px;">
-  <figure>
-    <img src="/images/01-introduction/designing_data_intensive_applications.avif" />
-    <figcaption>Kleppmann · Designing Data-Intensive Applications (2017)</figcaption>
-  </figure>
-  <figure>
-    <img src="/images/01-introduction/data_mesh.jpeg" />
-    <figcaption>Dehghani · Data Mesh (2022)</figcaption>
-  </figure>
-  <figure>
-    <img src="/images/01-introduction/Data_Feminism.jpg" />
-    <figcaption>D'Ignazio & Klein · Data Feminism (2020)</figcaption>
-  </figure>
-</div>
-
-### En ligne
-
-<div class="grid grid-cols-2 gap-4 mt-2" style="font-size: 0.8rem;">
+# Ressources en ligne
 
 - [PostgreSQL Documentation](https://www.postgresql.org/docs/)
 - [Use The Index, Luke!](https://use-the-index-luke.com/)
-- [dbt Documentation](https://docs.getdbt.com/)
+- [Data Mesh Principles](https://martinfowler.com/articles/data-mesh-principles.html)
 - [FAIR Principles](https://www.go-fair.org/fair-principles/)
 
-</div>
-
 ---
-layout: end
+layout: section
 ---
 
-# Questions ?
+# Questions

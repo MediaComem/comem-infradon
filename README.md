@@ -1,6 +1,6 @@
 # Infrastructure de Données (InfraDon)
 
-[![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
+[![License: CC BY 4.0](https://img.shields.io/badge/License-CC_BY_4.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
 
 Cours **Infrastructure de Données** de la filière Ingénierie des Médias, HEIG-VD.
 
@@ -105,16 +105,19 @@ Chaque groupe (2-3 personnes) reçoit les mêmes données mais un brief différe
 
 ```
 comem-infradon-1/
-├── cours/                        # Slides Slidev (01-08)
+├── course.config.json            # Configuration du cours : titre, decks, liens TP
+├── cours/                        # Slides Slidev, thème slidev-theme-pixel
 │   ├── 01-introduction.md
-│   ├── 02-fondamentaux.md
+│   ├── 02-fondamentaux.md        # Decks 02-08 : en cours de migration
 │   ├── 03-import-nettoyage.md
 │   ├── 04-transactions-concurrence.md
 │   ├── 05-optimisation-indexation.md
 │   ├── 06-securite-roles-sauvegarde.md
 │   ├── 07-structures-architectures.md
 │   ├── 08-ethique-donnees.md
-│   └── components/               # Composants Vue.js pour les slides
+│   ├── components/               # Composants Vue.js propres au cours
+│   ├── setup/                    # Thème Mermaid
+│   └── public/                   # Images et page d'accueil générée
 ├── projet/                       # Ressources du projet fil rouge
 │   ├── briefs/                   # Briefs par groupe (A, B, C, D)
 │   ├── data/                     # Fichiers Excel source (non versionnés)
@@ -122,9 +125,19 @@ comem-infradon-1/
 ├── revisions/                    # Préparation à l'examen final
 │   ├── examen-type.md            # Examen type (festival)
 │   └── README.md                 # Ce qu'il faut maîtriser
-├── scripts/                      # Scripts utilitaires (build, génération de données)
-├── package.json                  # Config Slidev
+├── scripts/                      # Build incrémental, serveur de dev, page d'accueil
+├── package.json                  # Scripts npm
+├── render.yaml                   # Déploiement Render.com
 └── README.md
+```
+
+### Commandes
+
+```bash
+npm run dev -- 01      # serveur de dev pour le deck 01
+npm run build          # build incrémental des decks modifiés
+npm run build:force    # rebuild complet
+npm run index          # régénère la page d'accueil depuis course.config.json
 ```
 
 ---

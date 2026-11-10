@@ -25,12 +25,12 @@ layout: default
 
 - Composants d'une infrastructure de données
 - Modèles de déploiement : sur site, cloud, hybride
-- Projet : Service technique d'Yverdon-les-Bains
-- Premières observations des fichiers Excel
+- Environnement : Docker, Git
+- Cas fil rouge : Service technique d'Yverdon-les-Bains
 
 <Card title="Aujourd'hui" color="#e92528">
 <template #icon><pixelarticons-filter /></template>
-Qualité des données, puis le pipeline d'import : staging, nettoyage SQL, transfert vers les tables finales.
+Qualité des données, pipeline d'import, rejets et traçabilité : ce qu'une donnée mal importée coûte en aval.
 </Card>
 
 ---
@@ -61,7 +61,7 @@ references: "Krantz et Jonker, <em>The True Cost of Poor Data Quality</em>, IBM 
 Mieux vaut <strong>refuser</strong> une donnée à l'entrée que la corriger en aval.
 </Card>
 
-<Card color="#6b7280" tag="note" title="Dans le projet">
+<Card color="#6b7280" tag="note" title="Au Service technique">
 <template #icon><pixelarticons-file-alt /></template>
 Formats de date multiples, valeurs manquantes, noms saisis à la main, doublons partiels.
 </Card>
@@ -106,7 +106,7 @@ layout: default
 class: compact
 ---
 
-# Exercice : *signalements*
+# Diagnostic : *signalements*
 
 `signalements`
 
@@ -152,7 +152,7 @@ layout: default
 class: compact
 ---
 
-# Inventaire des incohérences du projet
+# Inventaire des incohérences
 
 | Problème | Colonne | Exemples |
 |---|---|---|
@@ -166,7 +166,7 @@ class: compact
 | Liens en texte libre | `objet` | `le banc devant Place Pestalozzi` |
 | Téléphones | `telephone` | `024 423 12 34` · `+41 21 456 78 90` |
 
-Chaque problème appelle une **décision** : normaliser, imputer, exclure ou documenter.
+Chaque problème appelle une **décision** : normaliser, imputer, rejeter ou documenter.
 
 ---
 layout: image-right
@@ -186,7 +186,7 @@ backgroundSize: contain
 layout: section
 ---
 
-# Modéliser avant d'importer
+# Pipeline d'import
 
 ---
 layout: grid
@@ -210,7 +210,7 @@ Tout en <code>TEXT</code>, sans contrainte
 <pixelarticons-arrow-right v-click="2" class="text-3xl self-center" />
 <Card title="Nettoyage" :at="2">
 <template #icon><pixelarticons-filter /></template>
-<code>CASE</code>, <code>TRIM</code>, <code>TO_DATE</code>, <code>COALESCE</code>
+Conversions, correspondances, motif de rejet
 </Card>
 <pixelarticons-arrow-right v-click="3" class="text-3xl self-center" />
 <Card title="Production" :at="3">
@@ -251,7 +251,7 @@ class: compact
 
 | Champ brut | Problème | Décision |
 |---|---|---|
-| `date` | Quatre formats | `CASE` et `TO_DATE()` vers `DATE` |
+| `date` | Plusieurs formats | Reconnaître chaque format, rejeter les autres |
 | `cout_materiel` | `CHF 120.-`, `gratuit`, vide | Chiffres seuls · `gratuit` en `0` · vide en `NULL` |
 | `duree` | `1h30`, `une matinée` | Minutes en `INTEGER`, convention documentée |
 | `type` | `banc`, `Banc`, `banc public` | `LOWER(TRIM())` puis `CASE` |
@@ -259,16 +259,10 @@ class: compact
 | `latitude` | `NULL`, `46.78` | Garder `NULL`, signaler l'imprécision |
 | `objet` | Aucun identifiant | Rapprochement lieu et type vers `mobilier_id` |
 
-<Card title="Guide de nettoyage">
-<template #icon><logos-github-icon /></template>
-<a href="https://github.com/MediaComem/comem-infradon/blob/main/projet/aide-nettoyage.md">projet/aide-nettoyage.md</a> : export Excel, connexion, import des quatre fichiers.
+<Card title="Documenter" color="#6b7280" tag="note">
+<template #icon><pixelarticons-clipboard-note /></template>
+« Une matinée = 240 minutes » est une décision : elle change chaque total calculé en aval.
 </Card>
-
----
-layout: section
----
-
-# Staging
 
 ---
 layout: two-cols
@@ -316,11 +310,11 @@ layout: default
 | Partageable | Oui | Non |
 | Travail sur plusieurs séances | Oui | Non |
 | Suppression automatique | Non | Oui |
-| Usage | Projet, pipeline | Test rapide |
+| Usage | Pipeline | Test rapide |
 
-<Card title="Pour le projet" color="#16a34a" tag="tip">
+<Card title="Pour un pipeline" color="#16a34a" tag="tip">
 <template #icon><pixelarticons-check /></template>
-Table <strong>permanente</strong> dans le schéma <code>staging</code> : le pipeline se construit sur plusieurs semaines.
+Table <strong>permanente</strong> dans le schéma <code>staging</code> : on y revient pour comprendre un rejet.
 </Card>
 
 ---
@@ -391,10 +385,344 @@ Pourquoi, et comment l'éviter ?
 </v-click>
 
 ---
+layout: two-cols
+references: "PostgreSQL, <em>INSERT</em>"
+---
+
+::title::
+# Syntaxe : INSERT INTO ... SELECT
+
+::left::
+
+- Transfert en une seule requête
+- `SELECT` applique les transformations
+- `WHERE` écarte les lignes invalides
+- `ON CONFLICT` : import rejouable
+
+::right::
+
+```sql
+INSERT INTO table_finale (col1, col2)
+SELECT
+  transformation1 AS col1,
+  transformation2 AS col2
+FROM staging.table_brute
+WHERE condition_de_validite
+ON CONFLICT (id) DO NOTHING;
+```
+
+---
+layout: two-cols
+---
+
+::title::
+# Validation avant transfert
+
+::left::
+
+- Compter chaque valeur distincte
+- Repérer les variantes non traitées
+- Beaucoup de `NULL` après `CASE` : mapping incomplet
+- Vérifier, puis transférer
+
+::right::
+
+```sql
+SELECT type, COUNT(*)
+FROM staging.inventaire
+GROUP BY type
+ORDER BY COUNT(*) DESC;
+
+SELECT date_installation, COUNT(*)
+FROM staging.inventaire
+GROUP BY date_installation
+ORDER BY 2 DESC
+LIMIT 10;
+```
+
+---
 layout: section
 ---
 
-# Nettoyage SQL
+# Rejets et traçabilité
+
+---
+layout: two-cols
+---
+
+::title::
+# Propagation d'une erreur
+
+::left::
+
+### Situation
+
+> « Le budget matériel des interventions a doublé cette année. »
+
+### La question
+
+D'où vient l'écart ?
+
+::right::
+
+<v-click>
+
+```sql
+SELECT REGEXP_REPLACE(
+  'CHF 89.50', '[^0-9]', '', 'g'
+)::INTEGER;
+-- 8950
+```
+
+</v-click>
+
+<v-click>
+
+- La conversion réussit : aucune erreur levée
+- La vue, le rapport, le budget héritent du chiffre
+- Une erreur **silencieuse** coûte plus qu'un rejet
+
+</v-click>
+
+---
+layout: two-cols
+---
+
+::title::
+# Écarter, rejeter, corriger
+
+::left::
+
+- **Écarter** : un `WHERE` filtre, la ligne disparaît sans trace
+- **Rejeter** : la ligne est gardée à part, avec son motif
+- **Corriger** : une règle documentée, `gratuit` devient `0`
+- Rejet : quelqu'un peut corriger la source
+
+::right::
+
+<Card title="Règle" color="#e92528">
+<template #icon><pixelarticons-shield /></template>
+Aucune ligne ne disparaît sans trace : lues = valides + rejetées + ignorées.
+</Card>
+
+<Card color="#6b7280" tag="note" title="Bruit ou signal">
+<template #icon><pixelarticons-chart-bar /></template>
+Un taux de rejet qui monte signale un changement à la source : nouveau formulaire, nouvelle personne, nouvel export.
+</Card>
+
+---
+layout: two-cols
+references: "PostgreSQL, <em>JSON Functions</em>"
+---
+
+::title::
+# Table de rejets
+
+::left::
+
+- Une ligne par ligne refusée
+- Le **motif** : date illisible, coût négatif
+- La ligne brute, telle que reçue
+- Le lot d'import qui l'a produite
+- Calculer le motif **avant** de convertir
+
+::right::
+
+```sql
+CREATE TABLE rejet (
+  lot_id       INTEGER NOT NULL,
+  ligne_source INTEGER NOT NULL,
+  motif        TEXT NOT NULL,
+  ligne_brute  JSONB NOT NULL
+);
+
+INSERT INTO rejet
+SELECT 1, s.ligne_source, n.motif,
+       to_jsonb(s)
+FROM nettoyees AS n
+JOIN staging.interventions AS s
+  USING (ligne_source)
+WHERE n.motif IS NOT NULL;
+```
+
+---
+layout: two-cols
+---
+
+::title::
+# Traçabilité
+
+::left::
+
+- Chaque valeur remonte à sa ligne brute
+- **Lot** : une exécution de l'import
+- **Journal** : fichier, date, lignes lues, valides, rejetées
+- **Provenance** : `lot_id` et `ligne_source` dans la table finale
+- Un chiffre contesté se vérifie en une requête
+
+::right::
+
+```sql
+CREATE TABLE journal_import (
+  lot_id          INTEGER PRIMARY KEY,
+  fichier         TEXT NOT NULL,
+  importe_le      TIMESTAMPTZ DEFAULT now(),
+  lignes_lues     INTEGER,
+  lignes_valides  INTEGER,
+  lignes_rejetees INTEGER
+);
+
+ALTER TABLE intervention
+  ADD COLUMN lot_id INTEGER,
+  ADD COLUMN ligne_source INTEGER;
+```
+
+---
+layout: two-cols
+---
+
+::title::
+# Exemple : bilan d'un import
+
+::left::
+
+`journal_import`
+
+| lot | lues | valides | rejetées |
+|---|---|---|---|
+| 1 | 150 | 140 | 8 |
+| 2 | 150 | 0 | 8 |
+
+### La question
+
+Où sont passées deux lignes du lot 1 ? Pourquoi le lot 2 n'a-t-il rien ajouté ?
+
+::right::
+
+<v-click>
+
+- Deux doublons ignorés par `ON CONFLICT`
+- Ignorer est une décision : à compter aussi
+- Lot 2 : même fichier rejoué, rien de neuf
+- Les 8 rejets reviennent tant que la source n'est pas corrigée
+
+</v-click>
+
+---
+layout: two-cols
+---
+
+::title::
+# Idempotence
+
+::left::
+
+- **Idempotente** : N exécutions, même résultat qu'une
+- Lecture : toujours idempotente
+- Suppression : idempotente
+- `INSERT` : **non** idempotent par défaut
+
+::right::
+
+<Card title="Réessais" color="#d97706" tag="warning">
+<template #icon><pixelarticons-reload /></template>
+Le réseau coupe après l'écriture, avant la confirmation. Le client réessaie : sans idempotence, la ligne est insérée deux fois.
+</Card>
+
+<Card title="Import" color="#6b7280" tag="note">
+<template #icon><pixelarticons-repeat /></template>
+Un script d'import se relance souvent. Il doit donner le même résultat à chaque fois.
+</Card>
+
+---
+layout: two-cols
+class: compact
+---
+
+::title::
+# Exemple : signalements en double
+
+::left::
+
+### Situation
+
+> « L'application mobile a mal capté. Mon signalement de fontaine apparaît trois fois. »
+
+`signalements`
+
+| id | objet_id | date | description |
+|---|---|---|---|
+| 201 | FONT-012 | 2024-03-15 | fontaine cassée |
+| 202 | FONT-012 | 2024-03-15 | fontaine cassée |
+| 203 | FONT-012 | 2024-03-15 | fontaine cassée |
+
+::right::
+
+<v-click>
+
+```sql
+ALTER TABLE signalements
+  ADD CONSTRAINT signalement_unique
+  UNIQUE (objet_id, date, description);
+
+INSERT INTO signalements
+  (objet_id, date, description)
+VALUES ('FONT-012', '2024-03-15',
+        'fontaine cassée')
+ON CONFLICT DO NOTHING;
+```
+
+</v-click>
+
+<v-click>
+
+- Une contrainte définit le doublon
+- `ON CONFLICT DO NOTHING` ignore le réessai
+- Un réessai ne crée plus de ligne
+
+</v-click>
+
+---
+layout: section
+---
+
+# Travaux pratiques
+
+---
+layout: two-cols
+routeAlias: tp
+---
+
+::title::
+# Travail pratique · Semaine 2
+
+::left::
+
+### Déroulé
+
+1. Staging et profilage : 45 min
+2. Nettoyage : 75 min
+3. Rejets et traçabilité : 45 min
+4. Import rejouable, question type : 15 min
+
+<Card color="#6b7280" tag="note" title="Non noté">
+<template #icon><pixelarticons-book-open /></template>
+Les exercices préparent l'examen final.
+</Card>
+
+::right::
+
+### Départ
+
+1. Télécharger [02-import.sql](https://comem-infradon.onrender.com/exercices/02-import.sql) et [02-interventions.csv](https://comem-infradon.onrender.com/exercices/02-interventions.csv)
+2. Les copier dans le dossier `data`
+3. Exécuter le script dans `psql`, base `yverdon`
+
+```sql
+\i /data/02-import.sql
+```
+
+PostgreSQL 16 ou plus, pour `pg_input_is_valid`.
 
 ---
 layout: two-cols
@@ -518,7 +846,7 @@ FROM staging.signalements;
 
 ---
 layout: two-cols
-references: "PostgreSQL, <em>String Functions</em>"
+references: "PostgreSQL, <em>String Functions</em>, <em>Pattern Matching</em>"
 ---
 
 ::title::
@@ -528,20 +856,23 @@ references: "PostgreSQL, <em>String Functions</em>"
 
 - `TRIM` : espaces en début et en fin
 - `LOWER` : tout en minuscules
-- Combinées avant toute comparaison
-- `LIKE` : comparaison à un motif
-- `%` : n'importe quoi · `_` : un caractère
+- `LIKE` : motif simple, `%` et `_`
+- `~` : expression régulière
+- `REGEXP_REPLACE` : remplacer un motif
 
 ::right::
 
 ```sql
 TRIM('  banc  ')      -- 'banc'
 LOWER('Banc Public')  -- 'banc public'
-LOWER(TRIM(type))
 
-date LIKE '%.%.%'     -- des points
 date LIKE '____-__-__' -- ISO
-type LIKE 'banc%'     -- début
+date ~ '^\d{2}\.\d{2}\.\d{4}$'
+
+-- '12.03.2022' devient '2022-03-12'
+REGEXP_REPLACE(date,
+  '^(\d{2})\.(\d{2})\.(\d{4})$',
+  '\3-\2-\1')
 ```
 
 ---
@@ -586,7 +917,7 @@ references: "PostgreSQL, <em>Data Type Formatting Functions</em>"
 - `TO_DATE` : texte vers date, selon un masque
 - `::NUMERIC` : texte vers nombre
 - `REGEXP_REPLACE` : garder les seuls chiffres
-- Conversion impossible : erreur
+- Conversion impossible : erreur, tout l'`INSERT` échoue
 
 ::right::
 
@@ -601,6 +932,37 @@ NULLIF(latitude, '')::NUMERIC(9,6)
 REGEXP_REPLACE(
   cout, '[^0-9]', '', 'g'
 )::INTEGER
+```
+
+---
+layout: two-cols
+references: "PostgreSQL, <em>System Information Functions</em>"
+---
+
+::title::
+# Syntaxe : valider avant de convertir
+
+::left::
+
+- `pg_input_is_valid(texte, type)` : vrai ou faux
+- Aucune erreur levée, même sur `31.02.2023`
+- Convertir seulement si la valeur est valide
+- Sinon : un motif de rejet
+
+::right::
+
+```sql
+SELECT pg_input_is_valid('2023-02-31', 'date');
+-- false
+
+SELECT
+  CASE WHEN pg_input_is_valid(d, 'date')
+       THEN d::DATE
+  END AS date_ok,
+  CASE WHEN NOT pg_input_is_valid(d, 'date')
+       THEN 'date impossible'
+  END AS motif
+FROM ...;
 ```
 
 ---
@@ -674,182 +1036,211 @@ WHERE numero = 1;
 </v-click>
 
 ---
-layout: section
----
-
-# Import rejouable
-
----
-layout: two-cols
+layout: two-cols-bottom
 ---
 
 ::title::
-# Idempotence
+# Exercice 1 : staging
 
 ::left::
 
-- **Idempotente** : N exécutions, même résultat qu'une
-- Lecture : toujours idempotente
-- Suppression : idempotente
-- `INSERT` : **non** idempotent par défaut
+### Étapes
+
+1. Créer le schéma `staging`
+2. Créer `staging.interventions`, tout en `TEXT`
+3. Ajouter `ligne_source`, numérotée à l'import
+4. Importer le CSV, vérifier : 150 lignes
 
 ::right::
 
-<Card title="Réessais" color="#d97706" tag="warning">
-<template #icon><pixelarticons-reload /></template>
-Le réseau coupe après l'écriture, avant la confirmation. Le client réessaie : sans idempotence, la ligne est insérée deux fois.
+```sql
+CREATE TABLE staging.interventions (
+  ligne_source INTEGER
+    GENERATED ALWAYS AS IDENTITY,
+  date TEXT, objet TEXT, ...
+);
+
+COPY staging.interventions
+  (date, objet, type_intervention, technicien,
+   duree, cout_materiel, remarques)
+FROM '/data/02-interventions.csv'
+WITH (FORMAT csv, HEADER true);
+```
+
+::bottom::
+
+<Card title="Question" color="#e92528">
+<template #icon><pixelarticons-scale /></template>
+Pourquoi lister les colonnes dans <code>COPY</code> ? Que vaut <code>ligne_source</code> pour la première ligne du fichier ?
 </Card>
 
-<Card title="Import" color="#6b7280" tag="note">
-<template #icon><pixelarticons-repeat /></template>
-Un script d'import se relance souvent. Il doit donner le même résultat à chaque fois.
+---
+layout: two-cols-bottom
+---
+
+::title::
+# Exercice 2 : profilage
+
+::left::
+
+### Étapes
+
+1. Lister les formats de `date`, chiffres remplacés par `9`
+2. Lister les valeurs de `duree` et de `technicien`
+3. Lister les coûts qui ne sont pas un entier
+4. Tester la conversion du cours sur ces coûts
+
+::right::
+
+```sql
+SELECT REGEXP_REPLACE(date, '[0-9]', '9', 'g')
+         AS format,
+       COUNT(*)
+FROM staging.interventions
+GROUP BY 1
+ORDER BY 2 DESC;
+```
+
+::bottom::
+
+<Card title="Question" color="#e92528">
+<template #icon><pixelarticons-scale /></template>
+Quelles valeurs de coût la conversion de la slide « Conversion de types » fausse-t-elle, sans erreur ?
+</Card>
+
+---
+layout: two-cols-bottom
+---
+
+::title::
+# Exercice 3 : nettoyage
+
+::left::
+
+### Étapes
+
+1. Créer `staging.technicien_alias` : variante vers `technicien_id`
+2. Créer la vue `staging.interventions_nettoyees`
+3. Une colonne par champ de `intervention`, déjà typée
+4. Aucune conversion sans `pg_input_is_valid`
+
+::right::
+
+| Champ | Règle à écrire |
+|---|---|
+| `date` | Deux formats reconnus |
+| `duree` | Minutes, convention documentée |
+| `cout_materiel` | Décimales gardées, `gratuit` en `0` |
+| `technicien` | Par la table d'alias |
+| `type_intervention` | Minuscules, sans espaces |
+
+::bottom::
+
+<Card title="Question" color="#e92528">
+<template #icon><pixelarticons-scale /></template>
+Que faire de <code>stagiaire</code> ? Et d'une durée <code>45</code>, sans unité ?
+</Card>
+
+---
+layout: two-cols-bottom
+---
+
+::title::
+# Exercice 4 : rejets et traçabilité
+
+::left::
+
+### Étapes
+
+1. Ajouter à la vue une colonne `motif`, `NULL` si la ligne est valide
+2. Créer la table `rejet`
+3. Dans une transaction : un lot dans `journal_import`, les valides dans `intervention`, les autres dans `rejet`
+4. Compléter le journal : lues, valides, rejetées
+
+::right::
+
+```sql
+SELECT motif, COUNT(*)
+FROM staging.interventions_nettoyees
+GROUP BY motif
+ORDER BY 2 DESC;
+
+SELECT * FROM journal_import;
+```
+
+::bottom::
+
+<Card title="Question" color="#e92528">
+<template #icon><pixelarticons-scale /></template>
+Lues = valides + rejetées : l'égalité tient-elle ? Sinon, où sont les lignes manquantes ?
+</Card>
+
+---
+layout: two-cols-bottom
+---
+
+::title::
+# Exercice 5 : import rejouable
+
+::left::
+
+### Étapes
+
+1. Choisir la clé qui définit un doublon d'intervention
+2. Ajouter la contrainte `UNIQUE`
+3. Ajouter `ON CONFLICT DO NOTHING` au transfert
+4. Rejouer l'import, comparer les deux lots du journal
+
+::right::
+
+```sql
+SELECT COUNT(*) FROM intervention;
+
+SELECT lot_id, motif, COUNT(*)
+FROM rejet
+GROUP BY lot_id, motif
+ORDER BY lot_id;
+```
+
+::bottom::
+
+<Card title="Question" color="#e92528">
+<template #icon><pixelarticons-scale /></template>
+Les rejets s'accumulent à chaque lot : est-ce un problème ? Qui doit corriger la source ?
 </Card>
 
 ---
 layout: two-cols
-class: compact
 ---
 
 ::title::
-# Exemple : signalements en double
+# Exercice 6 : question type
 
 ::left::
 
 ### Situation
 
-> « L'application mobile a mal capté. Mon signalement de fontaine apparaît trois fois. »
+> « Le rapport affiche 30 115 CHF de matériel. La comptabilité a payé environ 19 000 CHF. »
 
-`signalements`
+### Question
 
-| id | objet_id | date | description |
-|---|---|---|---|
-| 201 | FONT-012 | 2024-03-15 | fontaine cassée |
-| 202 | FONT-012 | 2024-03-15 | fontaine cassée |
-| 203 | FONT-012 | 2024-03-15 | fontaine cassée |
-
-::right::
-
-<v-click>
-
-```sql
-ALTER TABLE signalements
-  ADD CONSTRAINT signalement_unique
-  UNIQUE (objet_id, date, description);
-
-INSERT INTO signalements
-  (objet_id, date, description)
-VALUES ('FONT-012', '2024-03-15',
-        'fontaine cassée')
-ON CONFLICT DO NOTHING;
-```
-
-</v-click>
-
-<v-click>
-
-- Une contrainte définit le doublon
-- `ON CONFLICT DO NOTHING` ignore le réessai
-- Un réessai ne crée plus de ligne
-
-</v-click>
-
----
-layout: section
----
-
-# De la staging à la production
-
----
-layout: two-cols
-references: "PostgreSQL, <em>INSERT</em>"
----
-
-::title::
-# Syntaxe : INSERT INTO ... SELECT
-
-::left::
-
-- Transfert en une seule requête
-- `SELECT` applique les transformations
-- `WHERE` écarte les lignes invalides
-- `ON CONFLICT` : import rejouable
+Le chiffre est-il fiable ? Quelles valeurs le faussent, et comment le pipeline aurait-il dû les traiter ?
 
 ::right::
 
 ```sql
-INSERT INTO table_finale (col1, col2)
-SELECT
-  transformation1 AS col1,
-  transformation2 AS col2
-FROM staging.table_brute
-WHERE condition_de_validite
-ON CONFLICT (id) DO NOTHING;
+SELECT SUM(REGEXP_REPLACE(
+         cout_materiel, '[^0-9]', '', 'g'
+       )::INTEGER)
+FROM staging.interventions
+WHERE cout_materiel ~ '^\D*\d';
 ```
 
----
-layout: two-cols
----
-
-::title::
-# Validation avant transfert
-
-::left::
-
-- Compter chaque valeur distincte
-- Repérer les variantes non traitées
-- Beaucoup de `NULL` après `CASE` : mapping incomplet
-- Vérifier, puis transférer
-
-::right::
-
-```sql
-SELECT type, COUNT(*)
-FROM staging.inventaire
-GROUP BY type
-ORDER BY COUNT(*) DESC;
-
-SELECT date_installation, COUNT(*)
-FROM staging.inventaire
-GROUP BY date_installation
-ORDER BY 2 DESC
-LIMIT 10;
-```
-
----
-layout: section
----
-
-# Travaux pratiques
-
----
-layout: two-cols
-routeAlias: tp
----
-
-::title::
-# Travail pratique · Semaine 2
-
-::left::
-
-### J0 · Exploration et modélisation
-
-1. Noter formats de date, variantes de `type`
-2. Repérer identifiants suspects, colonnes vides
-3. Dessiner le MCD et le MLD
-
-::right::
-
-### J1 · Import et nettoyage
-
-1. Créer le schéma `staging`, tout en `TEXT`
-2. Importer les quatre fichiers avec `COPY`
-3. Écrire le MPD : `CREATE TABLE` finaux
-4. Nettoyer, puis `INSERT INTO ... SELECT`
-
-<Card color="#6b7280" tag="note" title="Guide">
-<template #icon><pixelarticons-book-open /></template>
-<a href="https://github.com/MediaComem/comem-infradon/blob/main/projet/aide-nettoyage.md">projet/aide-nettoyage.md</a>
-</Card>
+| `cout_materiel` |
+|---|
+| `CHF 89.50` |
+| `12.80` |
+| `-30` |
 
 ---
 layout: default
@@ -860,6 +1251,7 @@ layout: default
 - [PostgreSQL · COPY](https://www.postgresql.org/docs/current/sql-copy.html)
 - [PostgreSQL · Fonctions sur les chaînes](https://www.postgresql.org/docs/current/functions-string.html)
 - [PostgreSQL · Formatage et TO_DATE](https://www.postgresql.org/docs/current/functions-formatting.html)
+- [PostgreSQL · pg_input_is_valid](https://www.postgresql.org/docs/current/functions-info.html)
 - [PostgreSQL · Window Functions](https://www.postgresql.org/docs/current/tutorial-window.html)
 - [PostgreSQL · INSERT et ON CONFLICT](https://www.postgresql.org/docs/current/sql-insert.html)
 

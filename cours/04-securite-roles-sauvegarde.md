@@ -27,10 +27,11 @@ layout: default
 - Anomalies de concurrence
 - Niveaux d'isolation de PostgreSQL
 - MVCC, verrous et interblocages
+- Coût de la cohérence, mesuré avec `pgbench`
 
 <Card title="Aujourd'hui" color="#e92528">
 <template #icon><pixelarticons-lock /></template>
-Qui peut faire quoi dans la base, comment supprimer une donnée, et comment ne jamais la perdre.
+Qui peut faire quoi dans la base, comment supprimer une donnée, et comment résister à une panne, une erreur ou une fuite.
 </Card>
 
 ---
@@ -96,6 +97,431 @@ Un groupe de privilèges, attribué à plusieurs personnes.
 <template #icon><pixelarticons-lock-open /></template>
 Une action autorisée sur une table : lire, modifier, supprimer.
 </Card>
+
+---
+layout: two-cols
+---
+
+::title::
+# Exemple : rôles du Service technique
+
+::left::
+
+### Besoins
+
+> « Les citoyen·ne·s consultent les signalements. Les technicien·ne·s les traitent. Moi, je gère tout. »
+
+### La question
+
+Quels rôles, avec quels privilèges ?
+
+::right::
+
+<v-click>
+
+```sql
+CREATE ROLE citoyen;
+GRANT SELECT ON signalements TO citoyen;
+
+CREATE ROLE technicien;
+GRANT SELECT, INSERT, UPDATE
+  ON signalements, interventions
+  TO technicien;
+
+CREATE ROLE responsable;
+GRANT ALL PRIVILEGES
+  ON ALL TABLES IN SCHEMA public
+  TO responsable;
+
+GRANT technicien TO alice;
+```
+
+</v-click>
+
+<v-click>
+
+- Un rôle par profil
+- Les personnes héritent du rôle
+
+</v-click>
+
+---
+layout: grid
+cols: 2
+align: stretch
+content: center
+---
+
+# Bonnes pratiques d'accès
+
+<Card title="Moindre privilège">
+<template #icon><pixelarticons-shield /></template>
+Uniquement les droits nécessaires. Jamais <code>ALL PRIVILEGES</code> par défaut.
+</Card>
+<Card title="Rôles">
+<template #icon><pixelarticons-users /></template>
+Des privilèges par groupe, jamais personne par personne.
+</Card>
+<Card title="Mots de passe">
+<template #icon><pixelarticons-lock /></template>
+Forts et renouvelés : <code>VALID UNTIL</code> impose l'expiration.
+</Card>
+<Card title="Nettoyage">
+<template #icon><pixelarticons-trash /></template>
+Supprimer comptes inactifs et rôles obsolètes.
+</Card>
+<Card title="Audit">
+<template #icon><pixelarticons-eye /></template>
+Journaux PostgreSQL ou extension <code>pgaudit</code>.
+</Card>
+
+---
+layout: two-cols
+---
+
+::title::
+# Pièges courants
+
+::left::
+
+- Application connectée en **superuser**
+- Compte **partagé** : impossible de savoir qui a fait quoi
+- Compte d'une personne **partie**, toujours actif
+- `GRANT ... TO PUBLIC` : tous les rôles, présents et futurs
+- `ON ALL TABLES` : y compris les tables ajoutées par erreur
+
+::right::
+
+<Card color="#d97706" tag="warning" title="Accumulation">
+<template #icon><pixelarticons-alert /></template>
+Chaque droit a été accordé pour une bonne raison. Personne ne les retire.
+</Card>
+
+<Card title="Superuser" color="#e92528">
+<template #icon><pixelarticons-shield /></template>
+Un superuser ignore tous les privilèges : un seul compte compromis donne la base entière.
+</Card>
+
+---
+layout: two-cols
+references: "PostgreSQL, <em>pg_roles</em>, <em>information_schema</em>"
+---
+
+::title::
+# Audit des rôles
+
+::left::
+
+- Qui peut se connecter ? Qui est superuser ?
+- Qui peut lire les données personnelles ?
+- Chaque compte correspond-il à une personne active ?
+- Chaque privilège a-t-il un besoin documenté ?
+- À refaire à chaque départ et chaque année
+
+::right::
+
+```sql
+SELECT rolname, rolsuper, rolcanlogin,
+       rolvaliduntil
+FROM pg_roles
+WHERE rolname !~ '^pg_';
+
+SELECT grantee, table_name,
+       privilege_type
+FROM information_schema.role_table_grants
+WHERE table_schema = 'public'
+ORDER BY grantee, table_name;
+```
+
+---
+layout: two-cols
+---
+
+::title::
+# Fuite de données
+
+::left::
+
+- Privilège trop large, compte volé
+- Mot de passe écrit dans un dépôt Git
+- Export CSV envoyé par email
+- Sauvegarde copiée sur un poste ou un cloud personnel
+- Base de test remplie de vraies données
+
+::right::
+
+<Card title="Sauvegarde" color="#d97706" tag="warning" footer="cours 06 · nLPD">
+<template #icon><pixelarticons-copy /></template>
+Un dump est une copie complète des données personnelles. Chiffrer, limiter l'accès, appliquer la rétention.
+</Card>
+
+<Card color="#6b7280" tag="note" title="Annonce">
+<template #icon><pixelarticons-mail /></template>
+nLPD, art. 24 : une fuite à risque élevé s'annonce au PFPDT dans les meilleurs délais.
+</Card>
+
+---
+layout: section
+---
+
+# Suppression des données
+
+---
+layout: two-cols
+---
+
+::title::
+# Suppression physique ou logique
+
+::left::
+
+- **Physique** : la ligne est effacée
+- **Logique** : la ligne est marquée, conservée
+- Colonne `deleted_at` ou `is_active`
+- Engage audit, conformité, performances
+
+::right::
+
+```sql
+-- Physique
+DELETE FROM signalements WHERE id = 42;
+
+-- Logique
+UPDATE signalements
+SET deleted_at = now()
+WHERE id = 42;
+
+SELECT * FROM signalements
+WHERE deleted_at IS NULL;
+```
+
+---
+layout: default
+---
+
+# Compromis de la suppression
+
+| | Physique | Logique |
+|---|---|---|
+| Audit | Impossible | Possible |
+| Retour en arrière | Impossible | Possible |
+| Droit à l'effacement (nLPD, RGPD) | Direct | Complexe |
+| Intégrité référentielle | Risque de cascade | Préservée |
+| Volume | Stable | Croissant |
+| Requêtes | Simples | Filtre `deleted_at IS NULL` |
+
+<Card title="Paradoxe" color="#d97706" tag="warning">
+<template #icon><pixelarticons-scale /></template>
+Le droit à l'oubli oblige parfois à effacer ce qu'on voudrait garder pour l'audit.
+</Card>
+
+---
+layout: section
+---
+
+# Sauvegarde et robustesse
+
+---
+layout: grid
+cols: 2
+align: stretch
+content: center
+---
+
+# Raisons de sauvegarder
+
+<Card title="Erreur humaine">
+<template #icon><pixelarticons-user-x /></template>
+Un <code>DELETE</code> sans <code>WHERE</code>, un <code>DROP TABLE</code> de trop.
+</Card>
+<Card title="Panne matérielle">
+<template #icon><pixelarticons-server /></template>
+Disque défaillant, serveur en panne, coupure électrique.
+</Card>
+<Card title="Attaque">
+<template #icon><pixelarticons-bug /></template>
+Rançongiciel, corruption volontaire, accès non autorisé.
+</Card>
+<Card title="Migration">
+<template #icon><pixelarticons-move /></template>
+Passer d'un serveur ou d'un environnement à l'autre.
+</Card>
+
+---
+layout: two-cols
+---
+
+::title::
+# RPO et RTO
+
+::left::
+
+- **RPO** : quelle perte de données est acceptable ?
+- **RTO** : combien de temps sans service est acceptable ?
+- Fixés par le métier, pas par l'informatique
+- Ils déterminent la stratégie et son coût
+
+::right::
+
+| Stratégie | RPO | RTO |
+|---|---|---|
+| `pg_dump` chaque nuit | 24 h | Temps de restauration |
+| Archivage des WAL | Quelques minutes | Restauration + rejeu |
+| Réplica de secours | Quelques secondes | Bascule |
+
+<Card color="#6b7280" tag="note" title="Service technique">
+<template #icon><pixelarticons-calendar /></template>
+Perdre une journée de signalements : acceptable ? Et une journée de paie ?
+</Card>
+
+---
+layout: default
+references:
+  - "PostgreSQL, <em>Continuous Archiving and Point-in-Time Recovery</em>"
+  - "PostgreSQL, <em>High Availability</em>"
+---
+
+# Trois façons de copier
+
+| | Dump logique | Sauvegarde physique et WAL | Réplication |
+|---|---|---|---|
+| Outil | `pg_dump` | `pg_basebackup`, archivage | Réplica en continu |
+| Contenu | Une base, en SQL | Tout le serveur, fichiers | Tout le serveur, en direct |
+| Retour à 14 h 59 | Non | Oui : restauration à un instant | Non |
+| Après un `DELETE` sans `WHERE` | Dernier dump | Juste avant l'erreur | Erreur répliquée |
+
+<Card title="Réplication" color="#e92528">
+<template #icon><pixelarticons-alert /></template>
+Une réplication protège contre la panne du serveur, pas contre l'erreur : elle copie aussi le <code>DELETE</code>.
+</Card>
+
+---
+layout: grid
+cols: 2
+align: stretch
+content: center
+---
+
+# Bonnes pratiques de sauvegarde
+
+<Card title="Automatiser">
+<template #icon><pixelarticons-calendar /></template>
+Une tâche planifiée, jamais une sauvegarde à la main.
+</Card>
+<Card title="Tester">
+<template #icon><pixelarticons-check /></template>
+Restaurer régulièrement sur une base de test, mesurer la durée.
+</Card>
+<Card title="Règle 3-2-1">
+<template #icon><pixelarticons-cloud-upload /></template>
+3 copies, sur 2 supports différents, dont 1 hors site. Idéalement une hors ligne.
+</Card>
+<Card title="Rétention">
+<template #icon><pixelarticons-archive /></template>
+Quotidienne 7 jours, hebdomadaire 4 semaines, mensuelle 12 mois.
+</Card>
+
+Une sauvegarde jamais testée n'est pas une sauvegarde : c'est un espoir.
+
+---
+layout: two-cols
+---
+
+::title::
+# Exemple : sauvegarde nocturne
+
+::left::
+
+### Besoins
+
+> « Je veux une sauvegarde chaque nuit, sans y penser. »
+
+### La question
+
+Comment planifier `pg_dump` ?
+
+::right::
+
+<v-click>
+
+```bash
+# crontab : chaque jour à 2h
+0 2 * * * pg_dump -U postgres \
+  -d yverdon -F c \
+  -f /backups/yverdon_$(date +\%Y\%m\%d).dump
+```
+
+</v-click>
+
+<v-click>
+
+- Un fichier daté par nuit
+- Copier ensuite hors site
+- Supprimer selon la rétention
+
+</v-click>
+
+---
+layout: default
+class: compact
+---
+
+# Scénarios de panne
+
+| Scénario | Ce qui protège | Ce qui ne protège pas |
+|---|---|---|
+| Disque du serveur détruit | Réplica, sauvegarde sur un autre support | Dump stocké sur le même disque |
+| `DELETE` sans `WHERE` | Moindre privilège, transaction, dump, WAL | Réplication |
+| Rançongiciel | Copie hors ligne, rôles cloisonnés | Copie montée en permanence |
+| Incendie du bâtiment | Copie hors site | Réplica dans la même salle |
+| Fuite par un compte | Moindre privilège, audit des rôles | Sauvegarde |
+
+<Card title="À retenir" color="#e92528">
+<template #icon><pixelarticons-shield /></template>
+Chaque mesure couvre certains risques. La robustesse vient de leur combinaison.
+</Card>
+
+---
+layout: section
+---
+
+# Travaux pratiques
+
+---
+layout: two-cols
+routeAlias: tp
+---
+
+::title::
+# Travail pratique · Semaine 4
+
+::left::
+
+### Déroulé
+
+1. Audit et moindre privilège : 75 min
+2. Suppression logique : 30 min
+3. Sauvegarde et incident : 60 min
+4. Question type : 15 min
+
+<Card color="#6b7280" tag="note" title="Non noté">
+<template #icon><pixelarticons-book-open /></template>
+Les exercices préparent l'examen final.
+</Card>
+
+::right::
+
+### Départ
+
+1. Télécharger [04-service-technique.sql](https://comem-infradon.onrender.com/exercices/04-service-technique.sql) et [04-incident.sql](https://comem-infradon.onrender.com/exercices/04-incident.sql)
+2. Les copier dans le dossier `data`
+3. Exécuter le premier dans `psql`, base `yverdon`
+
+```sql
+\i /data/04-service-technique.sql
+```
+
+Le second attend l'exercice 5.
 
 ---
 layout: two-cols
@@ -177,171 +603,34 @@ references: "PostgreSQL, <em>Privileges</em>"
 
 ---
 layout: two-cols
+references: "PostgreSQL, <em>SET ROLE</em>, <em>System Information Functions</em>"
 ---
 
 ::title::
-# Exemple : rôles du Service technique
+# Syntaxe : tester les droits
 
 ::left::
 
-### Besoins
-
-> « Les citoyen·ne·s consultent les signalements. Les technicien·ne·s les traitent. Moi, je gère tout. »
-
-### La question
-
-Quels rôles, avec quels privilèges ?
-
-::right::
-
-<v-click>
-
-```sql
-CREATE ROLE citoyen;
-GRANT SELECT ON signalements TO citoyen;
-GRANT SELECT (latitude, longitude)
-  ON mobilier TO citoyen;
-
-CREATE ROLE technicien;
-GRANT SELECT, INSERT, UPDATE
-  ON signalements, interventions
-  TO technicien;
-
-CREATE ROLE responsable;
-GRANT ALL PRIVILEGES
-  ON ALL TABLES IN SCHEMA public
-  TO responsable;
-
-GRANT technicien TO alice;
-```
-
-</v-click>
-
-<v-click>
-
-- Un rôle par profil
-- Les personnes héritent du rôle
-
-</v-click>
-
----
-layout: grid
-cols: 2
-align: stretch
-content: center
----
-
-# Bonnes pratiques d'accès
-
-<Card title="Moindre privilège">
-<template #icon><pixelarticons-shield /></template>
-Uniquement les droits nécessaires. Jamais <code>ALL PRIVILEGES</code> par défaut.
-</Card>
-<Card title="Rôles">
-<template #icon><pixelarticons-users /></template>
-Des privilèges par groupe, jamais personne par personne.
-</Card>
-<Card title="Mots de passe">
-<template #icon><pixelarticons-lock /></template>
-Forts et renouvelés : <code>VALID UNTIL</code> impose l'expiration.
-</Card>
-<Card title="Nettoyage">
-<template #icon><pixelarticons-trash /></template>
-Supprimer comptes inactifs et rôles obsolètes.
-</Card>
-<Card title="Audit">
-<template #icon><pixelarticons-eye /></template>
-Journaux PostgreSQL ou extension <code>pgaudit</code>.
-</Card>
-
----
-layout: section
----
-
-# Suppression des données
-
----
-layout: two-cols
----
-
-::title::
-# Suppression physique ou logique
-
-::left::
-
-- **Physique** : la ligne est effacée
-- **Logique** : la ligne est marquée, conservée
-- Colonne `deleted_at` ou `is_active`
-- Engage audit, conformité, performances
+- `\du` : rôles et attributs, dans `psql`
+- `\dp table` : privilèges d'une table
+- `has_table_privilege` : vrai ou faux
+- `SET ROLE` : agir avec les droits d'un rôle
+- `RESET ROLE` : revenir à son rôle
 
 ::right::
 
 ```sql
--- Physique
-DELETE FROM signalements WHERE id = 42;
+SELECT has_table_privilege(
+  'role_name', 'table_name', 'DELETE');
 
--- Logique
-UPDATE signalements
-SET deleted_at = now()
-WHERE id = 42;
+SET ROLE role_name;
+SELECT * FROM table_name;  -- autorisé ?
+RESET ROLE;
 
-SELECT * FROM signalements
-WHERE deleted_at IS NULL;
+ALTER ROLE role_name NOLOGIN;
+DROP OWNED BY role_name;
+DROP ROLE role_name;
 ```
-
----
-layout: default
----
-
-# Compromis de la suppression
-
-| | Physique | Logique |
-|---|---|---|
-| Audit | Impossible | Possible |
-| Retour en arrière | Impossible | Possible |
-| Droit à l'effacement (nLPD, RGPD) | Direct | Complexe |
-| Intégrité référentielle | Risque de cascade | Préservée |
-| Volume | Stable | Croissant |
-| Requêtes | Simples | Filtre `deleted_at IS NULL` |
-
-<Card title="Paradoxe" color="#d97706" tag="warning">
-<template #icon><pixelarticons-scale /></template>
-Le droit à l'oubli oblige parfois à effacer ce qu'on voudrait garder pour l'audit.
-</Card>
-
----
-layout: section
----
-
-# Sauvegarde
-
----
-layout: grid
-cols: 2
-align: stretch
-content: center
----
-
-# Raisons de sauvegarder
-
-<Card title="Erreur humaine">
-<template #icon><pixelarticons-user-x /></template>
-Un <code>DELETE</code> sans <code>WHERE</code>, un <code>DROP TABLE</code> de trop.
-</Card>
-<Card title="Panne matérielle">
-<template #icon><pixelarticons-server /></template>
-Disque défaillant, serveur en panne, coupure électrique.
-</Card>
-<Card title="Attaque">
-<template #icon><pixelarticons-bug /></template>
-Rançongiciel, corruption volontaire, accès non autorisé.
-</Card>
-<Card title="Migration">
-<template #icon><pixelarticons-move /></template>
-Passer d'un serveur ou d'un environnement à l'autre.
-</Card>
-
-Une sauvegarde jamais testée n'est pas une sauvegarde : c'est un espoir.
 
 ---
 layout: two-cols
@@ -516,104 +805,204 @@ pg_restore -U postgres -d yverdon \
 ```
 
 ---
-layout: grid
-cols: 2
-align: stretch
-content: center
----
-
-# Bonnes pratiques de sauvegarde
-
-<Card title="Automatiser">
-<template #icon><pixelarticons-calendar /></template>
-Une tâche planifiée, jamais une sauvegarde à la main.
-</Card>
-<Card title="Tester">
-<template #icon><pixelarticons-check /></template>
-Restaurer régulièrement sur une base de test.
-</Card>
-<Card title="Hors site">
-<template #icon><pixelarticons-cloud-upload /></template>
-Une copie sur un serveur distant ou un stockage objet.
-</Card>
-<Card title="Rétention">
-<template #icon><pixelarticons-archive /></template>
-Quotidienne 7 jours, hebdomadaire 4 semaines, mensuelle 12 mois.
-</Card>
-
----
-layout: two-cols
+layout: two-cols-bottom
 ---
 
 ::title::
-# Exemple : sauvegarde nocturne
+# Exercice 1 : audit des rôles
 
 ::left::
 
-### Besoins
+### Étapes
 
-> « Je veux une sauvegarde chaque nuit, sans y penser. »
-
-### La question
-
-Comment planifier `pg_dump` ?
+1. Lister les rôles, leurs attributs et leurs commentaires
+2. Lister les privilèges de chaque rôle
+3. Vérifier ce que `PUBLIC` peut lire
+4. Noter chaque problème et le risque associé
 
 ::right::
 
-<v-click>
+| rôle | problème | risque |
+|---|---|---|
+| | | |
+| | | |
+| | | |
+| | | |
 
-```bash
-# crontab : chaque jour à 2h
-0 2 * * * pg_dump -U postgres \
-  -d yverdon -F c \
-  -f /backups/yverdon_$(date +\%Y\%m\%d).dump
+::bottom::
+
+<Card title="Question" color="#e92528">
+<template #icon><pixelarticons-scale /></template>
+Quel problème corriger en premier, et pourquoi ?
+</Card>
+
+---
+layout: two-cols-bottom
+---
+
+::title::
+# Exercice 2 : moindre privilège
+
+::left::
+
+### Étapes
+
+1. Corriger les problèmes de l'exercice 1
+2. Créer les groupes `citoyen`, `technicien`, `responsable`
+3. Créer `alice`, `bob`, `carla`, un par groupe
+4. Tester chaque case du tableau avec `SET ROLE`
+
+::right::
+
+`signalement`, puis `technicien` (dernière colonne)
+
+| | lire | insérer | supprimer | téléphones |
+|---|---|---|---|---|
+| bob | | | | |
+| alice | | | | |
+| carla | | | | |
+
+::bottom::
+
+<Card title="Question" color="#e92528">
+<template #icon><pixelarticons-scale /></template>
+Que faire du compte <code>service_technique</code>, utilisé par toute l'équipe ?
+</Card>
+
+---
+layout: two-cols-bottom
+---
+
+::title::
+# Exercice 3 : suppression logique
+
+::left::
+
+### Étapes
+
+1. Ajouter `supprime_le` à `signalement`
+2. Créer la vue `signalement_actif`
+3. Donner à `citoyen` la vue, pas la table
+4. Supprimer logiquement un signalement en tant qu'`alice`
+
+::right::
+
+```sql
+SET ROLE alice;
+UPDATE signalement
+SET supprime_le = now()
+WHERE id = 42;
+RESET ROLE;
+
+SET ROLE bob;
+SELECT count(*) FROM signalement_actif;
+SELECT count(*) FROM signalement;
+RESET ROLE;
 ```
 
-</v-click>
+::bottom::
 
-<v-click>
-
-- Un fichier daté par nuit
-- Copier ensuite hors site
-- Supprimer selon la rétention
-
-</v-click>
+<Card title="Question" color="#e92528">
+<template #icon><pixelarticons-scale /></template>
+Une citoyenne demande l'effacement de son signalement. La suppression logique suffit-elle ?
+</Card>
 
 ---
-layout: section
----
-
-# Travaux pratiques
-
----
-layout: two-cols
-routeAlias: tp
+layout: two-cols-bottom
 ---
 
 ::title::
-# Travail pratique · Semaine 4
+# Exercice 4 : sauvegarde et restauration
 
 ::left::
 
-### J3 · Sécurité
+### Étapes
 
-1. Créer les rôles `citoyen`, `technicien`, `responsable`
-2. Lecture seule pour `citoyen`
-3. Écriture pour `technicien`
-4. Tester chaque rôle avec un compte dédié
+1. Sauvegarder `yverdon` en format custom, onglet **Exec**
+2. Créer la base `yverdon_test`
+3. Y restaurer la sauvegarde, en mesurant la durée
+4. Comparer le nombre de lignes de chaque table
 
 ::right::
 
-### Sauvegarde
+```bash
+time pg_dump -U postgres -d yverdon \
+  -F c -f /tmp/sauvegarde.dump
 
-1. Sauvegarder la base en format custom
-2. La restaurer dans une base vide
-3. Vérifier le nombre de lignes
+psql -U postgres \
+  -c "CREATE DATABASE yverdon_test;"
 
-<Card color="#6b7280" tag="note" title="Suppression">
-<template #icon><pixelarticons-trash /></template>
-Choisir et justifier : suppression physique ou logique des signalements.
+time pg_restore -U postgres \
+  -d yverdon_test /tmp/sauvegarde.dump
+```
+
+::bottom::
+
+<Card title="Question" color="#e92528">
+<template #icon><pixelarticons-scale /></template>
+Avec une sauvegarde chaque nuit, quel RPO ? Quel RTO pour cette base, et pour une base cent fois plus grande ?
 </Card>
+
+---
+layout: two-cols-bottom
+---
+
+::title::
+# Exercice 5 : incident
+
+::left::
+
+### Étapes
+
+1. Exécuter `04-incident.sql` : une journée, puis l'erreur de 16 h
+2. Constater les dégâts
+3. Restaurer les données de la seule table `intervention`
+4. Compter ce qui est revenu et ce qui est perdu
+
+::right::
+
+```sql
+\i /data/04-incident.sql
+SELECT count(*) FROM intervention;
+```
+
+```bash
+pg_restore -U postgres -d yverdon \
+  -a -t intervention /tmp/sauvegarde.dump
+```
+
+::bottom::
+
+<Card title="Question" color="#e92528">
+<template #icon><pixelarticons-scale /></template>
+Combien d'interventions sont perdues ? Quelles mesures des exercices 2 et 3 auraient évité l'incident ?
+</Card>
+
+---
+layout: two-cols
+---
+
+::title::
+# Exercice 6 : question type
+
+::left::
+
+### Situation
+
+> « Notre base est répliquée en continu sur un second serveur, dans la même salle. Une sauvegarde serait redondante. »
+
+### Question
+
+Pour chaque incident, la réplication suffit-elle ? Que proposer ?
+
+::right::
+
+| Incident |
+|---|
+| Le disque du serveur principal lâche |
+| Un `DROP TABLE` est lancé par erreur |
+| Un rançongiciel chiffre les deux serveurs |
+| Une inondation touche la salle |
 
 ---
 layout: default
@@ -626,8 +1015,9 @@ layout: default
 - [PostgreSQL · pg_dump](https://www.postgresql.org/docs/current/app-pgdump.html)
 - [PostgreSQL · pg_restore](https://www.postgresql.org/docs/current/app-pgrestore.html)
 - [PostgreSQL · Backup and Restore](https://www.postgresql.org/docs/current/backup.html)
+- [PostgreSQL · Point-in-Time Recovery](https://www.postgresql.org/docs/current/continuous-archiving.html)
 
 <Card title="Prochain cours" color="#e92528" footer="cours 05 · Structures et architectures">
 <template #icon><pixelarticons-arrow-right /></template>
-NoSQL, systèmes distribués, flux de données et architectures modernes.
+Limites du relationnel, NoSQL, OLTP et OLAP, architectures analytiques.
 </Card>

@@ -13,7 +13,7 @@
 | Q5 | **C - GRANT SELECT puis GRANT UPDATE (statut)** | Seule option qui accorde UPDATE au niveau colonne, évitant l'accès aux données de paiement |
 | Q6 | **B - ELT** | On charge les données brutes en base, puis on transforme dans PostgreSQL |
 | Q7 | **B - Clé-valeur (Redis)** | Accès O(1) par clé (code_barre -> statut), latence sous la milliseconde |
-| Q8 | **C - `NULLIF(TRIM(statut), '')`** | `TRIM` supprime les espaces, puis `NULLIF(..., '')` convertit la chaîne vide résultante en `NULL` — les deux cas indésirables retournent donc `NULL` |
+| Q8 | **C - `NULLIF(TRIM(statut), '')`** | `TRIM` supprime les espaces, puis `NULLIF(..., '')` convertit la chaîne vide résultante en `NULL` : les deux cas indésirables retournent donc `NULL` |
 | Q9 | **C - Graphe (Neo4j)** | Les relations entre participant·e·s et concerts ("a aussi aimé") sont naturellement un graphe |
 | Q10 | **B - Oui, dès lors que des personnes physiques sont concernées** | La nLPD s'applique à toute entité traitant des données personnelles de personnes physiques en Suisse |
 
@@ -29,7 +29,7 @@
 | Q2 | **Vrai** | `'early bird'` ne correspond à aucun `WHEN` -> `ELSE NULL` |
 | Q3 | **Vrai** | `REGEXP_REPLACE` supprime tout sauf les chiffres et le point, `'CHF 45.-'` devient `'45.'` -> `45` en NUMERIC |
 | Q4 | **Faux** | Les JOIN sont des INNER JOIN : si `participant` ou `concert` n'est pas trouvé, la ligne est exclue de l'INSERT |
-| Q5 | **Vrai** | `NULLIF(TRIM(NULL), '')` retourne `NULL`, et `NULL IS NOT NULL` est faux : la ligne est exclue par la clause `WHERE` |
+| Q5 | **Faux** | Les lignes sans prix (clause `WHERE`) et celles dont le participant ou le concert est introuvable (INNER JOIN) sont écartées **sans erreur ni trace**. Il faut comparer les comptages et garder les lignes écartées dans une table de rejets, avec leur motif |
 
 ### 2.2 | Transactions et isolation
 
@@ -37,7 +37,7 @@
 |---|---------|---------------|
 | Q6 | **Vrai** | En `READ COMMITTED`, chaque SELECT voit la version commitée au moment de son exécution, donc T2 commitée -> visible |
 | Q7 | **Vrai** | Sans mécanisme de vérification de `capacite_max` dans la transaction, l'INSERT s'exécute librement |
-| Q8 | **Faux** | `SERIALIZABLE` détecte des dépendances entre transactions et peut annuler l'une d'elles, mais ne vérifie pas automatiquement les règles métier comme `capacite_max`. Il faut toujours une contrainte explicite ou un `SELECT ... FOR UPDATE` |
+| Q8 | **Vrai** | En `SERIALIZABLE`, PostgreSQL détecte que T1 et T2 ont lu ce que l'autre écrit : aucun ordre série ne donne ce résultat, donc l'une échoue avec `could not serialize access`. Rejouée, elle voit 500 billets et n'insère pas. Sans rejeu dans l'application, l'achat échoue simplement |
 | Q9 | **Vrai** | `SKIP LOCKED` ignore les lignes déjà verrouillées par une autre transaction : chaque bénévole traite un billet différent en parallèle |
 
 ### 2.3 | Rôles et permissions
@@ -90,6 +90,14 @@ INSERT INTO billet (concert_id, participant_id, statut, prix)
 COMMIT;
 ```
 
+### 3.1c - Coût de la cohérence
+
+Le `tps` seul est trompeur :
+
+- En `SERIALIZABLE`, plus de 20 000 réessais et environ 1 580 échecs définitifs en 10 s, soit environ 150 achats refusés par seconde aux heures de pointe. Le débit paraît plus élevé parce que les transactions annulées libèrent vite leurs verrous.
+- `READ COMMITTED` avec `FOR UPDATE` sur le concert : 0 échec. La correction est ciblée, là où l'anomalie se produit.
+- `SERIALIZABLE` partout impose un rejeu dans chaque transaction de l'application, et les échecs augmentent avec la charge. On le réserve aux transactions qui en ont besoin.
+
 ### 3.2a - Pipeline ELT pour le festival
 
 - **Extract** : extraire les données des sources (fichiers CSV du prestataire billetterie, exports du système de contrôle d'accès, relevés de caisses restauration).
@@ -106,9 +114,11 @@ Deux solutions :
 
 ### 3.2c - Data mesh
 
-Le concept est le **data mesh**. Deux principes fondamentaux :
-1. **Propriété des données par domaine** (domain ownership) : chaque équipe (billetterie, programmation, restauration) est responsable de ses propres données, de leur qualité et de leur exposition.
-2. **Données comme produit** (data as a product) : chaque domaine expose ses données sous forme de produits consommables par les autres domaines, avec des contrats de qualité définis.
+Le concept est le **data mesh** : propriété des données par domaine, données comme produit, plateforme en libre-service, gouvernance fédérée.
+
+**Il n'est pas pertinent ici** : c'est de l'over-engineering. Le data mesh répond au goulot d'étranglement d'une équipe data centrale saturée, dans une organisation avec de nombreux domaines qui ont chacun leurs compétences. Avec trois personnes, il n'y a ni équipe à décharger ni équipes de domaine pour porter des produits de données.
+
+Signal qui ferait changer d'avis : le délai de livraison des demandes de données à l'équipe centrale (des semaines d'attente), le nombre de domaines et de sources, ou des conflits de définition récurrents entre services.
 
 ### 3.3a - Sauvegarde pendant le festival
 
@@ -121,21 +131,35 @@ Format custom (`-F c`) recommandé car :
 - Permet la restauration sélective avec `pg_restore -t billet`
 - Permet la restauration parallèle (`-j`)
 
+**RPO : 24 h.** Tout billet vendu après la sauvegarde du soir peut être perdu. Pendant le festival, avec des milliers de ventes par jour, c'est beaucoup : il faut des sauvegardes plus fréquentes, ou l'archivage des WAL, pour revenir à quelques minutes.
+
 ### 3.3b - Restauration de la table billet uniquement
 
-1. Créer une base temporaire :
+PostgreSQL ne permet pas de requête entre deux bases. On passe donc par un fichier.
+
+1. Restaurer la table dans une base temporaire :
    ```bash
    createdb -U postgres festival_restore_tmp
-   ```
-2. Restaurer uniquement la table `billet` :
-   ```bash
    pg_restore -U postgres -d festival_restore_tmp -t billet backup_jour1.dump
    ```
-3. Réimporter les données en production :
-   ```sql
-   INSERT INTO festival.billet SELECT * FROM festival_restore_tmp.billet
-   ON CONFLICT (id) DO NOTHING;
+2. En extraire les billets supprimés :
+   ```bash
+   psql -U postgres -d festival_restore_tmp \
+     -c "\copy (SELECT * FROM billet WHERE statut <> 'annule') TO '/tmp/billets_veille.csv' CSV"
    ```
+3. Les réinsérer en production, sans écraser les billets encore présents :
+   ```sql
+   BEGIN;
+   CREATE TEMP TABLE billets_veille (LIKE billet);
+   \copy billets_veille FROM '/tmp/billets_veille.csv' CSV
+   INSERT INTO billet SELECT * FROM billets_veille
+   ON CONFLICT (id) DO NOTHING;
+   -- vérifier le nombre de lignes insérées (~12 000), puis
+   COMMIT;
+   ```
+4. Les billets vendus entre la sauvegarde et l'erreur ne sont pas dans le dump : c'est le RPO. On peut les reconstituer depuis la table `vente` ou le prestataire de paiement.
+
+Si la table avait été entièrement vidée, `pg_restore -a -t billet` suffirait à recharger ses données directement en production.
 
 ### 3.3c - Soft delete vs hard delete
 
@@ -144,7 +168,11 @@ Avantages du soft delete pour le festival :
 - **Réversibilité** : possibilité de réactiver un billet annulé par erreur sans restauration.
 - **Audit** : statistiques complètes sur les ventes et annulations pour les éditions suivantes.
 
-Tension légale : si un·e participant·e demande la suppression de ses données personnelles, un soft delete ne suffit pas - il faut effectivement supprimer ou anonymiser ses données, y compris dans les billets "soft-deleted".
+Tension légale : si un·e participant·e demande la suppression de ses données personnelles, un soft delete ne suffit pas. Il faut effectivement supprimer ou anonymiser ses données, y compris dans les billets "soft-deleted".
+
+### 3.3d - Réplication
+
+**Non.** La réplication copie aussi le `DELETE` erroné, en quelques secondes : le réplica a perdu les mêmes 12 000 billets. Elle protège contre la panne d'un serveur, pas contre l'erreur humaine. Il faut une sauvegarde, ou l'archivage des WAL pour revenir juste avant l'erreur.
 
 ---
 
@@ -175,17 +203,31 @@ Correction :
 - Automatiser la purge avec un job planifié.
 - Proposer aux participant·e·s un opt-in explicite pour être recontacté·e·s pour les éditions suivantes.
 
-### 4.1d - Reconnaissance faciale
+### 4.1d - Biais dans le schéma
 
-Problème : la reconnaissance faciale produit des **données biométriques**, catégorie de données sensibles au sens de la nLPD. Son traitement est soumis à des conditions strictes. Par ailleurs, son utilisation soulève des questions de proportionnalité : la vérification d'un billet peut se faire par QR code sans biométrie.
+Problèmes : le schéma décide qui peut s'inscrire.
 
-Recommandation : renoncer à la reconnaissance faciale et maintenir la validation par QR code. Si la biométrie est maintenue, informer clairement les participant·e·s, obtenir leur consentement explicite, et effacer les photos après validation.
+- `genre NOT NULL CHECK (genre IN ('H', 'F'))` : deux cases obligatoires. Les personnes non binaires sont exclues ou contraintes de mentir, pour une information dont la billetterie n'a pas besoin.
+- `email NOT NULL` : il exclut une partie des personnes âgées, précisément le public visé.
+- `nom` et `prenom` `NOT NULL` : un seul modèle de nom.
+- `date_naissance NOT NULL` complète : disproportionné (nLPD, art. 6). Une tranche d'âge, ou un âge minimal vérifié, suffit.
 
-### 4.2a - Données personnelles vs non personnelles
+Recommandation : supprimer `genre`, ou le rendre facultatif avec une option ouverte. Accepter un email **ou** un téléphone (`CHECK (email IS NOT NULL OR telephone IS NOT NULL)`). Remplacer la date de naissance par une tranche d'âge. Utiliser un seul champ `nom_usage`.
 
-**Données personnelles** : email du·de la participant·e, code postal du·de la participant·e, historique des achats lié à un compte participant·e
+### 4.2a - Indicateurs de qualité
 
-**Données non personnelles** : nombre total de billets vendus pour un concert, nom de l'artiste, capacité maximale d'une scène
+Deux indicateurs parmi, par exemple :
+
+| Dimension | Indicateur | Condition SQL | Seuil |
+|---|---|---|---|
+| Complétude | Billets sans participant | `participant_id IS NULL` | 0 |
+| Validité | Prix hors des tarifs | `prix <= 0 OR prix > 500` | 0 |
+| Validité | Statut inconnu | `statut NOT IN ('valide', 'utilise', 'annule')` | 0 |
+| Cohérence | Billet utilisé avant l'achat | `statut = 'utilise' AND date_achat > now()` | 0 |
+| Unicité | Billets en double | `GROUP BY participant_id, concert_id, date_achat HAVING count(*) > 1` | 0 |
+| Cohérence | Concert au-delà de sa capacité | `count(*) > capacite_max` par concert | 0 |
+
+Un indicateur est une requête, un seuil et un·e responsable. Il est mesuré à chaque import, pas une seule fois.
 
 ### 4.2b - Partage des données de fréquentation
 

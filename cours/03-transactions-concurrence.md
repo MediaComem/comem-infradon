@@ -26,12 +26,12 @@ layout: default
 - Six dimensions de la qualité des données
 - Staging : tout en `TEXT`, sans contrainte
 - Nettoyage : `CASE`, `TRIM`, `TO_DATE`, `COALESCE`
-- Dédoublonnage avec `ROW_NUMBER`
+- Rejets avec motif, journal d'import, provenance des lignes
 - Import rejouable : `ON CONFLICT DO NOTHING`
 
 <Card title="Aujourd'hui" color="#e92528">
 <template #icon><pixelarticons-users /></template>
-Transactions et garanties ACID, puis ce qui se passe quand plusieurs personnes écrivent en même temps.
+Transactions et garanties ACID, accès simultanés, et ce que coûte la cohérence sous charge.
 </Card>
 
 ---
@@ -135,7 +135,7 @@ layout: two-cols
 
 > « Alice vire 100 francs à Bob. L'argent ne doit ni disparaître, ni apparaître. »
 
-### La question
+### Question
 
 Comment garantir les deux écritures ensemble ?
 
@@ -194,39 +194,6 @@ Validée, elle survit aux pannes, grâce au journal <strong>WAL</strong>.
 </Card>
 
 ---
-layout: two-cols
-references: "PostgreSQL, <em>SAVEPOINT</em>"
----
-
-::title::
-# Syntaxe : SAVEPOINT
-
-::left::
-
-- Point de reprise dans la transaction
-- `ROLLBACK TO` : annule jusqu'au point
-- Le début de la transaction est conservé
-- `COMMIT` valide le reste
-
-::right::
-
-```sql
-BEGIN;
-
-UPDATE compte SET solde = solde - 100
-WHERE id = 1;
-
-SAVEPOINT avant_credit;
-
-UPDATE compte SET solde = solde + 100
-WHERE id = 2;
-
-ROLLBACK TO SAVEPOINT avant_credit;
-
-COMMIT;
-```
-
----
 layout: section
 ---
 
@@ -261,32 +228,6 @@ references: "PostgreSQL, <em>Transaction Isolation</em>"
 ---
 
 ::title::
-# Lecture sale
-
-::left::
-
-- T2 lit une valeur **non validée** par T1
-- T1 annule : la valeur n'a jamais existé
-- Jamais permise par PostgreSQL
-
-::right::
-
-```mermaid {scale: 0.7}
-sequenceDiagram
-    participant T1
-    participant T2
-    T1->>T1: UPDATE solde = 400
-    T2->>T2: SELECT solde : 400
-    T1->>T1: ROLLBACK
-    Note over T1,T2: 400 n'a jamais été validé
-```
-
----
-layout: two-cols
-references: "PostgreSQL, <em>Transaction Isolation</em>"
----
-
-::title::
 # Lecture non répétable
 
 ::left::
@@ -306,33 +247,6 @@ sequenceDiagram
     T2->>T2: UPDATE solde = 200, COMMIT
     T1->>T1: SELECT solde : 200
     Note over T1: même requête, autre résultat
-```
-
----
-layout: two-cols
-references: "PostgreSQL, <em>Transaction Isolation</em>"
----
-
-::title::
-# Lecture fantôme
-
-::left::
-
-- T1 lit un ensemble de lignes, puis le relit
-- T2 a inséré une ligne entre-temps
-- Pas une ligne modifiée : une ligne **nouvelle**
-- Évitée dès `REPEATABLE READ` dans PostgreSQL
-
-::right::
-
-```mermaid {scale: 0.7}
-sequenceDiagram
-    participant T1
-    participant T2
-    T1->>T1: COUNT WHERE solde > 100 : 2
-    T2->>T2: INSERT Charlie 400, COMMIT
-    T1->>T1: COUNT WHERE solde > 100 : 3
-    Note over T1: le rapport change en cours de route
 ```
 
 ---
@@ -501,6 +415,226 @@ references: "PostgreSQL, <em>Transaction Isolation</em>"
 </Card>
 
 ---
+layout: default
+---
+
+# Choix du niveau
+
+| Situation | Niveau |
+|---|---|
+| Opérations courantes, API web | `READ COMMITTED` |
+| Rapport en plusieurs requêtes | `REPEATABLE READ` |
+| Calcul financier critique | `SERIALIZABLE` |
+| Import en masse | `READ COMMITTED`, par lots |
+| File de tâches | `READ COMMITTED` et `FOR UPDATE SKIP LOCKED` |
+
+La plupart des applications restent en `READ COMMITTED` : savoir pourquoi aide à diagnostiquer une anomalie.
+
+---
+layout: section
+---
+
+# MVCC et verrous
+
+---
+layout: two-cols
+references: "PostgreSQL, <em>Concurrency Control</em>"
+---
+
+::title::
+# Versions d'une ligne
+
+::left::
+
+- **M**ulti-**V**ersion **C**oncurrency **C**ontrol
+- `xmin` : transaction qui a créé la version
+- `xmax` : transaction qui l'a remplacée
+- Un `UPDATE` crée une nouvelle version
+- Lecteurs et écrivain ne se bloquent pas
+
+::right::
+
+`compte` (versions physiques)
+
+| xmin | xmax | id | solde |
+|---|---|---|---|
+| 9 | 11 | 1 | 500 |
+| 11 | | 1 | 400 |
+
+---
+layout: two-cols
+references: "PostgreSQL, <em>Explicit Locking</em>"
+---
+
+::title::
+# Verrous implicites
+
+::left::
+
+- Posés automatiquement par PostgreSQL
+- Lecture : aucun verrou, grâce à MVCC
+- Écriture : verrou sur la ligne
+- Changement de structure : verrou sur la table
+
+::right::
+
+| Instruction | Verrou |
+|---|---|
+| `SELECT` | Aucun |
+| `UPDATE`, `DELETE` | Ligne |
+| `ALTER TABLE` | Table |
+
+---
+layout: two-cols
+references: "PostgreSQL, <em>Deadlocks</em>"
+---
+
+::title::
+# Interblocage
+
+::left::
+
+- T1 attend T2, T2 attend T1
+- Détection après `deadlock_timeout` : 1 s
+- PostgreSQL annule l'une des deux
+- L'autre continue : `deadlock detected`
+
+::right::
+
+```mermaid {scale: 0.7}
+sequenceDiagram
+    participant T1
+    participant T2
+    T1->>T1: UPDATE id = 1, verrou ligne 1
+    T2->>T2: UPDATE id = 2, verrou ligne 2
+    T1->>T1: UPDATE id = 2, attend T2
+    T2->>T2: UPDATE id = 1, attend T1
+    Note over T1,T2: interblocage, T2 annulée
+    T1->>T1: COMMIT
+```
+
+---
+layout: section
+---
+
+# Cohérence sous charge
+
+---
+layout: two-cols
+---
+
+::title::
+# Coût de la cohérence
+
+::left::
+
+- Isolation stricte : plus de transactions annulées
+- Transaction annulée : travail perdu, puis réessai
+- Verrou posé : les autres attendent
+- Contention : écritures concentrées sur les mêmes lignes
+- Le coût dépend de la charge réelle
+
+::right::
+
+<Card title="Arbitrage" color="#e92528" footer="cours 05 · systèmes distribués, CAP">
+<template #icon><pixelarticons-scale /></template>
+Garantie plus forte ou débit plus élevé : le choix se mesure sur sa propre charge, pas sur une intuition.
+</Card>
+
+---
+layout: two-cols
+references: "PostgreSQL, <em>pgbench</em>"
+---
+
+::title::
+# Mesure de charge
+
+::left::
+
+- `pgbench` : fourni avec PostgreSQL
+- N clients rejouent un script en boucle
+- Débit : transactions par seconde (`tps`)
+- Échecs et réessais par type d'erreur
+- Mesure bruitée : répéter, comparer les écarts
+
+::right::
+
+```text
+number of clients: 8
+number of failed transactions: 17 (5.199%)
+number of serialization failures: 16 (4.893%)
+number of deadlock failures: 1 (0.306%)
+number of transactions retried: 204 (62.385%)
+latency average = 204.970 ms
+tps = 37.000925
+```
+
+---
+layout: grid
+cols: 2
+align: stretch
+content: center
+---
+
+# Règles des transactions
+
+<Card title="Courtes">
+<template #icon><pixelarticons-clock /></template>
+Moins de temps verrouillé, moins de conflits. Jamais d'attente de saisie dans une transaction.
+</Card>
+<Card title="Même ordre">
+<template #icon><pixelarticons-sort /></template>
+Accéder aux tables et aux lignes toujours dans le même ordre : plus d'interblocage circulaire.
+</Card>
+<Card title="Niveau adapté">
+<template #icon><pixelarticons-sliders /></template>
+<code>READ COMMITTED</code> le plus souvent. Plus strict pour les rapports et les calculs critiques.
+</Card>
+<Card title="Réessai">
+<template #icon><pixelarticons-reload /></template>
+Erreur <code>40001</code> : la transaction a été annulée. La relancer en entier.
+</Card>
+
+---
+layout: section
+---
+
+# Travaux pratiques
+
+---
+layout: two-cols
+routeAlias: tp
+---
+
+::title::
+# Travail pratique · Semaine 3
+
+::left::
+
+### Déroulé
+
+1. Anomalies à plusieurs sessions : 60 min
+2. Mesures avec `pgbench` : 75 min
+3. Analyse des mesures : 45 min
+
+<Card color="#6b7280" tag="note" title="Non noté">
+<template #icon><pixelarticons-book-open /></template>
+Les exercices préparent l'examen final.
+</Card>
+
+::right::
+
+### Départ
+
+1. Télécharger [03-banque.sql](https://comem-infradon.onrender.com/exercices/03-banque.sql), [03-virement.sql](https://comem-infradon.onrender.com/exercices/03-virement.sql) et [03-virement-ordonne.sql](https://comem-infradon.onrender.com/exercices/03-virement-ordonne.sql)
+2. Les copier dans le dossier `data`
+3. Créer les comptes dans `psql`
+
+```sql
+\i /data/03-banque.sql
+```
+
+---
 layout: two-cols
 ---
 
@@ -525,133 +659,6 @@ SET SESSION CHARACTERISTICS AS TRANSACTION
 BEGIN TRANSACTION ISOLATION LEVEL
   SERIALIZABLE READ ONLY;
 ```
-
----
-layout: default
----
-
-# Choix du niveau
-
-| Situation | Niveau |
-|---|---|
-| Opérations courantes, API web | `READ COMMITTED` |
-| Rapport en plusieurs requêtes | `REPEATABLE READ` |
-| Calcul financier critique | `SERIALIZABLE` |
-| Import en masse | `READ COMMITTED`, par lots |
-| File de tâches | `READ COMMITTED` et `FOR UPDATE SKIP LOCKED` |
-
-La plupart des applications restent en `READ COMMITTED` : savoir pourquoi aide à diagnostiquer une anomalie.
-
----
-layout: section
----
-
-# MVCC
-
----
-layout: two-cols
-references: "PostgreSQL, <em>Concurrency Control</em>"
----
-
-::title::
-# Versions d'une ligne
-
-::left::
-
-- **M**ulti-**V**ersion **C**oncurrency **C**ontrol
-- `xmin` : transaction qui a créé la version
-- `xmax` : transaction qui l'a remplacée
-- Un `UPDATE` crée une nouvelle version
-
-::right::
-
-`compte` (versions physiques)
-
-| xmin | xmax | id | solde |
-|---|---|---|---|
-| 9 | 11 | 1 | 500 |
-| 11 | | 1 | 400 |
-
----
-layout: two-cols
-references: "PostgreSQL, <em>Concurrency Control</em>"
----
-
-::title::
-# Lectures sans blocage
-
-::left::
-
-- T1 a commencé avant T2 : voit 500
-- T3 commence après T2 : voit 400
-- Chaque transaction lit sa version
-- Lecteurs et écrivain ne se bloquent pas
-
-::right::
-
-```mermaid {scale: 0.7}
-sequenceDiagram
-    participant T1 as T1 (id 10)
-    participant T2 as T2 (id 11)
-    participant T3 as T3 (id 12)
-    T1->>T1: BEGIN
-    T2->>T2: UPDATE solde = 400, COMMIT
-    T1->>T1: SELECT solde : 500
-    T3->>T3: SELECT solde : 400
-```
-
----
-layout: two-cols
-references: "PostgreSQL, <em>Routine Vacuuming</em>"
----
-
-::title::
-# Lignes mortes et VACUUM
-
-::left::
-
-- Ancienne version : **ligne morte**
-- Accumulation : la table gonfle
-- `VACUUM` libère l'espace
-- `autovacuum` le lance automatiquement
-- Seuil : 50 lignes et 20% de la table
-
-::right::
-
-<Figure
-  src="/images/03/autovacuum.png"
-  caption="<a href='https://www.geeksforgeeks.org/postgresql/postgresql-autovacuum/'>GeeksforGeeks, <em>PostgreSQL Autovacuum</em></a>"
-  alt="Fonctionnement de l'autovacuum PostgreSQL"
-/>
-
----
-layout: section
----
-
-# Verrous
-
----
-layout: two-cols
-references: "PostgreSQL, <em>Explicit Locking</em>"
----
-
-::title::
-# Verrous implicites
-
-::left::
-
-- Posés automatiquement par PostgreSQL
-- Lecture : aucun verrou, grâce à MVCC
-- Écriture : verrou sur la ligne
-- Changement de structure : verrou sur la table
-
-::right::
-
-| Instruction | Verrou |
-|---|---|
-| `SELECT` | Aucun |
-| `UPDATE`, `DELETE` | Ligne |
-| `ALTER TABLE` | Table |
 
 ---
 layout: two-cols
@@ -688,62 +695,6 @@ FOR UPDATE SKIP LOCKED;
 
 ---
 layout: two-cols
-references: "PostgreSQL, <em>Deadlocks</em>"
----
-
-::title::
-# Interblocage
-
-::left::
-
-- T1 attend T2, T2 attend T1
-- Détection après `deadlock_timeout` : 1 s
-- PostgreSQL annule l'une des deux
-- L'autre continue : `deadlock detected`
-
-::right::
-
-```mermaid {scale: 0.7}
-sequenceDiagram
-    participant T1
-    participant T2
-    T1->>T1: UPDATE id = 1, verrou ligne 1
-    T2->>T2: UPDATE id = 2, verrou ligne 2
-    T1->>T1: UPDATE id = 2, attend T2
-    T2->>T2: UPDATE id = 1, attend T1
-    Note over T1,T2: interblocage, T2 annulée
-    T1->>T1: COMMIT
-```
-
----
-layout: two-cols
-references: "PostgreSQL, <em>pg_locks</em>"
----
-
-::title::
-# Verrous en cours
-
-::left::
-
-- Vue système `pg_locks`
-- Une ligne par verrou demandé
-- `granted` faux : verrou en attente
-
-::right::
-
-```sql
-SELECT pid,
-       locktype,
-       relation::regclass AS table_name,
-       mode,
-       granted
-FROM pg_locks
-WHERE relation IS NOT NULL
-ORDER BY granted, pid;
-```
-
----
-layout: two-cols
 references: "PostgreSQL, <em>pg_blocking_pids</em>"
 ---
 
@@ -773,49 +724,11 @@ WHERE cardinality(
 ```
 
 ---
-layout: section
----
-
-# Bonnes pratiques
-
----
-layout: grid
-cols: 2
-align: stretch
-content: center
----
-
-# Règles des transactions
-
-<Card title="Courtes">
-<template #icon><pixelarticons-clock /></template>
-Moins de temps verrouillé, moins de conflits. Jamais d'attente de saisie dans une transaction.
-</Card>
-<Card title="Même ordre">
-<template #icon><pixelarticons-sort /></template>
-Accéder aux tables et aux lignes toujours dans le même ordre : plus d'interblocage circulaire.
-</Card>
-<Card title="Niveau adapté">
-<template #icon><pixelarticons-sliders /></template>
-<code>READ COMMITTED</code> le plus souvent. Plus strict pour les rapports et les calculs critiques.
-</Card>
-<Card title="Réessai">
-<template #icon><pixelarticons-reload /></template>
-Erreur <code>40001</code> : la transaction a été annulée. La relancer en entier.
-</Card>
-
----
-layout: section
----
-
-# Exercices
-
----
 layout: two-cols-bottom
 ---
 
 ::title::
-# Exercice 1 : READ COMMITTED
+# Exercice 1 : lecture non répétable
 
 ::left::
 
@@ -824,10 +737,8 @@ layout: two-cols-bottom
 ```sql
 BEGIN;
 SELECT solde FROM compte WHERE id = 1;
--- 500
 -- T2 s'exécute ici
 SELECT solde FROM compte WHERE id = 1;
--- ?
 COMMIT;
 ```
 
@@ -838,26 +749,21 @@ COMMIT;
 ```sql
 UPDATE compte SET solde = 200
 WHERE id = 1;
-COMMIT;
 ```
 
 ::bottom::
 
-<v-click>
-
-<Card title="200" color="#16a34a">
-<template #icon><pixelarticons-check /></template>
-Nouvel instantané à chaque instruction : T1 voit la validation de T2. Lecture non répétable.
+<Card title="Question" color="#e92528">
+<template #icon><pixelarticons-scale /></template>
+Quel solde T1 lit-elle la seconde fois ? Remettre le solde à 1000, puis refaire avec <code>REPEATABLE READ</code>.
 </Card>
-
-</v-click>
 
 ---
 layout: two-cols-bottom
 ---
 
 ::title::
-# Exercice 2 : REPEATABLE READ
+# Exercice 2 : conflit d'écriture
 
 ::left::
 
@@ -867,54 +773,10 @@ layout: two-cols-bottom
 BEGIN TRANSACTION ISOLATION LEVEL
   REPEATABLE READ;
 SELECT solde FROM compte WHERE id = 1;
--- 500
--- T2 s'exécute ici
-SELECT solde FROM compte WHERE id = 1;
--- ?
-COMMIT;
-```
-
-::right::
-
-### T2
-
-```sql
-UPDATE compte SET solde = 200
-WHERE id = 1;
-COMMIT;
-```
-
-::bottom::
-
-<v-click>
-
-<Card title="500" color="#16a34a">
-<template #icon><pixelarticons-check /></template>
-Instantané figé à la première lecture : T1 voit toujours la même version.
-</Card>
-
-</v-click>
-
----
-layout: two-cols-bottom
----
-
-::title::
-# Exercice 3 : conflit d'écriture
-
-::left::
-
-### T1
-
-```sql
-BEGIN TRANSACTION ISOLATION LEVEL
-  REPEATABLE READ;
-SELECT solde FROM compte WHERE id = 1;
--- 500
 -- T2 s'exécute ici
 UPDATE compte SET solde = solde - 50
 WHERE id = 1;
-COMMIT;  -- solde final ?
+COMMIT;
 ```
 
 ::right::
@@ -924,26 +786,21 @@ COMMIT;  -- solde final ?
 ```sql
 UPDATE compte SET solde = 100
 WHERE id = 1;
-COMMIT;
 ```
 
 ::bottom::
 
-<v-click>
-
-<Card title="Erreur, solde à 100" color="#16a34a">
-<template #icon><pixelarticons-check /></template>
-T2 a validé après l'instantané de T1 : <code>could not serialize access</code>. T1 est annulée et doit réessayer.
+<Card title="Question" color="#e92528">
+<template #icon><pixelarticons-scale /></template>
+Quel message reçoit T1 ? Quel est le solde final ? Que doit faire l'application ?
 </Card>
-
-</v-click>
 
 ---
 layout: two-cols-bottom
 ---
 
 ::title::
-# Exercice 4 : FOR UPDATE
+# Exercice 3 : interblocage
 
 ::left::
 
@@ -951,11 +808,10 @@ layout: two-cols-bottom
 
 ```sql
 BEGIN;
-SELECT solde FROM compte
-WHERE id = 1 FOR UPDATE;
--- T2 tente son UPDATE ici
-UPDATE compte SET solde = solde - 100
-WHERE id = 1;
+UPDATE compte SET solde = solde - 10
+WHERE id = 1;            -- étape 1
+UPDATE compte SET solde = solde + 10
+WHERE id = 2;            -- étape 3
 COMMIT;
 ```
 
@@ -964,57 +820,145 @@ COMMIT;
 ### T2
 
 ```sql
-UPDATE compte SET solde = 0
-WHERE id = 1;
--- que se passe-t-il ?
+BEGIN;
+UPDATE compte SET solde = solde - 10
+WHERE id = 2;            -- étape 2
+UPDATE compte SET solde = solde + 10
+WHERE id = 1;            -- étape 4
 COMMIT;
 ```
 
 ::bottom::
 
-<v-click>
-
-<Card title="T2 attend" color="#16a34a">
-<template #icon><pixelarticons-check /></template>
-Verrou exclusif posé par T1 : T2 attend son <code>COMMIT</code>, puis s'exécute. Solde final : 0.
+<Card title="Question" color="#e92528">
+<template #icon><pixelarticons-scale /></template>
+Après l'étape 3, lancer <code>Blocages en cours</code> dans une troisième session. Quelle transaction est annulée à l'étape 4 ? Comment l'éviter ?
 </Card>
-
-</v-click>
-
----
-layout: section
----
-
-# Travaux pratiques
 
 ---
 layout: two-cols
-routeAlias: tp
+references: "PostgreSQL, <em>pgbench</em>"
 ---
 
 ::title::
-# Travail pratique · Semaine 3
+# Syntaxe : pgbench
 
 ::left::
 
-### Transactions du projet
-
-1. Lister les opérations qui doivent être atomiques
-2. Écrire la clôture d'un signalement avec son intervention
-3. Tester le `ROLLBACK` sur une erreur volontaire
+- Lancer dans le conteneur, onglet **Exec**
+- `-f` : script, `-D` : variable du script
+- `-c` : clients simultanés, `-T` : durée en secondes
+- `--max-tries` : essais avant l'échec
+- `ALTER DATABASE` : niveau des nouvelles connexions
 
 ::right::
 
-### Concurrence
+```sql
+ALTER DATABASE yverdon
+  SET default_transaction_isolation
+  = 'serializable';
+-- Fin du TP : RESET, sans valeur
+```
 
-1. Ouvrir deux sessions `psql`
-2. Reproduire une lecture non répétable
-3. La corriger avec `REPEATABLE READ`
+```bash
+pgbench -U postgres -n \
+  -f /data/03-virement.sql -D nb=10000 \
+  -c 32 -j 2 -T 30 \
+  --max-tries=10 --failures-detailed \
+  yverdon
+```
 
-<Card color="#6b7280" tag="note" title="Scripts">
-<template #icon><pixelarticons-script /></template>
-Garder chaque scénario dans un fichier <code>.sql</code> commenté du dépôt.
+---
+layout: two-cols
+---
+
+::title::
+# Exercice 4 : niveau d'isolation
+
+::left::
+
+### Étapes
+
+1. Lancer `03-virement.sql`, `nb=10000`, 32 clients
+2. Recréer la table avant chaque mesure
+3. Relever `tps`, réessais, échecs par niveau
+4. Répéter trois fois chaque mesure
+5. Vérifier `SUM(solde)` à la fin
+
+::right::
+
+`mesures`
+
+| niveau | tps | réessais | échecs |
+|---|---|---|---|
+| read committed | | | |
+| repeatable read | | | |
+| serializable | | | |
+
+---
+layout: two-cols-bottom
+---
+
+::title::
+# Exercice 5 : contention
+
+::left::
+
+### Étapes
+
+1. Refaire l'exercice 4 avec `nb=10`
+2. Comparer 1 client et 8 clients
+3. Relancer avec `03-virement-ordonne.sql`
+4. Comparer les interblocages
+
+::right::
+
+```bash
+pgbench ... -f /data/03-virement.sql \
+  -D nb=10 -c 1 ...
+
+pgbench ... -f /data/03-virement.sql \
+  -D nb=10 -c 8 ...
+
+pgbench ... -f /data/03-virement-ordonne.sql \
+  -D nb=10 -c 8 ...
+```
+
+::bottom::
+
+<Card title="Question" color="#e92528">
+<template #icon><pixelarticons-scale /></template>
+Pourquoi le débit s'effondre-t-il avec 10 comptes ? Que change l'ordre des mises à jour ? Et le niveau d'isolation, une fois l'ordre corrigé ?
 </Card>
+
+---
+layout: two-cols
+---
+
+::title::
+# Exercice 6 : question type
+
+::left::
+
+### Situation
+
+> « On a eu une mise à jour perdue. Passons toute l'application en SERIALIZABLE. »
+
+### Question
+
+Que répondre, à partir des mesures ci-contre ?
+
+::right::
+
+`mesures`
+
+| niveau | tps | réessais | échecs |
+|---|---|---|---|
+| read committed | 2 238 | 0 | 0 |
+| repeatable read | 3 140 | 20 057 | 1 399 |
+| serializable | 3 136 | 20 611 | 1 581 |
+
+`03-virement-ordonne.sql`, 10 comptes, 8 clients, 10 s. Échec : abandon après 10 essais.
 
 ---
 layout: default
@@ -1026,7 +970,7 @@ layout: default
 - [PostgreSQL · Transaction Isolation](https://www.postgresql.org/docs/current/transaction-iso.html)
 - [PostgreSQL · MVCC](https://www.postgresql.org/docs/current/mvcc.html)
 - [PostgreSQL · Explicit Locking](https://www.postgresql.org/docs/current/explicit-locking.html)
-- [Brandur Leach · Postgres Isolation Levels](https://brandur.org/postgres-reads)
+- [PostgreSQL · pgbench](https://www.postgresql.org/docs/current/pgbench.html)
 
 <Card title="Prochain cours" color="#e92528" footer="cours 04 · Sécurité, rôles et sauvegarde">
 <template #icon><pixelarticons-arrow-right /></template>

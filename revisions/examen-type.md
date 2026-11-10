@@ -236,7 +236,7 @@ Justification si faux : _______________________________________________
 
 ---
 
-**Q5.** Un billet dont le `prix` est `NULL` dans la staging est exclu de l'INSERT.
+**Q5.** Si l'`INSERT` s'exécute sans erreur, toutes les lignes de `staging.billets_2023` se retrouvent dans `billet`.
 
 - [ ] Vrai
 - [ ] Faux
@@ -285,7 +285,7 @@ Justification si faux : _______________________________________________
 
 ---
 
-**Q8.** Pour éviter ce problème, il suffit de remplacer `READ COMMITTED` par `SERIALIZABLE` : PostgreSQL refusera automatiquement l'insertion qui dépasse la capacite_max.
+**Q8.** Si T1 et T2 s'exécutent en `SERIALIZABLE`, l'une des deux échoue avec une erreur de sérialisation, et l'application doit la rejouer.
 
 - [ ] Vrai
 - [ ] Faux
@@ -451,7 +451,7 @@ Justification si faux : _______________________________________________
 
 ### Question 3.1 | Concurrence et transactions (8 pts)
 
-**a)** Complétez le tableau suivant en indiquant si chaque niveau d'isolation PostgreSQL empêche chaque anomalie. (4 pts)
+**a)** Complétez le tableau suivant en indiquant si chaque niveau d'isolation PostgreSQL empêche chaque anomalie. (3 pts)
 
 | Niveau | Dirty read | Non-repeatable read | Phantom read |
 |---|:---:|:---:|:---:|
@@ -471,7 +471,16 @@ INSERT INTO billet (concert_id, participant_id, statut, prix)
 COMMIT;
 ```
 
-Expliquez le problème de concurrence qui peut amener deux acheteurs à acheter le même billet en trop. Proposez une solution SQL concrète. (4 pts)
+Expliquez le problème de concurrence qui peut amener deux acheteurs à acheter le même billet en trop. Proposez une solution SQL concrète. (3 pts)
+
+**c)** L'équipe teste l'achat de billets avec `pgbench` : 8 clients simultanés, 10 s, sur un concert presque complet.
+
+| niveau | tps | réessais | échecs |
+|---|---|---|---|
+| READ COMMITTED + `FOR UPDATE` | 2 200 | 0 | 0 |
+| SERIALIZABLE | 3 100 | 20 600 | 1 580 |
+
+Un·e collègue conclut : « `SERIALIZABLE` est plus rapide, passons toute la billetterie dans ce niveau. » Que répondez-vous ? (2 pts)
 
 ---
 
@@ -481,17 +490,19 @@ Expliquez le problème de concurrence qui peut amener deux acheteurs à acheter 
 
 **b)** Chaque soir, la·le responsable de billetterie lance un rapport SQL qui calcule le chiffre d'affaires total, le taux de remplissage par concert et les revenus par type de billet. Ce rapport scanne l'intégralité de la table `billet` (500 000 lignes) et prend 2 minutes. Pendant ce temps, des acheteur·se·s signalent des lenteurs lors de l'achat en ligne. Expliquez pourquoi ce conflit survient et proposez deux solutions architecturales vues en cours. (3 pts)
 
-**c)** Le festival envisage de passer d'une architecture centralisée (une équipe data gère tout) à une organisation où chaque domaine (billetterie, programmation, restauration) gère ses propres données. Quel concept vu en cours correspond à cette approche ? Citez deux de ses principes fondamentaux. (2 pts)
+**c)** Le festival, dont l'équipe technique compte trois personnes, envisage de passer d'une architecture centralisée à une organisation où chaque domaine (billetterie, programmation, restauration) gère ses propres données. Quel concept vu en cours correspond à cette approche ? Est-il pertinent ici ? Justifiez avec un signal mesurable. (2 pts)
 
 ---
 
 ### Question 3.3 | Sauvegarde et restauration (8 pts)
 
-**a)** La base de billetterie doit être sauvegardée chaque soir pendant les 4 jours du festival. Proposez une commande `pg_dump` adaptée et justifiez le format choisi. (2 pts)
+**a)** La base de billetterie doit être sauvegardée chaque soir pendant les 4 jours du festival. Proposez une commande `pg_dump` adaptée et justifiez le format choisi. Quel RPO cette stratégie offre-t-elle ? (2 pts)
 
 **b)** Le matin du Jour 2, un `DELETE FROM billet WHERE statut = 'annule'` est exécuté par erreur sans clause `WHERE` suffisamment précise, supprimant 12 000 billets valides. Décrivez les étapes pour restaurer uniquement la table `billet` depuis la sauvegarde de la veille, sans toucher au reste de la base. (3 pts)
 
-**c)** L'équipe technique propose d'utiliser le **soft delete** (champ `deleted_at`) plutôt que le hard delete pour les billets annulés. Quels sont les avantages de cette approche pour le festival ? Quelle contrainte légale peut entrer en tension avec ce choix ? (3 pts)
+**c)** L'équipe technique propose d'utiliser le **soft delete** (champ `deleted_at`) plutôt que le hard delete pour les billets annulés. Quels sont les avantages de cette approche pour le festival ? Quelle contrainte légale peut entrer en tension avec ce choix ? (2 pts)
+
+**d)** La base est répliquée en continu sur un second serveur. Dans le scénario b), le réplica aurait-il permis de récupérer les billets ? Justifiez. (1 pt)
 
 ---
 
@@ -507,20 +518,25 @@ Pour chacun des cas suivants, identifiez le problème et proposez une correction
 
 **c)** A la fin du festival, l'organisation conserve l'intégralité des données de tous les participant·e·s (y compris les coordonnées et historiques d'achat) pour les 15 prochaines années, au cas où elle aurait besoin de les recontacter pour de futures éditions. (3 pts)
 
-**d)** Pour améliorer la sécurité aux entrées, l'organisation envisage d'utiliser la reconnaissance faciale pour valider les billets, en comparant la photo prise à l'entrée avec celle du profil du compte participant·e. (3 pts)
+**d)** Le formulaire d'inscription repose sur la table suivante. Le festival veut attirer un public plus large, notamment des personnes âgées et des familles. (3 pts)
+
+```sql
+CREATE TABLE participant (
+  id             serial PRIMARY KEY,
+  nom            text NOT NULL,
+  prenom         text NOT NULL,
+  genre          char(1) NOT NULL CHECK (genre IN ('H', 'F')),
+  email          text NOT NULL,
+  date_naissance date NOT NULL,
+  code_postal    text NOT NULL
+);
+```
 
 ---
 
 ### Question 4.2 | RGPD, nLPD et gouvernance (8 pts)
 
-**a)** Classez les données suivantes en deux colonnes : données personnelles / données non personnelles. (2 pts)
-
-- Email du participant
-- Nombre total de billets vendus pour un concert
-- Code postal du participant
-- Nom de l'artiste
-- Historique des achats lié à un compte participant
-- Capacité maximale d'une scène
+**a)** Proposez deux indicateurs de qualité des données pour la table `billet`. Pour chacun : la dimension de qualité, la condition SQL et un seuil. (2 pts)
 
 **b)** Le festival souhaite partager les données de fréquentation (nombre de visiteurs par jour, par scène, par tranche d'âge) avec des partenaires médias pour la promotion de la prochaine édition. Quelles précautions doit-il prendre avant de partager ces données ? Citez deux mesures concrètes. (3 pts)
 

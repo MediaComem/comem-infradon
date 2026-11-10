@@ -4,7 +4,7 @@
 
 Cours **Infrastructure de Données** de la filière Ingénierie des Médias, HEIG-VD.
 
-Ce document est mis à jour au fur et à mesure du semestre avec les informations du cours, les jalons du projet et les ressources.
+Ce document est mis à jour au fur et à mesure du semestre avec les informations du cours, les fichiers d'exercices et les ressources.
 
 ---
 
@@ -25,9 +25,9 @@ Ce document est mis à jour au fur et à mesure du semestre avec les information
 |---|---|
 | [PostgreSQL](https://www.postgresql.org/) + [PostGIS](https://postgis.net/) | SGBD principal |
 | [Docker](https://www.docker.com/) | Conteneurisation de l'environnement |
-| [Git / GitHub](https://github.com/) | Versioning du projet |
+| [Git / GitHub](https://github.com/) | Versionnement des scripts d'exercices |
 
-Un fichier `docker-compose.yml` est fourni pour démarrer PostgreSQL + PostGIS.
+Le fichier [`docker-compose.yml`](cours/public/exercices/docker-compose.yml) démarre PostgreSQL 17 + PostGIS et crée la base `yverdon`. Il est aussi [téléchargeable](https://comem-infradon.onrender.com/exercices/docker-compose.yml) depuis le site du cours.
 
 ---
 
@@ -35,14 +35,20 @@ Un fichier `docker-compose.yml` est fourni pour démarrer PostgreSQL + PostGIS.
 
 | # | Module | Contenu |
 |---|--------|---------|
-| 01 | [Introduction](https://comem-infradon.onrender.com/01-introduction/) | Composants d'une infrastructure, modèles de déploiement, projet fil rouge |
-| 02 | [Import et nettoyage](https://comem-infradon.onrender.com/02-import-nettoyage/) | Qualité des données, staging, COPY, CASE, TRIM, COALESCE, TO_DATE, ROW_NUMBER, idempotence et ON CONFLICT |
-| 03 | [Transactions et concurrence](https://comem-infradon.onrender.com/03-transactions-concurrence/) | ACID, anomalies de concurrence, niveaux d'isolation, MVCC, verrous, interblocages |
-| 04 | [Sécurité, rôles et sauvegarde](https://comem-infradon.onrender.com/04-securite-roles-sauvegarde/) | GRANT/REVOKE, moindre privilège, suppression physique ou logique, pg_dump/pg_restore |
-| 05 | [Structures et architectures](https://comem-infradon.onrender.com/05-structures-architectures/) | JSONB, index GIN et GiST, EXPLAIN ANALYZE, NoSQL, CAP et BASE, OLTP/OLAP, vues matérialisées, ETL/ELT, medallion, lakehouse, data mesh |
-| 06 | [Éthique des données](https://comem-infradon.onrender.com/06-ethique-donnees/) | Impact environnemental, biais algorithmiques, souveraineté, nLPD/RGPD, gouvernance |
+| 01 | [Introduction](https://comem-infradon.onrender.com/01-introduction/) | Composants d'une infrastructure, flux de données, modèles de déploiement, conteneurs, versionnement. TP : environnement Docker et Git, exploration des fichiers, cadrage d'un besoin |
+| 02 | [Import et nettoyage](https://comem-infradon.onrender.com/02-import-nettoyage/) | Qualité des données, staging, COPY, propagation des erreurs, rejets, traçabilité et journal d'import, idempotence et ON CONFLICT. TP : profilage, nettoyage SQL, table de rejets, import rejouable |
+| 03 | [Transactions et concurrence](https://comem-infradon.onrender.com/03-transactions-concurrence/) | ACID, anomalies de concurrence, niveaux d'isolation, MVCC, verrous, interblocages, coût de la cohérence. TP : anomalies à plusieurs sessions, mesures avec pgbench |
+| 04 | [Sécurité, rôles et sauvegarde](https://comem-infradon.onrender.com/04-securite-roles-sauvegarde/) | GRANT/REVOKE, moindre privilège, audit des rôles, fuites de données, suppression physique ou logique, RPO/RTO, pg_dump/pg_restore, scénarios de panne. TP : audit et correction des rôles, suppression logique, sauvegarde, restauration après incident |
+| 05 | [Structures et architectures](https://comem-infradon.onrender.com/05-structures-architectures/) | Limites du relationnel, NoSQL, CAP et BASE, OLTP/OLAP, ETL/ELT, medallion, lakehouse, data mesh, over-engineering. TP : JSONB, index GIN, EXPLAIN ANALYZE, vues matérialisées, choix d'architecture |
+| 06 | [Éthique des données](https://comem-infradon.onrender.com/06-ethique-donnees/) | Gouvernance, qualité des données mesurée, nLPD/RGPD et audit de conformité, empreinte environnementale, souveraineté, biais. TP : inventaire et registre, pseudonymisation et rétention, indicateurs de qualité, biais de signalement |
 
 Les notions de base (CRUD, vues simples, index B-tree, plan d'exécution) sont vues au cours [Modélisation de Données](https://github.com/romanoe/comem-modeldon) du semestre 1.
+
+---
+
+## Organisation
+
+Chaque séance comprend 1 h de cours et 3 h de travaux pratiques en classe. Les exercices ne sont pas notés : ils se terminent par une question au format de l'examen. Les corrigés sont publiés une semaine après la séance.
 
 ---
 
@@ -50,20 +56,15 @@ Les notions de base (CRUD, vues simples, index B-tree, plan d'exécution) sont v
 
 | Composante | Poids |
 |---|---|
-| Projet : présentation + poster A3 | 50% |
-| Examen final : semaine d'examen | 50% |
+| Examen final : semaine d'examen | 100% |
 
 ---
 
-## Projet fil rouge : Service technique communal d'Yverdon-les-Bains
+## Cas fil rouge : Service technique communal d'Yverdon-les-Bains
 
-### Contexte
+La personne en charge du Service technique de la Commune d'Yverdon-les-Bains gère depuis 2018 le mobilier urbain (bancs, lampadaires, fontaines, poubelles, bornes de recharge) dans des fichiers Excel. Elle note les signalements de la population, enregistre les interventions de maintenance et tient une liste de fournisseurs. Les travaux pratiques en font, séance après séance, une infrastructure de données.
 
-La personne en charge du Service technique de la Commune d'Yverdon-les-Bains gère depuis 2018 le mobilier urbain (bancs, lampadaires, fontaines, poubelles, bornes de recharge) dans des fichiers Excel. Elle note les signalements de la population, enregistre les interventions de maintenance et tient une liste de fournisseurs.
-
-Vous recevez les **4 fichiers Excel** tels quels. Votre mission : en faire une **infrastructure de données** fonctionnelle, optimisée et utile.
-
-> **Note** : toutes les données du projet sont **fictives**. Les noms, numéros de téléphone, coordonnées et autres informations personnelles ont été générés pour les besoins du cours et ne correspondent à aucune personne réelle.
+> **Note** : toutes les données sont **fictives**. Les noms, numéros de téléphone, coordonnées et autres informations personnelles ont été générés pour les besoins du cours et ne correspondent à aucune personne réelle.
 
 ### Données
 
@@ -76,28 +77,29 @@ Vous recevez les **4 fichiers Excel** tels quels. Votre mission : en faire une *
 
 Les données sont volontairement imparfaites : casse variable, formats de date incohérents, références par texte libre, champs vides. Comme de vrais fichiers Excel faits à la main.
 
-### Briefs
+### Besoins
 
-Chaque groupe (2-3 personnes) reçoit les mêmes données mais un brief différent :
+Quatre demandes du Service technique, cadrées pendant le TP du cours 01 :
 
-| Brief | Thème | Détail |
+| Besoin | Thème | Détail |
 |---|---|---|
 | [A](projet/briefs/brief_a_budget.md) | Rapport budgétaire | Coût par type de mobilier, top 5 objets coûteux, saisonnalité |
 | [B](projet/briefs/brief_b_delais.md) | Délais de traitement | Délai moyen par quartier, signalements ouverts > 30 jours, taux de résolution |
 | [C](projet/briefs/brief_c_lampadaires.md) | Remplacement lampadaires | Fiche par lampadaire, score de priorité, sélection dans un budget de CHF 50'000.- |
 | [D](projet/briefs/brief_d_bancs.md) | Renouvellement des bancs | État du parc, bancs à remplacer sous 2 ans, estimation budgétaire |
 
-### Jalons du projet (formatifs)
+### Fichiers d'exercices
 
-| Jalon | Semaines | Livrable | Cours |
-|---|---|---|---|
-| **J0** : Exploration et modélisation | 1-2 | MCD et MLD. Identifier les entités, relations et cardinalités. Documenter les problèmes de qualité observés dans les Excel | 01-02 |
-| **J1** : Import et nettoyage | 3-4 | MPD (CREATE TABLE). Import des données brutes dans des tables staging. Nettoyage SQL : TRIM, COALESCE, regexp_replace, dédoublonnage. Migration staging vers tables finales | 02-03 |
-| **J2** : Requêtes et optimisation | 5-6 | Premières requêtes métier pour le brief. EXPLAIN ANALYZE, index pertinents. Premières vues SQL | 03, 05 |
-| **J3** : Sécurité et ouverture | 7-8 | Rôles et permissions (lecture seule pour citoyen-ne, écriture pour technicien-ne). Réflexion sur les structures alternatives adaptées au cas d'usage | 04 |
-| **J4** : Vues métier + poster | 9-10 | Finalisation des requêtes et vues SQL pour le brief. Réflexion sur les structures de données. Préparation du poster A3 | 05-06 |
-| **J5** : Présentation + poster | 28-29 mai | Poster A3 affiché en classe + présentation et discussion | 06 |
-| **Rendu final** | 31 mai | Scripts, jalons, adaptations selon retour des présentations | 06 |
+Les fichiers des TP sont dans [`cours/public/exercices/`](cours/public/exercices/) et en ligne sous `https://comem-infradon.onrender.com/exercices/`. Les copier dans le dossier `data`, monté sous `/data` dans le conteneur.
+
+| Cours | Fichiers |
+|---|---|
+| 01 | `docker-compose.yml` |
+| 02 | `02-import.sql`, `02-interventions.csv` |
+| 03 | `03-banque.sql`, `03-virement.sql`, `03-virement-ordonne.sql` |
+| 04 | `04-service-technique.sql`, `04-incident.sql` |
+| 05 | `05-mobilier.sql` |
+| 06 | `06-service-technique.sql` |
 
 ---
 
@@ -115,15 +117,16 @@ comem-infradon-1/
 │   ├── 06-ethique-donnees.md
 │   ├── components/               # Composants Vue.js propres au cours (vide)
 │   ├── setup/                    # Thème Mermaid
-│   └── public/                   # Images par cours (images/NN/), page d'accueil générée
-├── projet/                       # Ressources du projet fil rouge
-│   ├── briefs/                   # Briefs par groupe (A, B, C, D)
-│   ├── data/                     # Fichiers Excel source (non versionnés)
+│   └── public/                   # Images par cours (images/NN/), fichiers d'exercices (exercices/), page d'accueil générée
+├── projet/                       # Ressources du cas fil rouge
+│   ├── briefs/                   # Besoins du Service technique (A, B, C, D)
+│   ├── data/                     # Fichiers Excel et CSV source
+│   ├── generate_data.py          # Génération des données fictives
 │   └── aide-nettoyage.md         # Guide SQL de nettoyage
 ├── revisions/                    # Préparation à l'examen final
 │   ├── examen-type.md            # Examen type (festival)
 │   └── README.md                 # Ce qu'il faut maîtriser
-├── scripts/                      # Build incrémental, serveur de dev, page d'accueil
+├── scripts/                      # Build incrémental, serveur de dev, page d'accueil, export PDF
 ├── package.json                  # Scripts npm
 ├── render.yaml                   # Déploiement Render.com
 └── README.md

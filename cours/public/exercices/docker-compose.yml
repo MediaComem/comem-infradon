@@ -1,0 +1,24 @@
+# Infrastructure de Données · environnement du cours
+# PostgreSQL 17 et PostGIS, base yverdon créée au premier démarrage.
+# Démarrer : docker compose up -d   ·   Arrêter : docker compose down
+
+services:
+  postgres:
+    image: postgis/postgis:17-3.5
+    # Image publiée pour amd64 seulement : émulée sur Mac Apple Silicon.
+    platform: linux/amd64
+    container_name: infradon-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_DB: yverdon
+    ports:
+      - "5432:5432"
+    volumes:
+      # Données de la base : survivent à docker compose down.
+      - pgdata:/var/lib/postgresql/data
+      # Fichiers d'exercices et CSV, visibles sous /data dans le conteneur.
+      - ./data:/data
+
+volumes:
+  pgdata:

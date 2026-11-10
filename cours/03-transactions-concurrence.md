@@ -262,7 +262,7 @@ references: "PostgreSQL, <em>Transaction Isolation</em>"
 - T1 et T2 lisent la même valeur
 - Chacune écrit sa propre modification
 - La dernière écrase la première
-- Évitée par `REPEATABLE READ` ou `FOR UPDATE`
+- Évitée : `UPDATE` atomique, `FOR UPDATE`, `REPEATABLE READ`
 
 ::right::
 
@@ -351,7 +351,7 @@ references: "PostgreSQL, <em>Repeatable Read Isolation Level</em>"
 - T1 modifie une ligne changée depuis son instantané
 - PostgreSQL annule T1 : **erreur de sérialisation**
 - L'application doit **réessayer**
-- Une transaction en lecture seule n'échoue jamais
+- En `REPEATABLE READ`, une lecture seule n'échoue jamais
 
 ::right::
 
@@ -409,11 +409,6 @@ references: "PostgreSQL, <em>Transaction Isolation</em>"
 | `REPEATABLE READ` | Empêchée | Empêchée | Empêchée dans PostgreSQL | Possible |
 | `SERIALIZABLE` | Empêchée | Empêchée | Empêchée | Empêchée |
 
-<Card color="#6b7280" tag="note" title="Dans PostgreSQL">
-<template #icon><pixelarticons-info-box /></template>
-<code>READ COMMITTED</code> par défaut. <code>READ UNCOMMITTED</code> se comporte comme <code>READ COMMITTED</code>.
-</Card>
-
 ---
 layout: default
 ---
@@ -428,7 +423,7 @@ layout: default
 | Import en masse | `READ COMMITTED`, par lots |
 | File de tâches | `READ COMMITTED` et `FOR UPDATE SKIP LOCKED` |
 
-La plupart des applications restent en `READ COMMITTED` : savoir pourquoi aide à diagnostiquer une anomalie.
+Par défaut `READ COMMITTED`, plus strict seulement là où l'anomalie compte.
 
 ---
 layout: section
@@ -496,8 +491,8 @@ references: "PostgreSQL, <em>Deadlocks</em>"
 
 - T1 attend T2, T2 attend T1
 - Détection après `deadlock_timeout` : 1 s
-- PostgreSQL annule l'une des deux
-- L'autre continue : `deadlock detected`
+- PostgreSQL annule l'une : `deadlock detected`
+- L'autre continue
 
 ::right::
 
@@ -628,7 +623,7 @@ Les exercices préparent l'examen final.
 
 1. Télécharger [03-banque.sql](https://comem-infradon.onrender.com/exercices/03-banque.sql), [03-virement.sql](https://comem-infradon.onrender.com/exercices/03-virement.sql) et [03-virement-ordonne.sql](https://comem-infradon.onrender.com/exercices/03-virement-ordonne.sql)
 2. Les copier dans le dossier `data`
-3. Créer les comptes dans `psql`
+3. Créer les comptes dans `psql`, base `yverdon`
 
 ```sql
 \i /data/03-banque.sql

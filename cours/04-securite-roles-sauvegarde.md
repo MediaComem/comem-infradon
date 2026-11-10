@@ -129,8 +129,8 @@ GRANT SELECT, INSERT, UPDATE
   TO technicien;
 
 CREATE ROLE responsable;
-GRANT ALL PRIVILEGES
-  ON ALL TABLES IN SCHEMA public
+GRANT SELECT, INSERT, UPDATE, DELETE
+  ON signalements, interventions
   TO responsable;
 
 GRANT technicien TO alice;
@@ -212,11 +212,11 @@ references: "PostgreSQL, <em>pg_roles</em>, <em>information_schema</em>"
 
 ::left::
 
-- Qui peut se connecter ? Qui est superuser ?
-- Qui peut lire les données personnelles ?
-- Chaque compte correspond-il à une personne active ?
-- Chaque privilège a-t-il un besoin documenté ?
-- À refaire à chaque départ et chaque année
+- Comptes avec connexion, comptes superuser
+- Accès aux données personnelles
+- Un compte, une personne active
+- Un privilège, un besoin documenté
+- À refaire à chaque départ, et chaque année
 
 ::right::
 
@@ -277,7 +277,7 @@ layout: two-cols
 
 - **Physique** : la ligne est effacée
 - **Logique** : la ligne est marquée, conservée
-- Colonne `deleted_at` ou `is_active`
+- Colonne `supprime_le` ou `actif`
 - Engage audit, conformité, performances
 
 ::right::
@@ -288,11 +288,11 @@ DELETE FROM signalements WHERE id = 42;
 
 -- Logique
 UPDATE signalements
-SET deleted_at = now()
+SET supprime_le = now()
 WHERE id = 42;
 
 SELECT * FROM signalements
-WHERE deleted_at IS NULL;
+WHERE supprime_le IS NULL;
 ```
 
 ---
@@ -308,7 +308,7 @@ layout: default
 | Droit à l'effacement (nLPD, RGPD) | Direct | Complexe |
 | Intégrité référentielle | Risque de cascade | Préservée |
 | Volume | Stable | Croissant |
-| Requêtes | Simples | Filtre `deleted_at IS NULL` |
+| Requêtes | Simples | Filtre `supprime_le IS NULL` |
 
 <Card title="Paradoxe" color="#d97706" tag="warning">
 <template #icon><pixelarticons-scale /></template>
@@ -356,8 +356,8 @@ layout: two-cols
 
 ::left::
 
-- **RPO** : quelle perte de données est acceptable ?
-- **RTO** : combien de temps sans service est acceptable ?
+- **RPO** : perte de données maximale acceptable
+- **RTO** : durée d'interruption maximale acceptable
 - Fixés par le métier, pas par l'informatique
 - Ils déterminent la stratégie et son coût
 
@@ -387,7 +387,7 @@ references:
 |---|---|---|---|
 | Outil | `pg_dump` | `pg_basebackup`, archivage | Réplica en continu |
 | Contenu | Une base, en SQL | Tout le serveur, fichiers | Tout le serveur, en direct |
-| Retour à 14 h 59 | Non | Oui : restauration à un instant | Non |
+| Retour à un instant précis | Non | Oui | Non |
 | Après un `DELETE` sans `WHERE` | Dernier dump | Juste avant l'erreur | Erreur répliquée |
 
 <Card title="Réplication" color="#e92528">
@@ -515,13 +515,11 @@ Les exercices préparent l'examen final.
 
 1. Télécharger [04-service-technique.sql](https://comem-infradon.onrender.com/exercices/04-service-technique.sql) et [04-incident.sql](https://comem-infradon.onrender.com/exercices/04-incident.sql)
 2. Les copier dans le dossier `data`
-3. Exécuter le premier dans `psql`, base `yverdon`
+3. Exécuter le premier dans `psql`, le second à l'exercice 5
 
 ```sql
 \i /data/04-service-technique.sql
 ```
-
-Le second attend l'exercice 5.
 
 ---
 layout: two-cols

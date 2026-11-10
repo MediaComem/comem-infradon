@@ -312,7 +312,7 @@ La requête analytique lit toute la table et monopolise les ressources des petit
 
 <Card title="Solutions" color="#16a34a">
 <template #icon><pixelarticons-check /></template>
-Réplique en lecture pour l'analyse. Entrepôt de données séparé. Vue matérialisée calculée la nuit.
+Réplica en lecture pour l'analyse. Entrepôt de données séparé. Vue matérialisée calculée la nuit.
 </Card>
 
 </v-click>
@@ -332,7 +332,7 @@ layout: default
 | Critère | ETL | ELT |
 |---|---|---|
 | Ordre | Extract, Transform, Load | Extract, Load, Transform |
-| Données brutes | Perdues | Conservées en staging |
+| Données brutes | Non conservées | Conservées en staging |
 | Transformation | Outil externe | SQL dans la destination |
 | Rejouer | Difficile | Facile |
 
@@ -525,7 +525,7 @@ class: compact
 | Attributs variables | `JSONB` | Base document |
 | Rapports lents | Vue matérialisée | Entrepôt de données |
 | Formats bruts multiples | Staging | Lac de données, lakehouse |
-| Charge au-delà d'une machine | Réplique en lecture | Système distribué |
+| Charge au-delà d'une machine | Réplica en lecture | Système distribué |
 | Domaines autonomes | Schémas et rôles séparés | Data mesh |
 
 Réponse lourde : seulement si la réponse simple échoue, mesures à l'appui.
@@ -600,7 +600,7 @@ Les exercices préparent l'examen final.
 
 1. Télécharger [05-mobilier.sql](https://comem-infradon.onrender.com/exercices/05-mobilier.sql)
 2. Le copier dans le dossier `data`
-3. L'exécuter dans `psql`
+3. L'exécuter dans `psql`, base `yverdon`
 
 ```sql
 \i /data/05-mobilier.sql
@@ -619,7 +619,7 @@ references: "PostgreSQL, <em>JSON Functions and Operators</em>"
 - Type `JSONB` : JSON stocké en binaire
 - `->` : extraire un élément en JSONB
 - `->>` : extraire un élément en texte
-- `@>` : le document contient-il ce fragment ?
+- `@>` : le document contient ce fragment
 
 ::right::
 
@@ -712,11 +712,7 @@ references: "PostgreSQL, <em>GIN Indexes</em>"
 - Index **inversé** : valeur, puis lignes qui la contiennent
 - JSONB, tableaux, plein texte
 - Écriture plus lente, index plus lourd
-
-```sql
-CREATE INDEX idx_mobilier_attributs
-  ON mobilier USING gin (attributs);
-```
+- Sert `@>`, `?`, pas `->>`
 
 ::right::
 
@@ -764,7 +760,7 @@ class: compact
 | `cost` | Coût estimé, en unités arbitraires |
 | `rows` | Lignes estimées par le planificateur |
 | `actual time` | Temps réel, en millisecondes |
-| `Rows Removed by Filter` | Lignes lues pour rien : index manquant |
+| `Rows Removed by Filter` | Lignes lues pour rien : souvent un index manquant |
 
 ::right::
 

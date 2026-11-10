@@ -122,9 +122,20 @@ layout: two-cols
 ---
 
 ::title::
-# Exemple : tableau de qualité
+# Tableau de qualité
 
 ::left::
+
+| Indicateur | Valeur | Seuil |
+|---|---|---|
+| Sans urgence | 3.9 % | < 1 % |
+| Résolu sans date | 3.1 % | 0 % |
+
+- Une vue : recalculée à chaque lecture
+- Seuil dépassé : alerte au responsable
+- Historiser les valeurs pour voir la tendance
+
+::right::
 
 ```sql
 CREATE VIEW tableau_qualite AS
@@ -138,17 +149,6 @@ SELECT
     AS pct_resolu_sans_date
 FROM signalement;
 ```
-
-::right::
-
-| Indicateur | Valeur | Seuil |
-|---|---|---|
-| Sans urgence | 3.9 % | < 1 % |
-| Résolu sans date | 3.1 % | 0 % |
-
-- Une vue : recalculée à chaque lecture
-- Seuil dépassé : alerte au responsable
-- Historiser les valeurs pour voir la tendance
 
 ---
 layout: section
@@ -170,7 +170,7 @@ references:
 ::left::
 
 - **RGPD** : Union européenne, 2018
-- **nLPD** : Suisse, 2023, entreprises et Confédération
+- **nLPD** : Suisse, 2023, personnes privées et Confédération
 - **LPrD** : Vaud, pour le canton et les communes
 - Données de toute personne physique identifiable
 
@@ -918,15 +918,13 @@ Les exercices préparent l'examen final.
 
 ### Départ
 
-1. Télécharger [06-service-technique.sql](https://comem-infradon.onrender.com/exercices/06-service-technique.sql)
+1. Télécharger [06-service-technique.sql](https://comem-infradon.onrender.com/exercices/06-service-technique.sql), données fictives
 2. Le copier dans le dossier `data`
 3. L'exécuter dans `psql`, base `yverdon`
 
 ```sql
 \i /data/06-service-technique.sql
 ```
-
-Toutes les personnes de cette base sont fictives.
 
 ---
 layout: two-cols

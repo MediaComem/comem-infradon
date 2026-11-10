@@ -162,7 +162,7 @@ class: compact
 | Personnes en texte libre | `technicien` | `Jean-Marc` · `JM` · `Jean-Marc Bonvin` |
 | Coûts | `cout_materiel` | `120` · `CHF 120.-` · `gratuit` · vide |
 | Durées | `duree` | `1h30` · `30 min` · `une matinée` |
-| GPS | `latitude`, `longitude` | `NULL` (~8%) · `46.78` |
+| GPS | `latitude`, `longitude` | `NULL` · `46.78` arrondi |
 | Liens en texte libre | `objet` | `le banc devant Place Pestalozzi` |
 | Téléphones | `telephone` | `024 423 12 34` · `+41 21 456 78 90` |
 
@@ -358,7 +358,7 @@ layout: two-cols
 
 ### Situation
 
-> « J'ai importé `interventions.csv` directement dans la table finale. 47 lignes sur 150 sont refusées. »
+> « J'ai importé `interventions.csv` directement dans la table finale. Une erreur dès la première ligne, rien n'est importé. »
 
 ### Question
 
@@ -378,7 +378,7 @@ Pourquoi, et comment l'éviter ?
 
 <v-click>
 
-- Les contraintes rejettent toute ligne non conforme
+- Une ligne non conforme fait échouer tout l'import
 - Passer par la staging, nettoyer, valider
 - Puis `INSERT INTO ... SELECT`
 
@@ -396,7 +396,7 @@ references: "PostgreSQL, <em>INSERT</em>"
 
 - Transfert en une seule requête
 - `SELECT` applique les transformations
-- `WHERE` écarte les lignes invalides
+- `WHERE motif IS NULL` : lignes valides seulement
 - `ON CONFLICT` : import rejouable
 
 ::right::
@@ -721,8 +721,6 @@ Les exercices préparent l'examen final.
 ```sql
 \i /data/02-import.sql
 ```
-
-PostgreSQL 16 ou plus, pour `pg_input_is_valid`.
 
 ---
 layout: two-cols

@@ -33,7 +33,7 @@ cols: 3
 
 # Ce cours dans la formation
 
-A travers le cycle de vie de la donnée :
+À travers le cycle de vie de la donnée :
 
 <Card title="Modélisation" color="#6b7280" footer="ModelDon · semestre 1">
 <template #icon><pixelarticons-tree /></template>
@@ -662,9 +662,10 @@ docker compose exec postgres \
 
 docker compose down
 docker compose down -v   # efface pgdata
-```
 
-Docker Desktop : conteneur, onglet **Exec**, puis `psql -U postgres -d yverdon`.
+# Docker Desktop : onglet Exec du conteneur
+psql -U postgres -d yverdon
+```
 
 ---
 layout: two-cols
@@ -713,7 +714,7 @@ layout: two-cols-bottom
 1. Démarrer la base avec `docker compose up -d`
 2. Ouvrir `psql` dans l'onglet **Exec**
 3. Vérifier les versions de PostgreSQL et de PostGIS
-4. Créer une table, arrêter, redémarrer : est-elle encore là ?
+4. Créer une table, arrêter, redémarrer, la chercher
 
 ::right::
 
@@ -817,7 +818,7 @@ layout: two-cols-bottom
 1. Dessiner les flux du Service technique : sources, stockage, usages
 2. Pour chaque flux : rythme, volume, qui écrit, qui lit
 3. Choisir un besoin, de A à D
-4. Le cadrer : objectif mesurable, données nécessaires, données manquantes
+4. Le cadrer : objectif, données utiles, manquantes, contraintes
 
 ::right::
 

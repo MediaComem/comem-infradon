@@ -462,21 +462,28 @@ references:
 
 ---
 layout: default
+class: compact
 references:
-  - "IEA (2024)"
-  - "Climatiq (2024)"
-  - "MIT News (2025)"
+  - "Google (2009, 2025)"
+  - "<a href='https://epoch.ai/gradient-updates/how-much-energy-does-chatgpt-use'>Epoch AI</a> (2025)"
+  - "<a href='https://impactco2.fr/outils/usagenumerique/email'>ADEME</a>"
+  - "<a href='https://www.delltechnologies.com/asset/en-us/products/servers/briefs-summaries/poweredge-r760-life-cycle-assessment.pdf'>Dell</a>"
 ---
 
 # Ordres de grandeur
 
-| Usage | Émissions |
-|---|---|
-| Recherche Google | ~0.3 g CO₂ |
-| Requête ChatGPT | ~0.15 g CO₂ |
-| Email sans pièce jointe | ~4 g CO₂ |
-| Email avec pièce jointe | ~50 g CO₂ |
-| Fabrication d'un serveur | Plusieurs tonnes de CO₂ |
+| Usage | Énergie | Émissions | Source |
+|---|---|---|---|
+| Recherche Google, 2009 | 0.3 Wh | ~0.2 g CO₂ | Google |
+| Requête ChatGPT, 2025 | ~0.3 Wh | Non publié | OpenAI, Epoch AI |
+| Requête Gemini, 2025, médiane | 0.24 Wh | 0.03 g CO₂e | Google |
+| Email | | 0.1 à 2.5 g CO₂e | ADEME |
+| Serveur, cycle de vie complet | | 1.4 à 10 t CO₂e, ~10 % fabrication | Dell |
+
+<Card color="#6b7280" tag="note" title="Mix électrique">
+<template #icon><pixelarticons-zap /></template>
+Grammes = énergie × intensité du réseau. La même requête émet moins sur le réseau suisse. Chiffres déclarés par les entreprises, non audités.
+</Card>
 
 ---
 layout: two-cols

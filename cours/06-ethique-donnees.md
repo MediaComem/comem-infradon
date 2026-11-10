@@ -516,7 +516,7 @@ references:
 
 - Réseau haute tension zurichois déjà à la limite
 - Migration vers Argovie et Schaffhouse
-- Canton de Zurich : 114 000 m², environ 16 terrains de football
+- Zurich : 114 000 m², environ 16 terrains de football
 - **72%** de la population : énergie 100% renouvelable
 - **80%** : plus de transparence sur la consommation
 
@@ -793,7 +793,7 @@ references:
 - `nom NOT NULL`, `prenom NOT NULL` : un seul modèle de nom
 - `adresse NOT NULL` : pas de place sans domicile
 - `email NOT NULL` : la fracture numérique exclut
-- Catégories fermées : ce qui n'a pas de case n'existe pas
+- Catégories fermées : sans case, pas d'existence
 
 ::right::
 
@@ -1165,7 +1165,7 @@ layout: two-cols-bottom
 ### Étapes
 
 1. Une requête par dimension : complétude, validité, cohérence, unicité, temporalité
-2. Ajouter deux indicateurs de conformité : lignes hors rétention, colonnes non documentées
+2. Ajouter : lignes hors rétention, colonnes non documentées
 3. Regrouper le tout dans une vue `tableau_qualite`
 4. Fixer un seuil par indicateur
 

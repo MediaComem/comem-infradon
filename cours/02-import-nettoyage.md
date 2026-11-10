@@ -360,7 +360,7 @@ layout: two-cols
 
 > « J'ai importé `interventions.csv` directement dans la table finale. 47 lignes sur 150 sont refusées. »
 
-### La question
+### Question
 
 Pourquoi, et comment l'éviter ?
 
@@ -459,7 +459,7 @@ layout: two-cols
 
 > « Le budget matériel des interventions a doublé cette année. »
 
-### La question
+### Question
 
 D'où vient l'écart ?
 
@@ -494,7 +494,7 @@ layout: two-cols
 ::left::
 
 - **Écarter** : un `WHERE` filtre, la ligne disparaît sans trace
-- **Rejeter** : la ligne est gardée à part, avec son motif
+- **Rejeter** : ligne gardée à part, avec son motif
 - **Corriger** : une règle documentée, `gratuit` devient `0`
 - Rejet : quelqu'un peut corriger la source
 
@@ -593,7 +593,7 @@ layout: two-cols
 | 1 | 150 | 140 | 8 |
 | 2 | 150 | 0 | 8 |
 
-### La question
+### Question
 
 Où sont passées deux lignes du lot 1 ? Pourquoi le lot 2 n'a-t-il rien ajouté ?
 
@@ -604,7 +604,7 @@ Où sont passées deux lignes du lot 1 ? Pourquoi le lot 2 n'a-t-il rien ajouté
 - Deux doublons ignorés par `ON CONFLICT`
 - Ignorer est une décision : à compter aussi
 - Lot 2 : même fichier rejoué, rien de neuf
-- Les 8 rejets reviennent tant que la source n'est pas corrigée
+- Les 8 rejets reviennent jusqu'à correction de la source
 
 </v-click>
 
@@ -771,7 +771,7 @@ layout: two-cols
 
 > « Dans l'inventaire, on trouve `banc`, `Banc`, `banc public`. C'est le même type. »
 
-### La question
+### Question
 
 Comment ramener chaque variante à une seule valeur ?
 
@@ -814,7 +814,7 @@ layout: two-cols
 
 > « Certaines dates sont écrites `12.03.2022`, d'autres `2022-03-12`. »
 
-### La question
+### Question
 
 Comment convertir les deux formats en `DATE` ?
 
@@ -1003,7 +1003,7 @@ layout: two-cols
 
 > « Le même banc a été saisi deux fois, avec un identifiant différent. »
 
-### La question
+### Question
 
 Comment ne garder qu'une ligne par objet ?
 
@@ -1152,9 +1152,9 @@ layout: two-cols-bottom
 
 ### Étapes
 
-1. Ajouter à la vue une colonne `motif`, `NULL` si la ligne est valide
+1. Ajouter `motif` à la vue : `NULL` si valide
 2. Créer la table `rejet`
-3. Dans une transaction : un lot dans `journal_import`, les valides dans `intervention`, les autres dans `rejet`
+3. Dans une transaction : lot, lignes valides, rejets
 4. Compléter le journal : lues, valides, rejetées
 
 ::right::
@@ -1252,7 +1252,6 @@ layout: default
 - [PostgreSQL · Fonctions sur les chaînes](https://www.postgresql.org/docs/current/functions-string.html)
 - [PostgreSQL · Formatage et TO_DATE](https://www.postgresql.org/docs/current/functions-formatting.html)
 - [PostgreSQL · pg_input_is_valid](https://www.postgresql.org/docs/current/functions-info.html)
-- [PostgreSQL · Window Functions](https://www.postgresql.org/docs/current/tutorial-window.html)
 - [PostgreSQL · INSERT et ON CONFLICT](https://www.postgresql.org/docs/current/sql-insert.html)
 
 <Card title="Prochain cours" color="#e92528" footer="cours 03 · Transactions et concurrence">

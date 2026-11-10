@@ -111,7 +111,7 @@ layout: two-cols
 
 > « Les citoyen·ne·s consultent les signalements. Les technicien·ne·s les traitent. Moi, je gère tout. »
 
-### La question
+### Question
 
 Quels rôles, avec quels privilèges ?
 
@@ -436,7 +436,7 @@ layout: two-cols
 
 > « Je veux une sauvegarde chaque nuit, sans y penser. »
 
-### La question
+### Question
 
 Comment planifier `pg_dump` ?
 
@@ -1014,7 +1014,6 @@ layout: default
 - [PostgreSQL · Privileges](https://www.postgresql.org/docs/current/ddl-priv.html)
 - [PostgreSQL · pg_dump](https://www.postgresql.org/docs/current/app-pgdump.html)
 - [PostgreSQL · pg_restore](https://www.postgresql.org/docs/current/app-pgrestore.html)
-- [PostgreSQL · Backup and Restore](https://www.postgresql.org/docs/current/backup.html)
 - [PostgreSQL · Point-in-Time Recovery](https://www.postgresql.org/docs/current/continuous-archiving.html)
 
 <Card title="Prochain cours" color="#e92528" footer="cours 05 · Structures et architectures">

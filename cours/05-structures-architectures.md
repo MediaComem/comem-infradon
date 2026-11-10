@@ -750,19 +750,14 @@ WHERE colonne = 'valeur';
 ```
 
 ---
-layout: default
+layout: two-cols
 class: compact
 ---
 
+::title::
 # Lecture d'un plan
 
-```text
-Seq Scan on interventions  (cost=0.00..2450.00 rows=12 width=80)
-                           (actual time=0.021..18.340 rows=12 loops=1)
-  Filter: (mobilier_id = 42)
-  Rows Removed by Filter: 99988
-Execution Time: 18.361 ms
-```
+::left::
 
 | Champ | Signification |
 |---|---|
@@ -770,6 +765,17 @@ Execution Time: 18.361 ms
 | `rows` | Lignes estimées par le planificateur |
 | `actual time` | Temps réel, en millisecondes |
 | `Rows Removed by Filter` | Lignes lues pour rien : index manquant |
+
+::right::
+
+```text
+Seq Scan on interventions
+  (cost=0.00..2450.00 rows=12)
+  (actual time=0.021..18.340 rows=12)
+  Filter: (mobilier_id = 42)
+  Rows Removed by Filter: 99988
+Execution Time: 18.361 ms
+```
 
 ---
 layout: two-cols

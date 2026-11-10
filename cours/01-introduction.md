@@ -228,7 +228,7 @@ layout: two-cols
 
 > « Toutes nos données sont sur un serveur PostgreSQL, dans le bureau du responsable. Vendredi soir, une surtension a grillé le disque. »
 
-### La question
+### Question
 
 Qu'est-ce qui n'allait pas ?
 
@@ -923,7 +923,6 @@ layout: default
 - [PostgreSQL Documentation](https://www.postgresql.org/docs/)
 - [Docker Documentation](https://docs.docker.com/)
 - [Pro Git](https://git-scm.com/book/fr/v2), en français
-- [Use The Index, Luke!](https://use-the-index-luke.com/)
 - [Data Mesh Principles](https://martinfowler.com/articles/data-mesh-principles.html)
 - [FAIR Principles](https://www.go-fair.org/fair-principles/)
 

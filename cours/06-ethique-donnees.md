@@ -851,6 +851,7 @@ layout: two-cols
 references:
   - "<a href='https://data-feminism.mitpress.mit.edu/'>D'Ignazio et Klein, <em>Data Feminism</em></a> (2020)"
   - "<a href='https://www.zulma.fr/livre/contre-atlas-de-lintelligence-artificielle/'>Crawford, <em>Contre-atlas de l'intelligence artificielle</em></a> (2022)"
+  - "<a href='https://calculatingempires.net/about'>Crawford et Joler, <em>Calculating Empires</em></a> (2023)"
 ---
 
 ::title::

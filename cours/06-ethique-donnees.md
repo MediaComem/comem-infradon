@@ -161,7 +161,7 @@ layout: two-cols
 references:
   - "<a href='https://www.fedlex.admin.ch/eli/cc/2022/491/fr'>nLPD, fedlex.admin.ch</a>"
   - "<a href='https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=CELEX:32016R0679'>RGPD, eur-lex.europa.eu</a>"
-  - "<a href='https://prestations.vd.ch/pub/blv-publication/actes/consolide/172.65'>LPrD, Canton de Vaud</a>"
+  - "<a href='https://prestations.vd.ch/pub/blv-publication/actes/consolide/172.65?key=1543934892528&id=cf9df545-13f7-4106-a95b-9b3ab8fa8b01'>LPrD, Canton de Vaud</a>"
 ---
 
 ::title::

@@ -366,7 +366,7 @@ layout: section
 ---
 layout: two-cols
 references:
-  - "Crawford, <em>Atlas of AI</em> (2021)"
+  - "Crawford, <em>Contre-atlas de l'intelligence artificielle</em> (2022)"
   - "IEA, <em>Electricity 2024</em>"
 ---
 
@@ -393,7 +393,7 @@ references:
 ---
 layout: two-cols
 references:
-  - "Crawford, <em>Atlas of AI</em>, ch. 1 (2021)"
+  - "Crawford, <em>Contre-atlas de l'intelligence artificielle</em>, ch. 1 (2022)"
   - "Pitron, Reporterre"
 ---
 
@@ -626,7 +626,7 @@ layout: section
 ---
 layout: two-cols
 references:
-  - "Crawford, <em>Atlas of AI</em> (2021)"
+  - "Crawford, <em>Contre-atlas de l'intelligence artificielle</em> (2022)"
   - "Data Centre Magazine (2024)"
   - "ETH Zurich CSS, <em>Mind the E-Waste</em> (2023)"
 ---
@@ -845,7 +845,7 @@ Rapporter à la population, comparer à une inspection terrain, suivre la part d
 layout: two-cols
 references:
   - "D'Ignazio et Klein, <em>Data Feminism</em> (2020)"
-  - "Crawford, <em>Atlas of AI</em> (2021)"
+  - "Crawford, <em>Contre-atlas de l'intelligence artificielle</em> (2022)"
 ---
 
 ::title::
@@ -1267,7 +1267,7 @@ layout: two-cols
 ### Livres
 
 - D'Ignazio et Klein, *Data Feminism* (2020), [accès libre](https://data-feminism.mitpress.mit.edu/)
-- Crawford, *Atlas of AI* (2021)
+- Crawford, *Contre-atlas de l'intelligence artificielle* (Zulma, 2022)
 - Dehghani, *Data Mesh* (2022)
 - Kleppmann, *Designing Data-Intensive Applications* (2017)
 

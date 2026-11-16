@@ -890,29 +890,36 @@ Qualité des données, staging, nettoyage SQL, rejets et traçabilité.
 
 ---
 layout: grid
-cols: 3
+cols: 4
 ---
 
 # Ressources
 
 <Figure
-  class="w-1/2 mx-auto"
+  class="w-3/4 mx-auto"
   src="/images/01/designing_data_intensive_applications.avif"
   caption="Kleppmann, <em>Designing Data-Intensive Applications</em> (2017)"
   alt="Couverture de Designing Data-Intensive Applications"
 />
 <Figure
-  class="w-1/2 mx-auto"
+  class="w-3/4 mx-auto"
   src="/images/01/data_mesh.jpeg"
   caption="Dehghani, <em>Data Mesh</em> (2022)"
   alt="Couverture de Data Mesh"
 />
 <Figure
-  class="w-1/2 mx-auto"
+  class="w-3/4 mx-auto"
   src="/images/01/Data_Feminism.jpg"
   caption="D'Ignazio et Klein, <em>Data Feminism</em> (2020)"
   href="https://data-feminism.mitpress.mit.edu/"
   alt="Couverture de Data Feminism"
+/>
+<Figure
+  class="w-3/4 mx-auto"
+  src="/images/01/contre-atlas-ia.jpg"
+  caption="Crawford, <em>Contre-atlas de l'intelligence artificielle</em> (2022)"
+  href="https://www.zulma.fr/livre/contre-atlas-de-lintelligence-artificielle/"
+  alt="Couverture du Contre-atlas de l'intelligence artificielle"
 />
 
 ---

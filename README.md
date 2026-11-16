@@ -149,7 +149,7 @@ npm run index          # régénère la page d'accueil depuis course.config.json
 
 - **Designing Data-Intensive Applications** : Kleppmann (2017), O'Reilly Media
 - **Data Feminism**, D'Ignazio & Klein (2020), MIT Press : [accès libre](https://data-feminism.mitpress.mit.edu/)
-- **Atlas of AI**, Crawford (2021), Yale University Press
+- **Contre-atlas de l'intelligence artificielle**, Crawford (2022), Zulma, trad. Laurent Bury : édition française d'*Atlas of AI* (2021), Yale University Press
 - **Data Mesh**, Dehghani (2022), O'Reilly Media
 
 ### En ligne

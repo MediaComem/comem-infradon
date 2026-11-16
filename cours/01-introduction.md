@@ -116,8 +116,8 @@ layout: image-right
 image: /images/01/schema-infrastructure.jpg
 backgroundSize: contain
 references:
-  - "Acceldata, <em>Data Infrastructure: Building Reliable Data Ecosystems</em> (2024)"
-  - "Fortra, <em>What Is Data Infrastructure?</em> (2024)"
+  - "<a href='https://www.acceldata.io/blog/data-infrastructure'>Acceldata, <em>Data Infrastructure: Building Reliable Data Ecosystems</em></a> (2024)"
+  - "<a href='https://www.fortra.com/blog/what-data-infrastructure-simple-overview'>Fortra, <em>What Is Data Infrastructure?</em></a> (2024)"
 ---
 
 # Plomberie numérique
@@ -133,7 +133,7 @@ layout: grid
 cols: 3
 align: stretch
 content: center
-references: "Fortra, <em>What Is Data Infrastructure? A Simple Overview</em> (2024)"
+references: "<a href='https://www.fortra.com/blog/what-data-infrastructure-simple-overview'>Fortra, <em>What Is Data Infrastructure? A Simple Overview</em></a> (2024)"
 ---
 
 # Composants d'une infrastructure
@@ -189,7 +189,7 @@ layout: grid
 cols: 3
 align: stretch
 content: center
-references: "Acceldata, <em>Building Reliable Data Ecosystems</em> (2024)"
+references: "<a href='https://www.acceldata.io/blog/data-infrastructure'>Acceldata, <em>Building Reliable Data Ecosystems</em></a> (2024)"
 ---
 
 # Modèles de déploiement
@@ -274,7 +274,7 @@ layout: section
 
 ---
 layout: two-cols
-references: "Docker, <em>Docker overview</em>"
+references: "<a href='https://docs.docker.com/get-started/docker-overview/'>Docker, <em>Docker overview</em></a>"
 ---
 
 ::title::
@@ -302,7 +302,7 @@ Le même principe sert à déployer : le fichier décrit le serveur.
 
 ---
 layout: two-cols
-references: "Docker, <em>Compose file reference</em>"
+references: "<a href='https://docs.docker.com/reference/compose-file/'>Docker, <em>Compose file reference</em></a>"
 ---
 
 ::title::
@@ -338,7 +338,7 @@ volumes:
 
 ---
 layout: default
-references: "Pro Git, <em>Git Basics</em>"
+references: "<a href='https://git-scm.com/book/en/v2/Git-Basics-Getting-a-Git-Repository'>Pro Git, <em>Git Basics</em></a>"
 ---
 
 # Versionner une infrastructure
@@ -636,7 +636,7 @@ Les exercices préparent l'examen final.
 
 ---
 layout: two-cols
-references: "Docker, <em>docker compose CLI reference</em>"
+references: "<a href='https://docs.docker.com/reference/cli/docker/compose/'>Docker, <em>docker compose CLI reference</em></a>"
 ---
 
 ::title::
@@ -669,7 +669,7 @@ psql -U postgres -d yverdon
 
 ---
 layout: two-cols
-references: "Pro Git, <em>Recording Changes to the Repository</em>"
+references: "<a href='https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository'>Pro Git, <em>Recording Changes to the Repository</em></a>"
 ---
 
 ::title::

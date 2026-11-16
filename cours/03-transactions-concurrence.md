@@ -97,7 +97,7 @@ layout: two-cols
 
 ---
 layout: two-cols
-references: "PostgreSQL, <em>Transactions</em>"
+references: "PostgreSQL, <a href='https://www.postgresql.org/docs/current/tutorial-transactions.html'><em>Transactions</em></a>"
 ---
 
 ::title::
@@ -170,8 +170,8 @@ cols: 4
 align: stretch
 content: center
 references:
-  - "PostgreSQL, <em>Introduction to WAL</em>"
-  - "PostgreSQL, <em>Transaction Isolation</em>"
+  - "PostgreSQL, <a href='https://www.postgresql.org/docs/current/wal-intro.html'><em>Introduction to WAL</em></a>"
+  - "PostgreSQL, <a href='https://www.postgresql.org/docs/current/transaction-iso.html'><em>Transaction Isolation</em></a>"
 ---
 
 # ACID
@@ -224,7 +224,7 @@ layout: two-cols
 
 ---
 layout: two-cols
-references: "PostgreSQL, <em>Transaction Isolation</em>"
+references: "PostgreSQL, <a href='https://www.postgresql.org/docs/current/transaction-iso.html'><em>Transaction Isolation</em></a>"
 ---
 
 ::title::
@@ -251,7 +251,7 @@ sequenceDiagram
 
 ---
 layout: two-cols
-references: "PostgreSQL, <em>Transaction Isolation</em>"
+references: "PostgreSQL, <a href='https://www.postgresql.org/docs/current/transaction-iso.html'><em>Transaction Isolation</em></a>"
 ---
 
 ::title::
@@ -285,7 +285,7 @@ layout: section
 
 ---
 layout: two-cols
-references: "PostgreSQL, <em>Read Committed Isolation Level</em>"
+references: "PostgreSQL, <a href='https://www.postgresql.org/docs/current/transaction-iso.html#XACT-READ-COMMITTED'><em>Read Committed Isolation Level</em></a>"
 ---
 
 ::title::
@@ -313,7 +313,7 @@ sequenceDiagram
 
 ---
 layout: two-cols
-references: "PostgreSQL, <em>Repeatable Read Isolation Level</em>"
+references: "PostgreSQL, <a href='https://www.postgresql.org/docs/current/transaction-iso.html#XACT-REPEATABLE-READ'><em>Repeatable Read Isolation Level</em></a>"
 ---
 
 ::title::
@@ -340,7 +340,7 @@ sequenceDiagram
 
 ---
 layout: two-cols
-references: "PostgreSQL, <em>Repeatable Read Isolation Level</em>"
+references: "PostgreSQL, <a href='https://www.postgresql.org/docs/current/transaction-iso.html#XACT-REPEATABLE-READ'><em>Repeatable Read Isolation Level</em></a>"
 ---
 
 ::title::
@@ -368,7 +368,7 @@ sequenceDiagram
 
 ---
 layout: two-cols
-references: "PostgreSQL, <em>Serializable Isolation Level</em>"
+references: "PostgreSQL, <a href='https://www.postgresql.org/docs/current/transaction-iso.html#XACT-SERIALIZABLE'><em>Serializable Isolation Level</em></a>"
 ---
 
 ::title::
@@ -397,7 +397,7 @@ sequenceDiagram
 ---
 layout: default
 class: compact
-references: "PostgreSQL, <em>Transaction Isolation</em>"
+references: "PostgreSQL, <a href='https://www.postgresql.org/docs/current/transaction-iso.html'><em>Transaction Isolation</em></a>"
 ---
 
 # Quatre niveaux
@@ -433,7 +433,7 @@ layout: section
 
 ---
 layout: two-cols
-references: "PostgreSQL, <em>Concurrency Control</em>"
+references: "PostgreSQL, <a href='https://www.postgresql.org/docs/current/mvcc.html'><em>Concurrency Control</em></a>"
 ---
 
 ::title::
@@ -458,7 +458,7 @@ references: "PostgreSQL, <em>Concurrency Control</em>"
 
 ---
 layout: two-cols
-references: "PostgreSQL, <em>Explicit Locking</em>"
+references: "PostgreSQL, <a href='https://www.postgresql.org/docs/current/explicit-locking.html'><em>Explicit Locking</em></a>"
 ---
 
 ::title::
@@ -467,7 +467,7 @@ references: "PostgreSQL, <em>Explicit Locking</em>"
 ::left::
 
 - Posés automatiquement par PostgreSQL
-- Lecture : aucun verrou, grâce à MVCC
+- Lecture : aucun verrou de ligne, grâce à MVCC
 - Écriture : verrou sur la ligne
 - Changement de structure : verrou sur la table
 
@@ -475,13 +475,13 @@ references: "PostgreSQL, <em>Explicit Locking</em>"
 
 | Instruction | Verrou |
 |---|---|
-| `SELECT` | Aucun |
+| `SELECT` | Aucun sur les lignes |
 | `UPDATE`, `DELETE` | Ligne |
 | `ALTER TABLE` | Table |
 
 ---
 layout: two-cols
-references: "PostgreSQL, <em>Deadlocks</em>"
+references: "PostgreSQL, <a href='https://www.postgresql.org/docs/current/explicit-locking.html#LOCKING-DEADLOCKS'><em>Deadlocks</em></a>"
 ---
 
 ::title::
@@ -538,7 +538,7 @@ Garantie plus forte ou débit plus élevé : le choix se mesure sur sa propre ch
 
 ---
 layout: two-cols
-references: "PostgreSQL, <em>pgbench</em>"
+references: "PostgreSQL, <a href='https://www.postgresql.org/docs/current/pgbench.html'><em>pgbench</em></a>"
 ---
 
 ::title::
@@ -657,7 +657,7 @@ BEGIN TRANSACTION ISOLATION LEVEL
 
 ---
 layout: two-cols
-references: "PostgreSQL, <em>Explicit Locking</em>"
+references: "PostgreSQL, <a href='https://www.postgresql.org/docs/current/explicit-locking.html'><em>Explicit Locking</em></a>"
 ---
 
 ::title::
@@ -690,7 +690,7 @@ FOR UPDATE SKIP LOCKED;
 
 ---
 layout: two-cols
-references: "PostgreSQL, <em>pg_blocking_pids</em>"
+references: "PostgreSQL, <a href='https://www.postgresql.org/docs/current/functions-info.html#FUNCTIONS-INFO-SESSION'><em>pg_blocking_pids</em></a>"
 ---
 
 ::title::
@@ -832,7 +832,7 @@ Après l'étape 3, lancer <code>Blocages en cours</code> dans une troisième ses
 
 ---
 layout: two-cols
-references: "PostgreSQL, <em>pgbench</em>"
+references: "PostgreSQL, <a href='https://www.postgresql.org/docs/current/pgbench.html'><em>pgbench</em></a>"
 ---
 
 ::title::

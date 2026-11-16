@@ -157,6 +157,7 @@ npm run index          # régénère la page d'accueil depuis course.config.json
 - [PostgreSQL Documentation](https://www.postgresql.org/docs/)
 - [Use The Index, Luke!](https://use-the-index-luke.com/)
 - [Data Mesh Principles](https://martinfowler.com/articles/data-mesh-principles.html)
+- [Calculating Empires: A Genealogy of Technology and Power Since 1500](https://calculatingempires.net/about) : Crawford et Joler, 2023
 - [Enjeux et perspectives pour une IA éthique et durable](https://stm.cairn.info/revue-enjeux-numeriques-2025-1-page-8?lang=fr) : *Annales des Mines, Enjeux numériques* n°29, 2025
 
 ---

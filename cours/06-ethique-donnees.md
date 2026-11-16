@@ -76,7 +76,7 @@ layout: section
 
 ---
 layout: two-cols
-references: "Dehghani, <em>Data Mesh</em>, ch. 3 (2022)"
+references: "<a href='https://www.oreilly.com/library/view/data-mesh/9781492092384/'>Dehghani, <em>Data Mesh</em>, ch. 3</a> (2022)"
 ---
 
 ::title::
@@ -159,9 +159,9 @@ layout: section
 ---
 layout: two-cols
 references:
-  - "nLPD, fedlex.admin.ch"
-  - "RGPD, eur-lex.europa.eu"
-  - "LPrD, Canton de Vaud"
+  - "<a href='https://www.fedlex.admin.ch/eli/cc/2022/491/fr'>nLPD, fedlex.admin.ch</a>"
+  - "<a href='https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=CELEX:32016R0679'>RGPD, eur-lex.europa.eu</a>"
+  - "<a href='https://prestations.vd.ch/pub/blv-publication/actes/consolide/172.65'>LPrD, Canton de Vaud</a>"
 ---
 
 ::title::
@@ -192,8 +192,8 @@ Auteur·rice·s des signalements, technicien·ne·s, positions des véhicules.
 ---
 layout: two-cols
 references:
-  - "nLPD, art. 5"
-  - "RGPD, art. 9"
+  - "<a href='https://www.fedlex.admin.ch/eli/cc/2022/491/fr#art_5'>nLPD, art. 5</a>"
+  - "<a href='https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=CELEX:32016R0679'>RGPD, art. 9</a>"
 ---
 
 ::title::
@@ -225,7 +225,7 @@ Un champ <code>description</code> peut contenir des données sensibles sans que 
 
 ---
 layout: default
-references: "nLPD, art. 6"
+references: "<a href='https://www.fedlex.admin.ch/eli/cc/2022/491/fr#art_6'>nLPD, art. 6, 8 et 19</a>"
 ---
 
 # Principes de traitement
@@ -241,7 +241,7 @@ references: "nLPD, art. 6"
 
 ---
 layout: two-cols
-references: "PFPDT, <em>Privacy by Design</em>"
+references: "<a href='https://www.fedlex.admin.ch/eli/cc/2022/491/fr#art_7'>nLPD, art. 7 et 8</a>"
 ---
 
 ::title::
@@ -299,8 +299,8 @@ WHERE table_schema = 'public';
 ---
 layout: two-cols
 references:
-  - "nLPD, art. 12"
-  - "OPDo, art. 24"
+  - "<a href='https://www.fedlex.admin.ch/eli/cc/2022/491/fr#art_12'>nLPD, art. 12</a>"
+  - "<a href='https://www.fedlex.admin.ch/eli/cc/2022/568/fr#art_24'>OPDo, art. 24</a>"
 ---
 
 ::title::
@@ -312,7 +312,7 @@ references:
 - Finalité, personnes concernées, catégories de données
 - Destinataires, durée de conservation, localisation
 - Mesures de sécurité
-- Exemption possible sous 250 personnes si le risque est faible
+- Privé : exemption sous 250 collaborateur·rice·s, sauf risque élevé
 
 ::right::
 
@@ -327,8 +327,8 @@ references:
 ---
 layout: two-cols-bottom
 references:
-  - "RGPD, art. 4 et considérant 26"
-  - "Sweeney, <em>Simple Demographics Often Identify People Uniquely</em> (2000)"
+  - "<a href='https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=CELEX:32016R0679'>RGPD, art. 4 et considérant 26</a>"
+  - "<a href='https://dataprivacylab.org/projects/identifiability/paper1.pdf'>Sweeney, <em>Simple Demographics Often Identify People Uniquely</em></a> (2000)"
 ---
 
 ::title::
@@ -366,8 +366,8 @@ layout: section
 ---
 layout: two-cols
 references:
-  - "Crawford, <em>Contre-atlas de l'intelligence artificielle</em> (2022)"
-  - "IEA, <em>Electricity 2024</em>"
+  - "<a href='https://www.zulma.fr/livre/contre-atlas-de-lintelligence-artificielle/'>Crawford, <em>Contre-atlas de l'intelligence artificielle</em></a> (2022)"
+  - "<a href='https://www.iea.org/reports/electricity-2024'>IEA, <em>Electricity 2024</em></a>"
 ---
 
 ::title::
@@ -393,8 +393,9 @@ references:
 ---
 layout: two-cols
 references:
-  - "Crawford, <em>Contre-atlas de l'intelligence artificielle</em>, ch. 1 (2022)"
-  - "Pitron, Reporterre"
+  - "<a href='https://www.zulma.fr/livre/contre-atlas-de-lintelligence-artificielle/'>Crawford, <em>Contre-atlas de l'intelligence artificielle</em>, ch. 1</a> (2022)"
+  - "<a href='https://reporterre.net/Guillaume-Pitron-Un-telephone-portable-ne-pese-pas-150-grammes-mais-150-kilos'>Pitron, Reporterre</a>"
+  - "<a href='https://pubs.usgs.gov/periodicals/mcs2026/mcs2026-cobalt.pdf'>USGS, <em>Cobalt</em></a> (2026)"
 ---
 
 ::title::
@@ -438,9 +439,10 @@ layout: section
 ---
 layout: two-cols
 references:
-  - "IEA (2024)"
-  - "Climatiq (2024)"
-  - "MIT News (2025)"
+  - "<a href='https://www.climatiq.io/blog/measure-greenhouse-gas-emissions-carbon-data-centres-cloud-computing'>Climatiq</a>"
+  - "<a href='https://www.iea.org/energy-system/buildings/data-centres-and-data-transmission-networks'>IEA, <em>Data centres and data transmission networks</em></a>"
+  - "<a href='https://news.mit.edu/2025/explained-generative-ai-environmental-impact-0117'>MIT News</a> (2025)"
+  - "<a href='https://www.infomaniak.com/fr/ecologie'>Infomaniak, <em>Écologie</em></a>"
 ---
 
 ::title::
@@ -448,9 +450,9 @@ references:
 
 ::left::
 
-- Numérique : **~4%** des émissions de CO₂
-- Datacenters seuls : **~1%**, en forte croissance
-- Fabrication souvent supérieure à l'exploitation
+- Numérique : **~4%** des émissions de gaz à effet de serre
+- Datacenters et réseaux : **~1%**, en forte croissance
+- Réseau bas carbone : la fabrication domine l'empreinte
 
 ::right::
 
@@ -464,7 +466,8 @@ references:
 layout: default
 class: compact
 references:
-  - "Google (2009, 2025)"
+  - "<a href='https://googleblog.blogspot.com/2009/01/powering-google-search.html'>Google</a> (2009)"
+  - "<a href='https://cloud.google.com/blog/products/infrastructure/measuring-the-environmental-impact-of-ai-inference'>Google</a> (2025)"
   - "<a href='https://epoch.ai/gradient-updates/how-much-energy-does-chatgpt-use'>Epoch AI</a> (2025)"
   - "<a href='https://impactco2.fr/outils/usagenumerique/email'>ADEME</a>"
   - "<a href='https://www.delltechnologies.com/asset/en-us/products/servers/briefs-summaries/poweredge-r760-life-cycle-assessment.pdf'>Dell</a>"
@@ -478,7 +481,7 @@ references:
 | Requête ChatGPT, 2025 | ~0.3 Wh | Non publié | OpenAI, Epoch AI |
 | Requête Gemini, 2025, médiane | 0.24 Wh | 0.03 g CO₂e | Google |
 | Email | | 0.1 à 2.5 g CO₂e | ADEME |
-| Serveur, cycle de vie complet | | 1.4 à 10 t CO₂e, ~10 % fabrication | Dell |
+| Serveur, cycle de vie complet | | 2.9 à 4.2 t CO₂e, 10 à 15 % fabrication | Dell |
 
 <Card color="#6b7280" tag="note" title="Mix électrique">
 <template #icon><pixelarticons-zap /></template>
@@ -488,9 +491,9 @@ Grammes = énergie × intensité du réseau. La même requête émet moins sur l
 ---
 layout: two-cols
 references:
-  - "swissinfo.ch (2026)"
-  - "ETH Zurich"
-  - "OFEN (2021)"
+  - "<a href='https://www.swissinfo.ch/eng/swiss-ai/can-switzerlands-power-grid-keep-up-with-its-data-centres/90710181'>swissinfo.ch, citant la HSLU et l'ETH Zurich</a> (2026)"
+  - "<a href='https://www.admin.ch/fr/newnsb/GV-_d7OgIlqjfQDGZqbkN'>OFEN, <em>Centres de données en Suisse</em></a> (2026)"
+  - "<a href='https://www.iea.org/reports/energy-and-ai/energy-demand-from-ai'>IEA, <em>Energy and AI</em></a> (2025)"
 ---
 
 ::title::
@@ -498,11 +501,11 @@ references:
 
 ::left::
 
-- **6 à 8%** de l'électricité suisse, 3% au niveau mondial
-- **10 à 15%** d'ici 2030 selon la HSLU
+- HSLU : **6 à 8%** aujourd'hui, 10 à 15% en 2030
+- OFEN : **3,6%** en 2024, soit 2,1 TWh
+- Monde : **1,5%** en 2024 selon l'AIE
 - **+4,6 TWh** nécessaires selon l'ETH Zurich
-- ~120 datacenters, parmi les plus fortes densités
-- Plus de 10 nouveaux sites en construction
+- ~120 datacenters, plus de 10 en construction
 
 ::right::
 
@@ -515,8 +518,9 @@ references:
 ---
 layout: default
 references:
-  - "swissinfo.ch (2026)"
-  - "AlgorithmWatch CH"
+  - "<a href='https://www.swissinfo.ch/eng/swiss-ai/can-switzerlands-power-grid-keep-up-with-its-data-centres/90710181'>swissinfo.ch</a> (2026)"
+  - "<a href='https://www.swissinfo.ch/eng/swiss-ai/swiss-concerned-by-electricity-consumption-of-data-centres-and-ai/90233764'>Sondage AlgorithmWatch CH, swissinfo.ch</a> (2025)"
+  - "<a href='https://lenews.ch/2025/10/30/ai-boom-sparks-concern-over-data-centre-power-and-water-use-in-switzerland/'>Le News</a> (2025)"
 ---
 
 # Tensions et attentes
@@ -529,7 +533,7 @@ references:
 
 ---
 layout: two-cols
-references: "RTS (2026)"
+references: "<a href='https://www.rts.ch/info/economie/2026/article/entre-crainte-ecologique-et-opportunite-economique-l-expansion-des-datacenters-en-suisse-interroge-29235422.html'>RTS</a> (2026)"
 ---
 
 ::title::
@@ -595,19 +599,19 @@ references: "<a href='https://www.infomaniak.com/fr/ecologie'>infomaniak.com/fr/
 
 <Card title="Énergie">
 <template #icon><pixelarticons-zap /></template>
-60% hydraulique, 40% solaire. Objectif 100% renouvelable atteint.
+Électricité 100% renouvelable certifiée : hydraulique, solaire, sources locales.
 </Card>
 <Card title="Compensation">
 <template #icon><pixelarticons-leaf /></template>
-200% des émissions : fabrication, électricité, transport, vols.
+200% des émissions : fabrication, électricité, déplacements du personnel.
 </Card>
 <Card title="Chaleur">
 <template #icon><pixelarticons-fire /></template>
-D4 : 100% de la chaleur fatale injectée dans le chauffage à distance.
+Nouveaux datacenters : 100% de la chaleur revalorisée en chauffage.
 </Card>
 <Card title="Durée de vie">
 <template #icon><pixelarticons-clock /></template>
-Serveurs utilisés <strong>15 ans</strong> au lieu de 7 à 10. ISO 14001, ISO 50001.
+Serveurs gardés <strong>15 ans</strong> : leur fabrication vaut 7 à 10 ans d'exploitation.
 </Card>
 
 ---
@@ -626,9 +630,9 @@ layout: section
 ---
 layout: two-cols
 references:
-  - "Crawford, <em>Contre-atlas de l'intelligence artificielle</em> (2022)"
-  - "Data Centre Magazine (2024)"
-  - "ETH Zurich CSS, <em>Mind the E-Waste</em> (2023)"
+  - "<a href='https://www.climatiq.io/blog/measure-greenhouse-gas-emissions-carbon-data-centres-cloud-computing'>Climatiq</a>"
+  - "<a href='https://www.nature.com/articles/s43588-024-00712-6'>Wang et al., <em>E-waste challenges of generative AI</em></a> (2024)"
+  - "<a href='https://www.who.int/news-room/fact-sheets/detail/electronic-waste-(e-waste)'>OMS, <em>Electronic waste</em></a> (2024)"
 ---
 
 ::title::
@@ -636,11 +640,11 @@ references:
 
 ::left::
 
-- Matériel des datacenters remplacé tous les 3 à 5 ans
-- La demande en IA accélère ce rythme
-- Plomb, mercure, cadmium en décharge
-- **80%** des e-déchets vers des pays à bas revenus
-- Recycleur·euse·s exposé·e·s sans protection
+- Serveurs des datacenters remplacés tous les 3 à 5 ans
+- L'IA générative multiplie ces déchets
+- **22%** des e-déchets recyclés formellement en 2022
+- Recyclage informel : plomb et mercure libérés
+- Recycleur·euse·s exposé·e·s, enfants compris
 
 ::right::
 
@@ -695,7 +699,8 @@ layout: section
 layout: two-cols
 references:
   - "<a href='https://news.infomaniak.com/souverainete-numerique-de-la-suisse/'>Infomaniak, <em>Souveraineté numérique de la Suisse</em></a> (2021)"
-  - "RTS (2022)"
+  - "<a href='https://www.rts.ch/info/suisse/13419618-les-contrats-avec-cinq-geants-du-numerique-pour-le-cloud-de-la-confederation-ont-ete-signes.html'>RTS</a> (2022)"
+  - "<a href='https://www.congress.gov/bill/115th-congress/senate-bill/2383'>CLOUD Act</a> (2018)"
 ---
 
 ::title::
@@ -720,10 +725,9 @@ references:
 ---
 layout: two-cols-bottom
 references:
-  - "RTS (2026)"
-  - "Climatiq"
-  - "ScienceDirect (2025)"
-  - "The Guardian (2026)"
+  - "<a href='https://datacenters.google/efficiency/'>Google, <em>Data center efficiency</em></a>"
+  - "<a href='https://srgresearch.com/articles/cloud-market-share-trends-big-three-together-hold-63-while-oracle-and-the-neoclouds-inch-higher'>Synergy Research</a> (2025)"
+  - "<a href='https://www.congress.gov/bill/115th-congress/senate-bill/2383'>CLOUD Act</a> (2018)"
 ---
 
 ::title::
@@ -733,7 +737,7 @@ references:
 
 ### Pour
 
-- PUE ~1.2 contre ~2.0 en interne
+- PUE ~1.1 contre ~1.5 en moyenne du secteur
 - Infrastructure mutualisée
 - Engagements d'énergie renouvelable
 - Redondance mondiale
@@ -744,8 +748,7 @@ references:
 
 - Cloud Act : accès des autorités américaines
 - Dépendance au fournisseur
-- Fabrication et fin de vie rarement publiées
-- 3 acteurs : ~65% du marché mondial
+- 3 acteurs : ~63% du marché mondial
 
 ::bottom::
 
@@ -762,7 +765,7 @@ layout: section
 
 ---
 layout: two-cols
-references: "ProPublica, <em>Machine Bias</em> (2016)"
+references: "<a href='https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing'>ProPublica, <em>Machine Bias</em></a> (2016)"
 ---
 
 ::title::
@@ -773,8 +776,8 @@ references: "ProPublica, <em>Machine Bias</em> (2016)"
 - Score de risque de récidive, de 1 à 10
 - Utilisé par des tribunaux américains
 - Enquête ProPublica sur 7 000 personnes
-- Faux positifs **2 fois** plus fréquents pour les personnes racisées
-- Variables corrélées au phénotype
+- Faux positifs **2 fois** plus fréquents pour les prévenu·e·s noir·e·s
+- Race absente des 137 questions, biais présent
 
 ::right::
 
@@ -787,8 +790,8 @@ references: "ProPublica, <em>Machine Bias</em> (2016)"
 ---
 layout: two-cols
 references:
-  - "D'Ignazio et Klein, <em>Data Feminism</em>, ch. 4 (2020)"
-  - "W3C, <em>Personal names around the world</em>"
+  - "<a href='https://data-feminism.mitpress.mit.edu/pub/h1w0nbqp'>D'Ignazio et Klein, <em>Data Feminism</em>, ch. 4</a> (2020)"
+  - "<a href='https://www.w3.org/International/questions/qa-personal-names'>W3C, <em>Personal names around the world</em></a>"
 ---
 
 ::title::
@@ -816,7 +819,9 @@ Un <code>NULL</code> lu comme zéro transforme « non mesuré » en « aucun pro
 
 ---
 layout: two-cols
-references: "Crawford, <em>The Hidden Biases in Big Data</em>, Harvard Business Review (2013)"
+references:
+  - "<a href='https://hbr.org/2013/04/the-hidden-biases-in-big-data'>Crawford, <em>The Hidden Biases in Big Data</em>, Harvard Business Review</a> (2013)"
+  - "<a href='https://www.edweek.org/education/opinion-street-bumps-big-data-and-educational-inequality/2013/03'>Reich, <em>Street Bumps, Big Data, and Educational Inequality</em>, Education Week</a> (2013)"
 ---
 
 ::title::
@@ -844,8 +849,8 @@ Rapporter à la population, comparer à une inspection terrain, suivre la part d
 ---
 layout: two-cols
 references:
-  - "D'Ignazio et Klein, <em>Data Feminism</em> (2020)"
-  - "Crawford, <em>Contre-atlas de l'intelligence artificielle</em> (2022)"
+  - "<a href='https://data-feminism.mitpress.mit.edu/'>D'Ignazio et Klein, <em>Data Feminism</em></a> (2020)"
+  - "<a href='https://www.zulma.fr/livre/contre-atlas-de-lintelligence-artificielle/'>Crawford, <em>Contre-atlas de l'intelligence artificielle</em></a> (2022)"
 ---
 
 ::title::
@@ -935,7 +940,7 @@ Les exercices préparent l'examen final.
 
 ---
 layout: two-cols
-references: "PostgreSQL, <em>COMMENT</em>, <em>information_schema</em>"
+references: "PostgreSQL, <a href='https://www.postgresql.org/docs/current/sql-comment.html'><em>COMMENT</em></a>, <a href='https://www.postgresql.org/docs/current/information-schema.html'><em>information_schema</em></a>, <a href='https://www.postgresql.org/docs/current/functions-info.html#FUNCTIONS-INFO-COMMENT'><em>col_description</em></a>"
 ---
 
 ::title::
@@ -964,7 +969,7 @@ WHERE table_schema = 'public';
 
 ---
 layout: two-cols
-references: "PostgreSQL, <em>Aggregate Expressions</em>"
+references: "PostgreSQL, <a href='https://www.postgresql.org/docs/current/sql-expressions.html#SYNTAX-AGGREGATES'><em>Aggregate Expressions</em></a>"
 ---
 
 ::title::
@@ -991,7 +996,7 @@ FROM table_name;
 
 ---
 layout: two-cols
-references: "PostgreSQL, <em>Binary String Functions</em>"
+references: "PostgreSQL, <a href='https://www.postgresql.org/docs/current/functions-binarystring.html'><em>Binary String Functions</em></a>"
 ---
 
 ::title::
@@ -1022,7 +1027,7 @@ GRANT SELECT ON vue_publique TO role_name;
 
 ---
 layout: two-cols
-references: "PostgreSQL, <em>VACUUM</em>, <em>Database Object Size Functions</em>"
+references: "PostgreSQL, <a href='https://www.postgresql.org/docs/current/sql-vacuum.html'><em>VACUUM</em></a>, <a href='https://www.postgresql.org/docs/current/functions-admin.html#FUNCTIONS-ADMIN-DBSIZE'><em>Database Object Size Functions</em></a>"
 ---
 
 ::title::
@@ -1275,8 +1280,8 @@ layout: two-cols
 
 ### En ligne
 
-- [PFPDT, protection des données](https://www.edoeb.admin.ch/)
-- [nLPD, texte de loi](https://www.fedlex.admin.ch/eli/cc/2022/491/fr)
+- [nLPD, texte de loi](https://www.fedlex.admin.ch/eli/cc/2022/491/fr) et [PFPDT](https://www.edoeb.admin.ch/)
+- [Calculating Empires](https://calculatingempires.net/about), Crawford et Joler (2023)
 - [Machine Bias](https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing), ProPublica
 - [The Hidden Biases in Big Data](https://hbr.org/2013/04/the-hidden-biases-in-big-data), HBR
 - [Generative AI's environmental impact](https://news.mit.edu/2025/explained-generative-ai-environmental-impact-0117), MIT News

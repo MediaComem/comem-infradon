@@ -203,9 +203,7 @@ Un PostgreSQL sur une seule machine n'est pas distribué : CAP et BASE ne le con
 
 ---
 layout: two-cols
-references:
-  - "Hazelcast, <em>CAP Theorem</em>"
-  - "Kleppmann, <em>Please stop calling databases CP or AP</em> (2015)"
+references: "<a href='https://hazelcast.com/foundations/distributed-computing/cap-theorem/'>Hazelcast, <em>CAP Theorem</em></a>"
 ---
 
 ::title::
@@ -356,7 +354,7 @@ layout: default
 
 ---
 layout: two-cols
-references: "Armbrust et al., <em>Lakehouse</em> (CIDR 2021)"
+references: "<a href='https://www.cidrdb.org/cidr2021/papers/cidr2021_paper17.pdf'>Armbrust et al., <em>Lakehouse</em></a> (CIDR 2021)"
 ---
 
 ::title::
@@ -380,7 +378,7 @@ references: "Armbrust et al., <em>Lakehouse</em> (CIDR 2021)"
 
 ---
 layout: two-cols
-references: "Databricks, <em>Medallion Architecture</em>"
+references: "<a href='https://www.databricks.com/glossary/medallion-architecture'>Databricks, <em>Medallion Architecture</em></a>"
 ---
 
 ::title::
@@ -434,9 +432,9 @@ flowchart TD
 ---
 layout: two-cols
 references:
-  - "Dehghani, <em>How to Move Beyond a Monolithic Data Lake</em> (2019)"
-  - "Evans, <em>Domain-Driven Design</em> (2003)"
-  - "Pais et Skelton, <em>Team Topologies</em> (2019)"
+  - "<a href='https://martinfowler.com/articles/data-monolith-to-mesh.html'>Dehghani, <em>How to Move Beyond a Monolithic Data Lake</em></a> (2019)"
+  - "<a href='https://www.domainlanguage.com/ddd/'>Evans, <em>Domain-Driven Design</em></a> (2003)"
+  - "<a href='https://teamtopologies.com/book'>Pais et Skelton, <em>Team Topologies</em></a> (2019)"
 ---
 
 ::title::
@@ -464,7 +462,7 @@ layout: grid
 cols: 2
 align: stretch
 content: center
-references: "Dehghani, <em>Data Mesh Principles</em>, martinfowler.com"
+references: "<a href='https://martinfowler.com/articles/data-mesh-principles.html'>Dehghani, <em>Data Mesh Principles</em>, martinfowler.com</a> (2020)"
 ---
 
 # Principes du data mesh
@@ -608,7 +606,7 @@ Les exercices préparent l'examen final.
 
 ---
 layout: two-cols
-references: "PostgreSQL, <em>JSON Functions and Operators</em>"
+references: "PostgreSQL, <a href='https://www.postgresql.org/docs/current/functions-json.html'><em>JSON Functions and Operators</em></a>"
 ---
 
 ::title::
@@ -682,7 +680,7 @@ WHERE attributs @> '{"technologie": "LED"}';
 
 ---
 layout: default
-references: "PostgreSQL, <em>Index Types</em>"
+references: "PostgreSQL, <a href='https://www.postgresql.org/docs/current/indexes-types.html'><em>Index Types</em></a>"
 ---
 
 # Index de PostgreSQL
@@ -701,7 +699,7 @@ Index B-tree, plan d'exécution, coût d'un index à l'écriture.
 
 ---
 layout: two-cols
-references: "PostgreSQL, <em>GIN Indexes</em>"
+references: "PostgreSQL, <a href='https://www.postgresql.org/docs/current/gin.html'><em>GIN Indexes</em></a>"
 ---
 
 ::title::
@@ -723,7 +721,7 @@ references: "PostgreSQL, <em>GIN Indexes</em>"
 
 ---
 layout: two-cols
-references: "PostgreSQL, <em>EXPLAIN</em>"
+references: "PostgreSQL, <a href='https://www.postgresql.org/docs/current/sql-explain.html'><em>EXPLAIN</em></a>"
 ---
 
 ::title::
@@ -836,7 +834,7 @@ Quel stockage pour un attribut filtré souvent ? Et pour un attribut rare, propr
 
 ---
 layout: two-cols
-references: "PostgreSQL, <em>Materialized Views</em>"
+references: "PostgreSQL, <a href='https://www.postgresql.org/docs/current/rules-materializedviews.html'><em>Materialized Views</em></a>"
 ---
 
 ::title::

@@ -41,7 +41,7 @@ layout: section
 
 ---
 layout: two-cols
-references: "Krantz et Jonker, <em>The True Cost of Poor Data Quality</em>, IBM Think"
+references: "<a href='https://www.ibm.com/think/insights/cost-of-poor-data-quality'>Krantz et Jonker, <em>The True Cost of Poor Data Quality</em>, IBM Think</a> (2026)"
 ---
 
 ::title::
@@ -51,8 +51,7 @@ references: "Krantz et Jonker, <em>The True Cost of Poor Data Quality</em>, IBM 
 
 - Coûts cachés dans toute l'organisation
 - Propagation à chaque rapport, pipeline, décision
-- Corriger à l'entrée : coût 1
-- Corriger en production : coût 100
+- Contrôler au plus près de la saisie
 
 ::right::
 
@@ -71,7 +70,7 @@ layout: grid
 cols: 3
 align: stretch
 content: center
-references: "FirstEigen, <em>How to Build a Robust Data Infrastructure</em> (2022)"
+references: "<a href='https://firsteigen.com/blog/how-to-build-a-robust-data-infrastructure/'>Rao, FirstEigen, <em>How to Build a Robust Data Infrastructure</em></a> (2024)"
 ---
 
 # Six dimensions de la qualité
@@ -266,7 +265,7 @@ class: compact
 
 ---
 layout: two-cols
-references: "PostgreSQL, <em>CREATE SCHEMA</em>, <em>CREATE TABLE</em>"
+references: "PostgreSQL, <a href='https://www.postgresql.org/docs/current/sql-createschema.html'><em>CREATE SCHEMA</em></a>, <a href='https://www.postgresql.org/docs/current/sql-createtable.html'><em>CREATE TABLE</em></a>"
 ---
 
 ::title::
@@ -319,7 +318,7 @@ Table <strong>permanente</strong> dans le schéma <code>staging</code> : on y re
 
 ---
 layout: two-cols
-references: "PostgreSQL, <em>COPY</em>"
+references: "PostgreSQL, <a href='https://www.postgresql.org/docs/current/sql-copy.html'><em>COPY</em></a>"
 ---
 
 ::title::
@@ -386,7 +385,7 @@ Pourquoi, et comment l'éviter ?
 
 ---
 layout: two-cols
-references: "PostgreSQL, <em>INSERT</em>"
+references: "PostgreSQL, <a href='https://www.postgresql.org/docs/current/sql-insert.html'><em>INSERT</em></a>"
 ---
 
 ::title::
@@ -512,7 +511,7 @@ Un taux de rejet qui monte signale un changement à la source : nouveau formulai
 
 ---
 layout: two-cols
-references: "PostgreSQL, <em>JSON Functions</em>"
+references: "PostgreSQL, <a href='https://www.postgresql.org/docs/current/functions-json.html'><em>JSON Functions</em></a>"
 ---
 
 ::title::
@@ -724,7 +723,7 @@ Les exercices préparent l'examen final.
 
 ---
 layout: two-cols
-references: "PostgreSQL, <em>Conditional Expressions</em>"
+references: "PostgreSQL, <a href='https://www.postgresql.org/docs/current/functions-conditional.html'><em>Conditional Expressions</em></a>"
 ---
 
 ::title::
@@ -844,7 +843,7 @@ FROM staging.signalements;
 
 ---
 layout: two-cols
-references: "PostgreSQL, <em>String Functions</em>, <em>Pattern Matching</em>"
+references: "PostgreSQL, <a href='https://www.postgresql.org/docs/current/functions-string.html'><em>String Functions</em></a>, <a href='https://www.postgresql.org/docs/current/functions-matching.html'><em>Pattern Matching</em></a>"
 ---
 
 ::title::
@@ -875,7 +874,7 @@ REGEXP_REPLACE(date,
 
 ---
 layout: two-cols
-references: "PostgreSQL, <em>Conditional Expressions</em>"
+references: "PostgreSQL, <a href='https://www.postgresql.org/docs/current/functions-conditional.html'><em>Conditional Expressions</em></a>"
 ---
 
 ::title::
@@ -904,7 +903,7 @@ COALESCE(
 
 ---
 layout: two-cols
-references: "PostgreSQL, <em>Data Type Formatting Functions</em>"
+references: "PostgreSQL, <a href='https://www.postgresql.org/docs/current/functions-formatting.html'><em>Data Type Formatting Functions</em></a>"
 ---
 
 ::title::
@@ -934,7 +933,7 @@ REGEXP_REPLACE(
 
 ---
 layout: two-cols
-references: "PostgreSQL, <em>System Information Functions</em>"
+references: "PostgreSQL, <a href='https://www.postgresql.org/docs/current/functions-info.html#FUNCTIONS-INFO-VALIDITY'><em>Data Validity Checking Functions</em></a>"
 ---
 
 ::title::
@@ -965,7 +964,7 @@ FROM ...;
 
 ---
 layout: two-cols
-references: "PostgreSQL, <em>Window Functions</em>"
+references: "PostgreSQL, <a href='https://www.postgresql.org/docs/current/functions-window.html'><em>Window Functions</em></a>"
 ---
 
 ::title::

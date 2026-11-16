@@ -204,7 +204,7 @@ Un superuser ignore tous les privilèges : un seul compte compromis donne la bas
 
 ---
 layout: two-cols
-references: "PostgreSQL, <em>pg_roles</em>, <em>information_schema</em>"
+references: "PostgreSQL, <a href='https://www.postgresql.org/docs/current/view-pg-roles.html'><em>pg_roles</em></a>, <a href='https://www.postgresql.org/docs/current/information-schema.html'><em>information_schema</em></a>"
 ---
 
 ::title::
@@ -377,8 +377,8 @@ Perdre une journée de signalements : acceptable ? Et une journée de paie ?
 ---
 layout: default
 references:
-  - "PostgreSQL, <em>Continuous Archiving and Point-in-Time Recovery</em>"
-  - "PostgreSQL, <em>High Availability</em>"
+  - "PostgreSQL, <a href='https://www.postgresql.org/docs/current/continuous-archiving.html'><em>Continuous Archiving and Point-in-Time Recovery</em></a>"
+  - "PostgreSQL, <a href='https://www.postgresql.org/docs/current/high-availability.html'><em>High Availability</em></a>"
 ---
 
 # Trois façons de copier
@@ -524,8 +524,8 @@ Les exercices préparent l'examen final.
 ---
 layout: two-cols
 references:
-  - "PostgreSQL, <em>CREATE USER</em>"
-  - "PostgreSQL, <em>CREATE ROLE</em>"
+  - "PostgreSQL, <a href='https://www.postgresql.org/docs/current/sql-createuser.html'><em>CREATE USER</em></a>"
+  - "PostgreSQL, <a href='https://www.postgresql.org/docs/current/sql-createrole.html'><em>CREATE ROLE</em></a>"
 ---
 
 ::title::
@@ -558,8 +558,8 @@ DROP ROLE technicien;
 ---
 layout: two-cols
 references:
-  - "PostgreSQL, <em>GRANT</em>"
-  - "PostgreSQL, <em>REVOKE</em>"
+  - "PostgreSQL, <a href='https://www.postgresql.org/docs/current/sql-grant.html'><em>GRANT</em></a>"
+  - "PostgreSQL, <a href='https://www.postgresql.org/docs/current/sql-revoke.html'><em>REVOKE</em></a>"
 ---
 
 ::title::
@@ -584,7 +584,7 @@ REVOKE privilege ON objet
 
 ---
 layout: default
-references: "PostgreSQL, <em>Privileges</em>"
+references: "PostgreSQL, <a href='https://www.postgresql.org/docs/current/ddl-priv.html'><em>Privileges</em></a>"
 ---
 
 # Privilèges
@@ -601,7 +601,7 @@ references: "PostgreSQL, <em>Privileges</em>"
 
 ---
 layout: two-cols
-references: "PostgreSQL, <em>SET ROLE</em>, <em>System Information Functions</em>"
+references: "PostgreSQL, <a href='https://www.postgresql.org/docs/current/sql-set-role.html'><em>SET ROLE</em></a>, <a href='https://www.postgresql.org/docs/current/functions-info.html'><em>System Information Functions</em></a>"
 ---
 
 ::title::
@@ -632,7 +632,7 @@ DROP ROLE role_name;
 
 ---
 layout: two-cols
-references: "PostgreSQL, <em>pg_dump</em>"
+references: "PostgreSQL, <a href='https://www.postgresql.org/docs/current/app-pgdump.html'><em>pg_dump</em></a>"
 ---
 
 ::title::
@@ -663,7 +663,7 @@ pg_dump -U postgres \
 
 ---
 layout: default
-references: "PostgreSQL, <em>pg_dump</em>"
+references: "PostgreSQL, <a href='https://www.postgresql.org/docs/current/app-pgdump.html'><em>pg_dump</em></a>"
 ---
 
 # Formats de sortie
@@ -682,7 +682,7 @@ references: "PostgreSQL, <em>pg_dump</em>"
 
 ---
 layout: two-cols
-references: "PostgreSQL, <em>pg_dumpall</em>"
+references: "PostgreSQL, <a href='https://www.postgresql.org/docs/current/app-pgdump.html'><em>pg_dump</em></a>, <a href='https://www.postgresql.org/docs/current/app-pg-dumpall.html'><em>pg_dumpall</em></a>"
 ---
 
 ::title::
@@ -716,7 +716,7 @@ pg_dumpall -U postgres -f serveur.sql
 
 ---
 layout: two-cols
-references: "PostgreSQL, <em>pg_restore</em>"
+references: "PostgreSQL, <a href='https://www.postgresql.org/docs/current/app-pgrestore.html'><em>pg_restore</em></a>"
 ---
 
 ::title::
@@ -746,7 +746,7 @@ psql -U postgres \
 
 ---
 layout: two-cols
-references: "PostgreSQL, <em>pg_restore</em>"
+references: "PostgreSQL, <a href='https://www.postgresql.org/docs/current/app-pgrestore.html'><em>pg_restore</em></a>"
 ---
 
 ::title::

@@ -1,0 +1,3 @@
+*.md   linguist-detectable
+*.sql  linguist-detectable linguist-language=PLpgSQL
+projet/generate_data.py  linguist-detectable=false
